@@ -1,0 +1,96 @@
+import { z } from 'zod'
+
+export const cambridgeLevelSchema = z.enum(['Starters', 'Movers', 'Flyers', 'Preliminary'])
+export const wordHealthSchema = z.enum(['Healthy', 'At risk', 'Warming', 'New'])
+
+export const registerSchema = z.object({
+  name: z.string().trim().min(1).max(80),
+  email: z.string().trim().toLowerCase().email().max(254),
+  password: z.string().min(10).max(128),
+})
+
+export const loginSchema = z.object({
+  email: z.string().trim().toLowerCase().email(),
+  password: z.string().min(1).max(128),
+})
+
+export const passwordResetRequestSchema = z.object({
+  email: z.string().trim().toLowerCase().email(),
+})
+
+export const passwordResetConfirmSchema = z.object({
+  token: z.string().min(20).max(200),
+  password: z.string().min(10).max(128),
+})
+
+export const parentGateSchema = z.object({
+  password: z.string().min(1).max(128),
+})
+
+export const questClaimSchema = z.object({
+  questId: z.string().trim().min(1).max(40),
+})
+
+export const learnerCreateSchema = z.object({
+  name: z.string().trim().min(1).max(40),
+  avatar: z.string().trim().min(1).max(40).default('owl'),
+  level: cambridgeLevelSchema.default('Starters'),
+  pin: z.string().regex(/^\d{4,6}$/).optional(),
+})
+
+export const learnerSelectSchema = z.object({
+  learnerId: z.string().uuid(),
+  pin: z.string().regex(/^\d{4,6}$/).optional(),
+})
+
+export const quizCreateSchema = z.object({
+  count: z.number().int().min(1).max(20).default(10),
+  level: cambridgeLevelSchema.optional(),
+  category: z.string().trim().max(40).optional(),
+  mode: z.enum(['explorer', 'speed-match', 'fill-blank']).default('explorer'),
+  mapStop: z.enum(['space-station', 'nature-valley', 'crystal-caves', 'dragon-ridge']).optional(),
+})
+
+export const quizAnswerSchema = z.object({
+  wordId: z.string().min(1),
+  answer: z.string().trim().min(1).max(120),
+})
+
+export const settingsSchema = z.object({
+  dailyGoal: z.number().int().min(1).max(50).optional(),
+  dailyLimitMinutes: z.union([z.literal(15), z.literal(30), z.literal(45), z.literal(60)]).optional(),
+  reviewMix: z.union([z.literal(10), z.literal(25), z.literal(40)]).optional(),
+  timedModesEnabled: z.boolean().optional(),
+  focusMode: z.boolean().optional(),
+  soundEnabled: z.boolean().optional(),
+  hintsEnabled: z.boolean().optional(),
+})
+
+export const assignmentSchema = z.object({
+  learnerId: z.string().uuid(),
+  level: cambridgeLevelSchema,
+  categories: z.array(z.string().trim().min(1).max(40)).max(20).default([]),
+  dueDate: z.string().date().optional(),
+})
+
+export const giftDefinitionSchema = z.object({
+  id: z.string().uuid().optional(),
+  name: z.string().trim().min(1).max(60),
+  costGems: z.number().int().min(10).max(5000),
+})
+
+export const giftCatalogSchema = z.object({
+  gifts: z.array(giftDefinitionSchema).max(12),
+})
+
+export const giftRequestSchema = z.object({
+  giftId: z.string().uuid(),
+})
+
+export type RegisterInput = z.infer<typeof registerSchema>
+export type LoginInput = z.infer<typeof loginSchema>
+export type LearnerCreateInput = z.infer<typeof learnerCreateSchema>
+export type QuizCreateInput = z.infer<typeof quizCreateSchema>
+export type SettingsInput = z.infer<typeof settingsSchema>
+export type GiftCatalogInput = z.infer<typeof giftCatalogSchema>
+export type GiftRequestInput = z.infer<typeof giftRequestSchema>

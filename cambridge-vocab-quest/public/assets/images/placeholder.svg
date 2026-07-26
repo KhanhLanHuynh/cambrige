@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="200" viewBox="0 0 320 200" role="img" aria-label="Vocabulary placeholder">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#08dcff"/>
+      <stop offset="1" stop-color="#37f80c"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" rx="24" fill="#26005b"/>
+  <circle cx="250" cy="48" r="28" fill="url(#g)" opacity=".8"/>
+  <text x="28" y="110" fill="#f7f4ff" font-family="Segoe UI, sans-serif" font-size="28" font-weight="700">Word World</text>
+  <text x="28" y="142" fill="#a99ac6" font-family="Segoe UI, sans-serif" font-size="14">Replace with licensed art</text>
+</svg>

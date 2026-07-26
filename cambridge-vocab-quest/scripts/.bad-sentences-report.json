@@ -1,0 +1,761 @@
+[
+  {
+    "id": "flyers-beetle",
+    "word": "beetle",
+    "level": "Flyers",
+    "pos": "noun",
+    "category": "general",
+    "definition": "A small car, the Volkswagen Beetle (original version made 1938–2003, similar models made 1997–2010 and since 2011).",
+    "primary": "Noah saw a beetle at the zoo.",
+    "badCount": 4,
+    "samples": [
+      {
+        "sentence": "Noah saw a beetle at the zoo.",
+        "issues": [
+          "animal-template"
+        ]
+      },
+      {
+        "sentence": "Noah saw a beetle at the zoo.",
+        "issues": [
+          "animal-template"
+        ]
+      },
+      {
+        "sentence": "The beetle likes to play in the garden.",
+        "issues": [
+          "animal-template"
+        ]
+      }
+    ],
+    "issueTypes": [
+      "animal-template"
+    ]
+  },
+  {
+    "id": "preliminary-cabbage",
+    "word": "cabbage",
+    "level": "Preliminary",
+    "pos": "noun",
+    "category": "general",
+    "definition": "An edible plant (Brassica oleracea var. capitata) having a head of green leaves.",
+    "primary": "Zoe ate a cabbage for lunch.",
+    "badCount": 4,
+    "samples": [
+      {
+        "sentence": "Zoe ate a cabbage for lunch.",
+        "issues": [
+          "food-template"
+        ]
+      },
+      {
+        "sentence": "Zoe ate a cabbage for lunch.",
+        "issues": [
+          "food-template"
+        ]
+      },
+      {
+        "sentence": "Please pass me a cabbage.",
+        "issues": [
+          "food-template"
+        ]
+      }
+    ],
+    "issueTypes": [
+      "food-template"
+    ]
+  },
+  {
+    "id": "starters-candy",
+    "word": "candy)",
+    "level": "Starters",
+    "pos": "noun",
+    "category": "general",
+    "definition": "A word that means candy).",
+    "primary": "Emma ate a candy for lunch.",
+    "badCount": 4,
+    "samples": [
+      {
+        "sentence": "Emma ate a candy for lunch.",
+        "issues": [
+          "food-template"
+        ]
+      },
+      {
+        "sentence": "Emma ate a candy for lunch.",
+        "issues": [
+          "food-template"
+        ]
+      },
+      {
+        "sentence": "Please pass me a candy.",
+        "issues": [
+          "food-template"
+        ]
+      }
+    ],
+    "issueTypes": [
+      "food-template"
+    ]
+  },
+  {
+    "id": "preliminary-chilli",
+    "word": "chilli",
+    "level": "Preliminary",
+    "pos": "noun",
+    "category": "health",
+    "definition": "The pungent, spicy fresh or dried fruit of any of several cultivated varieties of capsicum peppers, used in cooking.",
+    "primary": "Emma ate a chilli for lunch.",
+    "badCount": 4,
+    "samples": [
+      {
+        "sentence": "Emma ate a chilli for lunch.",
+        "issues": [
+          "food-template"
+        ]
+      },
+      {
+        "sentence": "Emma ate a chilli for lunch.",
+        "issues": [
+          "food-template"
+        ]
+      },
+      {
+        "sentence": "Please pass me a chilli.",
+        "issues": [
+          "food-template"
+        ]
+      }
+    ],
+    "issueTypes": [
+      "food-template"
+    ]
+  },
+  {
+    "id": "movers-coffee",
+    "word": "coffee",
+    "level": "Movers",
+    "pos": "noun",
+    "category": "general",
+    "definition": "A beverage made by infusing the beans of the coffee plant in hot water.",
+    "primary": "Ben ate a coffee for lunch.",
+    "badCount": 4,
+    "samples": [
+      {
+        "sentence": "Ben ate a coffee for lunch.",
+        "issues": [
+          "food-template"
+        ]
+      },
+      {
+        "sentence": "Ben ate a coffee for lunch.",
+        "issues": [
+          "food-template"
+        ]
+      },
+      {
+        "sentence": "Please pass me a coffee.",
+        "issues": [
+          "food-template"
+        ]
+      }
+    ],
+    "issueTypes": [
+      "food-template"
+    ]
+  },
+  {
+    "id": "flyers-date",
+    "word": "date",
+    "level": "Flyers",
+    "pos": "noun",
+    "category": "general",
+    "definition": "The fruit of the date palm, Phoenix dactylifera, somewhat in the shape of an olive, containing a soft, sweet pulp and enclosing a hard…",
+    "primary": "Sam ate a date for lunch.",
+    "badCount": 4,
+    "samples": [
+      {
+        "sentence": "Sam ate a date for lunch.",
+        "issues": [
+          "food-template"
+        ]
+      },
+      {
+        "sentence": "Sam ate a date for lunch.",
+        "issues": [
+          "food-template"
+        ]
+      },
+      {
+        "sentence": "Please pass me a date.",
+        "issues": [
+          "food-template"
+        ]
+      }
+    ],
+    "issueTypes": [
+      "food-template"
+    ]
+  },
+  {
+    "id": "preliminary-dessert",
+    "word": "dessert",
+    "level": "Preliminary",
+    "pos": "noun",
+    "category": "general",
+    "definition": "A sweet confection served as the last course of a meal.",
+    "primary": "Ben ate a dessert for lunch.",
+    "badCount": 4,
+    "samples": [
+      {
+        "sentence": "Ben ate a dessert for lunch.",
+        "issues": [
+          "food-template"
+        ]
+      },
+      {
+        "sentence": "Ben ate a dessert for lunch.",
+        "issues": [
+          "food-template"
+        ]
+      },
+      {
+        "sentence": "Please pass me a dessert.",
+        "issues": [
+          "food-template"
+        ]
+      }
+    ],
+    "issueTypes": [
+      "food-template"
+    ]
+  },
+  {
+    "id": "preliminary-herb",
+    "word": "herb",
+    "level": "Preliminary",
+    "pos": "noun",
+    "category": "general",
+    "definition": "Any green, leafy plant, or parts thereof, used to flavour or season food.",
+    "primary": "Ana ate a herb for lunch.",
+    "badCount": 4,
+    "samples": [
+      {
+        "sentence": "Ana ate a herb for lunch.",
+        "issues": [
+          "food-template"
+        ]
+      },
+      {
+        "sentence": "Ana ate a herb for lunch.",
+        "issues": [
+          "food-template"
+        ]
+      },
+      {
+        "sentence": "Please pass me a herb.",
+        "issues": [
+          "food-template"
+        ]
+      }
+    ],
+    "issueTypes": [
+      "food-template"
+    ]
+  },
+  {
+    "id": "preliminary-leather",
+    "word": "leather",
+    "level": "Preliminary",
+    "pos": "noun",
+    "category": "food",
+    "definition": "A tough material produced from the skin of animals, by tanning or similar process, used e.g. for clothing.",
+    "primary": "Lily ate a leather for lunch.",
+    "badCount": 4,
+    "samples": [
+      {
+        "sentence": "Lily ate a leather for lunch.",
+        "issues": [
+          "food-template"
+        ]
+      },
+      {
+        "sentence": "Lily ate a leather for lunch.",
+        "issues": [
+          "food-template"
+        ]
+      },
+      {
+        "sentence": "Please pass me a leather.",
+        "issues": [
+          "food-template"
+        ]
+      }
+    ],
+    "issueTypes": [
+      "food-template"
+    ]
+  },
+  {
+    "id": "preliminary-lettuce",
+    "word": "lettuce",
+    "level": "Preliminary",
+    "pos": "noun",
+    "category": "general",
+    "definition": "An edible plant, Lactuca sativa and its close relatives, having a head of green and/or purple leaves.",
+    "primary": "Noah ate a lettuce for lunch.",
+    "badCount": 4,
+    "samples": [
+      {
+        "sentence": "Noah ate a lettuce for lunch.",
+        "issues": [
+          "food-template"
+        ]
+      },
+      {
+        "sentence": "Noah ate a lettuce for lunch.",
+        "issues": [
+          "food-template"
+        ]
+      },
+      {
+        "sentence": "Please pass me a lettuce.",
+        "issues": [
+          "food-template"
+        ]
+      }
+    ],
+    "issueTypes": [
+      "food-template"
+    ]
+  },
+  {
+    "id": "starters-lizard",
+    "word": "lizard",
+    "level": "Starters",
+    "pos": "noun",
+    "category": "general",
+    "definition": "Any reptile of the order Squamata that is not a snake, usually having four legs, external ear openings, movable eyelids and a long…",
+    "primary": "Ana saw a lizard at the zoo.",
+    "badCount": 4,
+    "samples": [
+      {
+        "sentence": "Ana saw a lizard at the zoo.",
+        "issues": [
+          "animal-template"
+        ]
+      },
+      {
+        "sentence": "Ana saw a lizard at the zoo.",
+        "issues": [
+          "animal-template"
+        ]
+      },
+      {
+        "sentence": "The lizard likes to play in the garden.",
+        "issues": [
+          "animal-template"
+        ]
+      }
+    ],
+    "issueTypes": [
+      "animal-template"
+    ]
+  },
+  {
+    "id": "preliminary-mushroom",
+    "word": "mushroom",
+    "level": "Preliminary",
+    "pos": "noun",
+    "category": "home",
+    "definition": "Any of the fleshy fruiting bodies of fungi typically produced above ground on soil or on their food sources (such as decaying wood).",
+    "primary": "Tom ate a mushroom for lunch.",
+    "badCount": 4,
+    "samples": [
+      {
+        "sentence": "Tom ate a mushroom for lunch.",
+        "issues": [
+          "food-template"
+        ]
+      },
+      {
+        "sentence": "Tom ate a mushroom for lunch.",
+        "issues": [
+          "food-template"
+        ]
+      },
+      {
+        "sentence": "Please pass me a mushroom.",
+        "issues": [
+          "food-template"
+        ]
+      }
+    ],
+    "issueTypes": [
+      "food-template"
+    ]
+  },
+  {
+    "id": "preliminary-olive",
+    "word": "olive",
+    "level": "Preliminary",
+    "pos": "noun",
+    "category": "general",
+    "definition": "A tree, Olea europaea, cultivated since ancient times in the Mediterranean for its fruit and the oil obtained from it.",
+    "primary": "Zoe ate an olive for lunch.",
+    "badCount": 4,
+    "samples": [
+      {
+        "sentence": "Zoe ate an olive for lunch.",
+        "issues": [
+          "food-template"
+        ]
+      },
+      {
+        "sentence": "Zoe ate an olive for lunch.",
+        "issues": [
+          "food-template"
+        ]
+      },
+      {
+        "sentence": "Please pass me an olive.",
+        "issues": [
+          "food-template"
+        ]
+      }
+    ],
+    "issueTypes": [
+      "food-template"
+    ]
+  },
+  {
+    "id": "flyers-olives",
+    "word": "olives",
+    "level": "Flyers",
+    "pos": "noun",
+    "category": "general",
+    "definition": "A tree, Olea europaea, cultivated since ancient times in the Mediterranean for its fruit and the oil obtained from it.",
+    "primary": "Sam ate the olives for lunch.",
+    "badCount": 4,
+    "samples": [
+      {
+        "sentence": "Sam ate the olives for lunch.",
+        "issues": [
+          "food-template"
+        ]
+      },
+      {
+        "sentence": "Sam ate the olives for lunch.",
+        "issues": [
+          "food-template"
+        ]
+      },
+      {
+        "sentence": "Please pass me the olives.",
+        "issues": [
+          "food-template"
+        ]
+      }
+    ],
+    "issueTypes": [
+      "food-template"
+    ]
+  },
+  {
+    "id": "preliminary-peanut",
+    "word": "peanut",
+    "level": "Preliminary",
+    "pos": "noun",
+    "category": "general",
+    "definition": "A legume resembling a nut, the fruit of the plant Arachis hypogaea.",
+    "primary": "Leo ate a peanut for lunch.",
+    "badCount": 4,
+    "samples": [
+      {
+        "sentence": "Leo ate a peanut for lunch.",
+        "issues": [
+          "food-template"
+        ]
+      },
+      {
+        "sentence": "Leo ate a peanut for lunch.",
+        "issues": [
+          "food-template"
+        ]
+      },
+      {
+        "sentence": "Please pass me a peanut.",
+        "issues": [
+          "food-template"
+        ]
+      }
+    ],
+    "issueTypes": [
+      "food-template"
+    ]
+  },
+  {
+    "id": "preliminary-row",
+    "word": "row",
+    "level": "Preliminary",
+    "pos": "noun",
+    "category": "general",
+    "definition": "A line of objects, often regularly spaced, such as seats in a theatre, vegetable plants in a garden etc.",
+    "primary": "Ben ate a row for lunch.",
+    "badCount": 4,
+    "samples": [
+      {
+        "sentence": "Ben ate a row for lunch.",
+        "issues": [
+          "food-template"
+        ]
+      },
+      {
+        "sentence": "Ben ate a row for lunch.",
+        "issues": [
+          "food-template"
+        ]
+      },
+      {
+        "sentence": "Please pass me a row.",
+        "issues": [
+          "food-template"
+        ]
+      }
+    ],
+    "issueTypes": [
+      "food-template"
+    ]
+  },
+  {
+    "id": "movers-sauce",
+    "word": "sauce",
+    "level": "Movers",
+    "pos": "noun",
+    "category": "general",
+    "definition": "A liquid (often thickened) condiment or accompaniment to food.",
+    "primary": "Emma ate a sauce for lunch.",
+    "badCount": 4,
+    "samples": [
+      {
+        "sentence": "Emma ate a sauce for lunch.",
+        "issues": [
+          "food-template"
+        ]
+      },
+      {
+        "sentence": "Emma ate a sauce for lunch.",
+        "issues": [
+          "food-template"
+        ]
+      },
+      {
+        "sentence": "Please pass me a sauce.",
+        "issues": [
+          "food-template"
+        ]
+      }
+    ],
+    "issueTypes": [
+      "food-template"
+    ]
+  },
+  {
+    "id": "preliminary-spinach",
+    "word": "spinach",
+    "level": "Preliminary",
+    "pos": "noun",
+    "category": "general",
+    "definition": "A particular edible plant, Spinacia oleracea, or its leaves.",
+    "primary": "Noah ate a spinach for lunch.",
+    "badCount": 4,
+    "samples": [
+      {
+        "sentence": "Noah ate a spinach for lunch.",
+        "issues": [
+          "food-template"
+        ]
+      },
+      {
+        "sentence": "Noah ate a spinach for lunch.",
+        "issues": [
+          "food-template"
+        ]
+      },
+      {
+        "sentence": "Please pass me a spinach.",
+        "issues": [
+          "food-template"
+        ]
+      }
+    ],
+    "issueTypes": [
+      "food-template"
+    ]
+  },
+  {
+    "id": "flyers-strawberry",
+    "word": "strawberry",
+    "level": "Flyers",
+    "pos": "noun",
+    "category": "general",
+    "definition": "The sweet, usually red, edible fruit of certain plants of the genus Fragaria.",
+    "primary": "Lily ate a strawberry for lunch.",
+    "badCount": 4,
+    "samples": [
+      {
+        "sentence": "Lily ate a strawberry for lunch.",
+        "issues": [
+          "food-template"
+        ]
+      },
+      {
+        "sentence": "Lily ate a strawberry for lunch.",
+        "issues": [
+          "food-template"
+        ]
+      },
+      {
+        "sentence": "Please pass me a strawberry.",
+        "issues": [
+          "food-template"
+        ]
+      }
+    ],
+    "issueTypes": [
+      "food-template"
+    ]
+  },
+  {
+    "id": "preliminary-supper",
+    "word": "supper",
+    "level": "Preliminary",
+    "pos": "noun",
+    "category": "general",
+    "definition": "Food consumed before going to bed.",
+    "primary": "Ana ate a supper for lunch.",
+    "badCount": 4,
+    "samples": [
+      {
+        "sentence": "Ana ate a supper for lunch.",
+        "issues": [
+          "food-template"
+        ]
+      },
+      {
+        "sentence": "Ana ate a supper for lunch.",
+        "issues": [
+          "food-template"
+        ]
+      },
+      {
+        "sentence": "Please pass me a supper.",
+        "issues": [
+          "food-template"
+        ]
+      }
+    ],
+    "issueTypes": [
+      "food-template"
+    ]
+  },
+  {
+    "id": "preliminary-vanilla",
+    "word": "vanilla",
+    "level": "Preliminary",
+    "pos": "noun",
+    "category": "health",
+    "definition": "Any tropical, climbing orchid of the genus Vanilla (especially Vanilla planifolia), bearing podlike fruit yielding an extract used in…",
+    "primary": "Ana ate a vanilla for lunch.",
+    "badCount": 4,
+    "samples": [
+      {
+        "sentence": "Ana ate a vanilla for lunch.",
+        "issues": [
+          "food-template"
+        ]
+      },
+      {
+        "sentence": "Ana ate a vanilla for lunch.",
+        "issues": [
+          "food-template"
+        ]
+      },
+      {
+        "sentence": "Please pass me a vanilla.",
+        "issues": [
+          "food-template"
+        ]
+      }
+    ],
+    "issueTypes": [
+      "food-template"
+    ]
+  },
+  {
+    "id": "preliminary-sandal",
+    "word": "sandal",
+    "level": "Preliminary",
+    "pos": "noun",
+    "category": "general",
+    "definition": "A type of open shoe made up of straps or bands holding a sole to the foot.",
+    "primary": "Ana put on a sandal this morning.",
+    "badCount": 3,
+    "samples": [
+      {
+        "sentence": "Ana put on a sandal this morning.",
+        "issues": [
+          "clothes-template"
+        ]
+      },
+      {
+        "sentence": "Ana put on a sandal this morning.",
+        "issues": [
+          "clothes-template"
+        ]
+      },
+      {
+        "sentence": "My sandal is soft and warm.",
+        "issues": [
+          "clothes-template"
+        ]
+      }
+    ],
+    "issueTypes": [
+      "clothes-template"
+    ]
+  },
+  {
+    "id": "preliminary-society",
+    "word": "society",
+    "level": "Preliminary",
+    "pos": "noun",
+    "category": "general",
+    "definition": "A long-standing group of people sharing cultural aspects such as language, dress, norms of behavior and artistic forms.",
+    "primary": "Tom put on a society this morning.",
+    "badCount": 3,
+    "samples": [
+      {
+        "sentence": "Tom put on a society this morning.",
+        "issues": [
+          "clothes-template"
+        ]
+      },
+      {
+        "sentence": "Tom put on a society this morning.",
+        "issues": [
+          "clothes-template"
+        ]
+      },
+      {
+        "sentence": "My society is soft and warm.",
+        "issues": [
+          "clothes-template"
+        ]
+      }
+    ],
+    "issueTypes": [
+      "clothes-template"
+    ]
+  }
+]
