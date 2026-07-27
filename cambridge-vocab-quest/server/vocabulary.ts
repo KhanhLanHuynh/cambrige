@@ -90,6 +90,8 @@ export function selectVocabulary(options: {
   category?: string
   categories?: string[]
   reviewMix?: number
+  reviewOnly?: boolean
+  focusWordIds?: string[]
   wordHealth?: WordAttemptSummary[]
 }): VocabularyWord[] {
   const categorySet = options.categories?.length
@@ -105,7 +107,6 @@ export function selectVocabulary(options: {
     pool = vocabulary.filter((word) => !options.level || word.level === options.level)
   }
 
-  const reviewMix = options.reviewMix ?? 0
   const healthById = new Map((options.wordHealth ?? []).map((item) => [item.wordId, item]))
   const reviewPool = shuffled(pool.filter((word) => {
     const health = healthById.get(word.id)?.health
@@ -116,20 +117,43 @@ export function selectVocabulary(options: {
     const health = healthById.get(word.id)?.health
     return health === 'Healthy' || health === 'New'
   }))
+  const practisedPool = shuffled(pool.filter((word) => healthById.has(word.id)))
 
+  const selected: VocabularyWord[] = []
+  const selectedIds = new Set<string>()
+  const take = (source: VocabularyWord[], needed: number) => {
+    for (const word of source) {
+      if (selected.length >= options.count || needed <= 0) break
+      if (selectedIds.has(word.id)) continue
+      selected.push(word)
+      selectedIds.add(word.id)
+      needed -= 1
+    }
+  }
+
+  if (options.focusWordIds?.length) {
+    const focusWords = options.focusWordIds
+      .map((id) => vocabulary.find((word) => word.id === id))
+      .filter((word): word is VocabularyWord => Boolean(word))
+    take(focusWords, focusWords.length)
+    take(reviewPool, options.count - selected.length)
+    take(practisedPool, options.count - selected.length)
+    take(unseenPool, options.count - selected.length)
+    take(shuffled(pool), options.count - selected.length)
+    return selected
+  }
+
+  if (options.reviewOnly) {
+    take(reviewPool, options.count)
+    take(practisedPool, options.count - selected.length)
+    take(otherPool, options.count - selected.length)
+    take(shuffled(pool), options.count - selected.length)
+    return selected
+  }
+
+  const reviewMix = options.reviewMix ?? 0
   if (reviewMix > 0 && (reviewPool.length || unseenPool.length)) {
     const reviewCount = Math.min(pool.length, Math.round(options.count * (reviewMix / 100)))
-    const selected: VocabularyWord[] = []
-    const selectedIds = new Set<string>()
-    const take = (source: VocabularyWord[], needed: number) => {
-      for (const word of source) {
-        if (selected.length >= options.count || needed <= 0) break
-        if (selectedIds.has(word.id)) continue
-        selected.push(word)
-        selectedIds.add(word.id)
-        needed -= 1
-      }
-    }
     take(reviewPool, reviewCount)
     take(unseenPool, options.count - selected.length)
     take(otherPool, options.count - selected.length)
@@ -144,12 +168,12 @@ export function selectVocabulary(options: {
   const flyersCount = Math.round(options.count * 0.7)
   const moversCount = Math.round(options.count * 0.2)
   const startersCount = Math.max(0, options.count - flyersCount - moversCount)
-  const selected = [
+  const mixed = [
     ...shuffled(pool.filter((word) => word.level === 'Flyers')).slice(0, flyersCount),
     ...shuffled(pool.filter((word) => word.level === 'Movers')).slice(0, moversCount),
     ...shuffled(pool.filter((word) => word.level === 'Starters')).slice(0, startersCount),
   ]
-  const selectedIds = new Set(selected.map((word) => word.id))
-  const remainder = shuffled(pool.filter((word) => word.level !== 'Preliminary' && !selectedIds.has(word.id)))
-  return shuffled([...selected, ...remainder.slice(0, Math.max(0, options.count - selected.length))])
+  const mixedIds = new Set(mixed.map((word) => word.id))
+  const remainder = shuffled(pool.filter((word) => word.level !== 'Preliminary' && !mixedIds.has(word.id)))
+  return shuffled([...mixed, ...remainder.slice(0, Math.max(0, options.count - mixed.length))])
 }

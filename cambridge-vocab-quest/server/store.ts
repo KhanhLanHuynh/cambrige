@@ -50,7 +50,6 @@ export interface LearnerRecord {
   level: CambridgeLevel
   pinHash?: string
   streak: number
-  stars: number
   gems: number
   lastActiveDate?: string
   claimedQuestIds: string[]
@@ -174,7 +173,7 @@ function normalizeRedemption(raw: Partial<RedemptionRecord> & Pick<RedemptionRec
   }
 }
 
-function normalizeLearner(raw: Partial<LearnerRecord> & Pick<LearnerRecord, 'id' | 'userId' | 'nickname' | 'avatar' | 'level' | 'createdAt'>): LearnerRecord {
+function normalizeLearner(raw: Partial<LearnerRecord> & Pick<LearnerRecord, 'id' | 'userId' | 'nickname' | 'avatar' | 'level' | 'createdAt'> & { stars?: number }): LearnerRecord {
   return {
     id: raw.id,
     userId: raw.userId,
@@ -183,8 +182,7 @@ function normalizeLearner(raw: Partial<LearnerRecord> & Pick<LearnerRecord, 'id'
     level: raw.level,
     pinHash: raw.pinHash,
     streak: raw.streak ?? 0,
-    stars: raw.stars ?? 0,
-    gems: raw.gems ?? 0,
+    gems: raw.gems ?? raw.stars ?? 0,
     lastActiveDate: raw.lastActiveDate,
     claimedQuestIds: raw.claimedQuestIds ?? [],
     achievementIds: raw.achievementIds ?? [],
@@ -267,7 +265,18 @@ export class JsonStore implements DataStore {
   private async persist(database: Database = this.data): Promise<void> {
     const temporary = `${this.filePath}.${process.pid}.${randomUUID()}.tmp`
     await writeFile(temporary, `${JSON.stringify(database, null, 2)}\n`, { encoding: 'utf8', mode: 0o600 })
-    await rename(temporary, this.filePath)
+    for (let attempt = 0; ; attempt++) {
+      try {
+        await rename(temporary, this.filePath)
+        return
+      } catch (error: any) {
+        if ((error.code === 'EPERM' || error.code === 'EACCES') && attempt < 4) {
+          await new Promise((resolve) => setTimeout(resolve, 50 * (attempt + 1)))
+          continue
+        }
+        throw error
+      }
+    }
   }
 }
 

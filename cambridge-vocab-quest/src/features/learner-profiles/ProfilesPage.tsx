@@ -62,7 +62,7 @@ export function ProfilesPage({ navigate }: { navigate: (path: string) => void })
         <div className="profile-grid">
           {learners.map((learner) => (
             <button className="learner-card" key={learner.id} onClick={() => choose(learner)}>
-              <span>{learner.avatar}</span><strong>{learner.name}</strong><small>Level {learner.level} • {learner.stars} stars</small>
+              <span>{learner.avatar}</span><strong>{learner.name}</strong><small>Level {learner.level} • {learner.gems} gems</small>
             </button>
           ))}
           <button className="learner-card add-card" onClick={() => setCreating(true)}><Plus /><strong>Add learner</strong><small>Create a new journey</small></button>
@@ -82,7 +82,7 @@ export function ProfilesPage({ navigate }: { navigate: (path: string) => void })
                 <h2 id="modal-title">Create a learner</h2><p>Set up their personalised learning path.</p>
                 <form onSubmit={create}>
                   <label>Display name<input name="name" placeholder="Learner name" autoFocus /></label>
-                  <label>Avatar<select name="avatar"><option>🧑🏽‍🚀</option><option>🦊</option><option>🐼</option><option>🦄</option><option>🤖</option></select></label>
+                  <label>Avatar<select name="avatar"><option>🚀</option><option>🦊</option><option>🐼</option><option>🦄</option><option>🤖</option></select></label>
                   <label>Cambridge level<select name="level"><option>Starters</option><option>Movers</option><option>Flyers</option><option>Preliminary</option></select></label>
                   <label>Optional 4-digit PIN<input name="pin" inputMode="numeric" maxLength={4} placeholder="1234" /></label>
                   {pinError && <div className="form-error" role="alert">{pinError}</div>}

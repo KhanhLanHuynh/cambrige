@@ -1,5 +1,5 @@
 import {
-  ArrowLeft, Check, ChevronRight, CircleHelp, Star, Trophy, Volume2,
+  ArrowLeft, Check, ChevronRight, CircleHelp, Gem, Sparkles, Trophy, Volume2,
 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Badge, Button, Progress } from '../../components/ui'
@@ -34,13 +34,22 @@ export function QuizPage({ learner, navigate }: { learner: Learner; navigate: (p
     reset()
     const params = new URLSearchParams(window.location.search)
     const stop = params.get('stop')
+    const focus = params.get('focus')
+    const review = params.get('review') === '1'
+    const mapStop = stop === 'nature-valley' || stop === 'crystal-caves' || stop === 'space-station' || stop === 'dragon-ridge'
+      ? stop
+      : undefined
     api<CreatedSession>('/quiz/sessions', {
       method: 'POST',
-      body: {
-        count: 10,
-        level: learner.level,
-        mapStop: stop === 'nature-valley' || stop === 'crystal-caves' || stop === 'space-station' || stop === 'dragon-ridge' ? stop : undefined,
-      },
+      body: focus
+        ? { count: 5, level: learner.level, focusWordIds: [focus] }
+        : review
+          ? { count: 8, level: learner.level, reviewOnly: true }
+          : {
+              count: 10,
+              level: learner.level,
+              mapStop,
+            },
     })
       .then((created) => { if (active) setSession(created) })
       .catch((error) => { if (active) setLoadError(error instanceof ApiError ? error.message : 'Could not start the quiz') })
@@ -170,10 +179,10 @@ export function QuizPage({ learner, navigate }: { learner: Learner; navigate: (p
         <aside className="quiz-rail">
           <div className="guide-message"><span>🤖</span><p>Welcome back, Explorer! Can you choose the right word to complete our mission?</p></div>
           <section className="card session-card">
-            <h3>SESSION STATS <Badge tone="lime"><Star /> Live</Badge></h3>
+            <h3>SESSION STATS <Badge tone="lime"><Sparkles /> Live</Badge></h3>
             <div>
               <span><Trophy /><small>STREAK</small><b>{streak}</b></span>
-              <span><Star /><small>GEMS</small><b>+{xp}</b></span>
+              <span><Gem /><small>GEMS</small><b>+{xp}</b></span>
             </div>
             <h4>SESSION PROGRESS</h4>
             <div className="milestone">

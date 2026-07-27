@@ -42,6 +42,5 @@ export interface SafeLearner {
   level: CambridgeLevel
   hasPin: boolean
   streak: number
-  stars: number
   gems: number
 }

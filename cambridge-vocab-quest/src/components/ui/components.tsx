@@ -26,10 +26,11 @@ interface AppShellProps {
   path: string
   learner: Learner
   navigate: (path: string) => void
+  onSwitchLearner: () => void
   onSignOut: () => void
 }
 
-export function AppShell({ children, path, learner, navigate, onSignOut }: AppShellProps) {
+export function AppShell({ children, path, learner, navigate, onSwitchLearner, onSignOut }: AppShellProps) {
   const [menuOpen, setMenuOpen] = useState(false)
   const links = [
     { path: '/home', label: 'Home Hub', icon: Home },
@@ -39,6 +40,10 @@ export function AppShell({ children, path, learner, navigate, onSignOut }: AppSh
   const go = (next: string) => {
     setMenuOpen(false)
     navigate(next)
+  }
+  const switchLearner = () => {
+    setMenuOpen(false)
+    onSwitchLearner()
   }
 
   return (
@@ -63,7 +68,7 @@ export function AppShell({ children, path, learner, navigate, onSignOut }: AppSh
         </nav>
         <div className="sidebar-profile">
           <div className="profile-row"><span className="avatar">{learner.avatar}</span><span><strong>{learner.name} Student</strong><small>Level {learner.level} Learner</small></span></div>
-          <button onClick={() => go('/profiles')}><UserRound size={16} /> Switch learner</button>
+          <button onClick={switchLearner}><UserRound size={16} /> Switch learner</button>
           <button onClick={() => go('/settings')}><Settings size={16} /> Settings</button>
           <button className="danger" onClick={onSignOut}><LogOut size={16} /> Sign out</button>
         </div>
@@ -72,7 +77,7 @@ export function AppShell({ children, path, learner, navigate, onSignOut }: AppSh
         <header className="topbar">
           <VocabularySearch navigate={navigate} />
           <div className="top-actions">
-            <button className="profile-menu" type="button" onClick={() => go('/profiles')} title="Switch learner">
+            <button className="profile-menu" type="button" onClick={switchLearner} title="Switch learner">
               <span>{learner.avatar}</span><strong>{learner.name} Student</strong><ChevronDown size={15} />
             </button>
           </div>

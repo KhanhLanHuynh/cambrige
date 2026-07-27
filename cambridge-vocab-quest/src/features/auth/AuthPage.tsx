@@ -4,7 +4,7 @@ import { z } from 'zod'
 import { Badge, Button, Logo } from '../../components/ui'
 import { api, ApiError } from '../../lib'
 import { useSessionStore } from '../../stores'
-import type { User } from '../../types'
+import type { Learner, User } from '../../types'
 
 const authSchema = z.object({
   name: z.string().min(2, 'Enter your name'),
@@ -20,6 +20,7 @@ export function AuthPage({ navigate }: { navigate: (path: string) => void }) {
   const [submitting, setSubmitting] = useState(false)
   const [resetToken, setResetToken] = useState('')
   const signIn = useSessionStore((state) => state.signIn)
+  const setLearners = useSessionStore((state) => state.setLearners)
 
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -65,6 +66,8 @@ export function AuthPage({ navigate }: { navigate: (path: string) => void }) {
         body: registering ? result.data : { email: result.data.email, password: result.data.password },
       })
       signIn(response.user)
+      const profiles = await api<{ learners: Learner[]; selectedLearnerId: string | null }>('/learners')
+      setLearners(profiles.learners, profiles.selectedLearnerId)
       navigate('/profiles')
     } catch (requestError) {
       setError(requestError instanceof ApiError ? requestError.message : 'Unable to connect to the learning server')

@@ -48,7 +48,6 @@ export async function seedStore(store: DataStore, reset = false): Promise<void> 
       level: 'Movers',
       pinHash,
       streak: 3,
-      stars: 120,
       gems: 420,
       claimedQuestIds: [],
       achievementIds: [],

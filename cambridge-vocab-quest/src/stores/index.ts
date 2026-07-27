@@ -11,8 +11,11 @@ interface SessionState {
   signIn: (user: User) => void
   signOut: () => void
   addLearner: (learner: Learner) => void
+  updateLearner: (learner: Learner) => void
   setLearners: (learners: Learner[], activeLearnerId?: string | null) => void
   selectLearner: (id: string) => void
+  clearLearner: () => void
+  removeLearner: (id: string) => void
   unlockAdult: () => void
   lockAdult: () => void
   setHydrated: () => void
@@ -29,8 +32,17 @@ export const useSessionStore = create<SessionState>()(
       signIn: (user) => set({ user }),
       signOut: () => set({ user: null, learners: [], activeLearnerId: null, adultUnlocked: false }),
       addLearner: (learner) => set((state) => ({ learners: [...state.learners, learner] })),
+      updateLearner: (learner) => set((state) => ({
+        learners: state.learners.map((item) => (item.id === learner.id ? { ...item, ...learner } : item)),
+      })),
       setLearners: (learners, activeLearnerId = null) => set({ learners, activeLearnerId }),
       selectLearner: (activeLearnerId) => set({ activeLearnerId, adultUnlocked: false }),
+      clearLearner: () => set({ activeLearnerId: null, adultUnlocked: false }),
+      removeLearner: (id) => set((state) => ({
+        learners: state.learners.filter((learner) => learner.id !== id),
+        activeLearnerId: state.activeLearnerId === id ? null : state.activeLearnerId,
+        adultUnlocked: state.activeLearnerId === id ? false : state.adultUnlocked,
+      })),
       unlockAdult: () => set({ adultUnlocked: true }),
       lockAdult: () => set({ adultUnlocked: false }),
       setHydrated: () => set({ hydrated: true }),

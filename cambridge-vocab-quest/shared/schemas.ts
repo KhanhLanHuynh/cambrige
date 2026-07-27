@@ -38,6 +38,35 @@ export const learnerCreateSchema = z.object({
   pin: z.string().regex(/^\d{4,6}$/).optional(),
 })
 
+export const learnerUpdateSchema = z.object({
+  name: z.string().trim().min(1).max(40).optional(),
+  avatar: z.string().trim().min(1).max(40).optional(),
+  level: cambridgeLevelSchema.optional(),
+  pin: z.string().regex(/^\d{4,6}$/).optional(),
+  clearPin: z.boolean().optional(),
+}).superRefine((value, context) => {
+  if (value.pin !== undefined && value.clearPin) {
+    context.addIssue({
+      code: 'custom',
+      message: 'Provide a new PIN or clear the PIN, not both',
+      path: ['pin'],
+    })
+  }
+  if (
+    value.name === undefined
+    && value.avatar === undefined
+    && value.level === undefined
+    && value.pin === undefined
+    && !value.clearPin
+  ) {
+    context.addIssue({
+      code: 'custom',
+      message: 'Provide at least one field to update',
+      path: ['name'],
+    })
+  }
+})
+
 export const learnerSelectSchema = z.object({
   learnerId: z.string().uuid(),
   pin: z.string().regex(/^\d{4,6}$/).optional(),
@@ -49,6 +78,8 @@ export const quizCreateSchema = z.object({
   category: z.string().trim().max(40).optional(),
   mode: z.enum(['explorer', 'speed-match', 'fill-blank']).default('explorer'),
   mapStop: z.enum(['space-station', 'nature-valley', 'crystal-caves', 'dragon-ridge']).optional(),
+  focusWordIds: z.array(z.string().min(1).max(80)).max(5).optional(),
+  reviewOnly: z.boolean().optional(),
 })
 
 export const quizAnswerSchema = z.object({
@@ -90,6 +121,7 @@ export const giftRequestSchema = z.object({
 export type RegisterInput = z.infer<typeof registerSchema>
 export type LoginInput = z.infer<typeof loginSchema>
 export type LearnerCreateInput = z.infer<typeof learnerCreateSchema>
+export type LearnerUpdateInput = z.infer<typeof learnerUpdateSchema>
 export type QuizCreateInput = z.infer<typeof quizCreateSchema>
 export type SettingsInput = z.infer<typeof settingsSchema>
 export type GiftCatalogInput = z.infer<typeof giftCatalogSchema>

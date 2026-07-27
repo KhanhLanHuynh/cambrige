@@ -10,6 +10,7 @@ import {
   giftRequestSchema,
   learnerCreateSchema,
   learnerSelectSchema,
+  learnerUpdateSchema,
   loginSchema,
   parentGateSchema,
   passwordResetConfirmSchema,
@@ -48,9 +49,9 @@ const vocabularySearchQuery = z.object({
 
 const MAP_THRESHOLDS = {
   'nature-valley': 0,
-  'space-station': 50,
-  'crystal-caves': 150,
-  'dragon-ridge': 300,
+  'space-station': 200,
+  'crystal-caves': 350,
+  'dragon-ridge': 550,
 } as const
 
 const MAP_LEVELS: Record<keyof typeof MAP_THRESHOLDS, CambridgeLevel> = {
@@ -80,7 +81,6 @@ function safeLearner(learner: LearnerRecord): SafeLearner {
     level: learner.level,
     hasPin: Boolean(learner.pinHash),
     streak: learner.streak,
-    stars: learner.stars,
     gems: learner.gems,
   }
 }
@@ -108,27 +108,47 @@ function wordHealthSummaries(attempts: AttemptRecord[]) {
   }))
 }
 
-function mapUnlocks(correctCount: number) {
-  return {
-    'space-station': correctCount >= MAP_THRESHOLDS['space-station'],
-    'nature-valley': correctCount >= MAP_THRESHOLDS['nature-valley'],
-    'crystal-caves': correctCount >= MAP_THRESHOLDS['crystal-caves'],
-    'dragon-ridge': correctCount >= MAP_THRESHOLDS['dragon-ridge'],
-  }
-}
-
 const MAP_STOP_UNLOCK_ORDER = ['dragon-ridge', 'crystal-caves', 'space-station', 'nature-valley'] as const
 
-function highestUnlockedLevel(correctCount: number): CambridgeLevel {
+function levelRank(level: CambridgeLevel): number {
+  return cambridgeLevels.indexOf(level)
+}
+
+function progressUnlockedLevel(correctCount: number): CambridgeLevel {
   for (const stop of MAP_STOP_UNLOCK_ORDER) {
     if (correctCount >= MAP_THRESHOLDS[stop]) return MAP_LEVELS[stop]
   }
   return 'Starters'
 }
 
-function levelsBelow(focusLevel: CambridgeLevel): CambridgeLevel[] {
-  const index = cambridgeLevels.indexOf(focusLevel)
-  return index <= 0 ? [] : [...cambridgeLevels.slice(0, index)]
+function mapUnlocks(correctCount: number, learnerLevel: CambridgeLevel) {
+  const learnerIndex = levelRank(learnerLevel)
+  return {
+    'nature-valley':
+      correctCount >= MAP_THRESHOLDS['nature-valley']
+      || levelRank(MAP_LEVELS['nature-valley']) <= learnerIndex,
+    'space-station':
+      correctCount >= MAP_THRESHOLDS['space-station']
+      || levelRank(MAP_LEVELS['space-station']) <= learnerIndex,
+    'crystal-caves':
+      correctCount >= MAP_THRESHOLDS['crystal-caves']
+      || levelRank(MAP_LEVELS['crystal-caves']) <= learnerIndex,
+    'dragon-ridge':
+      correctCount >= MAP_THRESHOLDS['dragon-ridge']
+      || levelRank(MAP_LEVELS['dragon-ridge']) <= learnerIndex,
+  }
+}
+
+function highestUnlockedLevel(correctCount: number, learnerLevel: CambridgeLevel): CambridgeLevel {
+  const fromProgress = progressUnlockedLevel(correctCount)
+  return levelRank(fromProgress) >= levelRank(learnerLevel) ? fromProgress : learnerLevel
+}
+
+function promoteLearnerLevel(learner: LearnerRecord, correctCount: number): boolean {
+  const progressLevel = progressUnlockedLevel(correctCount)
+  if (levelRank(progressLevel) <= levelRank(learner.level)) return false
+  learner.level = progressLevel
+  return true
 }
 
 function buildDailyQuestProgress(
@@ -136,38 +156,30 @@ function buildDailyQuestProgress(
   words: typeof vocabulary,
   correctCount: number,
   claimedQuestIds: string[],
+  learnerLevel: CambridgeLevel,
 ) {
-  const focusLevel = highestUnlockedLevel(correctCount)
-  const lowerLevels = levelsBelow(focusLevel)
-  const reviewLevels = lowerLevels.length > 0 ? lowerLevels : (['Starters'] as CambridgeLevel[])
+  const questLevel = highestUnlockedLevel(correctCount, learnerLevel)
+  const levelOf = (wordId: string) => words.find((word) => word.id === wordId)?.level
 
   let answerStreak = 0
   for (const attempt of [...todayAttempts].reverse()) {
-    if (!attempt.correct) break
+    if (!attempt.correct || levelOf(attempt.wordId) !== questLevel) break
     answerStreak += 1
   }
 
-  const levelOf = (wordId: string) => words.find((word) => word.id === wordId)?.level
   const focusCorrect = todayAttempts.filter(
-    (attempt) => attempt.correct && levelOf(attempt.wordId) === focusLevel,
+    (attempt) => attempt.correct && levelOf(attempt.wordId) === questLevel,
   ).length
-  const reviewCount = todayAttempts.filter((attempt) => {
-    const level = levelOf(attempt.wordId)
-    return level !== undefined && reviewLevels.includes(level)
-  }).length
+  const reviewCount = todayAttempts.filter((attempt) => levelOf(attempt.wordId) === questLevel).length
 
   const focusProgress = Math.min(focusCorrect, 1)
   const reviewProgress = Math.min(reviewCount, 5)
   const streakProgress = Math.min(answerStreak, 5)
-  const reviewLabel =
-    lowerLevels.length === 0
-      ? 'Practice 5 Starters words'
-      : `Review 5 ${[...lowerLevels].reverse().join('/')} words`
 
   const quests = [
     {
       id: 'focus',
-      label: `Complete 1 ${focusLevel} word`,
+      label: `Complete 1 ${questLevel} word`,
       progress: focusProgress,
       target: 1,
       reward: 30,
@@ -175,7 +187,7 @@ function buildDailyQuestProgress(
     },
     {
       id: 'review',
-      label: reviewLabel,
+      label: `Practice 5 ${questLevel} words`,
       progress: reviewProgress,
       target: 5,
       reward: 50,
@@ -183,7 +195,7 @@ function buildDailyQuestProgress(
     },
     {
       id: 'streak',
-      label: 'Maintain a 5-answer streak',
+      label: `Maintain a 5-answer ${questLevel} streak`,
       progress: streakProgress,
       target: 5,
       reward: 70,
@@ -457,7 +469,6 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
       level: body.level,
       pinHash: body.pin ? await hashSecret(body.pin) : undefined,
       streak: 0,
-      stars: 0,
       gems: 0,
       claimedQuestIds: [],
       achievementIds: [],
@@ -493,6 +504,49 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
     return { learner: safeLearner(learner) }
   })
 
+  app.delete('/api/learners/:id', async (request, reply) => {
+    const session = requireParent(request)
+    const { id } = parse(idParams, request.params)
+    const learner = store.read((database) =>
+      database.learners.find((item) => item.id === id && item.userId === session.userId),
+    )
+    if (!learner) throw new HttpError(404, 'Learner not found')
+    await store.update((database) => {
+      database.learners = database.learners.filter((item) => item.id !== id)
+      database.quizzes = database.quizzes.filter((item) => item.learnerId !== id)
+      database.attempts = database.attempts.filter((item) => item.learnerId !== id)
+      database.assignments = database.assignments.filter((item) => item.learnerId !== id)
+      database.redemptions = database.redemptions.filter((item) => item.learnerId !== id)
+      for (const current of database.sessions) {
+        if (current.selectedLearnerId === id) current.selectedLearnerId = undefined
+      }
+    })
+    return reply.code(204).send()
+  })
+
+  app.patch('/api/learners/:id', async (request) => {
+    const session = requireParent(request)
+    const { id } = parse(idParams, request.params)
+    const body = parse(learnerUpdateSchema, request.body ?? {})
+    const exists = store.read((database) =>
+      database.learners.find((item) => item.id === id && item.userId === session.userId),
+    )
+    if (!exists) throw new HttpError(404, 'Learner not found')
+
+    const pinHash = body.pin ? await hashSecret(body.pin) : undefined
+    const updated = await store.update((database) => {
+      const current = database.learners.find((item) => item.id === id && item.userId === session.userId)
+      if (!current) throw new HttpError(404, 'Learner not found')
+      if (body.name !== undefined) current.nickname = body.name
+      if (body.avatar !== undefined) current.avatar = body.avatar
+      if (body.level !== undefined) current.level = body.level
+      if (body.clearPin) delete current.pinHash
+      else if (pinHash) current.pinHash = pinHash
+      return safeLearner(current)
+    })
+    return { learner: updated }
+  })
+
   app.get('/api/vocabulary/search', async (request) => {
     requireLearner(request)
     const query = parse(vocabularySearchQuery, request.query ?? {})
@@ -501,36 +555,57 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
 
   app.get('/api/learner/hub', async (request) => {
     const { learner } = requireLearner(request)
+    const attempts = attemptsForLearner(store, learner.id)
+    const correctCount = attempts.filter((attempt) => attempt.correct).length
     await store.update((database) => {
       const current = database.learners.find((item) => item.id === learner.id)
-      if (current) ensureDailyPractice(current)
+      if (!current) return
+      ensureDailyPractice(current)
+      promoteLearnerLevel(current, correctCount)
     })
     const fresh = store.read((database) => database.learners.find((item) => item.id === learner.id)) ?? learner
-    const attempts = attemptsForLearner(store, fresh.id)
     const today = todayKey()
     const todayAttempts = attempts.filter((attempt) => attempt.answeredAt.slice(0, 10) === today)
-    const correctCount = attempts.filter((attempt) => attempt.correct).length
-    const { quests } = buildDailyQuestProgress(todayAttempts, vocabulary, correctCount, fresh.claimedQuestIds)
-    const unlocked = mapUnlocks(correctCount)
+    const { quests } = buildDailyQuestProgress(
+      todayAttempts,
+      vocabulary,
+      correctCount,
+      fresh.claimedQuestIds,
+      fresh.level,
+    )
+    const unlocked = mapUnlocks(correctCount, fresh.level)
     const achievementIds = syncAchievements(store, fresh.id)
     await store.update((database) => {
       const current = database.learners.find((item) => item.id === fresh.id)
       if (current) current.achievementIds = achievementIds
     })
     const health = wordHealthSummaries(attempts)
+    const healthRank: Record<string, number> = {
+      'At risk': 0,
+      Warming: 1,
+      New: 2,
+      Healthy: 3,
+    }
     const journey = health
       .map((item) => {
         const word = vocabulary.find((entry) => entry.id === item.wordId)
         if (!word) return null
         return {
+          wordId: word.id,
           word: word.word,
           category: word.category,
           definition: word.definition,
           mastery: item.accuracy,
+          health: item.health,
         }
       })
-      .filter(Boolean)
-      .sort((a, b) => (b?.mastery ?? 0) - (a?.mastery ?? 0))
+      .filter((item): item is NonNullable<typeof item> => Boolean(item))
+      .sort((a, b) => {
+        const healthDiff = (healthRank[a.health] ?? 99) - (healthRank[b.health] ?? 99)
+        if (healthDiff !== 0) return healthDiff
+        if (a.mastery !== b.mastery) return a.mastery - b.mastery
+        return a.word.localeCompare(b.word)
+      })
       .slice(0, 8)
 
     const assignment = store.read((database) =>
@@ -583,14 +658,22 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
     if (learner.claimedQuestIds.includes(quest.id)) throw new HttpError(409, 'Reward already claimed')
 
     const attempts = attemptsForLearner(store, learner.id)
+    const correctCount = attempts.filter((attempt) => attempt.correct).length
+    await store.update((database) => {
+      const current = database.learners.find((item) => item.id === learner.id)
+      if (!current) return
+      promoteLearnerLevel(current, correctCount)
+    })
+    const freshLearner = store.read((database) => database.learners.find((item) => item.id === learner.id))
+    if (!freshLearner) throw new HttpError(404, 'Learner not found')
     const today = todayKey()
     const todayAttempts = attempts.filter((attempt) => attempt.answeredAt.slice(0, 10) === today)
-    const correctCount = attempts.filter((attempt) => attempt.correct).length
     const { progress: questProgress } = buildDailyQuestProgress(
       todayAttempts,
       vocabulary,
       correctCount,
-      learner.claimedQuestIds,
+      freshLearner.claimedQuestIds,
+      freshLearner.level,
     )
     const progress = questProgress[quest.id as keyof typeof questProgress] ?? 0
     if (progress < quest.target) throw new HttpError(400, 'Quest is not complete yet')
@@ -601,7 +684,6 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
       if (current.claimedQuestIds.includes(quest.id)) throw new HttpError(409, 'Reward already claimed')
       current.claimedQuestIds.push(quest.id)
       current.gems += quest.reward
-      current.stars += quest.reward
       if (!current.achievementIds.includes('quest_first')) {
         current.achievementIds.push('quest_first')
       }
@@ -633,7 +715,7 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
 
     const attempts = attemptsForLearner(store, learner.id)
     const correctCount = attempts.filter((attempt) => attempt.correct).length
-    const unlocks = mapUnlocks(correctCount)
+    const unlocks = mapUnlocks(correctCount, learner.level)
     if (body.mapStop && !unlocks[body.mapStop]) {
       throw new HttpError(403, 'This map stop is still locked')
     }
@@ -652,8 +734,10 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
       count: body.count,
       level,
       category: body.category,
-      categories: assignment?.categories,
-      reviewMix: learner.settings.reviewMix,
+      categories: body.focusWordIds?.length || body.reviewOnly ? undefined : assignment?.categories,
+      reviewMix: body.reviewOnly || body.focusWordIds?.length ? undefined : learner.settings.reviewMix,
+      reviewOnly: body.reviewOnly,
+      focusWordIds: body.focusWordIds,
       wordHealth: wordHealthSummaries(attempts),
     })
     if (!selected.length) throw new HttpError(404, 'No vocabulary matches this quiz')
@@ -718,12 +802,13 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
           currentLearner.lastActiveDate = today
         }
         if (correct) {
-          const reward = currentQuiz.mode === 'fill-blank' ? 5 : 10
-          currentLearner.stars += reward
+          const belowLevel = levelRank(word.level) < levelRank(currentLearner.level)
+          const reward = currentQuiz.mode === 'fill-blank' || belowLevel ? 5 : 10
           currentLearner.gems += reward
           gemsAwarded = reward
         }
         const attempts = database.attempts.filter((item) => item.learnerId === learner.id)
+        promoteLearnerLevel(currentLearner, attempts.filter((item) => item.correct).length)
         const wordAttempts = attempts.filter((item) => item.wordId === word.id)
         if (wasAtRisk && healthForAttempts(wordAttempts) === 'Healthy') {
           if (!currentLearner.achievementIds.includes('comeback_kid')) {
@@ -930,7 +1015,6 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
         throw new HttpError(400, 'Not enough gems to approve this gift')
       }
       learner.gems -= redemption.costGems
-      learner.stars = Math.max(0, learner.stars - redemption.costGems)
       redemption.status = 'approved'
       redemption.resolvedAt = new Date().toISOString()
       if (!learner.achievementIds.includes('gift_first')) {

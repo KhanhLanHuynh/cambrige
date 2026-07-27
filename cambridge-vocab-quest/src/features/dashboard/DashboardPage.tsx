@@ -39,10 +39,15 @@ function newGiftDraft(): GiftDefinition {
 export function SettingsModal({
   onClose,
   initial,
+  onLearnersChanged,
 }: {
   onClose: () => void
   initial?: LearnerSettings | null
+  onLearnersChanged?: () => void
 }) {
+  const learners = useSessionStore((state) => state.learners)
+  const removeLearner = useSessionStore((state) => state.removeLearner)
+  const updateLearner = useSessionStore((state) => state.updateLearner)
   const [saved, setSaved] = useState(false)
   const [catalogSaved, setCatalogSaved] = useState(false)
   const [error, setError] = useState('')
@@ -50,6 +55,19 @@ export function SettingsModal({
   const [settings, setSettings] = useState<LearnerSettings | null>(initial ?? null)
   const [catalog, setCatalog] = useState<GiftDefinition[]>([])
   const [catalogLoading, setCatalogLoading] = useState(true)
+  const [pendingDelete, setPendingDelete] = useState<Learner | null>(null)
+  const [confirmName, setConfirmName] = useState('')
+  const [deleteError, setDeleteError] = useState('')
+  const [deleteBusy, setDeleteBusy] = useState(false)
+  const [editing, setEditing] = useState<Learner | null>(null)
+  const [editName, setEditName] = useState('')
+  const [editAvatar, setEditAvatar] = useState('🚀')
+  const [editLevel, setEditLevel] = useState<CambridgeLevel>('Starters')
+  const [editPin, setEditPin] = useState('')
+  const [clearPin, setClearPin] = useState(false)
+  const [editError, setEditError] = useState('')
+  const [editBusy, setEditBusy] = useState(false)
+  const [editSaved, setEditSaved] = useState(false)
 
   useEffect(() => {
     if (initial) {
@@ -118,6 +136,91 @@ export function SettingsModal({
     }
   }
 
+  const confirmDelete = async () => {
+    if (!pendingDelete) return
+    if (confirmName.trim() !== pendingDelete.name) {
+      setDeleteError('Type the learner’s name exactly to confirm')
+      return
+    }
+    setDeleteBusy(true)
+    setDeleteError('')
+    try {
+      await api(`/learners/${pendingDelete.id}`, { method: 'DELETE' })
+      removeLearner(pendingDelete.id)
+      setPendingDelete(null)
+      setConfirmName('')
+      onLearnersChanged?.()
+    } catch (requestError) {
+      setDeleteError(requestError instanceof ApiError ? requestError.message : 'Could not delete learner')
+    } finally {
+      setDeleteBusy(false)
+    }
+  }
+
+  const openEdit = (entry: Learner) => {
+    setEditing(entry)
+    setEditName(entry.name)
+    setEditAvatar(entry.avatar || '🚀')
+    setEditLevel(entry.level)
+    setEditPin('')
+    setClearPin(false)
+    setEditError('')
+    setEditSaved(false)
+    setPendingDelete(null)
+    setConfirmName('')
+    setDeleteError('')
+  }
+
+  const saveEdit = async () => {
+    if (!editing) return
+    const name = editName.trim()
+    if (name.length < 1) {
+      setEditError('Enter a display name')
+      return
+    }
+    if (editPin && !/^\d{4,6}$/.test(editPin)) {
+      setEditError('PIN must be 4–6 digits')
+      return
+    }
+    if (clearPin && editPin) {
+      setEditError('Provide a new PIN or clear the PIN, not both')
+      return
+    }
+
+    const body: {
+      name: string
+      avatar: string
+      level: CambridgeLevel
+      pin?: string
+      clearPin?: boolean
+    } = {
+      name,
+      avatar: editAvatar,
+      level: editLevel,
+    }
+    if (clearPin) body.clearPin = true
+    else if (editPin) body.pin = editPin
+
+    setEditBusy(true)
+    setEditError('')
+    try {
+      const response = await api<{ learner: Learner }>(`/learners/${editing.id}`, {
+        method: 'PATCH',
+        body,
+      })
+      updateLearner(response.learner)
+      setEditing(response.learner)
+      setEditPin('')
+      setClearPin(false)
+      setEditSaved(true)
+      onLearnersChanged?.()
+    } catch (requestError) {
+      setEditError(requestError instanceof ApiError ? requestError.message : 'Could not update learner')
+    } finally {
+      setEditBusy(false)
+    }
+  }
+
   if (!settings) {
     return <div className="modal-backdrop"><section className="modal settings-modal"><p>Loading settings…</p></section></div>
   }
@@ -166,6 +269,183 @@ export function SettingsModal({
           {saved && <div className="save-success"><Check /> Settings saved</div>}
           <Button type="submit">Save settings</Button>
         </form>
+
+        <div className="learners-manager">
+          <h3>Learners</h3>
+          <p>Edit or remove learner profiles. Deleting permanently removes progress, quizzes, and gift requests.</p>
+          <ul className="learners-manager-list">
+            {learners.map((entry) => (
+              <li key={entry.id}>
+                <span className="learners-manager-avatar" aria-hidden="true">{entry.avatar}</span>
+                <span>
+                  <strong>{entry.name}</strong>
+                  <small>{entry.gems ?? 0} gems · Level {entry.level}{entry.hasPin ? ' · PIN' : ''}</small>
+                </span>
+                <span className="learners-manager-actions">
+                  <button
+                    type="button"
+                    className="text-link"
+                    onClick={() => openEdit(entry)}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    type="button"
+                    className="text-link danger-link"
+                    onClick={() => {
+                      setPendingDelete(entry)
+                      setConfirmName('')
+                      setDeleteError('')
+                      setEditing(null)
+                      setEditError('')
+                      setEditSaved(false)
+                    }}
+                  >
+                    Delete
+                  </button>
+                </span>
+              </li>
+            ))}
+          </ul>
+          {!learners.length && <p className="no-results">No learners on this account.</p>}
+          {editing && (
+            <div className="edit-learner-form">
+              <strong>Edit {editing.name}</strong>
+              <label>
+                Display name
+                <input
+                  aria-label="Learner display name"
+                  value={editName}
+                  maxLength={40}
+                  autoFocus
+                  onChange={(event) => {
+                    setEditName(event.target.value)
+                    setEditSaved(false)
+                  }}
+                />
+              </label>
+              <label>
+                Avatar
+                <select
+                  aria-label="Learner avatar"
+                  value={editAvatar}
+                  onChange={(event) => {
+                    setEditAvatar(event.target.value)
+                    setEditSaved(false)
+                  }}
+                >
+                  {!['🚀', '🦊', '🐼', '🦄', '🤖'].includes(editAvatar) && (
+                    <option value={editAvatar}>{editAvatar}</option>
+                  )}
+                  <option>🚀</option>
+                  <option>🦊</option>
+                  <option>🐼</option>
+                  <option>🦄</option>
+                  <option>🤖</option>
+                </select>
+              </label>
+              <label>
+                Cambridge level
+                <select
+                  aria-label="Learner Cambridge level"
+                  value={editLevel}
+                  onChange={(event) => {
+                    setEditLevel(event.target.value as CambridgeLevel)
+                    setEditSaved(false)
+                  }}
+                >
+                  <option>Starters</option>
+                  <option>Movers</option>
+                  <option>Flyers</option>
+                  <option>Preliminary</option>
+                </select>
+              </label>
+              <label>
+                New PIN (optional)
+                <input
+                  aria-label="New learner PIN"
+                  inputMode="numeric"
+                  maxLength={6}
+                  value={editPin}
+                  placeholder={editing.hasPin ? 'Leave blank to keep current PIN' : 'Optional 4–6 digits'}
+                  disabled={clearPin}
+                  onChange={(event) => {
+                    setEditPin(event.target.value.replace(/\D/g, '').slice(0, 6))
+                    setEditSaved(false)
+                  }}
+                />
+              </label>
+              {editing.hasPin && (
+                <label className="toggle-row">
+                  <span><strong>Remove PIN</strong><small>Allow open access without a PIN</small></span>
+                  <input
+                    type="checkbox"
+                    checked={clearPin}
+                    onChange={(event) => {
+                      setClearPin(event.target.checked)
+                      if (event.target.checked) setEditPin('')
+                      setEditSaved(false)
+                    }}
+                  />
+                </label>
+              )}
+              {editError && <div className="form-error">{editError}</div>}
+              {editSaved && <div className="save-success"><Check /> Learner updated</div>}
+              <div className="gift-editor-actions">
+                <Button
+                  type="button"
+                  variant="secondary"
+                  disabled={editBusy}
+                  onClick={() => {
+                    setEditing(null)
+                    setEditError('')
+                    setEditSaved(false)
+                  }}
+                >
+                  Cancel
+                </Button>
+                <Button type="button" disabled={editBusy} onClick={() => void saveEdit()}>
+                  Save learner
+                </Button>
+              </div>
+            </div>
+          )}
+          {pendingDelete && (
+            <div className="delete-learner-confirm">
+              <strong>Delete {pendingDelete.name}?</strong>
+              <p>This cannot be undone. Type <b>{pendingDelete.name}</b> to confirm.</p>
+              <input
+                aria-label="Type learner name to confirm delete"
+                value={confirmName}
+                placeholder={pendingDelete.name}
+                autoFocus
+                onChange={(event) => setConfirmName(event.target.value)}
+              />
+              {deleteError && <div className="form-error">{deleteError}</div>}
+              <div className="gift-editor-actions">
+                <Button
+                  type="button"
+                  variant="secondary"
+                  disabled={deleteBusy}
+                  onClick={() => {
+                    setPendingDelete(null)
+                    setConfirmName('')
+                    setDeleteError('')
+                  }}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  type="button"
+                  disabled={deleteBusy || confirmName.trim() !== pendingDelete.name}
+                  onClick={() => void confirmDelete()}
+                >
+                  Delete forever
+                </Button>
+              </div>
+            </div>
+          )}
+        </div>
 
         <div className="gift-catalog-editor">
           <h3>Real-world gifts</h3>
@@ -568,7 +848,20 @@ export function DashboardPage({
           <Button onClick={() => setSettingsOpen(true)}>Open Parent Control Center</Button>
         </aside>
       </div>
-      {settingsOpen && <SettingsModal initial={trackedLearner?.settings} onClose={() => { setSettingsOpen(false); if (openSettings) navigate('/dashboard') }} />}
+      {settingsOpen && (
+        <SettingsModal
+          initial={trackedLearner?.settings}
+          onLearnersChanged={() => {
+            void api<DashboardSummary>('/parent/dashboard')
+              .then((dashboard) => {
+                setSummary(dashboard)
+                setPendingItems(dashboard.pendingRedemptions?.items ?? [])
+              })
+              .catch(() => undefined)
+          }}
+          onClose={() => { setSettingsOpen(false); if (openSettings) navigate('/dashboard') }}
+        />
+      )}
       {redeemOpen && (
         <RedeemModal
           initialPending={pendingItems}

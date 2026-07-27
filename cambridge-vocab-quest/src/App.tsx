@@ -10,14 +10,14 @@ import { ProfilesPage } from './features/learner-profiles/ProfilesPage'
 import { flushQueue } from './db'
 import { useRouter } from './hooks'
 import { api } from './lib'
-import { useSessionStore } from './stores'
+import { useSessionStore, useQuestStore } from './stores'
 import type { Learner, User } from './types'
 
 function App() {
   const { path, navigate } = useRouter()
   const {
     user, learners, activeLearnerId, hydrated,
-    signIn, signOut, setLearners, setHydrated,
+    signIn, signOut, setLearners, setHydrated, clearLearner,
   } = useSessionStore()
   const learner = learners.find((item) => item.id === activeLearnerId)
 
@@ -80,6 +80,11 @@ function App() {
       path={path}
       learner={learner}
       navigate={navigate}
+      onSwitchLearner={() => {
+        clearLearner()
+        useQuestStore.getState().reset()
+        navigate('/profiles')
+      }}
       onSignOut={() => {
         void api('/auth/logout', { method: 'POST' }).finally(() => {
           signOut()

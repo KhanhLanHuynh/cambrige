@@ -1,10 +1,29 @@
 import {
-  Check, ChevronLeft, ChevronRight, Flame, Gamepad2, Gift, Rocket, Star, Target, Trophy, X,
+  Check, ChevronLeft, ChevronRight, Flame, Gamepad2, Gem, Gift, Rocket, Target, Trophy, X,
 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Badge, Button, Progress } from '../../components/ui'
 import { api, ApiError } from '../../lib'
-import type { Achievement, GiftDefinition, GiftRedemption, HubQuest, Learner, LearnerSettings } from '../../types'
+import { useSessionStore } from '../../stores'
+import type { Achievement, CambridgeLevel, GiftDefinition, GiftRedemption, HubQuest, Learner, LearnerSettings, WordHealth } from '../../types'
+
+type MapStop = 'space-station' | 'nature-valley' | 'crystal-caves' | 'dragon-ridge'
+
+const LEVEL_TO_STOP: Record<CambridgeLevel, MapStop> = {
+  Starters: 'nature-valley',
+  Movers: 'space-station',
+  Flyers: 'crystal-caves',
+  Preliminary: 'dragon-ridge',
+}
+
+type JourneyItem = {
+  wordId: string
+  word: string
+  category: string
+  definition: string
+  mastery: number
+  health: WordHealth
+}
 
 type HubData = {
   learner: Learner
@@ -16,12 +35,12 @@ type HubData = {
   settings: LearnerSettings
   quests: HubQuest[]
   map: {
-    unlocks: Record<'space-station' | 'nature-valley' | 'crystal-caves' | 'dragon-ridge', boolean>
+    unlocks: Record<MapStop, boolean>
     correctCount: number
-    thresholds: Record<'space-station' | 'nature-valley' | 'crystal-caves' | 'dragon-ridge', number>
+    thresholds: Record<MapStop, number>
   }
   achievements: Achievement[]
-  journey: Array<{ word: string; category: string; definition: string; mastery: number }>
+  journey: JourneyItem[]
   assignment: { id: string; level: string; categories: string[] } | null
   bonusReady: boolean
 }
@@ -32,9 +51,19 @@ type GiftsData = {
   pending: GiftRedemption | null
 }
 
+function sortByGems(learners: Learner[]) {
+  return [...learners].sort((a, b) => {
+    const gemDiff = (b.gems ?? 0) - (a.gems ?? 0)
+    if (gemDiff !== 0) return gemDiff
+    return a.name.localeCompare(b.name)
+  })
+}
+
 export function HomePage({ learner, navigate }: { learner: Learner; navigate: (path: string) => void }) {
+  const updateLearner = useSessionStore((state) => state.updateLearner)
   const [hub, setHub] = useState<HubData | null>(null)
   const [gifts, setGifts] = useState<GiftsData | null>(null)
+  const [leaderboard, setLeaderboard] = useState<Learner[]>([])
   const [message, setMessage] = useState('')
   const [achievementsOpen, setAchievementsOpen] = useState(false)
   const [journeyOffset, setJourneyOffset] = useState(0)
@@ -42,11 +71,17 @@ export function HomePage({ learner, navigate }: { learner: Learner; navigate: (p
 
   const reload = () => {
     api<HubData>('/learner/hub')
-      .then(setHub)
+      .then((data) => {
+        setHub(data)
+        updateLearner(data.learner)
+      })
       .catch(() => undefined)
     api<GiftsData>('/learner/gifts')
       .then(setGifts)
       .catch(() => setGifts({ gems: learner.gems ?? 0, catalog: [], pending: null }))
+    api<{ learners: Learner[] }>('/learners')
+      .then((data) => setLeaderboard(sortByGems(data.learners)))
+      .catch(() => setLeaderboard([]))
   }
 
   useEffect(() => { reload() }, [learner.id])
@@ -58,10 +93,11 @@ export function HomePage({ learner, navigate }: { learner: Learner; navigate: (p
   const limitReached = (hub?.minutesRemaining ?? 1) <= 0
   const journey = hub?.journey ?? []
   const visibleJourney = journey.slice(journeyOffset, journeyOffset + 4)
-  const gemBalance = gifts?.gems ?? currentLearner.gems ?? currentLearner.stars
+  const gemBalance = gifts?.gems ?? currentLearner.gems
   const pendingGift = gifts?.pending
+  const focusStop = LEVEL_TO_STOP[currentLearner.level] ?? 'nature-valley'
 
-  const startStop = (stop: 'space-station' | 'nature-valley' | 'crystal-caves' | 'dragon-ridge') => {
+  const startStop = (stop: MapStop) => {
     if (limitReached) return setMessage('Daily learning limit reached. Come back tomorrow!')
     if (!hub?.map.unlocks[stop]) {
       return setMessage(`Locked — need ${hub?.map.thresholds[stop] ?? 0} correct answers (you have ${hub?.map.correctCount ?? 0}).`)
@@ -130,7 +166,7 @@ export function HomePage({ learner, navigate }: { learner: Learner; navigate: (p
         </div>
         <div className="stat-pills">
           <Badge tone="lime"><Flame /> {currentLearner.streak} DAY STREAK</Badge>
-          <Badge><Star /> {gemBalance} GEMS</Badge>
+          <Badge><Gem /> {gemBalance} GEMS</Badge>
           <Badge>🎯 {hub?.completedToday ?? 0}/{hub?.dailyGoal ?? 10}</Badge>
           <Badge>{hub?.minutesRemaining ?? '—'}m left</Badge>
         </div>
@@ -151,29 +187,29 @@ export function HomePage({ learner, navigate }: { learner: Learner; navigate: (p
               <button
                 className={`map-stop stop-two ${hub?.map.unlocks['space-station'] ? '' : 'locked'}`}
                 onClick={() => startStop('space-station')}
-                title={hub?.map.unlocks['space-station'] ? 'Space Station' : `Need ${hub?.map.thresholds['space-station'] ?? 50} correct`}
+                title={hub?.map.unlocks['space-station'] ? 'Space Station' : `Need ${hub?.map.thresholds['space-station'] ?? 200} correct`}
               >
                 <i>{hub?.map.unlocks['space-station'] ? '👆' : '🔒'}</i><span>SPACE STATION</span>
               </button>
               <button
                 className={`map-stop stop-three ${hub?.map.unlocks['crystal-caves'] ? '' : 'locked'}`}
                 onClick={() => startStop('crystal-caves')}
-                title={hub?.map.unlocks['crystal-caves'] ? 'Crystal Caves' : `Need ${hub?.map.thresholds['crystal-caves'] ?? 150} correct`}
+                title={hub?.map.unlocks['crystal-caves'] ? 'Crystal Caves' : `Need ${hub?.map.thresholds['crystal-caves'] ?? 350} correct`}
               >
                 <i>{hub?.map.unlocks['crystal-caves'] ? '💎' : '🔒'}</i><span>CRYSTAL CAVES</span>
               </button>
               <button
                 className={`map-stop stop-four ${hub?.map.unlocks['dragon-ridge'] ? '' : 'locked'}`}
                 onClick={() => startStop('dragon-ridge')}
-                title={hub?.map.unlocks['dragon-ridge'] ? 'Dragon Ridge' : `Need ${hub?.map.thresholds['dragon-ridge'] ?? 300} correct`}
+                title={hub?.map.unlocks['dragon-ridge'] ? 'Dragon Ridge' : `Need ${hub?.map.thresholds['dragon-ridge'] ?? 550} correct`}
               >
                 <i>{hub?.map.unlocks['dragon-ridge'] ? '🐉' : '🔒'}</i><span>DRAGON RIDGE</span>
               </button>
-              <Button disabled={limitReached} onClick={() => startStop('nature-valley')}>Resume Quest <Rocket size={17} /></Button>
+              <Button disabled={limitReached} onClick={() => startStop(focusStop)}>Resume Quest <Rocket size={17} /></Button>
             </div>
           </section>
           <div className="home-actions">
-            <Button variant="lime" disabled={limitReached} onClick={() => startStop('nature-valley')}><Rocket /> START NEW QUIZ</Button>
+            <Button variant="lime" disabled={limitReached} onClick={() => startStop(focusStop)}><Rocket /> START NEW QUIZ</Button>
             <Button variant="secondary" disabled={gamesLocked || timedLocked || limitReached} onClick={() => openMiniGame('/games/fill-blank')}>
               <Gamepad2 /> {gamesLocked ? 'MINI-GAMES (LOCKED)' : 'FILL THE BLANK'}
             </Button>
@@ -263,7 +299,18 @@ export function HomePage({ learner, navigate }: { learner: Learner; navigate: (p
       <section className="journey">
         <div className="section-heading">
           <h2><span className="heading-icon"><Target /></span> Continue Your Word Journey</h2>
-          <div>
+          <div className="journey-heading-actions">
+            <Button
+              variant="secondary"
+              className="journey-weak-cta"
+              disabled={!journey.length || limitReached}
+              onClick={() => {
+                if (limitReached) return setMessage('Daily learning limit reached.')
+                navigate('/explore?review=1')
+              }}
+            >
+              Practice weak words
+            </Button>
             <button aria-label="Previous" disabled={journeyOffset === 0} onClick={() => setJourneyOffset((value) => Math.max(0, value - 1))}><ChevronLeft /></button>
             <button aria-label="Next" disabled={journeyOffset + 4 >= journey.length} onClick={() => setJourneyOffset((value) => value + 1)}><ChevronRight /></button>
           </div>
@@ -271,16 +318,53 @@ export function HomePage({ learner, navigate }: { learner: Learner; navigate: (p
         <div className="word-cards">
           {visibleJourney.length
             ? visibleJourney.map((item) => (
-              <article className="card" key={item.word}>
-                <Badge tone={item.category.toLowerCase().includes('nature') ? 'lime' : 'cyan'}>{item.category}</Badge>
+              <article className="card journey-card" key={item.wordId}>
+                <div className="journey-card-badges">
+                  <Badge tone={item.category.toLowerCase().includes('nature') ? 'lime' : 'cyan'}>{item.category}</Badge>
+                  <Badge tone={item.health === 'Healthy' ? 'lime' : item.health === 'At risk' ? 'rose' : 'cyan'}>{item.health}</Badge>
+                </div>
                 <h3>{item.word}</h3>
                 <p>{item.definition}</p>
                 <small>MASTERY <b>{item.mastery}%</b></small>
                 <Progress value={item.mastery} />
+                <Button
+                  variant="secondary"
+                  className="journey-practice-cta"
+                  disabled={limitReached}
+                  onClick={() => {
+                    if (limitReached) return setMessage('Daily learning limit reached.')
+                    navigate(`/explore?focus=${encodeURIComponent(item.wordId)}`)
+                  }}
+                >
+                  Practice
+                </Button>
               </article>
             ))
             : <p className="no-results">Practice words in Word Explorer to build your journey.</p>}
         </div>
+      </section>
+      <section className="leaderboard">
+        <div className="section-heading">
+          <h2><span className="heading-icon"><Trophy /></span> Leaderboard</h2>
+        </div>
+        <ol className="leaderboard-list">
+          {leaderboard.length
+            ? leaderboard.map((entry, index) => (
+              <li
+                key={entry.id}
+                className={`leaderboard-row${entry.id === learner.id ? ' is-you' : ''}`}
+              >
+                <span className="leaderboard-rank">{index + 1}</span>
+                <span className="leaderboard-avatar" aria-hidden="true">{entry.avatar}</span>
+                <span className="leaderboard-name">
+                  <strong>{entry.name}</strong>
+                  {entry.id === learner.id && <small>You</small>}
+                </span>
+                <span className="leaderboard-gems"><Gem size={14} /> {entry.gems ?? 0}</span>
+              </li>
+            ))
+            : <li className="no-results">No explorers to rank yet.</li>}
+        </ol>
       </section>
       <section className="parent-promo card">
         <div className="promo-art">📊</div>

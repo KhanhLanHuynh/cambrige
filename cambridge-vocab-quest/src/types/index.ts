@@ -14,8 +14,7 @@ export interface Learner {
   level: CambridgeLevel
   hasPin: boolean
   streak: number
-  stars: number
-  gems?: number
+  gems: number
 }
 
 export interface VocabularyWord {
