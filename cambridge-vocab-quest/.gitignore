@@ -11,8 +11,8 @@ node_modules
 dist
 dist-ssr
 *.local
-server/data/*.json
-!server/data/cambridge-vocabulary.json
+server/data/database.json
+server/data/cambridge-vocabulary.json
 server/data/*.tmp
 scripts/.fact-wiki-cache.json
 
