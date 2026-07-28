@@ -8,6 +8,7 @@ interface SessionState {
   activeLearnerId: string | null
   adultUnlocked: boolean
   hydrated: boolean
+  hubRevision: number
   signIn: (user: User) => void
   signOut: () => void
   addLearner: (learner: Learner) => void
@@ -19,6 +20,7 @@ interface SessionState {
   unlockAdult: () => void
   lockAdult: () => void
   setHydrated: () => void
+  bumpHub: () => void
 }
 
 export const useSessionStore = create<SessionState>()(
@@ -29,6 +31,7 @@ export const useSessionStore = create<SessionState>()(
       activeLearnerId: null,
       adultUnlocked: false,
       hydrated: false,
+      hubRevision: 0,
       signIn: (user) => set({ user }),
       signOut: () => set({ user: null, learners: [], activeLearnerId: null, adultUnlocked: false }),
       addLearner: (learner) => set((state) => ({ learners: [...state.learners, learner] })),
@@ -46,6 +49,7 @@ export const useSessionStore = create<SessionState>()(
       unlockAdult: () => set({ adultUnlocked: true }),
       lockAdult: () => set({ adultUnlocked: false }),
       setHydrated: () => set({ hydrated: true }),
+      bumpHub: () => set((state) => ({ hubRevision: state.hubRevision + 1 })),
     }),
     {
       name: 'cvq-session',

@@ -389,13 +389,14 @@ async function main() {
   const draft = leveled.map((item) => {
     const api = dictMap.get(item.word)
     const definition = definitionFor(item.display, item.partOfSpeech, api?.definition)
+    const primarySentence = sentenceFor(item.display, item.partOfSpeech)
     return {
       id: slugify(item.word, item.level),
       word: item.display,
       phonetic: api?.phonetic || '',
       definition,
       definitionVi: '',
-      sentence: sentenceFor(item.display, item.partOfSpeech),
+      sentences: [primarySentence],
       category: themeFor(item.word),
       partOfSpeech: item.partOfSpeech,
       hint: hintFor(item.display, item.partOfSpeech),
@@ -431,7 +432,7 @@ async function main() {
       phonetic: item.phonetic,
       definition: item.definition,
       definitionVi: item.definitionVi ?? '',
-      sentence: item.sentence,
+      sentences: item.sentences,
       category: item.category,
       partOfSpeech: item.partOfSpeech,
       choices,

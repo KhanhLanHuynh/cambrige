@@ -1,0 +1,1409 @@
+{
+  "flyers-necklace": {
+    "category": "clothes",
+    "definition": "a piece of jewellery worn around the neck",
+    "definitionVi": "vòng cổ, dây chuyền",
+    "hint": "A necklace can be made of beads, gold, or shells.",
+    "fact": "People have worn necklaces for thousands of years."
+  },
+  "flyers-nest": {
+    "category": "animals",
+    "definition": "a place birds build to lay their eggs",
+    "definitionVi": "tổ chim",
+    "hint": "Birds build a nest from twigs and leaves.",
+    "fact": "Some birds build a new nest every single year."
+  },
+  "flyers-news": {
+    "category": "technology",
+    "definition": "information about things that have just happened",
+    "definitionVi": "tin tức",
+    "hint": "Grown-ups often watch the news in the evening.",
+    "fact": "News can come from TV, newspapers, radio, or the internet."
+  },
+  "flyers-newspaper": {
+    "category": "technology",
+    "definition": "printed sheets of paper with news stories",
+    "definitionVi": "báo giấy",
+    "hint": "A newspaper is printed with new stories every day.",
+    "fact": "Newspapers have been telling people the news for hundreds of years."
+  },
+  "flyers-next": {
+    "category": "time",
+    "definition": "coming immediately after this one",
+    "definitionVi": "tiếp theo, kế tiếp",
+    "hint": "What is the next lesson after break time?",
+    "fact": "'Next' tells you what comes right after something."
+  },
+  "flyers-noisy": {
+    "category": "general",
+    "definition": "making a lot of loud sound",
+    "definitionVi": "ồn ào",
+    "hint": "The playground is very noisy at break time.",
+    "fact": "'Noisy' is the opposite of 'quiet'."
+  },
+  "flyers-north": {
+    "category": "places",
+    "definition": "the direction to your left when facing the sunrise",
+    "definitionVi": "hướng bắc",
+    "hint": "A compass needle always points to the north.",
+    "fact": "The North Pole is the coldest place at the very top of the Earth."
+  },
+  "flyers-nowhere": {
+    "category": "places",
+    "definition": "not in, at, or to any place",
+    "definitionVi": "không nơi nào",
+    "hint": "Say 'there's nowhere to sit' when every seat is taken.",
+    "fact": "'Nowhere' means the total opposite of 'everywhere'."
+  },
+  "flyers-ocean": {
+    "category": "nature",
+    "definition": "a huge area of salty sea water",
+    "definitionVi": "đại dương",
+    "hint": "The Pacific Ocean is the biggest ocean on Earth.",
+    "fact": "Oceans cover more than two-thirds of our planet."
+  },
+  "flyers-octopus": {
+    "category": "animals",
+    "definition": "a sea animal with eight long arms",
+    "definitionVi": "con bạch tuộc",
+    "hint": "An octopus can change colour to hide from danger.",
+    "fact": "An octopus has three hearts and blue blood!"
+  },
+  "flyers-of-course": {
+    "category": "general",
+    "definition": "used to say yes in a strong, friendly way",
+    "definitionVi": "tất nhiên rồi",
+    "hint": "Say 'of course!' when the answer is clearly yes.",
+    "fact": "'Of course' shows you are very happy to agree."
+  },
+  "flyers-office": {
+    "category": "jobs",
+    "definition": "a room or building where people do desk work",
+    "definitionVi": "văn phòng",
+    "hint": "Many grown-ups work at a desk in an office.",
+    "fact": "An office often has desks, computers, and telephones."
+  },
+  "flyers-olives": {
+    "category": "food",
+    "definition": "small green or black fruits used in cooking",
+    "definitionVi": "quả ô liu",
+    "hint": "Olives grow on trees in warm countries.",
+    "fact": "Oil made from olives is called olive oil."
+  },
+  "flyers-once": {
+    "category": "time",
+    "definition": "one time, or at some time in the past",
+    "definitionVi": "một lần, đã từng",
+    "hint": "Say 'once upon a time' to start a fairy tale.",
+    "fact": "'Once' can mean 'one time' or 'in the past'."
+  },
+  "flyers-online": {
+    "category": "technology",
+    "definition": "connected to the internet",
+    "definitionVi": "trực tuyến",
+    "hint": "You can read books or play games online.",
+    "fact": "Being online means your device is connected to the internet."
+  },
+  "flyers-oven": {
+    "category": "home",
+    "definition": "an enclosed space used to bake or roast food",
+    "definitionVi": "lò nướng",
+    "hint": "We bake a cake in a hot oven.",
+    "fact": "Ovens can be part of a cooker or a separate machine."
+  },
+  "flyers-over": {
+    "category": "general",
+    "definition": "above something, or finished",
+    "definitionVi": "phía trên, kết thúc",
+    "hint": "Say 'the film is over' when it has finished.",
+    "fact": "'Over' can mean above, across, or finished."
+  },
+  "flyers-p-m-pajamas": {
+    "category": "clothes",
+    "definition": "soft, comfortable clothes worn for sleeping",
+    "definitionVi": "đồ ngủ, bộ pyjama",
+    "hint": "You put on pajamas before you go to bed.",
+    "fact": "'Pajamas' is the American spelling of 'pyjamas'."
+  },
+  "flyers-passenger": {
+    "category": "travel",
+    "definition": "a person travelling in a car, bus, plane, or train",
+    "definitionVi": "hành khách",
+    "hint": "A passenger does not drive the vehicle.",
+    "fact": "Big planes can carry hundreds of passengers at once."
+  },
+  "flyers-past": {
+    "category": "time",
+    "definition": "the time before now",
+    "definitionVi": "quá khứ",
+    "hint": "History lessons teach us about the past.",
+    "fact": "'Past' is the opposite of 'future'."
+  },
+  "flyers-path": {
+    "category": "places",
+    "definition": "a narrow track for people to walk along",
+    "definitionVi": "con đường mòn, lối đi",
+    "hint": "Follow the path through the park to the lake.",
+    "fact": "Paths in a forest are often made just by people walking."
+  },
+  "flyers-pepper": {
+    "category": "food",
+    "definition": "a spice or vegetable used to add flavour to food",
+    "definitionVi": "hạt tiêu / quả ớt chuông",
+    "hint": "A little pepper adds a strong flavour to soup.",
+    "fact": "Black pepper comes from small dried berries."
+  },
+  "flyers-perhaps": {
+    "category": "general",
+    "definition": "possibly, maybe",
+    "definitionVi": "có lẽ",
+    "hint": "Say 'perhaps' when you are not completely sure.",
+    "fact": "'Perhaps' and 'maybe' mean almost the same thing."
+  },
+  "flyers-photographer": {
+    "category": "jobs",
+    "definition": "a person whose job is taking photographs",
+    "definitionVi": "nhiếp ảnh gia",
+    "hint": "A photographer uses a camera to capture special moments.",
+    "fact": "Photographers can work at weddings, in nature, or for magazines."
+  },
+  "flyers-piece": {
+    "category": "food",
+    "definition": "a part of something bigger",
+    "definitionVi": "miếng, mảnh",
+    "hint": "Ask for a piece of cake, please.",
+    "fact": "A puzzle is made of many small pieces."
+  },
+  "flyers-pilot": {
+    "category": "jobs",
+    "definition": "a person who flies a plane",
+    "definitionVi": "phi công",
+    "hint": "A pilot sits at the front of the plane to fly it.",
+    "fact": "Pilots train for years before they can fly a passenger plane."
+  },
+  "flyers-pizza": {
+    "category": "food",
+    "definition": "a flat, round bread with cheese and toppings, baked",
+    "definitionVi": "bánh pizza",
+    "hint": "You can put many toppings, like cheese, on a pizza.",
+    "fact": "Pizza first became popular in Naples, Italy."
+  },
+  "flyers-planet": {
+    "category": "nature",
+    "definition": "a huge round object in space that circles a star",
+    "definitionVi": "hành tinh",
+    "hint": "Earth is the planet we live on.",
+    "fact": "There are eight planets in our solar system."
+  },
+  "flyers-plastic": {
+    "category": "general",
+    "definition": "made of a light, man-made material",
+    "definitionVi": "làm bằng nhựa",
+    "hint": "A plastic cup is light and does not break easily.",
+    "fact": "Plastic can take hundreds of years to break down."
+  },
+  "flyers-platform": {
+    "category": "travel",
+    "definition": "the raised area where you wait for a train",
+    "definitionVi": "sân ga",
+    "hint": "Wait behind the yellow line on the platform.",
+    "fact": "Big train stations can have many different platforms."
+  },
+  "flyers-pleased": {
+    "category": "feelings",
+    "definition": "feeling happy and satisfied about something",
+    "definitionVi": "hài lòng, vui vẻ",
+    "hint": "Say 'pleased to meet you' when you meet someone new.",
+    "fact": "'Pleased' is a polite way of saying you are happy."
+  },
+  "flyers-pocket": {
+    "category": "clothes",
+    "definition": "a small bag sewn into clothes to hold things",
+    "definitionVi": "túi quần/áo",
+    "hint": "You can keep small things, like keys, in your pocket.",
+    "fact": "Some clothes have several pockets for different things."
+  },
+  "flyers-police-officer": {
+    "category": "jobs",
+    "definition": "a person whose job is to keep people safe from crime",
+    "definitionVi": "cảnh sát",
+    "hint": "A police officer wears a special uniform.",
+    "fact": "Police officers help people who are lost or in danger too."
+  },
+  "flyers-police-station": {
+    "category": "places",
+    "definition": "a building where police officers work",
+    "definitionVi": "đồn công an",
+    "hint": "You can report a problem at the police station.",
+    "fact": "Police officers start and end their working day at the station."
+  },
+  "flyers-pond": {
+    "category": "nature",
+    "definition": "a small area of still water, smaller than a lake",
+    "definitionVi": "cái ao",
+    "hint": "Ducks often swim on a pond in the park.",
+    "fact": "A pond is much smaller than a lake or the sea."
+  },
+  "flyers-poor": {
+    "category": "feelings",
+    "definition": "having very little money, or deserving sympathy",
+    "definitionVi": "nghèo, tội nghiệp",
+    "hint": "Say 'poor dog' when an animal looks sad or hurt.",
+    "fact": "'Poor' is the opposite of 'rich'."
+  },
+  "flyers-pop-music": {
+    "category": "general",
+    "definition": "popular modern music with a catchy tune",
+    "definitionVi": "nhạc pop",
+    "hint": "Pop music is often played on the radio.",
+    "fact": "'Pop' is short for 'popular'."
+  },
+  "flyers-popular": {
+    "category": "feelings",
+    "definition": "liked by a lot of people",
+    "definitionVi": "phổ biến, được yêu thích",
+    "hint": "Football is a very popular sport around the world.",
+    "fact": "A popular song is one that many people enjoy listening to."
+  },
+  "flyers-post": {
+    "category": "general",
+    "definition": "to send a letter or parcel by mail",
+    "definitionVi": "gửi thư, gửi bưu kiện",
+    "hint": "Put a stamp on the letter before you post it.",
+    "fact": "You can also 'post' a message online to share with others."
+  },
+  "flyers-post-office": {
+    "category": "places",
+    "definition": "a place where you send letters and parcels",
+    "definitionVi": "bưu điện",
+    "hint": "Buy stamps at the post office before you post a letter.",
+    "fact": "The post office also sells boxes for sending parcels."
+  },
+  "flyers-postcard": {
+    "category": "travel",
+    "definition": "a card with a picture, sent by post without an envelope",
+    "definitionVi": "bưu thiếp",
+    "hint": "People send a postcard to friends while on holiday.",
+    "fact": "Postcards usually have a photo of a place on the front."
+  },
+  "flyers-prefer": {
+    "category": "feelings",
+    "definition": "to like one thing more than another",
+    "definitionVi": "thích hơn",
+    "hint": "Say 'I prefer apples to bananas' to show what you like more.",
+    "fact": "Everyone has different things they prefer to eat or do."
+  },
+  "flyers-prepare": {
+    "category": "school",
+    "definition": "to get ready for something",
+    "definitionVi": "chuẩn bị",
+    "hint": "Prepare your bag the night before school.",
+    "fact": "Chefs prepare food carefully before they cook it."
+  },
+  "flyers-prize": {
+    "category": "school",
+    "definition": "something you win for doing well in a contest",
+    "definitionVi": "phần thưởng",
+    "hint": "The winner of the race gets a prize.",
+    "fact": "A prize can be a medal, a trophy, or even money."
+  },
+  "flyers-problem": {
+    "category": "school",
+    "definition": "something difficult that needs to be solved",
+    "definitionVi": "vấn đề",
+    "hint": "Tell a grown-up if you have a problem you cannot solve.",
+    "fact": "Maths problems become easier the more you practise."
+  },
+  "flyers-programme": {
+    "category": "technology",
+    "definition": "a show on TV or radio",
+    "definitionVi": "chương trình (TV, đài)",
+    "hint": "What is your favourite TV programme?",
+    "fact": "'Programme' can also mean a plan for an event."
+  },
+  "flyers-project": {
+    "category": "school",
+    "definition": "a piece of work you plan and research over time",
+    "definitionVi": "dự án, bài tập lớn",
+    "hint": "You might make a poster for a school project.",
+    "fact": "Projects often let you choose a topic you find interesting."
+  },
+  "flyers-pull": {
+    "category": "general",
+    "definition": "to move something towards you",
+    "definitionVi": "kéo",
+    "hint": "Pull the door open instead of pushing it.",
+    "fact": "'Pull' is the opposite of 'push'."
+  },
+  "flyers-push": {
+    "category": "general",
+    "definition": "to move something away from you using force",
+    "definitionVi": "đẩy",
+    "hint": "Push the swing to make it go higher.",
+    "fact": "'Push' is the opposite of 'pull'."
+  },
+  "flyers-puzzle": {
+    "category": "general",
+    "definition": "a game or toy that makes you think to solve it",
+    "definitionVi": "trò chơi xếp hình, câu đố",
+    "hint": "Fit all the pieces together to finish a puzzle.",
+    "fact": "A jigsaw puzzle can have hundreds of small pieces."
+  },
+  "flyers-pyjamas": {
+    "category": "clothes",
+    "definition": "soft, comfortable clothes worn for sleeping",
+    "definitionVi": "bộ đồ ngủ",
+    "hint": "You put on pyjamas before you get into bed.",
+    "fact": "Pyjamas usually have a top and matching trousers."
+  },
+  "flyers-pyramid": {
+    "category": "places",
+    "definition": "a large stone shape with a square base and pointed top",
+    "definitionVi": "kim tự tháp",
+    "hint": "The pyramids in Egypt are thousands of years old.",
+    "fact": "The Great Pyramid of Giza was built for an ancient king."
+  },
+  "flyers-quarter": {
+    "category": "school",
+    "definition": "one of four equal parts of something",
+    "definitionVi": "một phần tư",
+    "hint": "Cut the pizza into a quarter for each friend.",
+    "fact": "'Quarter past' means fifteen minutes after the hour."
+  },
+  "flyers-queen": {
+    "category": "people",
+    "definition": "a woman who rules a country, or a king's wife",
+    "definitionVi": "nữ hoàng",
+    "hint": "A queen often wears a crown like a king does.",
+    "fact": "Some countries still have a queen who is part of the royal family."
+  },
+  "flyers-quite": {
+    "category": "general",
+    "definition": "fairly, but not extremely",
+    "definitionVi": "khá là",
+    "hint": "Say 'quite tired' to mean fairly tired, not very tired.",
+    "fact": "'Quite' can make a word a little stronger or weaker."
+  },
+  "flyers-quiz": {
+    "category": "school",
+    "definition": "a short test or game with questions",
+    "definitionVi": "bài kiểm tra ngắn, trò chơi đố vui",
+    "hint": "You answer questions quickly in a quiz.",
+    "fact": "Quizzes are a fun way to check what you have learned."
+  },
+  "flyers-race": {
+    "category": "sports",
+    "definition": "a competition to see who is fastest",
+    "definitionVi": "cuộc đua",
+    "hint": "Runners line up at the start of a race.",
+    "fact": "In a race, the winner crosses the finish line first."
+  },
+  "flyers-bike": {
+    "category": "sports",
+    "definition": "connected with fast competitions, like a racing car",
+    "definitionVi": "thuộc về đua xe, tốc độ",
+    "hint": "A racing car is built to go extremely fast.",
+    "fact": "Racing bikes are made very light so riders can go faster."
+  },
+  "flyers-railway": {
+    "category": "travel",
+    "definition": "the metal tracks that trains travel along",
+    "definitionVi": "đường sắt",
+    "hint": "Trains travel along a railway to different towns.",
+    "fact": "The first railways were built about 200 years ago."
+  },
+  "flyers-ready": {
+    "category": "school",
+    "definition": "prepared and able to do something",
+    "definitionVi": "sẵn sàng",
+    "hint": "Say 'I'm ready!' when you have everything you need.",
+    "fact": "Being ready early means you never have to rush."
+  },
+  "flyers-remember": {
+    "category": "school",
+    "definition": "to keep something in your mind and not forget it",
+    "definitionVi": "nhớ",
+    "hint": "Try to remember your homework every day.",
+    "fact": "'Remember' is the opposite of 'forget'."
+  },
+  "flyers-repair": {
+    "category": "technology",
+    "definition": "to fix something that is broken",
+    "definitionVi": "sửa chữa",
+    "hint": "A mechanic can repair a broken bicycle.",
+    "fact": "'Repair' and 'fix' mean the same thing."
+  },
+  "flyers-repeat": {
+    "category": "school",
+    "definition": "to say or do something again",
+    "definitionVi": "lặp lại",
+    "hint": "Ask 'Can you repeat that, please?' if you did not hear.",
+    "fact": "Repeating new words helps you remember them better."
+  },
+  "flyers-restaurant": {
+    "category": "places",
+    "definition": "a place where people pay to eat a meal",
+    "definitionVi": "nhà hàng",
+    "hint": "You order food from a menu at a restaurant.",
+    "fact": "Restaurants can serve food from countries all around the world."
+  },
+  "flyers-rich": {
+    "category": "feelings",
+    "definition": "having a lot of money",
+    "definitionVi": "giàu có",
+    "hint": "'Rich' is the opposite of 'poor'.",
+    "fact": "Being rich in friends and family is important too!"
+  },
+  "flyers-ring": {
+    "category": "clothes",
+    "definition": "a piece of jewellery worn on a finger",
+    "definitionVi": "chiếc nhẫn",
+    "hint": "A ring can be made of gold, silver, or plastic.",
+    "fact": "People often wear a special ring when they get married."
+  },
+  "flyers-rock-music": {
+    "category": "general",
+    "definition": "loud music with electric guitars and strong drums",
+    "definitionVi": "nhạc rock",
+    "hint": "Rock music often has a strong, fast beat.",
+    "fact": "Rock music became very popular around the 1950s and 1960s."
+  },
+  "flyers-rocket": {
+    "category": "technology",
+    "definition": "a vehicle that flies fast into space",
+    "definitionVi": "tên lửa",
+    "hint": "A rocket blasts off with fire and smoke.",
+    "fact": "Rockets have to travel very fast to escape Earth's gravity."
+  },
+  "flyers-rucksack": {
+    "category": "school",
+    "definition": "a bag carried on your back",
+    "definitionVi": "ba lô",
+    "hint": "You carry a rucksack when you go hiking or to school.",
+    "fact": "'Rucksack' and 'backpack' mean almost the same thing."
+  },
+  "flyers-salt": {
+    "category": "food",
+    "definition": "a white food used to add flavour",
+    "definitionVi": "muối",
+    "hint": "A little salt makes food taste better.",
+    "fact": "The sea contains a huge amount of natural salt."
+  },
+  "flyers-same": {
+    "category": "school",
+    "definition": "not different, exactly alike",
+    "definitionVi": "giống nhau",
+    "hint": "Twins can wear the same clothes.",
+    "fact": "'Same' is the opposite of 'different'."
+  },
+  "flyers-save": {
+    "category": "general",
+    "definition": "to keep something safe, or to keep money",
+    "definitionVi": "tiết kiệm, cứu",
+    "hint": "Save your coins in a piggy bank.",
+    "fact": "'Save' can mean to keep money or to rescue someone."
+  },
+  "flyers-science": {
+    "category": "school",
+    "definition": "the school subject about how the world works",
+    "definitionVi": "môn khoa học",
+    "hint": "In science, you might do experiments with water or plants.",
+    "fact": "Science helps us understand animals, space, and the human body."
+  },
+  "flyers-scissors": {
+    "category": "school",
+    "definition": "a tool with two blades for cutting paper",
+    "definitionVi": "cái kéo",
+    "hint": "Use scissors carefully to cut along the line.",
+    "fact": "Scissors have two blades joined together in the middle."
+  },
+  "flyers-screen": {
+    "category": "technology",
+    "definition": "the flat surface of a TV, phone, or computer that shows pictures",
+    "definitionVi": "màn hình",
+    "hint": "You watch videos on a phone or TV screen.",
+    "fact": "Screens can show words, pictures, games, and videos."
+  },
+  "flyers-search": {
+    "category": "technology",
+    "definition": "the act of trying to find something",
+    "definitionVi": "sự tìm kiếm",
+    "hint": "Do an online search to find the answer to a question.",
+    "fact": "You can search the internet using just a few words."
+  },
+  "flyers-secret": {
+    "category": "feelings",
+    "definition": "something known only to a few people, kept hidden",
+    "definitionVi": "bí mật",
+    "hint": "Whisper a secret so only your friend can hear.",
+    "fact": "Everyone loves a good secret, especially about a surprise party!"
+  },
+  "flyers-sell": {
+    "category": "general",
+    "definition": "to give something to someone who pays for it",
+    "definitionVi": "bán",
+    "hint": "Shops sell food, clothes, and toys.",
+    "fact": "'Sell' is the opposite of 'buy'."
+  },
+  "flyers-several": {
+    "category": "school",
+    "definition": "more than two, but not a huge number",
+    "definitionVi": "vài, một số",
+    "hint": "Say 'several times' to mean more than two or three times.",
+    "fact": "'Several' is more than 'a few' but less than 'many'."
+  },
+  "flyers-shampoo": {
+    "category": "home",
+    "definition": "a soapy liquid used to wash your hair",
+    "definitionVi": "dầu gội đầu",
+    "hint": "You use shampoo when you wash your hair in the shower.",
+    "fact": "Shampoo makes lots of bubbles when you rub it into wet hair."
+  },
+  "flyers-shelf": {
+    "category": "home",
+    "definition": "a flat board used to store or display things",
+    "definitionVi": "cái kệ",
+    "hint": "Put your books back on the shelf when you finish.",
+    "fact": "A bookcase is made of several shelves joined together."
+  },
+  "flyers-should": {
+    "category": "general",
+    "definition": "used to give or ask for advice",
+    "definitionVi": "nên",
+    "hint": "Say 'you should wear a coat' when it's cold outside.",
+    "fact": "'Should' is a gentle way to give someone advice."
+  },
+  "flyers-silver": {
+    "category": "general",
+    "definition": "having the colour of the shiny grey metal silver",
+    "definitionVi": "màu bạc",
+    "hint": "The second-place winner often gets a silver medal.",
+    "fact": "Silver is a shiny metal often used to make jewellery."
+  },
+  "flyers-singer": {
+    "category": "jobs",
+    "definition": "a person whose job is to sing",
+    "definitionVi": "ca sĩ",
+    "hint": "A singer often performs songs on a stage.",
+    "fact": "Some singers write their own songs, too."
+  },
+  "flyers-ski": {
+    "category": "sports",
+    "definition": "a long, flat board used to slide over snow",
+    "definitionVi": "ván trượt tuyết",
+    "hint": "You wear a ski on each foot to glide over the snow.",
+    "fact": "People have used skis to travel over snow for thousands of years."
+  },
+  "flyers-sledge": {
+    "category": "sports",
+    "definition": "a vehicle used to slide over snow, often for fun",
+    "definitionVi": "xe trượt tuyết",
+    "hint": "Children love to ride a sledge down a snowy hill.",
+    "fact": "A sledge has no wheels — it slides on the snow."
+  },
+  "flyers-smell": {
+    "category": "body",
+    "definition": "something you notice with your nose",
+    "definitionVi": "mùi",
+    "hint": "Fresh bread has a lovely smell.",
+    "fact": "Dogs can smell things far better than humans can."
+  },
+  "flyers-snack": {
+    "category": "food",
+    "definition": "a small amount of food eaten between meals",
+    "definitionVi": "đồ ăn nhẹ",
+    "hint": "Fruit makes a healthy snack between meals.",
+    "fact": "A snack is smaller than a full meal."
+  },
+  "flyers-snowball": {
+    "category": "weather",
+    "definition": "a ball made by pressing snow together",
+    "definitionVi": "quả cầu tuyết",
+    "hint": "Roll the snow in your hands to make a snowball.",
+    "fact": "Snowballs are perfect for a friendly snowball fight."
+  },
+  "flyers-snowboard": {
+    "category": "sports",
+    "definition": "a board used to slide down snowy hills standing up",
+    "definitionVi": "ván trượt tuyết (đứng)",
+    "hint": "You stand sideways on a snowboard as you slide down.",
+    "fact": "Snowboarding became an Olympic sport in 1998."
+  },
+  "flyers-snowboarding": {
+    "category": "sports",
+    "definition": "the sport of sliding down snow on a snowboard",
+    "definitionVi": "môn trượt ván tuyết",
+    "hint": "You need a snowy mountain to go snowboarding.",
+    "fact": "Snowboarding is a fun winter sport enjoyed all over the world."
+  },
+  "flyers-snowman": {
+    "category": "weather",
+    "definition": "a figure of a person made from packed snow",
+    "definitionVi": "người tuyết",
+    "hint": "You can build a snowman with a carrot for a nose.",
+    "fact": "A snowman melts away once the weather gets warmer."
+  },
+  "flyers-so": {
+    "category": "general",
+    "definition": "to a great degree, or as a result",
+    "definitionVi": "vì vậy, quá",
+    "hint": "Say 'so happy' to mean very happy.",
+    "fact": "'So' can join two ideas or make a word stronger."
+  },
+  "flyers-soap": {
+    "category": "health",
+    "definition": "a substance used with water to clean your skin",
+    "definitionVi": "xà phòng",
+    "hint": "Wash your hands with soap and water before you eat.",
+    "fact": "Soap makes bubbles that help wash dirt and germs away."
+  },
+  "flyers-soft": {
+    "category": "general",
+    "definition": "gentle to touch, not hard or rough",
+    "definitionVi": "mềm",
+    "hint": "A pillow feels soft when you rest your head on it.",
+    "fact": "'Soft' is the opposite of 'hard'."
+  },
+  "flyers-somewhere": {
+    "category": "places",
+    "definition": "in, at, or to a place, not stated exactly",
+    "definitionVi": "một nơi nào đó",
+    "hint": "Say 'let's go somewhere fun' when you haven't decided yet.",
+    "fact": "'Somewhere' means a place, but you don't say exactly where."
+  },
+  "flyers-soon": {
+    "category": "time",
+    "definition": "in a short time from now",
+    "definitionVi": "sớm thôi, chẳng bao lâu nữa",
+    "hint": "Say 'see you soon' when you will meet again shortly.",
+    "fact": "'Soon' means something will happen before too long."
+  },
+  "flyers-sore": {
+    "category": "health",
+    "definition": "painful, especially when touched",
+    "definitionVi": "đau, nhức",
+    "hint": "A sore throat can make it hurt to swallow.",
+    "fact": "Resting a sore muscle helps it feel better."
+  },
+  "flyers-sound": {
+    "category": "general",
+    "definition": "something you can hear",
+    "definitionVi": "âm thanh",
+    "hint": "Music, voices, and thunder are all kinds of sound.",
+    "fact": "Sound travels through the air as invisible waves."
+  },
+  "flyers-south": {
+    "category": "places",
+    "definition": "the direction opposite to north",
+    "definitionVi": "hướng nam",
+    "hint": "Birds fly south to find warmer weather in winter.",
+    "fact": "The South Pole is at the very bottom of the Earth."
+  },
+  "flyers-space": {
+    "category": "nature",
+    "definition": "the huge area beyond Earth's sky with stars and planets",
+    "definitionVi": "không gian vũ trụ",
+    "hint": "Astronauts travel to space in a rocket.",
+    "fact": "There is no air to breathe in space."
+  },
+  "flyers-spaceship": {
+    "category": "technology",
+    "definition": "a vehicle that travels through space",
+    "definitionVi": "tàu vũ trụ",
+    "hint": "A spaceship carries astronauts to the Moon or beyond.",
+    "fact": "Some spaceships have carried astronauts all the way to the Moon."
+  },
+  "flyers-speak": {
+    "category": "school",
+    "definition": "to say words out loud",
+    "definitionVi": "nói",
+    "hint": "Speak clearly so everyone can understand you.",
+    "fact": "You can speak more than one language if you practise."
+  },
+  "flyers-special": {
+    "category": "feelings",
+    "definition": "different and better than usual, important",
+    "definitionVi": "đặc biệt",
+    "hint": "Your birthday is a special day just for you.",
+    "fact": "Special days, like festivals, are often full of celebration."
+  },
+  "flyers-spend": {
+    "category": "general",
+    "definition": "to use money to buy something, or to use time doing something",
+    "definitionVi": "tiêu (tiền), dành (thời gian)",
+    "hint": "Don't spend all your pocket money at once.",
+    "fact": "You can spend money or spend time — both use the same word."
+  },
+  "flyers-spoon": {
+    "category": "food",
+    "definition": "a tool with a small bowl shape, used for eating",
+    "definitionVi": "cái thìa",
+    "hint": "You eat soup with a spoon.",
+    "fact": "A spoon, fork, and knife are the main tools used at meals."
+  },
+  "flyers-spot": {
+    "category": "animals",
+    "definition": "a small, round, coloured mark",
+    "definitionVi": "đốm, chấm",
+    "hint": "A ladybird has black spots on its red back.",
+    "fact": "Leopards and giraffes both have spots on their fur."
+  },
+  "flyers-spotted": {
+    "category": "animals",
+    "definition": "covered with small, round marks",
+    "definitionVi": "có đốm",
+    "hint": "A spotted dog has small marks all over its fur.",
+    "fact": "Dalmatian dogs are famous for being spotted."
+  },
+  "flyers-spring": {
+    "category": "weather",
+    "definition": "the season between winter and summer when flowers grow",
+    "definitionVi": "mùa xuân",
+    "hint": "Flowers and baby animals appear in spring.",
+    "fact": "Spring is when many plants start to grow again after winter."
+  },
+  "flyers-stadium": {
+    "category": "places",
+    "definition": "a large building with seats for watching sports",
+    "definitionVi": "sân vận động",
+    "hint": "Thousands of fans watch a match at a stadium.",
+    "fact": "Some stadiums can hold more than one hundred thousand people."
+  },
+  "flyers-stage-theatre": {
+    "category": "places",
+    "definition": "the raised area where actors perform",
+    "definitionVi": "sân khấu",
+    "hint": "Actors stand on the stage so the audience can see them.",
+    "fact": "Bright lights help everyone see the actors on the stage."
+  },
+  "flyers-stamp": {
+    "category": "general",
+    "definition": "a small sticker you put on post to pay for sending it",
+    "definitionVi": "tem thư",
+    "hint": "Stick a stamp on the envelope before you post a letter.",
+    "fact": "Some people collect stamps from different countries as a hobby."
+  },
+  "flyers-stay": {
+    "category": "travel",
+    "definition": "to remain in a place and not leave",
+    "definitionVi": "ở lại",
+    "hint": "We will stay at a hotel during our holiday.",
+    "fact": "'Stay' means you don't go anywhere else."
+  },
+  "flyers-step": {
+    "category": "body",
+    "definition": "a movement of the foot when walking, or a stair",
+    "definitionVi": "bước chân, bậc thang",
+    "hint": "Take a big step to jump over the puddle.",
+    "fact": "Walking up stairs means climbing one step at a time."
+  },
+  "flyers-still": {
+    "category": "time",
+    "definition": "continuing to happen, up until now",
+    "definitionVi": "vẫn còn",
+    "hint": "Say 'I'm still hungry' if you want more food.",
+    "fact": "'Still' can also mean staying without moving at all."
+  },
+  "flyers-stone": {
+    "category": "nature",
+    "definition": "a small hard piece of rock",
+    "definitionVi": "hòn đá",
+    "hint": "You can skim a flat stone across a lake.",
+    "fact": "Ancient people used stone to make their first tools."
+  },
+  "flyers-storm": {
+    "category": "weather",
+    "definition": "very bad weather with strong wind, rain, or thunder",
+    "definitionVi": "cơn bão",
+    "hint": "Stay inside safely during a storm.",
+    "fact": "A storm can bring loud thunder and bright lightning."
+  },
+  "flyers-straight-on": {
+    "category": "places",
+    "definition": "continuing forward without turning",
+    "definitionVi": "đi thẳng",
+    "hint": "Go straight on until you reach the shop.",
+    "fact": "'Straight on' is a common direction people give when helping you."
+  },
+  "flyers-strange": {
+    "category": "feelings",
+    "definition": "unusual or difficult to explain",
+    "definitionVi": "kỳ lạ",
+    "hint": "It felt strange to see snow in summer.",
+    "fact": "'Strange' and 'unusual' mean almost the same thing."
+  },
+  "flyers-strawberry": {
+    "category": "food",
+    "definition": "a small, red, sweet fruit",
+    "definitionVi": "quả dâu tây",
+    "hint": "Strawberries have tiny seeds on the outside.",
+    "fact": "Strawberries are the only fruit with seeds on the outside."
+  },
+  "flyers-stream": {
+    "category": "nature",
+    "definition": "a small, narrow river",
+    "definitionVi": "dòng suối",
+    "hint": "Fish can swim in a small, clear stream.",
+    "fact": "Many streams flow into bigger rivers."
+  },
+  "flyers-stripe": {
+    "category": "clothes",
+    "definition": "a long, narrow band of colour",
+    "definitionVi": "sọc",
+    "hint": "A zebra has black and white stripes.",
+    "fact": "Every zebra has its own unique pattern of stripes."
+  },
+  "flyers-striped": {
+    "category": "clothes",
+    "definition": "having long, narrow bands of colour",
+    "definitionVi": "có sọc",
+    "hint": "A striped T-shirt has lines of different colours.",
+    "fact": "Tigers have striped fur to help them hide in tall grass."
+  },
+  "flyers-student": {
+    "category": "school",
+    "definition": "a person who is learning at a school or college",
+    "definitionVi": "học sinh, sinh viên",
+    "hint": "Every student in the class has their own desk.",
+    "fact": "Students learn new things every single day at school."
+  },
+  "flyers-study": {
+    "category": "school",
+    "definition": "to spend time learning about a subject",
+    "definitionVi": "học tập",
+    "hint": "Study a little every day before a big test.",
+    "fact": "You study best in a quiet place with no distractions."
+  },
+  "flyers-subject": {
+    "category": "school",
+    "definition": "an area of knowledge taught at school, like maths",
+    "definitionVi": "môn học",
+    "hint": "What is your favourite subject at school?",
+    "fact": "Schools usually teach many different subjects every week."
+  },
+  "flyers-suddenly": {
+    "category": "general",
+    "definition": "happening quickly, without warning",
+    "definitionVi": "đột nhiên",
+    "hint": "Suddenly, the rain started to pour down.",
+    "fact": "'Suddenly' makes a story feel exciting and surprising."
+  },
+  "flyers-sugar": {
+    "category": "food",
+    "definition": "a sweet substance added to food and drinks",
+    "definitionVi": "đường",
+    "hint": "A little sugar makes tea taste sweeter.",
+    "fact": "Sugar is made from plants like sugar cane or sugar beet."
+  },
+  "flyers-suitcase": {
+    "category": "travel",
+    "definition": "a case used to carry clothes when travelling",
+    "definitionVi": "vali",
+    "hint": "Pack your clothes in a suitcase before a holiday.",
+    "fact": "Suitcases often have wheels so they are easy to pull."
+  },
+  "flyers-summer": {
+    "category": "weather",
+    "definition": "the warmest season of the year",
+    "definitionVi": "mùa hè",
+    "hint": "Children often swim outside during the summer.",
+    "fact": "Summer has the longest days of sunlight in the year."
+  },
+  "flyers-sunglasses": {
+    "category": "clothes",
+    "definition": "dark glasses that protect your eyes from the sun",
+    "definitionVi": "kính râm",
+    "hint": "Wear sunglasses on a bright, sunny day.",
+    "fact": "Sunglasses protect your eyes from strong sunlight."
+  },
+  "flyers-sure": {
+    "category": "feelings",
+    "definition": "certain, without any doubt",
+    "definitionVi": "chắc chắn",
+    "hint": "Say 'I'm sure' when you have no doubt at all.",
+    "fact": "'Sure' shows you feel confident about something."
+  },
+  "flyers-surname": {
+    "category": "people",
+    "definition": "your family name, the last part of your name",
+    "definitionVi": "họ (trong tên)",
+    "hint": "Your surname is usually the same as your parents'.",
+    "fact": "In many countries, your surname comes after your first name."
+  },
+  "flyers-surprise": {
+    "category": "feelings",
+    "definition": "something unexpected that happens",
+    "definitionVi": "sự bất ngờ, ngạc nhiên",
+    "hint": "A birthday party can be a lovely surprise.",
+    "fact": "A good surprise can make your whole day feel special."
+  },
+  "flyers-swan": {
+    "category": "animals",
+    "definition": "a large white bird with a long neck that swims",
+    "definitionVi": "con thiên nga",
+    "hint": "A swan glides gracefully across the water.",
+    "fact": "Swans usually stay with the same partner for their whole life."
+  },
+  "flyers-swing": {
+    "category": "places",
+    "definition": "a seat that hangs and moves back and forth",
+    "definitionVi": "cái xích đu",
+    "hint": "You sit on a swing and push with your legs to move.",
+    "fact": "Playgrounds almost always have a swing to play on."
+  },
+  "flyers-taste": {
+    "category": "food",
+    "definition": "the flavour of food, or the sense used to notice it",
+    "definitionVi": "vị, mùi vị",
+    "hint": "Lemons have a sour taste.",
+    "fact": "Your tongue can taste sweet, sour, salty, and bitter flavours."
+  },
+  "flyers-taxi": {
+    "category": "travel",
+    "definition": "a car you pay a driver to take you somewhere",
+    "definitionVi": "xe taxi",
+    "hint": "You can call a taxi to take you to the airport.",
+    "fact": "In many cities, taxis are a special colour, like yellow."
+  },
+  "flyers-team": {
+    "category": "sports",
+    "definition": "a group of people who play or work together",
+    "definitionVi": "đội, nhóm",
+    "hint": "Everyone on the team wears the same colour shirt.",
+    "fact": "Football, basketball, and volleyball are all team sports."
+  },
+  "flyers-telephone": {
+    "category": "technology",
+    "definition": "a machine used to talk to someone far away",
+    "definitionVi": "điện thoại",
+    "hint": "You use a telephone to call your friends and family.",
+    "fact": "'Telephone' is often shortened to 'phone'."
+  },
+  "flyers-tent": {
+    "category": "travel",
+    "definition": "a shelter made of cloth, used for camping",
+    "definitionVi": "lều trại",
+    "hint": "You sleep in a tent when you go camping.",
+    "fact": "A tent can be put up and taken down quickly."
+  },
+  "flyers-thank": {
+    "category": "people",
+    "definition": "to tell someone you are grateful",
+    "definitionVi": "cảm ơn",
+    "hint": "Always thank someone who gives you a gift.",
+    "fact": "Saying 'thank you' is a simple way to be polite."
+  },
+  "flyers-theatre": {
+    "category": "places",
+    "definition": "a building where plays and shows are performed",
+    "definitionVi": "nhà hát",
+    "hint": "You watch actors perform live on stage at a theatre.",
+    "fact": "The oldest theatres were built by the ancient Greeks."
+  },
+  "flyers-thousand": {
+    "category": "school",
+    "definition": "the number 1,000",
+    "definitionVi": "một nghìn",
+    "hint": "A thousand is ten times a hundred.",
+    "fact": "It would take about seventeen minutes to count to a thousand."
+  },
+  "flyers-tidy": {
+    "category": "home",
+    "definition": "neat, with everything in its proper place",
+    "definitionVi": "gọn gàng",
+    "hint": "Keep your room tidy by putting toys away.",
+    "fact": "'Tidy' is the opposite of 'messy' or 'untidy'."
+  },
+  "flyers-time": {
+    "category": "time",
+    "definition": "the thing we measure using clocks and calendars",
+    "definitionVi": "thời gian",
+    "hint": "Look at a clock to check the time.",
+    "fact": "Time is measured in seconds, minutes, hours, days, and years."
+  },
+  "flyers-timetable": {
+    "category": "school",
+    "definition": "a chart that shows when things happen",
+    "definitionVi": "thời khóa biểu",
+    "hint": "Check your timetable to see your next lesson.",
+    "fact": "Buses and trains also have a timetable showing arrival times."
+  },
+  "flyers-toe": {
+    "category": "body",
+    "definition": "one of the five parts at the end of your foot",
+    "definitionVi": "ngón chân",
+    "hint": "You have five toes on each foot.",
+    "fact": "Your big toe helps you balance when you walk."
+  },
+  "flyers-together": {
+    "category": "people",
+    "definition": "with each other, in the same place or time",
+    "definitionVi": "cùng nhau",
+    "hint": "Friends like to play games together.",
+    "fact": "Working together often makes a big job easier."
+  },
+  "flyers-tomorrow": {
+    "category": "time",
+    "definition": "the day after today",
+    "definitionVi": "ngày mai",
+    "hint": "Say 'see you tomorrow' at the end of the school day.",
+    "fact": "'Tomorrow' is the opposite of 'yesterday'."
+  },
+  "flyers-tonight": {
+    "category": "time",
+    "definition": "during the evening or night of today",
+    "definitionVi": "tối nay",
+    "hint": "We will watch a film tonight after dinner.",
+    "fact": "'Tonight' means the night part of the day you are in now."
+  },
+  "flyers-torch": {
+    "category": "home",
+    "definition": "a small light you carry and hold in your hand",
+    "definitionVi": "đèn pin",
+    "hint": "Use a torch to find your way in the dark.",
+    "fact": "In American English, a torch is usually called a 'flashlight'."
+  },
+  "flyers-tortoise": {
+    "category": "animals",
+    "definition": "a slow-moving animal with a hard, round shell",
+    "definitionVi": "con rùa (cạn)",
+    "hint": "A tortoise can hide its head inside its shell.",
+    "fact": "Some tortoises can live for more than one hundred years."
+  },
+  "flyers-touch": {
+    "category": "body",
+    "definition": "to put your hand or fingers on something",
+    "definitionVi": "chạm, sờ",
+    "hint": "Touch the sand gently to feel how soft it is.",
+    "fact": "Your fingertips are very good at feeling small details."
+  },
+  "flyers-tour": {
+    "category": "travel",
+    "definition": "a trip to see the interesting parts of a place",
+    "definitionVi": "chuyến tham quan",
+    "hint": "A guide leads you around on a tour of the museum.",
+    "fact": "You can take a tour of a city, a castle, or even a factory."
+  },
+  "flyers-traffic": {
+    "category": "travel",
+    "definition": "all the cars and other vehicles on a road",
+    "definitionVi": "giao thông, xe cộ",
+    "hint": "There is a lot of traffic on the road after school.",
+    "fact": "Traffic lights help control busy traffic safely."
+  },
+  "flyers-trainers": {
+    "category": "clothes",
+    "definition": "soft, comfortable shoes worn for sport",
+    "definitionVi": "giày thể thao",
+    "hint": "Wear trainers for PE so you can run comfortably.",
+    "fact": "'Trainers' in British English are called 'sneakers' in American English."
+  },
+  "flyers-tune": {
+    "category": "general",
+    "definition": "a simple, pleasant series of musical notes",
+    "definitionVi": "giai điệu",
+    "hint": "You can hum a happy tune.",
+    "fact": "A catchy tune is one that stays in your head all day!"
+  },
+  "flyers-turn": {
+    "category": "places",
+    "definition": "to change direction, or move around a point",
+    "definitionVi": "rẽ, xoay",
+    "hint": "Turn left at the corner to reach the park.",
+    "fact": "A wheel turns round and round as a bike moves forward."
+  },
+  "flyers-turn-off": {
+    "category": "home",
+    "definition": "to stop something working by using a switch",
+    "definitionVi": "tắt (đèn, máy...)",
+    "hint": "Turn off the light when you leave the room.",
+    "fact": "'Turn off' is the opposite of 'turn on'."
+  },
+  "flyers-turn-on": {
+    "category": "home",
+    "definition": "to make something start working by using a switch",
+    "definitionVi": "bật (đèn, máy...)",
+    "hint": "Turn on the TV to watch your favourite show.",
+    "fact": "'Turn on' is the opposite of 'turn off'."
+  },
+  "flyers-twice": {
+    "category": "time",
+    "definition": "two times",
+    "definitionVi": "hai lần",
+    "hint": "Brush your teeth twice a day, morning and night.",
+    "fact": "'Twice' means the same as 'two times'."
+  },
+  "flyers-tyre": {
+    "category": "travel",
+    "definition": "the round rubber part around a wheel",
+    "definitionVi": "lốp xe",
+    "hint": "A bicycle needs air inside its tyres.",
+    "fact": "Cars usually have four tyres, but bicycles only have two."
+  },
+  "flyers-umbrella": {
+    "category": "weather",
+    "definition": "something you hold over your head to stay dry in rain",
+    "definitionVi": "cái ô, dù",
+    "hint": "Take an umbrella if it looks like it might rain.",
+    "fact": "An umbrella can also protect you from strong sunshine."
+  },
+  "flyers-unfriendly": {
+    "category": "people",
+    "definition": "not kind or pleasant to other people",
+    "definitionVi": "không thân thiện",
+    "hint": "Try not to be unfriendly, even when you feel grumpy.",
+    "fact": "'Unfriendly' is the opposite of 'friendly'."
+  },
+  "flyers-unhappy": {
+    "category": "feelings",
+    "definition": "feeling sad, not happy",
+    "definitionVi": "không vui, buồn",
+    "hint": "A kind word can cheer up someone who feels unhappy.",
+    "fact": "'Unhappy' is the opposite of 'happy'."
+  },
+  "flyers-uniform": {
+    "category": "clothes",
+    "definition": "special matching clothes worn by a group, like at school",
+    "definitionVi": "đồng phục",
+    "hint": "You wear a school uniform to look the same as your classmates.",
+    "fact": "Police officers, pilots, and nurses all wear a uniform for work."
+  },
+  "flyers-university": {
+    "category": "school",
+    "definition": "a place where people study after college, for a degree",
+    "definitionVi": "trường đại học",
+    "hint": "People often go to university when they are about eighteen.",
+    "fact": "Some universities are hundreds of years old."
+  },
+  "flyers-unkind": {
+    "category": "people",
+    "definition": "not nice or caring towards other people",
+    "definitionVi": "không tử tế",
+    "hint": "It's never nice to be unkind to a friend.",
+    "fact": "'Unkind' is the opposite of 'kind'."
+  },
+  "flyers-untidy": {
+    "category": "home",
+    "definition": "messy, not neat or in order",
+    "definitionVi": "bừa bộn, lộn xộn",
+    "hint": "Tidy up your untidy room before your friend visits.",
+    "fact": "'Untidy' is the opposite of 'tidy'."
+  },
+  "flyers-unusual": {
+    "category": "feelings",
+    "definition": "not common, different from normal",
+    "definitionVi": "khác thường, bất thường",
+    "hint": "A purple cat would be a very unusual sight!",
+    "fact": "'Unusual' is the opposite of 'usual' or 'normal'."
+  },
+  "flyers-use": {
+    "category": "general",
+    "definition": "to do something with an object for a purpose",
+    "definitionVi": "sử dụng",
+    "hint": "You use a pencil to write your name.",
+    "fact": "You use different tools for different jobs."
+  },
+  "flyers-usually": {
+    "category": "time",
+    "definition": "most of the time, as a habit",
+    "definitionVi": "thường thường",
+    "hint": "I usually go to bed at eight o'clock.",
+    "fact": "'Usually' tells us what happens most of the time, not always."
+  },
+  "flyers-view": {
+    "category": "nature",
+    "definition": "what you can see from a certain place",
+    "definitionVi": "khung cảnh, tầm nhìn",
+    "hint": "You get a great view of the town from the top of the hill.",
+    "fact": "Tall towers often have the best views of a city."
+  },
+  "flyers-violin": {
+    "category": "general",
+    "definition": "a wooden musical instrument played with a bow",
+    "definitionVi": "đàn vi-ô-lông",
+    "hint": "You hold a violin under your chin and play it with a bow.",
+    "fact": "A violin has four strings that make different notes."
+  },
+  "flyers-visit": {
+    "category": "travel",
+    "definition": "to go and see a person or place",
+    "definitionVi": "đi thăm, ghé thăm",
+    "hint": "We visit our grandparents on the weekend.",
+    "fact": "People visit museums to learn about history and art."
+  },
+  "flyers-volleyball": {
+    "category": "sports",
+    "definition": "a game where two teams hit a ball over a net",
+    "definitionVi": "bóng chuyền",
+    "hint": "In volleyball, you hit the ball over the net without letting it drop.",
+    "fact": "Volleyball can be played indoors or on a sandy beach."
+  },
+  "flyers-waiter": {
+    "category": "jobs",
+    "definition": "a person who brings food to tables in a restaurant",
+    "definitionVi": "người phục vụ (nam)",
+    "hint": "A waiter takes your order and brings your food.",
+    "fact": "Remember to say 'thank you' to the waiter who serves you."
+  },
+  "flyers-warm": {
+    "category": "weather",
+    "definition": "having a comfortable, pleasant amount of heat",
+    "definitionVi": "ấm áp",
+    "hint": "Wear a jumper to stay warm in autumn.",
+    "fact": "'Warm' is more comfortable than 'hot' but not 'cold'."
+  },
+  "flyers-way": {
+    "category": "places",
+    "definition": "a route or direction to somewhere",
+    "definitionVi": "đường, cách",
+    "hint": "Ask 'Which way is the park?' if you are lost.",
+    "fact": "'Way' can mean a direction, or a way of doing something."
+  },
+  "flyers-west": {
+    "category": "places",
+    "definition": "the direction where the sun sets",
+    "definitionVi": "hướng tây",
+    "hint": "The sun sets in the west every evening.",
+    "fact": "West is the opposite direction to east."
+  },
+  "flyers-wheel": {
+    "category": "travel",
+    "definition": "a round object that turns to help things move",
+    "definitionVi": "bánh xe",
+    "hint": "A car has four wheels, and a bicycle has two.",
+    "fact": "The wheel is one of the most important inventions ever made."
+  },
+  "flyers-whisper": {
+    "category": "people",
+    "definition": "to speak very quietly and softly",
+    "definitionVi": "thì thầm",
+    "hint": "Whisper in the library so you don't disturb others.",
+    "fact": "It is hard for other people to hear you when you whisper."
+  },
+  "flyers-whistle": {
+    "category": "sports",
+    "definition": "to make a high sound by blowing air through your lips",
+    "definitionVi": "huýt sáo",
+    "hint": "A referee will whistle to stop the game.",
+    "fact": "Some birds can whistle beautiful tunes too."
+  },
+  "flyers-wife": {
+    "category": "people",
+    "definition": "the woman someone is married to",
+    "definitionVi": "vợ",
+    "hint": "A husband and wife are a married couple.",
+    "fact": "A wife is part of a person's close family."
+  },
+  "flyers-wifi": {
+    "category": "technology",
+    "definition": "a way to connect to the internet without wires",
+    "definitionVi": "wifi, mạng không dây",
+    "hint": "You need wifi to use the internet on a tablet.",
+    "fact": "'Wifi' lets many devices connect to the internet at the same time."
+  },
+  "flyers-wild": {
+    "category": "animals",
+    "definition": "living freely in nature, not kept as a pet",
+    "definitionVi": "hoang dã",
+    "hint": "Lions and tigers are wild animals, not pets.",
+    "fact": "'Wild' is the opposite of 'tame'."
+  },
+  "flyers-will": {
+    "category": "time",
+    "definition": "used to talk about what happens in the future",
+    "definitionVi": "sẽ",
+    "hint": "Say 'I will help you' to promise something in the future.",
+    "fact": "'Will' is one of the main ways to talk about the future."
+  },
+  "flyers-win": {
+    "category": "sports",
+    "definition": "to come first or be the best in a game or contest",
+    "definitionVi": "chiến thắng",
+    "hint": "You win a race by finishing before everyone else.",
+    "fact": "'Win' is the opposite of 'lose'."
+  },
+  "flyers-wing": {
+    "category": "animals",
+    "definition": "the part of a bird or insect used for flying",
+    "definitionVi": "cánh (chim, côn trùng)",
+    "hint": "A bird flaps its wings to fly.",
+    "fact": "Planes have wings too, just like birds!"
+  },
+  "flyers-winner": {
+    "category": "sports",
+    "definition": "the person or team who wins",
+    "definitionVi": "người chiến thắng",
+    "hint": "The winner of the race gets a shiny medal.",
+    "fact": "Every competition has a winner at the very end."
+  },
+  "flyers-winter": {
+    "category": "weather",
+    "definition": "the coldest season of the year",
+    "definitionVi": "mùa đông",
+    "hint": "It can snow during winter in some countries.",
+    "fact": "Some animals sleep through the whole winter."
+  },
+  "flyers-wish": {
+    "category": "feelings",
+    "definition": "a hope for something you want to happen",
+    "definitionVi": "điều ước",
+    "hint": "Make a wish before you blow out your birthday candles.",
+    "fact": "People often wish on a falling star."
+  },
+  "flyers-wonderful": {
+    "category": "feelings",
+    "definition": "extremely good, causing wonder or joy",
+    "definitionVi": "tuyệt vời",
+    "hint": "Say 'what a wonderful surprise!' when something great happens.",
+    "fact": "'Wonderful' means the same as 'amazing' or 'excellent'."
+  },
+  "flyers-wood": {
+    "category": "nature",
+    "definition": "the hard material that trees are made of",
+    "definitionVi": "gỗ",
+    "hint": "Chairs and tables are often made of wood.",
+    "fact": "Wood comes from trees and can be used to build houses."
+  },
+  "flyers-wool": {
+    "category": "clothes",
+    "definition": "soft, warm material made from sheep's hair",
+    "definitionVi": "len",
+    "hint": "A woolly jumper keeps you warm in winter.",
+    "fact": "Wool comes from the fluffy coat of a sheep."
+  },
+  "flyers-worried": {
+    "category": "feelings",
+    "definition": "feeling anxious about something that might go wrong",
+    "definitionVi": "lo lắng",
+    "hint": "Talk to someone if you feel worried about something.",
+    "fact": "Everyone feels worried sometimes — it's a normal feeling."
+  },
+  "flyers-x-ray": {
+    "category": "health",
+    "definition": "a picture doctors take to see inside your body",
+    "definitionVi": "chụp X-quang",
+    "hint": "Doctors use an x-ray to check if a bone is broken.",
+    "fact": "An x-ray can see straight through your skin to your bones."
+  },
+  "flyers-yet": {
+    "category": "time",
+    "definition": "up until now, used mostly in questions and negatives",
+    "definitionVi": "chưa",
+    "hint": "Say 'not yet' when something has not happened.",
+    "fact": "'Yet' usually goes at the end of a question or sentence."
+  },
+  "flyers-yoghurt": {
+    "category": "food",
+    "definition": "a thick, creamy food made from milk",
+    "definitionVi": "sữa chua",
+    "hint": "Yoghurt can be plain or flavoured with fruit.",
+    "fact": "Yoghurt is made by adding good bacteria to milk."
+  },
+  "flyers-zero": {
+    "category": "school",
+    "definition": "the number 0, meaning nothing",
+    "definitionVi": "số không",
+    "hint": "A rocket launch counts down to zero before it blasts off.",
+    "fact": "Zero was invented as a number a very long time ago."
+  }
+}

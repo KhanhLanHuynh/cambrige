@@ -1,11 +1,11 @@
 import {
-  Check, ChevronLeft, ChevronRight, Flame, Gamepad2, Gem, Gift, Rocket, Target, Trophy, X,
+  ChevronLeft, ChevronRight, Flame, Gamepad2, Gem, Rocket, Target,
 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Badge, Button, Progress } from '../../components/ui'
-import { api, ApiError } from '../../lib'
+import { api } from '../../lib'
 import { useSessionStore } from '../../stores'
-import type { Achievement, CambridgeLevel, GiftDefinition, GiftRedemption, HubQuest, Learner, LearnerSettings, WordHealth } from '../../types'
+import type { CambridgeLevel, Learner, LearnerSettings, WordHealth } from '../../types'
 
 type MapStop = 'space-station' | 'nature-valley' | 'crystal-caves' | 'dragon-ridge'
 
@@ -33,41 +33,21 @@ type HubData = {
   minutesRemaining: number
   completedQuizToday: boolean
   settings: LearnerSettings
-  quests: HubQuest[]
   map: {
     unlocks: Record<MapStop, boolean>
     correctCount: number
     thresholds: Record<MapStop, number>
   }
-  achievements: Achievement[]
   journey: JourneyItem[]
   assignment: { id: string; level: string; categories: string[] } | null
-  bonusReady: boolean
-}
-
-type GiftsData = {
-  gems: number
-  catalog: GiftDefinition[]
-  pending: GiftRedemption | null
-}
-
-function sortByGems(learners: Learner[]) {
-  return [...learners].sort((a, b) => {
-    const gemDiff = (b.gems ?? 0) - (a.gems ?? 0)
-    if (gemDiff !== 0) return gemDiff
-    return a.name.localeCompare(b.name)
-  })
 }
 
 export function HomePage({ learner, navigate }: { learner: Learner; navigate: (path: string) => void }) {
   const updateLearner = useSessionStore((state) => state.updateLearner)
+  const hubRevision = useSessionStore((state) => state.hubRevision)
   const [hub, setHub] = useState<HubData | null>(null)
-  const [gifts, setGifts] = useState<GiftsData | null>(null)
-  const [leaderboard, setLeaderboard] = useState<Learner[]>([])
   const [message, setMessage] = useState('')
-  const [achievementsOpen, setAchievementsOpen] = useState(false)
   const [journeyOffset, setJourneyOffset] = useState(0)
-  const [giftBusy, setGiftBusy] = useState(false)
 
   const reload = () => {
     api<HubData>('/learner/hub')
@@ -76,15 +56,9 @@ export function HomePage({ learner, navigate }: { learner: Learner; navigate: (p
         updateLearner(data.learner)
       })
       .catch(() => undefined)
-    api<GiftsData>('/learner/gifts')
-      .then(setGifts)
-      .catch(() => setGifts({ gems: learner.gems ?? 0, catalog: [], pending: null }))
-    api<{ learners: Learner[] }>('/learners')
-      .then((data) => setLeaderboard(sortByGems(data.learners)))
-      .catch(() => setLeaderboard([]))
   }
 
-  useEffect(() => { reload() }, [learner.id])
+  useEffect(() => { reload() }, [learner.id, hubRevision])
 
   const currentLearner = hub?.learner ?? learner
   const settings = hub?.settings
@@ -93,8 +67,6 @@ export function HomePage({ learner, navigate }: { learner: Learner; navigate: (p
   const limitReached = (hub?.minutesRemaining ?? 1) <= 0
   const journey = hub?.journey ?? []
   const visibleJourney = journey.slice(journeyOffset, journeyOffset + 4)
-  const gemBalance = gifts?.gems ?? currentLearner.gems
-  const pendingGift = gifts?.pending
   const focusStop = LEVEL_TO_STOP[currentLearner.level] ?? 'nature-valley'
 
   const startStop = (stop: MapStop) => {
@@ -103,45 +75,6 @@ export function HomePage({ learner, navigate }: { learner: Learner; navigate: (p
       return setMessage(`Locked — need ${hub?.map.thresholds[stop] ?? 0} correct answers (you have ${hub?.map.correctCount ?? 0}).`)
     }
     navigate(`/explore?stop=${stop}`)
-  }
-
-  const claimQuest = async (questId: string) => {
-    try {
-      const response = await api<{ reward: number; learner: Learner }>('/learner/quests/claim', {
-        method: 'POST',
-        body: { questId },
-      })
-      setMessage(`+${response.reward} gems claimed!`)
-      reload()
-    } catch (error) {
-      setMessage(error instanceof ApiError ? error.message : 'Could not claim reward')
-    }
-  }
-
-  const requestGift = async (giftId: string) => {
-    setGiftBusy(true)
-    try {
-      await api('/learner/gifts/request', { method: 'POST', body: { giftId } })
-      setMessage('Request sent — ask a grown-up to confirm in Analytics.')
-      reload()
-    } catch (error) {
-      setMessage(error instanceof ApiError ? error.message : 'Could not request gift')
-    } finally {
-      setGiftBusy(false)
-    }
-  }
-
-  const cancelGift = async () => {
-    setGiftBusy(true)
-    try {
-      await api('/learner/gifts/cancel', { method: 'POST' })
-      setMessage('Gift request cancelled.')
-      reload()
-    } catch (error) {
-      setMessage(error instanceof ApiError ? error.message : 'Could not cancel request')
-    } finally {
-      setGiftBusy(false)
-    }
   }
 
   const openMiniGame = (path: '/games/fill-blank' | '/games/speed-match') => {
@@ -166,13 +99,22 @@ export function HomePage({ learner, navigate }: { learner: Learner; navigate: (p
         </div>
         <div className="stat-pills">
           <Badge tone="lime"><Flame /> {currentLearner.streak} DAY STREAK</Badge>
-          <Badge><Gem /> {gemBalance} GEMS</Badge>
+          <Badge><Gem /> {currentLearner.gems} GEMS</Badge>
           <Badge>🎯 {hub?.completedToday ?? 0}/{hub?.dailyGoal ?? 10}</Badge>
           <Badge>{hub?.minutesRemaining ?? '—'}m left</Badge>
         </div>
       </div>
       <div className="home-grid">
         <div className="home-main">
+          <div className="home-actions">
+            <Button variant="lime" disabled={limitReached} onClick={() => startStop(focusStop)}><Rocket /> START NEW QUIZ</Button>
+            <Button variant="secondary" disabled={gamesLocked || timedLocked || limitReached} onClick={() => openMiniGame('/games/fill-blank')}>
+              <Gamepad2 /> {gamesLocked ? 'MINI-GAMES (LOCKED)' : 'FILL THE BLANK'}
+            </Button>
+            <Button variant="secondary" disabled={gamesLocked || timedLocked || limitReached} onClick={() => openMiniGame('/games/speed-match')}>
+              <Gamepad2 /> {gamesLocked ? 'MINI-GAMES (LOCKED)' : 'SPEED MATCH'}
+            </Button>
+          </div>
           <section className="quest-map card">
             <div className="map-sky">
               <span className="cloud cloud-one" /><span className="cloud cloud-two" /><span className="planet">🪐</span>
@@ -205,96 +147,9 @@ export function HomePage({ learner, navigate }: { learner: Learner; navigate: (p
               >
                 <i>{hub?.map.unlocks['dragon-ridge'] ? '🐉' : '🔒'}</i><span>DRAGON RIDGE</span>
               </button>
-              <Button disabled={limitReached} onClick={() => startStop(focusStop)}>Resume Quest <Rocket size={17} /></Button>
             </div>
           </section>
-          <div className="home-actions">
-            <Button variant="lime" disabled={limitReached} onClick={() => startStop(focusStop)}><Rocket /> START NEW QUIZ</Button>
-            <Button variant="secondary" disabled={gamesLocked || timedLocked || limitReached} onClick={() => openMiniGame('/games/fill-blank')}>
-              <Gamepad2 /> {gamesLocked ? 'MINI-GAMES (LOCKED)' : 'FILL THE BLANK'}
-            </Button>
-            <Button variant="secondary" disabled={gamesLocked || timedLocked || limitReached} onClick={() => openMiniGame('/games/speed-match')}>
-              <Gamepad2 /> {gamesLocked ? 'MINI-GAMES (LOCKED)' : 'SPEED MATCH'}
-            </Button>
-          </div>
         </div>
-        <aside className="home-rail">
-          <section className="card daily">
-            <h3><Target /> DAILY QUESTS <span>{hub?.quests.filter((quest) => quest.progress >= quest.target).length ?? 0}/3 Done</span></h3>
-            {(hub?.quests ?? []).map((quest) => (
-              <div className="quest-line" key={quest.id}>
-                <Check className={quest.progress >= quest.target ? 'done' : ''} />
-                <span>
-                  {quest.label} (+{quest.reward} gems)
-                  <Progress value={(quest.progress / quest.target) * 100} />
-                  {quest.progress >= quest.target && !quest.claimed && (
-                    <button className="text-link" onClick={() => void claimQuest(quest.id)}>Claim</button>
-                  )}
-                  {quest.claimed && <small>Claimed</small>}
-                </span>
-              </div>
-            ))}
-            <button
-              className="reward"
-              disabled={!hub?.bonusReady}
-              onClick={() => void claimQuest('bonus')}
-            >
-              <span>🎁</span>
-              <strong>BONUS REWARD<small>{hub?.bonusReady ? 'Claim Treasure Chest' : 'Complete all quests'}</small></strong>
-              <ChevronRight />
-            </button>
-          </section>
-          <section className="card gift-shop">
-            <h3><Gift /> REAL-WORLD GIFTS</h3>
-            {pendingGift && (
-              <div className="gift-pending">
-                <strong>Pending: {pendingGift.giftName}</strong>
-                <small>{pendingGift.costGems} gems · waiting for a grown-up</small>
-                <button className="text-link" disabled={giftBusy} onClick={() => void cancelGift()}>Cancel request</button>
-              </div>
-            )}
-            <ul className="gift-shop-list">
-              {(gifts?.catalog ?? []).map((gift) => {
-                const cannotAfford = gemBalance < gift.costGems
-                const blocked = Boolean(pendingGift) || cannotAfford || giftBusy
-                return (
-                  <li key={gift.id}>
-                    <span>
-                      <strong>{gift.name}</strong>
-                      <small>{gift.costGems} gems</small>
-                    </span>
-                    <Button
-                      variant="secondary"
-                      disabled={blocked}
-                      onClick={() => void requestGift(gift.id)}
-                    >
-                      Request
-                    </Button>
-                  </li>
-                )
-              })}
-            </ul>
-            {!gifts?.catalog.length && (
-              <p className="no-results">Ask a grown-up to add gifts in Curriculum Settings.</p>
-            )}
-          </section>
-          <section className="card achievements">
-            <h3>
-              <Trophy /> RECENT ACHIEVEMENTS
-              <button className="text-link" onClick={() => setAchievementsOpen(true)}>View all</button>
-            </h3>
-            <div>
-              {(hub?.achievements.filter((item) => item.unlocked).slice(0, 4) ?? []).map((item) => (
-                <span key={item.id}><i>{item.icon}</i><small>{item.label}</small></span>
-              ))}
-              {!hub?.achievements.some((item) => item.unlocked) && <small>Play to unlock achievements</small>}
-            </div>
-            <Progress
-              value={hub ? (hub.achievements.filter((item) => item.unlocked).length / Math.max(1, hub.achievements.length)) * 100 : 0}
-              label={`${hub?.achievements.filter((item) => item.unlocked).length ?? 0} of ${hub?.achievements.length ?? 0} achievements`}
-            />
-          </section>
-        </aside>
       </div>
       <section className="journey">
         <div className="section-heading">
@@ -343,56 +198,6 @@ export function HomePage({ learner, navigate }: { learner: Learner; navigate: (p
             : <p className="no-results">Practice words in Word Explorer to build your journey.</p>}
         </div>
       </section>
-      <section className="leaderboard">
-        <div className="section-heading">
-          <h2><span className="heading-icon"><Trophy /></span> Leaderboard</h2>
-        </div>
-        <ol className="leaderboard-list">
-          {leaderboard.length
-            ? leaderboard.map((entry, index) => (
-              <li
-                key={entry.id}
-                className={`leaderboard-row${entry.id === learner.id ? ' is-you' : ''}`}
-              >
-                <span className="leaderboard-rank">{index + 1}</span>
-                <span className="leaderboard-avatar" aria-hidden="true">{entry.avatar}</span>
-                <span className="leaderboard-name">
-                  <strong>{entry.name}</strong>
-                  {entry.id === learner.id && <small>You</small>}
-                </span>
-                <span className="leaderboard-gems"><Gem size={14} /> {entry.gems ?? 0}</span>
-              </li>
-            ))
-            : <li className="no-results">No explorers to rank yet.</li>}
-        </ol>
-      </section>
-      <section className="parent-promo card">
-        <div className="promo-art">📊</div>
-        <div>
-          <h2>Check your progress with Parents!</h2>
-          <p>Head over to the Dashboard together to see your word count grow.</p>
-          <Button onClick={() => navigate('/dashboard')}>Go to Analytics Dashboard</Button>
-        </div>
-      </section>
-      {achievementsOpen && (
-        <div className="modal-backdrop">
-          <section className="modal" role="dialog" aria-modal="true">
-            <button className="modal-close" onClick={() => setAchievementsOpen(false)} aria-label="Close"><X /></button>
-            <h2>Achievements</h2>
-            <div className="achievement-list">
-              {(hub?.achievements ?? []).map((item) => (
-                <article key={item.id} className={item.unlocked ? '' : 'locked'}>
-                  <span>{item.icon}</span>
-                  <div>
-                    <strong>{item.label}</strong>
-                    <small>{item.description}</small>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
-        </div>
-      )}
     </>
   )
 }

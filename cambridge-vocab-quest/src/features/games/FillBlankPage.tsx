@@ -14,17 +14,13 @@ function escapeRegExp(value: string) {
 
 function blankSentence(question: QuizQuestion) {
   const target = question.word.replace(/\)+$/g, '').trim()
-  const pool = question.sentences?.length
-    ? question.sentences
-    : question.sentence
-      ? [question.sentence]
-      : []
+  const pool = question.sentences
   const withWord = pool.filter((sentence) =>
     target ? new RegExp(`\\b${escapeRegExp(target)}\\b`, 'i').test(sentence) : false,
   )
   // Prefer classroom-safe lines; avoid leftover nonsense templates.
   const ranked = [...withWord].sort((a, b) => scoreSentence(a, target) - scoreSentence(b, target))
-  const match = ranked[0] ?? question.sentence ?? pool[0] ?? (target ? `Write the word: ${target}` : 'Write the missing word.')
+  const match = ranked[0] ?? pool[0] ?? (target ? `Write the word: ${target}` : 'Write the missing word.')
   if (!target) return match
   return match.replace(new RegExp(`\\b${escapeRegExp(target)}\\b`, 'i'), '______')
 }

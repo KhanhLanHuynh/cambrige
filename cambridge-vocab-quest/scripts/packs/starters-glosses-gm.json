@@ -1,0 +1,646 @@
+{
+  "starters-game": {
+    "category": "general",
+    "definition": "Something fun you play with rules.",
+    "definitionVi": "Trò chơi vui có luật chơi.",
+    "hint": "Board games and tag are both games.",
+    "fact": "Playing games helps you learn to take turns."
+  },
+  "starters-garden": {
+    "category": "nature",
+    "definition": "An outdoor place where plants grow.",
+    "definitionVi": "Khu vực ngoài trời để trồng cây.",
+    "hint": "Flowers and vegetables can grow here.",
+    "fact": "Bees love visiting gardens for nectar."
+  },
+  "starters-get": {
+    "category": "general",
+    "definition": "to receive or obtain something.",
+    "definitionVi": "Nhận hoặc lấy được cái gì đó.",
+    "hint": "You get a gift on your birthday.",
+    "fact": "People get mail from the post office."
+  },
+  "starters-giraffe": {
+    "category": "animals",
+    "definition": "A tall African animal with a long neck.",
+    "definitionVi": "Loài thú cao, cổ dài ở châu Phi.",
+    "hint": "It eats leaves from tall trees.",
+    "fact": "A giraffe's tongue can be 45 cm long."
+  },
+  "starters-girl": {
+    "category": "people",
+    "definition": "A young female child.",
+    "definitionVi": "Bé gái.",
+    "hint": "She might be your sister or friend.",
+    "fact": "Every girl can learn and play anything."
+  },
+  "starters-give": {
+    "category": "general",
+    "definition": "to hand something to someone.",
+    "definitionVi": "Đưa hoặc tặng cái gì cho ai.",
+    "hint": "You give a present to a friend.",
+    "fact": "Giving makes both people feel happy."
+  },
+  "starters-glasses": {
+    "category": "clothes",
+    "definition": "Clear lenses you wear to see better.",
+    "definitionVi": "Kính đeo để nhìn rõ hơn.",
+    "hint": "They sit on your nose and ears.",
+    "fact": "Some glasses protect eyes from the sun."
+  },
+  "starters-go": {
+    "category": "travel",
+    "definition": "to move from one place to another.",
+    "definitionVi": "Đi từ nơi này đến nơi khác.",
+    "hint": "We go to school every morning.",
+    "fact": "People go by foot, bike, bus, or car."
+  },
+  "starters-go-to-bed": {
+    "category": "home",
+    "definition": "to lie down in bed to rest.",
+    "definitionVi": "Lên giường nằm nghỉ.",
+    "hint": "You do this at night before sleep.",
+    "fact": "A bedtime story helps many children relax."
+  },
+  "starters-go-to-sleep": {
+    "category": "home",
+    "definition": "to close your eyes and fall asleep.",
+    "definitionVi": "Nhắm mắt và chìm vào giấc ngủ.",
+    "hint": "You feel sleepy and close your eyes.",
+    "fact": "Most children need about ten hours of sleep."
+  },
+  "starters-goat": {
+    "category": "animals",
+    "definition": "A farm animal with horns and a beard.",
+    "definitionVi": "Con dê nuôi ở trang trại.",
+    "hint": "It says \"baa\" and eats grass.",
+    "fact": "Goats can climb steep rocks easily."
+  },
+  "starters-good": {
+    "category": "general",
+    "definition": "Nice, kind, or of high quality.",
+    "definitionVi": "Tốt, hay, hoặc đẹp.",
+    "hint": "A good friend helps you.",
+    "fact": "Saying \"good job\" makes people smile."
+  },
+  "starters-grandfather": {
+    "category": "people",
+    "definition": "Your father's or mother's father.",
+    "definitionVi": "Ông nội hoặc ông ngoại.",
+    "hint": "He is your dad's or mum's dad.",
+    "fact": "Grandfathers often tell wonderful stories."
+  },
+  "starters-grandma": {
+    "category": "people",
+    "definition": "A friendly word for grandmother.",
+    "definitionVi": "Cách gọi thân mật cho bà.",
+    "hint": "She might bake cookies for you.",
+    "fact": "Many kids call their grandmother \"Grandma\"."
+  },
+  "starters-grandmother": {
+    "category": "people",
+    "definition": "Your father's or mother's mother.",
+    "definitionVi": "Bà nội hoặc bà ngoại.",
+    "hint": "She is your dad's or mum's mum.",
+    "fact": "Grandmothers love spending time with grandchildren."
+  },
+  "starters-grandpa": {
+    "category": "people",
+    "definition": "A friendly word for grandfather.",
+    "definitionVi": "Cách gọi thân mật cho ông.",
+    "hint": "He might take you to the park.",
+    "fact": "Many kids call their grandfather \"Grandpa\"."
+  },
+  "starters-grape": {
+    "category": "food",
+    "definition": "A small round sweet or sour fruit.",
+    "definitionVi": "Quả nho nhỏ, ngọt hoặc chua.",
+    "hint": "They grow in bunches on vines.",
+    "fact": "Purple grapes can be dried to make raisins."
+  },
+  "starters-gray": {
+    "category": "general",
+    "definition": "The colour between black and white.",
+    "definitionVi": "Màu xám, giữa đen và trắng.",
+    "hint": "Clouds can look gray before rain.",
+    "fact": "Elephants and dolphins are often gray."
+  },
+  "starters-great": {
+    "category": "general",
+    "definition": "Very good or very big.",
+    "definitionVi": "Rất tốt hoặc rất lớn.",
+    "hint": "You say \"Great!\" when something is wonderful.",
+    "fact": "The Great Wall of China is very long."
+  },
+  "starters-green": {
+    "category": "general",
+    "definition": "The colour of grass and leaves.",
+    "definitionVi": "Màu xanh lá cây.",
+    "hint": "Grass and leaves are this colour.",
+    "fact": "Green plants make oxygen we breathe."
+  },
+  "starters-grey": {
+    "category": "general",
+    "definition": "The colour between black and white.",
+    "definitionVi": "Màu xám.",
+    "hint": "Same as gray — British spelling.",
+    "fact": "A grey sky often means rain is coming."
+  },
+  "starters-guitar": {
+    "category": "general",
+    "definition": "A string instrument you strum or pluck.",
+    "definitionVi": "Nhạc cụ dây, gảy hoặc gõ.",
+    "hint": "It has six strings and a long neck.",
+    "fact": "Guitars can be acoustic or electric."
+  },
+  "starters-hair": {
+    "category": "body",
+    "definition": "The soft strands on your head.",
+    "definitionVi": "Tóc trên đầu.",
+    "hint": "You brush it every morning.",
+    "fact": "Hair grows a little bit every day."
+  },
+  "starters-hall": {
+    "category": "home",
+    "definition": "A long room or passage in a building.",
+    "definitionVi": "Hành lang hoặc phòng dài trong nhà.",
+    "hint": "You walk through it to reach rooms.",
+    "fact": "School halls are where students line up."
+  },
+  "starters-hand": {
+    "category": "body",
+    "definition": "The part at the end of your arm.",
+    "definitionVi": "Bàn tay ở cuối cánh tay.",
+    "hint": "It has five fingers for holding things.",
+    "fact": "Your hand has 27 small bones inside."
+  },
+  "starters-handbag": {
+    "category": "clothes",
+    "definition": "A small bag a woman carries.",
+    "definitionVi": "Túi xách nhỏ phụ nữ hay mang.",
+    "hint": "Mum might keep keys and phone inside.",
+    "fact": "Handbags come in many colours and sizes."
+  },
+  "starters-happy": {
+    "category": "feelings",
+    "definition": "Feeling glad and smiling inside.",
+    "definitionVi": "Cảm thấy vui và hạnh phúc.",
+    "hint": "You feel happy on your birthday.",
+    "fact": "Smiling can help you feel happier too."
+  },
+  "starters-hat": {
+    "category": "clothes",
+    "definition": "Something you wear on your head.",
+    "definitionVi": "Mũ đội trên đầu.",
+    "hint": "It keeps sun or rain off your head.",
+    "fact": "Baseball players wear special caps."
+  },
+  "starters-have": {
+    "category": "general",
+    "definition": "to own or possess something.",
+    "definitionVi": "Có, sở hữu cái gì đó.",
+    "hint": "I have a red bike.",
+    "fact": "You can have friends, toys, or pets."
+  },
+  "starters-have-got": {
+    "category": "general",
+    "definition": "to own or possess something.",
+    "definitionVi": "Có cái gì (cách nói thông dụng).",
+    "hint": "I've got two brothers.",
+    "fact": "\"Have got\" means the same as \"have\"."
+  },
+  "starters-head": {
+    "category": "body",
+    "definition": "The top part of your body.",
+    "definitionVi": "Phần trên cơ thể — cái đầu.",
+    "hint": "Your eyes, nose, and mouth are on it.",
+    "fact": "Your brain inside your head helps you think."
+  },
+  "starters-helicopter": {
+    "category": "travel",
+    "definition": "A flying machine with spinning blades on top.",
+    "definitionVi": "Máy bay có cánh quạt trên đầu.",
+    "hint": "It can hover and land in small spaces.",
+    "fact": "Helicopters can rescue people in mountains."
+  },
+  "starters-hippo": {
+    "category": "animals",
+    "definition": "A huge African animal that loves water.",
+    "definitionVi": "Hà mã — thú lớn sống ở châu Phi.",
+    "hint": "It spends lots of time in rivers.",
+    "fact": "Hippos can hold their breath underwater."
+  },
+  "starters-hobby": {
+    "category": "general",
+    "definition": "Something fun you do in free time.",
+    "definitionVi": "Sở thích làm lúc rảnh.",
+    "hint": "Drawing, reading, or collecting stamps.",
+    "fact": "Hobbies help you learn new skills."
+  },
+  "starters-hockey": {
+    "category": "sports",
+    "definition": "A team sport played with sticks and a puck.",
+    "definitionVi": "Môn thể thao chơi bằng gậy và đĩa.",
+    "hint": "Players hit a puck on ice or grass.",
+    "fact": "Ice hockey is very fast and exciting."
+  },
+  "starters-hold": {
+    "category": "general",
+    "definition": "to keep something in your hands.",
+    "definitionVi": "Cầm hoặc giữ cái gì trong tay.",
+    "hint": "Hold my hand when we cross the road.",
+    "fact": "You hold a cup carefully so it doesn't spill."
+  },
+  "starters-home": {
+    "category": "home",
+    "definition": "The place where you live.",
+    "definitionVi": "Nơi em sống cùng gia đình.",
+    "hint": "You sleep and eat here every day.",
+    "fact": "Home is where your family waits for you."
+  },
+  "starters-horse": {
+    "category": "animals",
+    "definition": "A large animal people ride or use on farms.",
+    "definitionVi": "Con ngựa — thú lớn, người ta cưỡi.",
+    "hint": "It runs fast and says \"neigh\".",
+    "fact": "Horses can sleep standing up."
+  },
+  "starters-house": {
+    "category": "home",
+    "definition": "A building where people live.",
+    "definitionVi": "Ngôi nhà — nơi mọi người ở.",
+    "hint": "It has rooms like a kitchen and bedroom.",
+    "fact": "Houses can be big, small, or colourful."
+  },
+  "starters-ice-cream": {
+    "category": "food",
+    "definition": "A cold sweet treat made from milk.",
+    "definitionVi": "Kem — món ngọt lạnh từ sữa.",
+    "hint": "You eat it on hot summer days.",
+    "fact": "Ice cream melts quickly in the sun."
+  },
+  "starters-jacket": {
+    "category": "clothes",
+    "definition": "A short coat you wear outside.",
+    "definitionVi": "Áo khoác ngắn mặc khi ra ngoài.",
+    "hint": "You zip it up when it is cold.",
+    "fact": "Jackets keep you warm in winter."
+  },
+  "starters-jeans": {
+    "category": "clothes",
+    "definition": "Trousers made from strong blue cloth.",
+    "definitionVi": "Quần jean xanh, vải bền.",
+    "hint": "Most kids wear them to school.",
+    "fact": "Jeans were first made for workers."
+  },
+  "starters-jellyfish": {
+    "category": "animals",
+    "definition": "A soft sea animal that can sting.",
+    "definitionVi": "Sứa — động vật biển mềm, có thể chích.",
+    "hint": "It floats in the sea like a blob.",
+    "fact": "Some jellyfish glow in the dark."
+  },
+  "starters-juice": {
+    "category": "food",
+    "definition": "A drink made from fruit.",
+    "definitionVi": "Nước ép trái cây.",
+    "hint": "Orange juice comes from oranges.",
+    "fact": "Fresh juice has vitamins from the fruit."
+  },
+  "starters-jump": {
+    "category": "sports",
+    "definition": "to push off the ground into the air.",
+    "definitionVi": "Nhảy lên khỏi mặt đất.",
+    "hint": "Frogs and kangaroos jump very high.",
+    "fact": "Jumping is good exercise for your legs."
+  },
+  "starters-keyboard": {
+    "category": "technology",
+    "definition": "Keys you press to type on a computer.",
+    "definitionVi": "Bàn phím gõ chữ trên máy tính.",
+    "hint": "It has letters A to Z on it.",
+    "fact": "The space bar is the longest key."
+  },
+  "starters-kick": {
+    "category": "sports",
+    "definition": "to hit something with your foot.",
+    "definitionVi": "Đá bằng chân.",
+    "hint": "You kick a football in a match.",
+    "fact": "Goalkeepers kick the ball very far."
+  },
+  "starters-kid": {
+    "category": "people",
+    "definition": "A child or young person.",
+    "definitionVi": "Em bé hoặc trẻ em.",
+    "hint": "You are a kid when you are young.",
+    "fact": "Kids love to play, learn, and explore."
+  },
+  "starters-kitchen": {
+    "category": "home",
+    "definition": "The room where food is cooked.",
+    "definitionVi": "Phòng bếp — nơi nấu ăn.",
+    "hint": "The fridge and stove are here.",
+    "fact": "Families often eat together in the kitchen."
+  },
+  "starters-kite": {
+    "category": "general",
+    "definition": "A light toy that flies in the wind.",
+    "definitionVi": "Diều — đồ chơi bay theo gió.",
+    "hint": "You hold a string on a windy day.",
+    "fact": "Kites were invented over two thousand years ago."
+  },
+  "starters-kiwi": {
+    "category": "food",
+    "definition": "A small brown fruit with green inside.",
+    "definitionVi": "Quả kiwi — vỏ nâu, ruột xanh.",
+    "hint": "It has tiny black seeds inside.",
+    "fact": "Kiwis have more vitamin C than oranges."
+  },
+  "starters-know": {
+    "category": "school",
+    "definition": "to understand or have learned something.",
+    "definitionVi": "Biết, hiểu điều gì đó.",
+    "hint": "I know my teacher's name.",
+    "fact": "Reading books helps you know more words."
+  },
+  "starters-lamp": {
+    "category": "home",
+    "definition": "A light you switch on in a room.",
+    "definitionVi": "Đèn chiếu sáng trong phòng.",
+    "hint": "You turn it on when it gets dark.",
+    "fact": "Bedside lamps help you read at night."
+  },
+  "starters-learn": {
+    "category": "school",
+    "definition": "to get new knowledge or skills.",
+    "definitionVi": "Học hỏi kiến thức hoặc kỹ năng mới.",
+    "hint": "You learn at school every day.",
+    "fact": "Practice helps your brain learn faster."
+  },
+  "starters-leg": {
+    "category": "body",
+    "definition": "The part you use for walking and running.",
+    "definitionVi": "Chân — dùng để đi và chạy.",
+    "hint": "You have two legs below your body.",
+    "fact": "Your leg bones are very strong."
+  },
+  "starters-lemon": {
+    "category": "food",
+    "definition": "A yellow sour citrus fruit.",
+    "definitionVi": "Quả chanh vàng, vị chua.",
+    "hint": "Lemonade is made from lemons.",
+    "fact": "Lemons float in water because they are light."
+  },
+  "starters-lemonade": {
+    "category": "food",
+    "definition": "A sweet cold drink from lemons.",
+    "definitionVi": "Nước chanh ngọt, uống lạnh.",
+    "hint": "It tastes sweet and a little sour.",
+    "fact": "Lemonade is popular on hot days."
+  },
+  "starters-lesson": {
+    "category": "school",
+    "definition": "A time at school when you learn something.",
+    "definitionVi": "Tiết học ở trường.",
+    "hint": "Maths and English are lessons.",
+    "fact": "Each lesson teaches you something new."
+  },
+  "starters-letter": {
+    "category": "school",
+    "definition": "A symbol like A, B, or C.",
+    "definitionVi": "Chữ cái như A, B, C.",
+    "hint": "The alphabet has 26 letters.",
+    "fact": "Every English word is made from letters."
+  },
+  "starters-let-s": {
+    "category": "general",
+    "definition": "Short for \"let us\" — suggesting doing something together.",
+    "definitionVi": "Viết tắt của \"let us\" — rủ nhau làm gì.",
+    "hint": "Let's play! Let's go!",
+    "fact": "Teachers often say \"Let's start the lesson.\""
+  },
+  "starters-lime": {
+    "category": "food",
+    "definition": "A small green sour citrus fruit.",
+    "definitionVi": "Quả chanh xanh nhỏ, vị chua.",
+    "hint": "It looks like a small green lemon.",
+    "fact": "Limes are used in many tropical drinks."
+  },
+  "starters-line": {
+    "category": "school",
+    "definition": "A long thin mark or a row of people.",
+    "definitionVi": "Đường kẻ hoặc hàng người xếp thành hàng.",
+    "hint": "Stand in a line at school.",
+    "fact": "You draw straight lines with a ruler."
+  },
+  "starters-listen": {
+    "category": "school",
+    "definition": "to pay attention to sounds or speech.",
+    "definitionVi": "Lắng nghe âm thanh hoặc lời nói.",
+    "hint": "Listen carefully to your teacher.",
+    "fact": "Good listeners learn faster in class."
+  },
+  "starters-live": {
+    "category": "home",
+    "definition": "to have your home in a place.",
+    "definitionVi": "Sống, ở tại một nơi.",
+    "hint": "I live in a small town.",
+    "fact": "People live in houses, flats, or apartments."
+  },
+  "starters-living-room": {
+    "category": "home",
+    "definition": "The main room where a family relaxes.",
+    "definitionVi": "Phòng khách — nơi cả nhà nghỉ ngơi.",
+    "hint": "The sofa and TV are often here.",
+    "fact": "Families watch films in the living room."
+  },
+  "starters-lizard": {
+    "category": "animals",
+    "definition": "A small reptile with four legs and a tail.",
+    "definitionVi": "Thằn lằn — bò sát nhỏ, có đuôi.",
+    "hint": "It can run fast on warm rocks.",
+    "fact": "Some lizards can change colour to hide."
+  },
+  "starters-long": {
+    "category": "general",
+    "definition": "Measuring a great distance or time.",
+    "definitionVi": "Dài — về khoảng cách hoặc thời gian.",
+    "hint": "A giraffe has a long neck.",
+    "fact": "The longest river in the world is very long."
+  },
+  "starters-look": {
+    "category": "general",
+    "definition": "to turn your eyes toward something.",
+    "definitionVi": "Nhìn về phía cái gì.",
+    "hint": "Look at the picture on the board.",
+    "fact": "Your eyes can look near or far away."
+  },
+  "starters-look-at": {
+    "category": "general",
+    "definition": "to turn your eyes toward something.",
+    "definitionVi": "Nhìn vào cái gì cụ thể.",
+    "hint": "Look at me when I speak.",
+    "fact": "Looking at books helps you learn to read."
+  },
+  "starters-lorry": {
+    "category": "travel",
+    "definition": "A large vehicle for carrying heavy goods.",
+    "definitionVi": "Xe tải lớn chở hàng.",
+    "hint": "Also called a truck in American English.",
+    "fact": "Lorries deliver food to supermarkets."
+  },
+  "starters-lot": {
+    "category": "general",
+    "definition": "A large amount of something.",
+    "definitionVi": "Rất nhiều, một lượng lớn.",
+    "hint": "I have a lot of books.",
+    "fact": "A parking lot is where cars wait."
+  },
+  "starters-lots": {
+    "category": "general",
+    "definition": "Many or a large amount.",
+    "definitionVi": "Rất nhiều (số nhiều).",
+    "hint": "Lots of kids love ice cream.",
+    "fact": "\"Lots\" is a friendly word for \"many\"."
+  },
+  "starters-love": {
+    "category": "feelings",
+    "definition": "to care for someone very much.",
+    "definitionVi": "Yêu thương ai rất nhiều.",
+    "hint": "I love my mum and dad.",
+    "fact": "People show love with hugs and kind words."
+  },
+  "starters-lunch": {
+    "category": "food",
+    "definition": "The meal you eat in the middle of the day.",
+    "definitionVi": "Bữa trưa — ăn giữa ngày.",
+    "hint": "You eat lunch at school or home.",
+    "fact": "A healthy lunch gives you energy to learn."
+  },
+  "starters-make": {
+    "category": "general",
+    "definition": "to create or build something.",
+    "definitionVi": "Làm, tạo ra cái gì.",
+    "hint": "You make a card for Mum's birthday.",
+    "fact": "Children make art with paper and crayons."
+  },
+  "starters-man": {
+    "category": "people",
+    "definition": "An adult male person.",
+    "definitionVi": "Người đàn ông trưởng thành.",
+    "hint": "Your father is a man.",
+    "fact": "Men and women can do any job they choose."
+  },
+  "starters-mango": {
+    "category": "food",
+    "definition": "A sweet tropical fruit with orange flesh.",
+    "definitionVi": "Quả xoài ngọt, ruột màu cam.",
+    "hint": "It is juicy and very sweet.",
+    "fact": "Mangoes grow in hot countries."
+  },
+  "starters-mat": {
+    "category": "home",
+    "definition": "A flat piece on the floor by a door.",
+    "definitionVi": "Thảm nhỏ đặt trước cửa hoặc sàn.",
+    "hint": "Wipe your feet on the mat.",
+    "fact": "Yoga mats are soft for exercise."
+  },
+  "starters-may-as-in-girl-s": {
+    "category": "time",
+    "definition": "The fifth month of the year.",
+    "definitionVi": "Tháng Năm — tháng thứ năm trong năm.",
+    "hint": "It comes after April.",
+    "fact": "Many flowers bloom in May."
+  },
+  "starters-meat": {
+    "category": "food",
+    "definition": "Food that comes from animals.",
+    "definitionVi": "Thịt — thức ăn từ động vật.",
+    "hint": "Chicken, beef, and pork are types of meat.",
+    "fact": "Meat gives your body protein to grow strong."
+  },
+  "starters-meatballs": {
+    "category": "food",
+    "definition": "Small balls of minced meat, often in sauce.",
+    "definitionVi": "Thịt viên tròn, thường có sốt.",
+    "hint": "They are round like little balls.",
+    "fact": "Meatballs are popular in many countries."
+  },
+  "starters-milk": {
+    "category": "food",
+    "definition": "A white drink from cows.",
+    "definitionVi": "Sữa bò — đồ uống màu trắng.",
+    "hint": "You pour it on cereal for breakfast.",
+    "fact": "Milk helps build strong bones and teeth."
+  },
+  "starters-mirror": {
+    "category": "home",
+    "definition": "Glass that shows your reflection.",
+    "definitionVi": "Gương — nhìn thấy hình mình.",
+    "hint": "You comb your hair in front of it.",
+    "fact": "Mirrors bounce light back to your eyes."
+  },
+  "starters-monkey": {
+    "category": "animals",
+    "definition": "A clever animal that climbs trees.",
+    "definitionVi": "Khỉ — thú thông minh, leo cây giỏi.",
+    "hint": "It has a long tail and loves bananas.",
+    "fact": "Monkeys use their hands like we do."
+  },
+  "starters-monster": {
+    "category": "general",
+    "definition": "A scary creature in stories.",
+    "definitionVi": "Quái vật — nhân vật đáng sợ trong truyện.",
+    "hint": "Monsters appear in fairy tales.",
+    "fact": "Friendly monsters appear in many children's books."
+  },
+  "starters-morning": {
+    "category": "time",
+    "definition": "The early part of the day before noon.",
+    "definitionVi": "Buổi sáng — trước trưa.",
+    "hint": "You wake up in the morning.",
+    "fact": "The sun rises every morning in the east."
+  },
+  "starters-mother": {
+    "category": "people",
+    "definition": "A woman who is your parent.",
+    "definitionVi": "Mẹ — người sinh ra và nuôi em.",
+    "hint": "Also called Mum or Mom.",
+    "fact": "Mother's Day is a day to thank your mum."
+  },
+  "starters-motorbike": {
+    "category": "travel",
+    "definition": "A two-wheeled vehicle with an engine.",
+    "definitionVi": "Xe máy — phương tiện hai bánh có động cơ.",
+    "hint": "Riders wear helmets for safety.",
+    "fact": "Motorbikes can go faster than bicycles."
+  },
+  "starters-mouse": {
+    "category": "animals",
+    "definition": "A tiny animal with a long tail.",
+    "definitionVi": "Con chuột nhỏ, đuôi dài.",
+    "hint": "It squeaks and likes cheese in stories.",
+    "fact": "A mouse can fit through very small holes."
+  },
+  "starters-mouth": {
+    "category": "body",
+    "definition": "The part of your face for eating and talking.",
+    "definitionVi": "Miệng — dùng để ăn và nói.",
+    "hint": "Your teeth and tongue are inside it.",
+    "fact": "You taste food with your tongue."
+  },
+  "starters-mum": {
+    "category": "people",
+    "definition": "A friendly word for mother.",
+    "definitionVi": "Mẹ — cách gọi thân mật.",
+    "hint": "She cooks, hugs you, and reads stories.",
+    "fact": "Kids in the UK often say \"Mum\"."
+  },
+  "starters-music": {
+    "category": "general",
+    "definition": "Sounds made with voices or instruments.",
+    "definitionVi": "Âm nhạc — tiếng hát hoặc nhạc cụ.",
+    "hint": "Songs and piano tunes are music.",
+    "fact": "Music can make you feel happy or calm."
+  }
+}

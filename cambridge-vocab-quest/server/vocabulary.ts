@@ -26,7 +26,7 @@ function toSearchResult(word: VocabularyWord): VocabularySearchResult {
     word: word.word,
     phonetic: word.phonetic,
     definition: word.definition,
-    sentence: word.sentence,
+    sentences: word.sentences,
     category: word.category,
     partOfSpeech: word.partOfSpeech,
     level: word.level,

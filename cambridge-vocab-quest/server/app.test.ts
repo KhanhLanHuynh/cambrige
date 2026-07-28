@@ -402,6 +402,130 @@ describe('Cambridge Vocab Quest API', () => {
     await app.close()
   }, 20_000)
 
+  it('counts lower unlocked map practice when profile level is ahead of earned progress', async () => {
+    const { vocabulary } = await import('./vocabulary.js')
+    const app = await testApp()
+    const registration = await app.inject({
+      method: 'POST',
+      url: '/api/auth/register',
+      payload: { name: 'Parent', email: 'profile-ahead-quest@example.com', password: 'A-secure-password1' },
+    })
+    const cookie = registration.cookies[0]?.name + '=' + registration.cookies[0]?.value
+    const creation = await app.inject({
+      method: 'POST',
+      url: '/api/learners',
+      headers: { cookie },
+      payload: { name: 'Alan', level: 'Flyers' },
+    })
+    await app.inject({
+      method: 'POST',
+      url: '/api/learners/select',
+      headers: { cookie },
+      payload: { learnerId: creation.json().learner.id },
+    })
+
+    const hubBefore = await app.inject({ method: 'GET', url: '/api/learner/hub', headers: { cookie } })
+    expect(hubBefore.json().quests.find((quest: { id: string }) => quest.id === 'focus')).toMatchObject({
+      label: 'Complete 1 Flyers word',
+      progress: 0,
+    })
+
+    const moversQuiz = await app.inject({
+      method: 'POST',
+      url: '/api/quiz/sessions',
+      headers: { cookie },
+      payload: { count: 1, mapStop: 'space-station' },
+    })
+    expect(moversQuiz.statusCode).toBe(201)
+    const moversQuestion = moversQuiz.json().questions[0]
+    const moversAnswer = vocabulary.find((item) => item.id === moversQuestion.id)?.answer
+    expect(moversAnswer).toBeTruthy()
+    await app.inject({
+      method: 'POST',
+      url: `/api/quiz/sessions/${moversQuiz.json().id}/answers`,
+      headers: { cookie },
+      payload: { wordId: moversQuestion.id, answer: moversAnswer },
+    })
+
+    const hubAfter = await app.inject({ method: 'GET', url: '/api/learner/hub', headers: { cookie } })
+    expect(hubAfter.json().quests.find((quest: { id: string }) => quest.id === 'focus')).toMatchObject({
+      progress: 1,
+    })
+    const claim = await app.inject({
+      method: 'POST',
+      url: '/api/learner/quests/claim',
+      headers: { cookie },
+      payload: { questId: 'focus' },
+    })
+    expect(claim.statusCode).toBe(200)
+    expect(claim.json().reward).toBe(30)
+    await app.close()
+  }, 20_000)
+
+  it('claims all completed daily quests in one request', async () => {
+    const { vocabulary } = await import('./vocabulary.js')
+    const app = await testApp()
+    const registration = await app.inject({
+      method: 'POST',
+      url: '/api/auth/register',
+      payload: { name: 'Parent', email: 'claim-all@example.com', password: 'A-secure-password1' },
+    })
+    const cookie = registration.cookies[0]?.name + '=' + registration.cookies[0]?.value
+    const creation = await app.inject({
+      method: 'POST',
+      url: '/api/learners',
+      headers: { cookie },
+      payload: { name: 'Explorer', level: 'Starters' },
+    })
+    await app.inject({
+      method: 'POST',
+      url: '/api/learners/select',
+      headers: { cookie },
+      payload: { learnerId: creation.json().learner.id },
+    })
+
+    for (let index = 0; index < 5; index += 1) {
+      const quizResponse = await app.inject({
+        method: 'POST',
+        url: '/api/quiz/sessions',
+        headers: { cookie },
+        payload: { count: 1, level: 'Starters' },
+      })
+      const quiz = quizResponse.json()
+      const word = quiz.questions[0]
+      const answer = vocabulary.find((item) => item.id === word.id)?.answer
+      expect(answer).toBeTruthy()
+      await app.inject({
+        method: 'POST',
+        url: `/api/quiz/sessions/${quiz.id}/answers`,
+        headers: { cookie },
+        payload: { wordId: word.id, answer },
+      })
+    }
+
+    const hub = await app.inject({ method: 'GET', url: '/api/learner/hub', headers: { cookie } })
+    expect(hub.json().quests.every((quest: { progress: number; target: number }) => quest.progress >= quest.target)).toBe(true)
+
+    const claimAll = await app.inject({
+      method: 'POST',
+      url: '/api/learner/quests/claim-all',
+      headers: { cookie },
+    })
+    expect(claimAll.statusCode).toBe(200)
+    expect(claimAll.json().reward).toBe(150)
+    expect(claimAll.json().claimedQuestIds).toEqual(['focus', 'review', 'streak'])
+
+    const again = await app.inject({
+      method: 'POST',
+      url: '/api/learner/quests/claim-all',
+      headers: { cookie },
+    })
+    expect(again.statusCode).toBe(200)
+    expect(again.json().reward).toBe(0)
+    expect(again.json().claimedQuestIds).toEqual([])
+    await app.close()
+  }, 20_000)
+
   it.each([
     { correctCount: 350, level: 'Flyers', mapStop: 'crystal-caves' },
     { correctCount: 550, level: 'Preliminary', mapStop: 'dragon-ridge' },

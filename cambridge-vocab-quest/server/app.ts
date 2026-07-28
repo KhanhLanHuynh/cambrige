@@ -144,6 +144,18 @@ function highestUnlockedLevel(correctCount: number, learnerLevel: CambridgeLevel
   return levelRank(fromProgress) >= levelRank(learnerLevel) ? fromProgress : learnerLevel
 }
 
+/** Words that count toward daily quests: exact quest tier, or any unlocked lower tier when profile level is ahead of earned map progress. */
+function countsTowardDailyQuest(
+  wordLevel: CambridgeLevel | undefined,
+  correctCount: number,
+  questLevel: CambridgeLevel,
+): boolean {
+  if (!wordLevel) return false
+  const earnedLevel = progressUnlockedLevel(correctCount)
+  const rank = levelRank(wordLevel)
+  return rank <= levelRank(questLevel) && rank >= levelRank(earnedLevel)
+}
+
 function promoteLearnerLevel(learner: LearnerRecord, correctCount: number): boolean {
   const progressLevel = progressUnlockedLevel(correctCount)
   if (levelRank(progressLevel) <= levelRank(learner.level)) return false
@@ -160,17 +172,18 @@ function buildDailyQuestProgress(
 ) {
   const questLevel = highestUnlockedLevel(correctCount, learnerLevel)
   const levelOf = (wordId: string) => words.find((word) => word.id === wordId)?.level
+  const counts = (wordId: string) => countsTowardDailyQuest(levelOf(wordId), correctCount, questLevel)
 
   let answerStreak = 0
   for (const attempt of [...todayAttempts].reverse()) {
-    if (!attempt.correct || levelOf(attempt.wordId) !== questLevel) break
+    if (!attempt.correct || !counts(attempt.wordId)) break
     answerStreak += 1
   }
 
   const focusCorrect = todayAttempts.filter(
-    (attempt) => attempt.correct && levelOf(attempt.wordId) === questLevel,
+    (attempt) => attempt.correct && counts(attempt.wordId),
   ).length
-  const reviewCount = todayAttempts.filter((attempt) => levelOf(attempt.wordId) === questLevel).length
+  const reviewCount = todayAttempts.filter((attempt) => counts(attempt.wordId)).length
 
   const focusProgress = Math.min(focusCorrect, 1)
   const reviewProgress = Math.min(reviewCount, 5)
@@ -207,7 +220,6 @@ function buildDailyQuestProgress(
     focus: focusProgress,
     review: reviewProgress,
     streak: streakProgress,
-    bonus: [focusProgress >= 1, reviewProgress >= 5, streakProgress >= 5].filter(Boolean).length,
   }
 
   return { quests, progress }
@@ -640,7 +652,6 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
       assignment: assignment
         ? { id: assignment.id, level: assignment.level, categories: assignment.categories }
         : null,
-      bonusReady: quests.every((quest) => quest.progress >= quest.target) && !fresh.claimedQuestIds.includes('bonus'),
     }
   })
 
@@ -651,7 +662,6 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
       { id: 'focus', target: 1, reward: 30 },
       { id: 'review', target: 5, reward: 50 },
       { id: 'streak', target: 5, reward: 70 },
-      { id: 'bonus', target: 3, reward: 100 },
     ]
     const quest = hubQuests.find((item) => item.id === body.questId)
     if (!quest) throw new HttpError(404, 'Quest not found')
@@ -687,9 +697,6 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
       if (!current.achievementIds.includes('quest_first')) {
         current.achievementIds.push('quest_first')
       }
-      if (quest.id === 'bonus' && !current.achievementIds.includes('quest_bonus')) {
-        current.achievementIds.push('quest_bonus')
-      }
       const attempts = database.attempts.filter((item) => item.learnerId === learner.id)
       const quizzes = database.quizzes.filter((item) => item.learnerId === learner.id)
       const redemptions = database.redemptions.filter((item) => item.learnerId === learner.id)
@@ -697,6 +704,66 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
       return safeLearner(current)
     })
     return { learner: updated, reward: quest.reward }
+  })
+
+  app.post('/api/learner/quests/claim-all', async (request) => {
+    const { learner } = requireLearner(request)
+    const hubQuests = [
+      { id: 'focus', target: 1, reward: 30 },
+      { id: 'review', target: 5, reward: 50 },
+      { id: 'streak', target: 5, reward: 70 },
+    ] as const
+
+    const attempts = attemptsForLearner(store, learner.id)
+    const correctCount = attempts.filter((attempt) => attempt.correct).length
+    await store.update((database) => {
+      const current = database.learners.find((item) => item.id === learner.id)
+      if (!current) return
+      promoteLearnerLevel(current, correctCount)
+    })
+    const freshLearner = store.read((database) => database.learners.find((item) => item.id === learner.id))
+    if (!freshLearner) throw new HttpError(404, 'Learner not found')
+    const today = todayKey()
+    const todayAttempts = attempts.filter((attempt) => attempt.answeredAt.slice(0, 10) === today)
+    const { progress: questProgress } = buildDailyQuestProgress(
+      todayAttempts,
+      vocabulary,
+      correctCount,
+      freshLearner.claimedQuestIds,
+      freshLearner.level,
+    )
+
+    const claimable = hubQuests.filter((quest) => {
+      if (freshLearner.claimedQuestIds.includes(quest.id)) return false
+      const progress = questProgress[quest.id] ?? 0
+      return progress >= quest.target
+    })
+    if (!claimable.length) {
+      return { learner: safeLearner(freshLearner), reward: 0, claimedQuestIds: [] as string[] }
+    }
+
+    const updated = await store.update((database) => {
+      const current = database.learners.find((item) => item.id === learner.id)
+      if (!current) throw new HttpError(404, 'Learner not found')
+      let reward = 0
+      const claimedQuestIds: string[] = []
+      for (const quest of claimable) {
+        if (current.claimedQuestIds.includes(quest.id)) continue
+        current.claimedQuestIds.push(quest.id)
+        current.gems += quest.reward
+        reward += quest.reward
+        claimedQuestIds.push(quest.id)
+      }
+      if (claimedQuestIds.length && !current.achievementIds.includes('quest_first')) {
+        current.achievementIds.push('quest_first')
+      }
+      const learnerAttempts = database.attempts.filter((item) => item.learnerId === learner.id)
+      const quizzes = database.quizzes.filter((item) => item.learnerId === learner.id)
+      const redemptions = database.redemptions.filter((item) => item.learnerId === learner.id)
+      current.achievementIds = evaluateAchievements(current, learnerAttempts, { quizzes, redemptions })
+      return { learner: safeLearner(current), reward, claimedQuestIds }
+    })
+    return updated
   })
 
   app.post('/api/quiz/sessions', async (request, reply) => {

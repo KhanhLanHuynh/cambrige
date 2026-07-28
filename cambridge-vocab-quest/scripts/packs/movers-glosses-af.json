@@ -1,0 +1,772 @@
+{
+  "movers-ability": {
+    "category": "general",
+    "definition": "to be able to do something well, like running fast",
+    "definitionVi": "khả năng làm việc gì đó tốt",
+    "hint": "A good swimmer has the ability to swim far.",
+    "fact": "Practice helps your abilities grow stronger every day."
+  },
+  "movers-address": {
+    "category": "places",
+    "definition": "the numbers and street name where someone lives",
+    "definitionVi": "địa chỉ nhà, số nhà và tên đường",
+    "hint": "Write your address on a letter so it reaches home.",
+    "fact": "Every house has its own special address."
+  },
+  "movers-afraid": {
+    "category": "feelings",
+    "definition": "feeling scared or worried about something",
+    "definitionVi": "sợ hãi, lo lắng về điều gì đó",
+    "hint": "It is okay to feel afraid during a loud storm.",
+    "fact": "Talking to a grown-up can help fear feel smaller."
+  },
+  "movers-age": {
+    "category": "people",
+    "definition": "how many years old a person or thing is",
+    "definitionVi": "tuổi, bao nhiêu năm tuổi",
+    "hint": "You blow out candles for each year of your age.",
+    "fact": "Turtles can live to a very old age — over 100 years!"
+  },
+  "movers-all": {
+    "category": "general",
+    "definition": "every one of something, with nothing left out",
+    "definitionVi": "tất cả, mọi thứ không sót ai",
+    "hint": "All the children put their hands up together.",
+    "fact": "When you finish all your homework, you feel proud."
+  },
+  "movers-all-right": {
+    "category": "feelings",
+    "definition": "feeling okay and not hurt or upset",
+    "definitionVi": "ổn, không sao, không bị thương",
+    "hint": "After a small fall, ask \"Are you all right?\"",
+    "fact": "Saying \"I am all right\" tells people you feel fine."
+  },
+  "movers-always": {
+    "category": "time",
+    "definition": "every time, at all times, never stopping",
+    "definitionVi": "luôn luôn, mọi lúc",
+    "hint": "The sun always rises in the morning.",
+    "fact": "Kind friends always help when you need them."
+  },
+  "movers-app": {
+    "category": "technology",
+    "definition": "a small program on a phone or tablet",
+    "definitionVi": "ứng dụng trên điện thoại hoặc máy tính bảng",
+    "hint": "You tap an icon to open a game app.",
+    "fact": "Some apps teach you maths while you play."
+  },
+  "movers-asleep": {
+    "category": "feelings",
+    "definition": "sleeping with your eyes closed and body resting",
+    "definitionVi": "đang ngủ, nhắm mắt nghỉ ngơi",
+    "hint": "The cat is asleep on the warm sofa.",
+    "fact": "Most children need about ten hours of sleep."
+  },
+  "movers-aunt": {
+    "category": "people",
+    "definition": "your mum or dad's sister in your family",
+    "definitionVi": "cô, dì — chị em của bố hoặc mẹ",
+    "hint": "Your aunt might give you birthday presents.",
+    "fact": "Some aunts live far away and visit on holidays."
+  },
+  "movers-awake": {
+    "category": "feelings",
+    "definition": "not sleeping; your eyes are open and alert",
+    "definitionVi": "thức, không ngủ, mắt mở",
+    "hint": "An alarm clock helps you stay awake for school.",
+    "fact": "Birds are awake and singing early in the morning."
+  },
+  "movers-back": {
+    "category": "body",
+    "definition": "the rear part of your body behind you",
+    "definitionVi": "phía sau, lưng hoặc mặt sau",
+    "hint": "Carry your backpack on your back.",
+    "fact": "Your spine runs down the middle of your back."
+  },
+  "movers-bad": {
+    "category": "feelings",
+    "definition": "not good; wrong or unpleasant",
+    "definitionVi": "xấu, không tốt, tệ",
+    "hint": "Eating too much candy is bad for your teeth.",
+    "fact": "Everyone has a bad day sometimes — tomorrow can be better."
+  },
+  "movers-badly": {
+    "category": "general",
+    "definition": "in a wrong or poor way, not well done",
+    "definitionVi": "một cách tệ, không tốt",
+    "hint": "If you feel badly, tell a teacher or parent.",
+    "fact": "Practising again can fix something done badly."
+  },
+  "movers-balcony": {
+    "category": "home",
+    "definition": "a small outdoor platform on an upper floor",
+    "definitionVi": "ban công ngoài trời trên tầng cao",
+    "hint": "You can stand on a balcony and look at the street.",
+    "fact": "Some balconies have flowers in colourful pots."
+  },
+  "movers-band": {
+    "category": "people",
+    "definition": "a group of people who play music together",
+    "definitionVi": "ban nhạc, nhóm chơi nhạc cùng nhau",
+    "hint": "A band might have drums, guitar and singers.",
+    "fact": "School bands sometimes play at concerts."
+  },
+  "movers-basement": {
+    "category": "home",
+    "definition": "the lowest room in a house, often underground",
+    "definitionVi": "tầng hầm, phòng ở dưới lòng đất",
+    "hint": "Some families keep old toys in the basement.",
+    "fact": "Basements are cool in summer because they are below ground."
+  },
+  "movers-bat": {
+    "category": "animals",
+    "definition": "a small flying animal that sleeps upside down",
+    "definitionVi": "con dơi, động vật bay ban đêm",
+    "hint": "Bats come out at night to hunt insects.",
+    "fact": "Bats use sound to find their way in the dark."
+  },
+  "movers-be-called": {
+    "category": "people",
+    "definition": "to have a name that people use for you",
+    "definitionVi": "được gọi là, có tên là",
+    "hint": "I am called Mia — that is my name.",
+    "fact": "Every person in the world is called something different."
+  },
+  "movers-beard": {
+    "category": "body",
+    "definition": "hair that grows on a man's chin and cheeks",
+    "definitionVi": "râu, lông mọc trên cằm và má",
+    "hint": "Some grandpas have long white beards.",
+    "fact": "Beards grow slowly — just a little each day."
+  },
+  "movers-best": {
+    "category": "general",
+    "definition": "better than all the others; number one",
+    "definitionVi": "tốt nhất, số một",
+    "hint": "Try your best even when something is hard.",
+    "fact": "Your best friend is the person you trust most."
+  },
+  "movers-better": {
+    "category": "general",
+    "definition": " nicer or more good than before or than another",
+    "definitionVi": "tốt hơn, khá hơn",
+    "hint": "Rest and water help you feel better when sick.",
+    "fact": "Practice makes your drawing skills get better."
+  },
+  "movers-blanket": {
+    "category": "home",
+    "definition": "a warm cover you put on a bed at night",
+    "definitionVi": "chăn ấm phủ lên giường",
+    "hint": "Pull the blanket up when you feel cold.",
+    "fact": "A soft blanket can make bedtime feel cosy."
+  },
+  "movers-blond-e": {
+    "category": "body",
+    "definition": "having light yellow or golden hair colour",
+    "definitionVi": "tóc vàng, màu tóc sáng",
+    "hint": "Many people in northern countries have blonde hair.",
+    "fact": "Hair colour can change a little in the sun."
+  },
+  "movers-boring": {
+    "category": "feelings",
+    "definition": "not interesting; making you want to sleep",
+    "definitionVi": "nhàm chán, không thú vị",
+    "hint": "A long wait with nothing to do feels boring.",
+    "fact": "Finding a fun game can turn boring time into fun."
+  },
+  "movers-bottle": {
+    "category": "home",
+    "definition": "a container with a narrow top for drinks",
+    "definitionVi": "chai đựng nước hoặc đồ uống",
+    "hint": "Take a water bottle to school on hot days.",
+    "fact": "Reusable bottles help reduce plastic waste."
+  },
+  "movers-bottom": {
+    "category": "general",
+    "definition": "the lowest part of something, not the top",
+    "definitionVi": "phần dưới cùng, đáy",
+    "hint": "Your shoes go at the bottom of the cupboard.",
+    "fact": "Fish often swim near the bottom of a lake."
+  },
+  "movers-bowl": {
+    "category": "home",
+    "definition": "a round deep dish for soup, cereal or fruit",
+    "definitionVi": "cái bát, tô đựng thức ăn",
+    "hint": "Pour milk into your cereal bowl at breakfast.",
+    "fact": "Bowls are easier to hold than flat plates."
+  },
+  "movers-brave": {
+    "category": "feelings",
+    "definition": "not afraid to try something difficult or scary",
+    "definitionVi": "dũng cảm, không sợ thử việc khó",
+    "hint": "It is brave to speak in front of the class.",
+    "fact": "Even brave people feel nervous sometimes."
+  },
+  "movers-break": {
+    "category": "time",
+    "definition": "a short rest time between lessons or work",
+    "definitionVi": "giờ nghỉ giữa các tiết học",
+    "hint": "Play outside during the school break.",
+    "fact": "A break helps your brain feel fresh again."
+  },
+  "movers-brilliant": {
+    "category": "feelings",
+    "definition": "very clever or very bright and wonderful",
+    "definitionVi": "xuất sắc, rất giỏi hoặc rất sáng",
+    "hint": "The sun is brilliant on a clear summer day.",
+    "fact": "Teachers say \"brilliant!\" when you do great work."
+  },
+  "movers-bring": {
+    "category": "general",
+    "definition": "to carry something to a place or person",
+    "definitionVi": "mang, đem cái gì đến chỗ nào",
+    "hint": "Bring your homework book to school tomorrow.",
+    "fact": "Dogs can bring a ball back when you throw it."
+  },
+  "movers-build": {
+    "category": "general",
+    "definition": "to make something by putting parts together",
+    "definitionVi": "xây dựng, ghép các phần lại với nhau",
+    "hint": "You can build a tower with wooden blocks.",
+    "fact": "Beavers build homes called dams from sticks."
+  },
+  "movers-building": {
+    "category": "places",
+    "definition": "a place with walls and a roof, like a school",
+    "definitionVi": "tòa nhà, công trình có tường và mái",
+    "hint": "Look up — tall buildings have many windows.",
+    "fact": "The tallest buildings in cities touch the clouds."
+  },
+  "movers-bus-station": {
+    "category": "travel",
+    "definition": "a place where many buses stop and start",
+    "definitionVi": "bến xe buýt, nơi xe buýt đậu",
+    "hint": "Check the timetable at the bus station.",
+    "fact": "Big cities have busy bus stations with lots of routes."
+  },
+  "movers-bus-stop": {
+    "category": "travel",
+    "definition": "a place on the street where a bus picks you up",
+    "definitionVi": "trạm dừng xe buýt trên đường",
+    "hint": "Wait quietly at the bus stop for your bus.",
+    "fact": "Bus stops often have a sign showing the route number."
+  },
+  "movers-busy": {
+    "category": "general",
+    "definition": "having lots to do with no free time",
+    "definitionVi": "bận rộn, có nhiều việc phải làm",
+    "hint": "The shop is busy on Saturday mornings.",
+    "fact": "Bees are always busy collecting nectar from flowers."
+  },
+  "movers-buy": {
+    "category": "general",
+    "definition": "to pay money to get something from a shop",
+    "definitionVi": "mua, trả tiền lấy hàng",
+    "hint": "You need money to buy snacks at the shop.",
+    "fact": "Some people buy things online with a computer."
+  },
+  "movers-call": {
+    "category": "technology",
+    "definition": "to phone someone or shout their name loudly",
+    "definitionVi": "gọi điện hoặc gọi to tên ai",
+    "hint": "Call your friend to invite them to play.",
+    "fact": "Before mobile phones, people used house telephones to call."
+  },
+  "movers-car-park": {
+    "category": "travel",
+    "definition": "an area where people leave their cars",
+    "definitionVi": "bãi đỗ xe, chỗ để ô tô",
+    "hint": "Find an empty space in the car park.",
+    "fact": "Some car parks are underground beneath buildings."
+  },
+  "movers-careful": {
+    "category": "general",
+    "definition": "watching closely so you do not make mistakes",
+    "definitionVi": "cẩn thận, chú ý không mắc lỗi",
+    "hint": "Be careful when you cross the road.",
+    "fact": "Careful drivers always look both ways first."
+  },
+  "movers-carefully": {
+    "category": "general",
+    "definition": "in a slow safe way, without rushing or breaking things",
+    "definitionVi": "một cách cẩn thận, chậm và an toàn",
+    "hint": "Carry the glass jar carefully so it does not fall.",
+    "fact": "Scientists work carefully when they do experiments."
+  },
+  "movers-carry": {
+    "category": "general",
+    "definition": "to hold something and take it somewhere",
+    "definitionVi": "mang, cầm và đưa đi chỗ khác",
+    "hint": "Carry your lunch box in your school bag.",
+    "fact": "Ants can carry things heavier than their own body."
+  },
+  "movers-cd": {
+    "category": "technology",
+    "definition": "a shiny disc that stores music or computer files",
+    "definitionVi": "đĩa CD chứa nhạc hoặc dữ liệu",
+    "hint": "Old music players read songs from a CD.",
+    "fact": "CD stands for compact disc."
+  },
+  "movers-center": {
+    "category": "places",
+    "definition": "the middle part of something, not the edges",
+    "definitionVi": "trung tâm, phần giữa",
+    "hint": "Stand in the center of the circle in PE class.",
+    "fact": "The center of a pizza is often the first bite people take."
+  },
+  "movers-centre": {
+    "category": "places",
+    "definition": "the middle part of something, not the edges",
+    "definitionVi": "trung tâm, phần giữa",
+    "hint": "The sports centre has a swimming pool inside.",
+    "fact": "British spelling uses centre; American uses center."
+  },
+  "movers-change": {
+    "category": "general",
+    "definition": "to make something different or become different",
+    "definitionVi": "thay đổi, làm cho khác đi",
+    "hint": "Change your clothes after playing in the mud.",
+    "fact": "Leaves change colour in autumn before they fall."
+  },
+  "movers-cheese": {
+    "category": "food",
+    "definition": "a yellow or white food made from milk",
+    "definitionVi": "phô mai, làm từ sữa bò",
+    "hint": "Cheese melts on hot pizza.",
+    "fact": "There are hundreds of different types of cheese."
+  },
+  "movers-cinema": {
+    "category": "places",
+    "definition": "a building where you watch films on a big screen",
+    "definitionVi": "rạp chiếu phim",
+    "hint": "Buy popcorn when you go to the cinema.",
+    "fact": "The first cinemas showed silent black-and-white films."
+  },
+  "movers-circle": {
+    "category": "school",
+    "definition": "a round flat shape like a ring or a wheel",
+    "definitionVi": "hình tròn, như vòng tròn",
+    "hint": "Draw a circle by going round and round.",
+    "fact": "A pizza is often cut into triangle slices from a circle."
+  },
+  "movers-circus": {
+    "category": "places",
+    "definition": "a show with clowns, acrobats and trained animals",
+    "definitionVi": "rạp xiếc với chú hề và diễn viên nhào lộn",
+    "hint": "Circus performers sometimes swing on a trapeze.",
+    "fact": "Circuses used to travel from town to town in tents."
+  },
+  "movers-city": {
+    "category": "places",
+    "definition": "a large town with many buildings and people",
+    "definitionVi": "thành phố lớn, nhiều nhà và người",
+    "hint": "Cities have tall buildings and busy streets.",
+    "fact": "Some of the biggest cities have millions of people."
+  },
+  "movers-clever": {
+    "category": "feelings",
+    "definition": "quick at learning and good at solving problems",
+    "definitionVi": "thông minh, học nhanh và giỏi",
+    "hint": "A clever fox found a way into the hen house.",
+    "fact": "Clever crows can use tools to get food."
+  },
+  "movers-climb": {
+    "category": "sports",
+    "definition": "to go up something using your hands and feet",
+    "definitionVi": "leo, trèo lên bằng tay và chân",
+    "hint": "Climb the ladder carefully one step at a time.",
+    "fact": "Monkeys climb trees quickly and easily."
+  },
+  "movers-cloud": {
+    "category": "weather",
+    "definition": "a white or grey fluffy mass floating in the sky",
+    "definitionVi": "đám mây trắng hoặc xám trên trời",
+    "hint": "Clouds bring rain when they get dark and heavy.",
+    "fact": "Clouds are made of tiny drops of water."
+  },
+  "movers-cloudy": {
+    "category": "weather",
+    "definition": "with many clouds covering the sky",
+    "definitionVi": "trời nhiều mây, không nắng",
+    "hint": "Take a jacket on cloudy days — it might rain.",
+    "fact": "On cloudy nights you cannot see many stars."
+  },
+  "movers-clown": {
+    "category": "people",
+    "definition": "a funny performer with bright clothes and makeup",
+    "definitionVi": "chú hề, người biểu diễn hài hước",
+    "hint": "Clowns at the circus make children laugh.",
+    "fact": "Some clowns twist balloons into animal shapes."
+  },
+  "movers-coat": {
+    "category": "clothes",
+    "definition": "a warm jacket you wear outside in cold weather",
+    "definitionVi": "áo khoác ấm mặc khi trời lạnh",
+    "hint": "Button up your coat before you go outside.",
+    "fact": "Animals like seals have thick coats of fur."
+  },
+  "movers-coffee": {
+    "category": "food",
+    "definition": "a hot brown drink that grown-ups often enjoy",
+    "definitionVi": "cà phê, đồ uống nóng của người lớn",
+    "hint": "Coffee smells strong — kids usually drink milk instead.",
+    "fact": "Coffee beans grow on trees in warm countries."
+  },
+  "movers-cold": {
+    "category": "weather",
+    "definition": "not warm; low temperature that makes you shiver",
+    "definitionVi": "lạnh, nhiệt độ thấp",
+    "hint": "Wear gloves when your hands feel cold.",
+    "fact": "Ice is water that has turned very cold and hard."
+  },
+  "movers-comic": {
+    "category": "school",
+    "definition": "a funny book or story told with pictures",
+    "definitionVi": "truyện tranh hài hước",
+    "hint": "Superhero comics have speech bubbles for dialogue.",
+    "fact": "Comics combine art and writing to tell a story."
+  },
+  "movers-comic-book": {
+    "category": "school",
+    "definition": "a thin book full of cartoon pictures and speech bubbles",
+    "definitionVi": "sách truyện tranh có hình vẽ và thoại",
+    "hint": "Read a comic book from left to right.",
+    "fact": "Some comic books are about heroes who save the world."
+  },
+  "movers-cook": {
+    "category": "jobs",
+    "definition": "a person whose job is making food in a kitchen",
+    "definitionVi": "đầu bếp, người nấu ăn",
+    "hint": "The cook in the café makes delicious sandwiches.",
+    "fact": "Good cooks taste food while they prepare it."
+  },
+  "movers-cough": {
+    "category": "health",
+    "definition": "a sudden push of air from your throat when sick",
+    "definitionVi": "ho, đẩy hơi đột ngột từ cổ họng",
+    "hint": "Cover your mouth when you cough near others.",
+    "fact": "Drinking warm water can soothe a cough."
+  },
+  "movers-country": {
+    "category": "places",
+    "definition": "a large area of land with its own name and flag",
+    "definitionVi": "quốc gia, đất nước có cờ riêng",
+    "hint": "Vietnam is a beautiful country in Asia.",
+    "fact": "There are about 195 countries in the world."
+  },
+  "movers-countryside": {
+    "category": "nature",
+    "definition": "land outside cities with fields, farms and trees",
+    "definitionVi": "nông thôn, vùng quê ngoài thành phố",
+    "hint": "The countryside is quiet with green hills and cows.",
+    "fact": "Many birds and wild flowers live in the countryside."
+  },
+  "movers-cry": {
+    "category": "feelings",
+    "definition": "to make tears come from your eyes when sad",
+    "definitionVi": "khóc, rơi nước mắt khi buồn",
+    "hint": "It is okay to cry when you feel hurt or upset.",
+    "fact": "Tears help clean dust out of your eyes."
+  },
+  "movers-cup": {
+    "category": "home",
+    "definition": "a small container with a handle for drinking",
+    "definitionVi": "cái cốc có quai để uống nước",
+    "hint": "Fill your cup with juice at breakfast.",
+    "fact": "Tea cups are often smaller than big soup mugs."
+  },
+  "movers-curly": {
+    "category": "body",
+    "definition": "with hair that bends in rings or waves",
+    "definitionVi": "tóc xoăn, uốn thành vòng",
+    "hint": "Curly hair bounces when you run and jump.",
+    "fact": "Some people use rollers to make straight hair curly."
+  },
+  "movers-dance": {
+    "category": "sports",
+    "definition": "moving your body to music in a rhythm",
+    "definitionVi": "nhảy múa theo nhịp âm nhạc",
+    "hint": "Learn a simple dance for the school show.",
+    "fact": "People dance differently in every country around the world."
+  },
+  "movers-dangerous": {
+    "category": "general",
+    "definition": "able to hurt you; not safe to go near",
+    "definitionVi": "nguy hiểm, có thể gây thương tích",
+    "hint": "Knives are dangerous — only adults should use them.",
+    "fact": "Red warning signs tell you when something is dangerous."
+  },
+  "movers-daughter": {
+    "category": "people",
+    "definition": "a girl or woman who belongs to her parents",
+    "definitionVi": "con gái của bố mẹ",
+    "hint": "The farmer's daughter helps feed the chickens.",
+    "fact": "In stories, the princess is often the king's daughter."
+  },
+  "movers-dentist": {
+    "category": "jobs",
+    "definition": "a doctor who looks after your teeth and gums",
+    "definitionVi": "nha sĩ, bác sĩ chăm sóc răng",
+    "hint": "Visit the dentist twice a year for a check-up.",
+    "fact": "Dentists use a small mirror to see all your teeth."
+  },
+  "movers-difference": {
+    "category": "school",
+    "definition": "the way two things are not the same",
+    "definitionVi": "sự khác biệt giữa hai thứ",
+    "hint": "Spot the difference between the two pictures.",
+    "fact": "Even twins have small differences if you look closely."
+  },
+  "movers-different": {
+    "category": "general",
+    "definition": "not the same as something else",
+    "definitionVi": "khác, không giống nhau",
+    "hint": "We wear different clothes for school and for sport.",
+    "fact": "Butterflies come in many different colours and patterns."
+  },
+  "movers-difficult": {
+    "category": "school",
+    "definition": "hard to do or understand, not easy",
+    "definitionVi": "khó, không dễ làm hoặc hiểu",
+    "hint": "Ask for help when a maths problem is difficult.",
+    "fact": "Difficult puzzles feel great when you finally solve them."
+  },
+  "movers-doctor": {
+    "category": "jobs",
+    "definition": "a person who helps sick or hurt people get well",
+    "definitionVi": "bác sĩ, chữa bệnh cho người ốm",
+    "hint": "The doctor listens to your heart with a stethoscope.",
+    "fact": "Doctors study for many years before they treat patients."
+  },
+  "movers-dolphin": {
+    "category": "animals",
+    "definition": "a friendly sea animal that jumps and clicks",
+    "definitionVi": "cá heo, động vật biển thông minh",
+    "hint": "Dolphins swim in groups called pods.",
+    "fact": "Dolphins breathe air through a hole on top of their head."
+  },
+  "movers-down": {
+    "category": "general",
+    "definition": "towards a lower place, the opposite of up",
+    "definitionVi": "xuống, về phía thấp hơn",
+    "hint": "Walk down the stairs holding the rail.",
+    "fact": "Rain falls down from clouds in the sky."
+  },
+  "movers-downstairs": {
+    "category": "home",
+    "definition": "on or to a lower floor in a building",
+    "definitionVi": "ở tầng dưới hoặc đi xuống tầng dưới",
+    "hint": "The kitchen is downstairs on the ground floor.",
+    "fact": "Some houses have bedrooms upstairs and a living room downstairs."
+  },
+  "movers-dream": {
+    "category": "feelings",
+    "definition": "pictures and stories in your head while you sleep",
+    "definitionVi": "giấc mơ khi đang ngủ",
+    "hint": "Sometimes you dream about flying or playing.",
+    "fact": "Most people forget their dreams a few minutes after waking."
+  },
+  "movers-dress-up": {
+    "category": "clothes",
+    "definition": "to put on special or fancy clothes for fun",
+    "definitionVi": "ăn mặc đẹp hoặc hóa trang cho vui",
+    "hint": "Dress up as a pirate for the costume party.",
+    "fact": "Children love to dress up at Halloween."
+  },
+  "movers-driver": {
+    "category": "jobs",
+    "definition": "a person who controls a car, bus or truck",
+    "definitionVi": "tài xế, người lái xe",
+    "hint": "The bus driver stops at every bus stop.",
+    "fact": "Drivers must pass a test before they get a licence."
+  },
+  "movers-drop": {
+    "category": "general",
+    "definition": "to let something fall from your hand by accident",
+    "definitionVi": "làm rơi, để vật tuột khỏi tay",
+    "hint": "Hold your phone tight so you do not drop it.",
+    "fact": "A raindrop is one tiny bit of falling rain."
+  },
+  "movers-dry": {
+    "category": "weather",
+    "definition": "not wet; with no water on the surface",
+    "definitionVi": "khô, không ướt",
+    "hint": "Hang wet towels in the sun to make them dry.",
+    "fact": "Deserts are very dry places with little rain."
+  },
+  "movers-dvd": {
+    "category": "technology",
+    "definition": "a disc that stores films to watch on a screen",
+    "definitionVi": "đĩa DVD chứa phim để xem",
+    "hint": "Put the DVD in the player to watch a movie.",
+    "fact": "DVDs replaced old video tapes for home movies."
+  },
+  "movers-e-book": {
+    "category": "technology",
+    "definition": "a book you read on a screen, not on paper",
+    "definitionVi": "sách điện tử đọc trên màn hình",
+    "hint": "You can carry hundreds of e-books on one tablet.",
+    "fact": "E-books never get dog-eared like paper pages."
+  },
+  "movers-earache": {
+    "category": "health",
+    "definition": "pain inside your ear that hurts and bothers you",
+    "definitionVi": "đau tai, nhức bên trong tai",
+    "hint": "Tell a grown-up if you have an earache.",
+    "fact": "Loud music can sometimes cause ear pain."
+  },
+  "movers-easy": {
+    "category": "school",
+    "definition": "not hard to do; simple and quick to learn",
+    "definitionVi": "dễ, không khó làm",
+    "hint": "The first question on the test was easy.",
+    "fact": "What feels easy for you might be hard for someone else."
+  },
+  "movers-elevator": {
+    "category": "travel",
+    "definition": "a small room that moves up and down inside a building",
+    "definitionVi": "thang máy đi lên xuống trong nhà",
+    "hint": "Press the button and wait for the elevator doors.",
+    "fact": "Elevators use strong cables to lift people safely."
+  },
+  "movers-email": {
+    "category": "technology",
+    "definition": "a message you send through the internet to someone",
+    "definitionVi": "email, thư gửi qua mạng",
+    "hint": "Type an email and click send to your friend.",
+    "fact": "Email can reach the other side of the world in seconds."
+  },
+  "movers-etc": {
+    "category": "general",
+    "definition": "and other similar things — short for et cetera",
+    "definitionVi": "v.v., và những thứ tương tự khác",
+    "hint": "We need pens, paper, glue, etc. for art class.",
+    "fact": "Etc. comes from Latin words meaning \"and the rest\"."
+  },
+  "movers-exciting": {
+    "category": "feelings",
+    "definition": "making you feel happy, interested and full of energy",
+    "definitionVi": "thú vị, hồi hộp và vui",
+    "hint": "A roller coaster ride is very exciting!",
+    "fact": "Your heart beats faster when something exciting happens."
+  },
+  "movers-fair": {
+    "category": "feelings",
+    "definition": "treating everyone equally and in the right way",
+    "definitionVi": "công bằng, đối xử bình đẳng",
+    "hint": "Sharing toys fairly means everyone gets a turn.",
+    "fact": "Referees in sport try to make sure the game is fair."
+  },
+  "movers-fall": {
+    "category": "general",
+    "definition": "to drop down from a higher place to a lower one",
+    "definitionVi": "ngã, rơi từ trên xuống",
+    "hint": "Leaves fall from trees in autumn.",
+    "fact": "Skydivers fall fast before their parachute opens."
+  },
+  "movers-famous": {
+    "category": "people",
+    "definition": "known by many people all over the world",
+    "definitionVi": "nổi tiếng, được nhiều người biết đến",
+    "hint": "Famous singers perform on TV and at big concerts.",
+    "fact": "Some famous people help charities with their money."
+  },
+  "movers-farm": {
+    "category": "places",
+    "definition": "land where farmers grow food and keep animals",
+    "definitionVi": "trang trại, nơi nuôi động vật và trồng cây",
+    "hint": "Visit a farm to see cows, pigs and chickens.",
+    "fact": "Many farms have a big red barn for storing hay."
+  },
+  "movers-farmer": {
+    "category": "jobs",
+    "definition": "a person who works on a farm growing food",
+    "definitionVi": "nông dân, người làm việc trên trang trại",
+    "hint": "The farmer wakes early to milk the cows.",
+    "fact": "Farmers help put fresh vegetables on our plates."
+  },
+  "movers-fat": {
+    "category": "body",
+    "definition": "having a thick or round body; not thin",
+    "definitionVi": "béo, mập, thân hình tròn",
+    "hint": "Bears store fat to keep warm in winter.",
+    "fact": "Some healthy foods like nuts contain good fat."
+  },
+  "movers-feed": {
+    "category": "animals",
+    "definition": "to give food to a person or animal",
+    "definitionVi": "cho ăn, đưa thức ăn cho người hoặc vật",
+    "hint": "Feed the fish a tiny pinch of food each day.",
+    "fact": "Baby birds open their mouths wide to be fed."
+  },
+  "movers-field": {
+    "category": "nature",
+    "definition": "an open area of grass or crops in the countryside",
+    "definitionVi": "cánh đồng cỏ hoặc ruộng trồng cây",
+    "hint": "Sheep graze in a green field all day.",
+    "fact": "Football is often played on a flat grass field."
+  },
+  "movers-film": {
+    "category": "technology",
+    "definition": "a story shown as moving pictures on a screen",
+    "definitionVi": "bộ phim, câu chuyện chiếu trên màn hình",
+    "hint": "We watched a funny film at the cinema.",
+    "fact": "The longest films can last more than three hours."
+  },
+  "movers-film-star": {
+    "category": "people",
+    "definition": "a famous actor who appears in movies",
+    "definitionVi": "ngôi sao điện ảnh, diễn viên nổi tiếng",
+    "hint": "Film stars walk on a red carpet at premieres.",
+    "fact": "Some film stars started acting when they were children."
+  },
+  "movers-fine": {
+    "category": "feelings",
+    "definition": "good enough; okay and not a problem",
+    "definitionVi": "ổn, không sao, tốt",
+    "hint": "Say \"I am fine\" when someone asks how you feel.",
+    "fact": "Fine weather means sunny skies and gentle wind."
+  },
+  "movers-first": {
+    "category": "time",
+    "definition": "coming before all others; number one in order",
+    "definitionVi": "đầu tiên, số một trong thứ tự",
+    "hint": "Who crossed the finish line first?",
+    "fact": "The first day of school is exciting for many children."
+  },
+  "movers-fish": {
+    "category": "sports",
+    "definition": "to try to catch fish with a rod and line",
+    "definitionVi": "câu cá bằng cần và dây",
+    "hint": "Sit quietly by the lake when you fish.",
+    "fact": "Some people fish in the sea from a small boat."
+  },
+  "movers-fix": {
+    "category": "general",
+    "definition": "to repair something that is broken or not working",
+    "definitionVi": "sửa chữa cái gì đó bị hỏng",
+    "hint": "Dad can fix the broken chair with glue.",
+    "fact": "Engineers fix bridges and roads to keep them safe."
+  },
+  "movers-forest": {
+    "category": "nature",
+    "definition": "a large area covered with many trees",
+    "definitionVi": "rừng, nơi có rất nhiều cây",
+    "hint": "Walk quietly in the forest and listen for birds.",
+    "fact": "Forests are home to deer, foxes and many insects."
+  },
+  "movers-frightened": {
+    "category": "feelings",
+    "definition": "feeling very scared because of something sudden",
+    "definitionVi": "sợ hãi, hoảng sợ vì điều bất ngờ",
+    "hint": "Thunder can make small dogs feel frightened.",
+    "fact": "Hugging someone you trust helps when you feel frightened."
+  },
+  "movers-funfair": {
+    "category": "places",
+    "definition": "an outdoor place with rides, games and sweet treats",
+    "definitionVi": "hội chợ vui chơi với trò chơi và đồ ngọt",
+    "hint": "Win a teddy at the funfair ring-toss game.",
+    "fact": "Funfairs often have bright lights and merry-go-rounds."
+  }
+}

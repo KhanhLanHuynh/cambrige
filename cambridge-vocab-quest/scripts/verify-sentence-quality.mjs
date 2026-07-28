@@ -1,11 +1,15 @@
 import { readFileSync } from 'node:fs'
 
+function primarySentence(word) {
+  return word.sentences?.[0] || ''
+}
+
 const checks = ['mouth', 'leather', 'row', 'society', 'coffee', 'cooker', 'restaurant', 'stomach', 'bowl', 'seat', 'death', 'sweatshirt', 'suitcase', 'milkshake']
 for (const level of ['starters', 'movers', 'flyers', 'preliminary']) {
   const data = JSON.parse(readFileSync(`server/data/${level}.json`, 'utf8'))
   for (const word of data.words) {
     if (checks.includes(word.word.toLowerCase())) {
-      console.log(`${word.word} => ${word.sentence}`)
+      console.log(`${word.word} => ${primarySentence(word)}`)
     }
   }
 }
@@ -18,7 +22,7 @@ for (const level of ['starters', 'movers', 'flyers', 'preliminary']) {
   const data = JSON.parse(readFileSync(`server/data/${level}.json`, 'utf8'))
   for (const word of data.words) {
     const head = word.word.replace(/\)+$/g, '').trim().toLowerCase()
-    const sentence = word.sentence || ''
+    const sentence = primarySentence(word)
     if (/ate .+ for lunch/i.test(sentence) && !food.test(head)) {
       console.log('BAD FOOD:', word.id, sentence)
       bad += 1

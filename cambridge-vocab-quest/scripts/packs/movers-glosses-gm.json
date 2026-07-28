@@ -1,0 +1,527 @@
+{
+  "movers-get-dressed": {
+    "category": "home",
+    "definition": "to put on your clothes.",
+    "definitionVi": "Mặc quần áo vào.",
+    "hint": "You do this every morning before school.",
+    "fact": "Buttons and zips help you get dressed."
+  },
+  "movers-get-off": {
+    "category": "travel",
+    "definition": "to leave a bus, train, or bike.",
+    "definitionVi": "Xuống xe buýt, tàu hoặc xe đạp.",
+    "hint": "Wait until the vehicle stops first.",
+    "fact": "Always look both ways after you get off."
+  },
+  "movers-get-on": {
+    "category": "travel",
+    "definition": "to board a bus, train, or bike.",
+    "definitionVi": "Lên xe buýt, tàu hoặc xe đạp.",
+    "hint": "Hold the handrail when you step up.",
+    "fact": "People queue politely to get on a bus."
+  },
+  "movers-get-undressed": {
+    "category": "home",
+    "definition": "to take off your clothes.",
+    "definitionVi": "Cởi quần áo ra.",
+    "hint": "You do this before a bath or bed.",
+    "fact": "Put dirty clothes in the laundry basket."
+  },
+  "movers-get-up": {
+    "category": "home",
+    "definition": "to leave your bed in the morning.",
+    "definitionVi": "Thức dậy và ra khỏi giường.",
+    "hint": "Your alarm clock helps you get up.",
+    "fact": "Stretching when you get up feels good."
+  },
+  "movers-glass": {
+    "category": "home",
+    "definition": "A cup made of clear hard material.",
+    "definitionVi": "Cốc thủy tinh trong suốt.",
+    "hint": "You drink water or juice from it.",
+    "fact": "Glass can break, so hold it carefully."
+  },
+  "movers-go-shopping": {
+    "category": "travel",
+    "definition": "to visit shops to buy things.",
+    "definitionVi": "Đi mua sắm ở cửa hàng.",
+    "hint": "Mum might take you to the supermarket.",
+    "fact": "Making a list helps when you go shopping."
+  },
+  "movers-goal": {
+    "category": "sports",
+    "definition": "The place where you score in football.",
+    "definitionVi": "Khung thành trong bóng đá.",
+    "hint": "Kick the ball into the net to score.",
+    "fact": "Cheering erupts when a team scores a goal."
+  },
+  "movers-granddaughter": {
+    "category": "people",
+    "definition": "Your son or daughter's daughter.",
+    "definitionVi": "Cháu gái — con gái của con bạn.",
+    "hint": "Grandparents love their granddaughters.",
+    "fact": "A granddaughter is part of your family tree."
+  },
+  "movers-grandparent": {
+    "category": "people",
+    "definition": "Your mother's or father's parent.",
+    "definitionVi": "Ông bà — bố hoặc mẹ của bố mẹ bạn.",
+    "hint": "Grandma and Grandpa are grandparents.",
+    "fact": "Grandparents often tell the best stories."
+  },
+  "movers-grandson": {
+    "category": "people",
+    "definition": "Your son or daughter's son.",
+    "definitionVi": "Cháu trai — con trai của con bạn.",
+    "hint": "Grandparents love their grandsons.",
+    "fact": "A grandson is part of your family tree."
+  },
+  "movers-grass": {
+    "category": "nature",
+    "definition": "Green plants that cover the ground.",
+    "definitionVi": "Cỏ xanh mọc trên mặt đất.",
+    "hint": "You can sit on it in the park.",
+    "fact": "Grass feels soft under bare feet."
+  },
+  "movers-ground": {
+    "category": "nature",
+    "definition": "The solid surface under your feet.",
+    "definitionVi": "Mặt đất dưới chân bạn.",
+    "hint": "Leaves fall on the ground in autumn.",
+    "fact": "Worms live in the ground underground."
+  },
+  "movers-grow": {
+    "category": "nature",
+    "definition": "to become bigger over time.",
+    "definitionVi": "Lớn lên hoặc mọc lên theo thời gian.",
+    "hint": "Plants and children both grow.",
+    "fact": "Sunlight and water help plants grow."
+  },
+  "movers-grown-up": {
+    "category": "people",
+    "definition": "An adult person, not a child.",
+    "definitionVi": "Người lớn, không phải trẻ em.",
+    "hint": "Teachers and parents are grown-ups.",
+    "fact": "Grown-ups can drive cars and vote."
+  },
+  "movers-have-got-to": {
+    "category": "general",
+    "definition": "to need or must do something.",
+    "definitionVi": "Phải làm điều gì đó.",
+    "hint": "You have got to wear a seat belt in the car.",
+    "fact": "Rules help us know what we have got to do."
+  },
+  "movers-headache": {
+    "category": "health",
+    "definition": "A pain inside your head.",
+    "definitionVi": "Đau đầu.",
+    "hint": "Rest and water can help a headache.",
+    "fact": "Too much screen time can cause headaches."
+  },
+  "movers-helmet": {
+    "category": "sports",
+    "definition": "Hard head protection for cycling or sport.",
+    "definitionVi": "Mũ bảo hiểm bảo vệ đầu.",
+    "hint": "Wear one when you ride a bike.",
+    "fact": "Helmets protect your head if you fall."
+  },
+  "movers-help": {
+    "category": "general",
+    "definition": "to give support to someone.",
+    "definitionVi": "Giúp đỡ ai đó.",
+    "hint": "Friends help each other with homework.",
+    "fact": "Helping others makes everyone feel good."
+  },
+  "movers-hide": {
+    "category": "general",
+    "definition": "to go where others cannot see you.",
+    "definitionVi": "Trốn, ẩn nấp để không ai thấy.",
+    "hint": "You hide behind a tree in hide-and-seek.",
+    "fact": "Animals hide to stay safe from danger."
+  },
+  "movers-holiday": {
+    "category": "time",
+    "definition": "A special day off from school or work.",
+    "definitionVi": "Ngày nghỉ lễ hoặc kỳ nghỉ.",
+    "hint": "Christmas and summer break are holidays.",
+    "fact": "Many families travel on holiday together."
+  },
+  "movers-homework": {
+    "category": "school",
+    "definition": "School work you do at home.",
+    "definitionVi": "Bài tập về nhà.",
+    "hint": "Teachers give it after class.",
+    "fact": "Doing homework helps you remember lessons."
+  },
+  "movers-hop": {
+    "category": "sports",
+    "definition": "to jump on one foot.",
+    "definitionVi": "Nhảy lò cò trên một chân.",
+    "hint": "Rabbits hop across the grass.",
+    "fact": "Hopscotch is a game where you hop on squares."
+  },
+  "movers-hospital": {
+    "category": "places",
+    "definition": "A place where sick people get care.",
+    "definitionVi": "Bệnh viện — nơi chữa bệnh.",
+    "hint": "Doctors and nurses work here.",
+    "fact": "Ambulances take people to hospital quickly."
+  },
+  "movers-hot": {
+    "category": "weather",
+    "definition": "Having a high temperature; very warm.",
+    "definitionVi": "Nóng, nhiệt độ cao.",
+    "hint": "Ice cream melts on a hot day.",
+    "fact": "Drink water when the weather is hot."
+  },
+  "movers-how": {
+    "category": "general",
+    "definition": "In what way or manner.",
+    "definitionVi": "Như thế nào, bằng cách nào.",
+    "hint": "Ask \"How do you spell that?\"",
+    "fact": "How is one of the five W question words."
+  },
+  "movers-how-much": {
+    "category": "general",
+    "definition": "Asking about price or amount.",
+    "definitionVi": "Bao nhiêu tiền hoặc bao nhiêu lượng.",
+    "hint": "Say it when you buy something at a shop.",
+    "fact": "How much costs less than how many for liquids."
+  },
+  "movers-how-often": {
+    "category": "time",
+    "definition": "Asking how many times something happens.",
+    "definitionVi": "Bao lâu một lần, thường xuyên ra sao.",
+    "hint": "How often do you brush your teeth?",
+    "fact": "Dentists ask how often you floss."
+  },
+  "movers-huge": {
+    "category": "general",
+    "definition": "Very, very big.",
+    "definitionVi": "Cực kỳ to lớn.",
+    "hint": "A whale is a huge animal.",
+    "fact": "Huge ships carry goods across oceans."
+  },
+  "movers-hundred": {
+    "category": "school",
+    "definition": "The number 100.",
+    "definitionVi": "Số một trăm.",
+    "hint": "It comes after ninety-nine.",
+    "fact": "One hundred years is called a century."
+  },
+  "movers-hungry": {
+    "category": "feelings",
+    "definition": "Wanting to eat food.",
+    "definitionVi": "Đói, muốn ăn.",
+    "hint": "Your tummy rumbles when you are hungry.",
+    "fact": "Breakfast helps when you wake up hungry."
+  },
+  "movers-hurt": {
+    "category": "health",
+    "definition": "to feel pain or cause pain.",
+    "definitionVi": "Bị đau hoặc làm ai đó đau.",
+    "hint": "You might hurt your knee if you fall.",
+    "fact": "A plaster can help a small hurt feel better."
+  },
+  "movers-ice": {
+    "category": "nature",
+    "definition": "Frozen water that is hard and cold.",
+    "definitionVi": "Nước đá cứng và lạnh.",
+    "hint": "It melts in your drink on a hot day.",
+    "fact": "Ice skaters glide on smooth ice."
+  },
+  "movers-ice-skates": {
+    "category": "sports",
+    "definition": "Boots with blades for skating on ice.",
+    "definitionVi": "Giày trượt băng có lưỡi dao.",
+    "hint": "You wear them at an ice rink.",
+    "fact": "Ice skates let you glide across frozen ponds."
+  },
+  "movers-ice-skating": {
+    "category": "sports",
+    "definition": "Moving on ice wearing skates.",
+    "definitionVi": "Trượt băng trên mặt băng.",
+    "hint": "People spin and glide at the rink.",
+    "fact": "Ice skating is popular in cold countries."
+  },
+  "movers-idea": {
+    "category": "general",
+    "definition": "A thought or plan in your mind.",
+    "definitionVi": "Ý tưởng, suy nghĩ trong đầu.",
+    "hint": "Say \"Good idea!\" when you like a plan.",
+    "fact": "Sharing ideas helps teams solve problems."
+  },
+  "movers-ill": {
+    "category": "health",
+    "definition": "Not well; feeling sick.",
+    "definitionVi": "Ốm, không khỏe.",
+    "hint": "You stay home from school when ill.",
+    "fact": "Rest and soup help when you feel ill."
+  },
+  "movers-inside": {
+    "category": "places",
+    "definition": "In the inner part; not outside.",
+    "definitionVi": "Ở bên trong, không phải ngoài trời.",
+    "hint": "Toys are inside the box.",
+    "fact": "It is warm inside on a rainy day."
+  },
+  "movers-internet": {
+    "category": "technology",
+    "definition": "A global network of connected computers.",
+    "definitionVi": "Mạng internet kết nối máy tính.",
+    "hint": "You use it to watch videos and learn.",
+    "fact": "The internet links people around the world."
+  },
+  "movers-invite": {
+    "category": "general",
+    "definition": "to ask someone to come to an event.",
+    "definitionVi": "Mời ai đó đến dự sự kiện.",
+    "hint": "You invite friends to your birthday party.",
+    "fact": "Party invitations can be cards or messages."
+  },
+  "movers-island": {
+    "category": "places",
+    "definition": "Land with water all around it.",
+    "definitionVi": "Hòn đảo — đất bao quanh bởi nước.",
+    "hint": "Hawaii and Bali are famous islands.",
+    "fact": "Some islands have volcanoes and beaches."
+  },
+  "movers-jungle": {
+    "category": "nature",
+    "definition": "A thick, hot forest with many plants.",
+    "definitionVi": "Rừng rậm nhiệt đới.",
+    "hint": "Monkeys and parrots live in jungles.",
+    "fact": "Jungles are home to colourful birds and insects."
+  },
+  "movers-kangaroo": {
+    "category": "animals",
+    "definition": "An Australian animal that hops.",
+    "definitionVi": "Chuột túi — loài nhảy ở Úc.",
+    "hint": "It carries a baby in its pouch.",
+    "fact": "Kangaroos can jump over three metres high."
+  },
+  "movers-kind": {
+    "category": "general",
+    "definition": "A type or sort of something.",
+    "definitionVi": "Loại, kiểu của một thứ gì.",
+    "hint": "What kind of ice cream do you like?",
+    "fact": "There are many kinds of dogs and cats."
+  },
+  "movers-kitten": {
+    "category": "animals",
+    "definition": "A very young cat.",
+    "definitionVi": "Mèo con.",
+    "hint": "It says \"meow\" and loves to play.",
+    "fact": "Kittens learn to hunt by playing with toys."
+  },
+  "movers-lake": {
+    "category": "nature",
+    "definition": "A large body of water surrounded by land.",
+    "definitionVi": "Hồ nước lớn giữa đất liền.",
+    "hint": "Ducks swim on the lake.",
+    "fact": "Some lakes are so big they look like seas."
+  },
+  "movers-laptop": {
+    "category": "technology",
+    "definition": "A small computer you can carry.",
+    "definitionVi": "Máy tính xách tay.",
+    "hint": "You can use it on your desk or lap.",
+    "fact": "Laptops run on batteries when unplugged."
+  },
+  "movers-last": {
+    "category": "time",
+    "definition": "Coming at the end; most recent.",
+    "definitionVi": "Cuối cùng; vừa rồi.",
+    "hint": "Last week means the week before this one.",
+    "fact": "The last day of school feels exciting."
+  },
+  "movers-laugh": {
+    "category": "feelings",
+    "definition": "The sound when something is funny.",
+    "definitionVi": "Tiếng cười khi thấy vui.",
+    "hint": "Jokes and silly faces make you laugh.",
+    "fact": "Laughing with friends feels wonderful."
+  },
+  "movers-leaf": {
+    "category": "nature",
+    "definition": "The flat green part on a plant stem.",
+    "definitionVi": "Chiếc lá trên cành cây.",
+    "hint": "Leaves turn red and gold in autumn.",
+    "fact": "Trees lose their leaves in cold winters."
+  },
+  "movers-library": {
+    "category": "places",
+    "definition": "A quiet place full of books to borrow.",
+    "definitionVi": "Thư viện — nơi mượn sách.",
+    "hint": "You can read stories here for free.",
+    "fact": "Libraries have thousands of books to explore."
+  },
+  "movers-lift": {
+    "category": "travel",
+    "definition": "A small room that moves up and down.",
+    "definitionVi": "Thang máy đi lên xuống.",
+    "hint": "Press a button to choose your floor.",
+    "fact": "Lifts are also called elevators in America."
+  },
+  "movers-lion": {
+    "category": "animals",
+    "definition": "A big wild cat with a mane.",
+    "definitionVi": "Sư tử — mèo lớn có bờm.",
+    "hint": "It roars loudly in the savanna.",
+    "fact": "Lions live in groups called prides."
+  },
+  "movers-little": {
+    "category": "general",
+    "definition": "Small in size.",
+    "definitionVi": "Nhỏ, bé.",
+    "hint": "A mouse is a little animal.",
+    "fact": "Little steps still take you forward."
+  },
+  "movers-look-for": {
+    "category": "general",
+    "definition": "to try to find something.",
+    "definitionVi": "Tìm kiếm cái gì đó.",
+    "hint": "You look for your keys before school.",
+    "fact": "Detectives look for clues to solve mysteries."
+  },
+  "movers-lose": {
+    "category": "general",
+    "definition": "to no longer have something.",
+    "definitionVi": "Làm mất, không còn nữa.",
+    "hint": "You lose a game when the other team scores more.",
+    "fact": "Putting things in the same place stops you losing them."
+  },
+  "movers-loud": {
+    "category": "general",
+    "definition": "Making a lot of sound.",
+    "definitionVi": "Ồn ào, to tiếng.",
+    "hint": "A drum is a loud instrument.",
+    "fact": "Cover your ears if music is too loud."
+  },
+  "movers-loudly": {
+    "category": "general",
+    "definition": "In a way that makes much noise.",
+    "definitionVi": "Một cách ồn ào.",
+    "hint": "Do not speak loudly in the library.",
+    "fact": "Birds sing loudly at dawn."
+  },
+  "movers-machine": {
+    "category": "technology",
+    "definition": "A device that does work with moving parts.",
+    "definitionVi": "Máy móc có bộ phận chuyển động.",
+    "hint": "Washing machines clean your clothes.",
+    "fact": "Simple machines include levers and wheels."
+  },
+  "movers-map": {
+    "category": "travel",
+    "definition": "A drawing that shows places and roads.",
+    "definitionVi": "Bản đồ chỉ đường và địa điểm.",
+    "hint": "Use one to find your way on a trip.",
+    "fact": "Treasure maps have X marks the spot."
+  },
+  "movers-market": {
+    "category": "places",
+    "definition": "An outdoor place where people sell food.",
+    "definitionVi": "Chợ ngoài trời bán thực phẩm.",
+    "hint": "Stalls sell fruit, fish, and bread.",
+    "fact": "Markets are busy and colourful on weekends."
+  },
+  "movers-matter": {
+    "category": "general",
+    "definition": "A problem or something wrong.",
+    "definitionVi": "Vấn đề, chuyện không ổn.",
+    "hint": "Ask \"What's the matter?\" when someone is sad.",
+    "fact": "Talking about a matter can make you feel better."
+  },
+  "movers-mean": {
+    "category": "general",
+    "definition": "to have a particular meaning.",
+    "definitionVi": "Có nghĩa là gì đó.",
+    "hint": "Red means stop on traffic lights.",
+    "fact": "A smile can mean you are happy."
+  },
+  "movers-message": {
+    "category": "technology",
+    "definition": "Words you send to someone by phone.",
+    "definitionVi": "Tin nhắn gửi qua điện thoại.",
+    "hint": "You type it and press send.",
+    "fact": "Messages can travel around the world in seconds."
+  },
+  "movers-milkshake": {
+    "category": "food",
+    "definition": "A cold sweet drink made with milk.",
+    "definitionVi": "Sữa lắc ngọt lạnh.",
+    "hint": "It comes in chocolate or strawberry flavour.",
+    "fact": "Milkshakes are popular at cafés and diners."
+  },
+  "movers-mistake": {
+    "category": "school",
+    "definition": "Something done wrong by accident.",
+    "definitionVi": "Lỗi sai, làm nhầm.",
+    "hint": "Cross it out and try again.",
+    "fact": "Everyone makes mistakes when learning."
+  },
+  "movers-model": {
+    "category": "general",
+    "definition": "A small copy of something real.",
+    "definitionVi": "Mô hình thu nhỏ của vật thật.",
+    "hint": "You might build a model aeroplane.",
+    "fact": "Model trains run on tiny tracks."
+  },
+  "movers-moon": {
+    "category": "nature",
+    "definition": "The round object that shines at night.",
+    "definitionVi": "Mặt trăng sáng ban đêm.",
+    "hint": "It changes shape during the month.",
+    "fact": "Astronauts walked on the moon in 1969."
+  },
+  "movers-more": {
+    "category": "general",
+    "definition": "A greater amount than before.",
+    "definitionVi": "Nhiều hơn, thêm nữa.",
+    "hint": "Can I have more juice, please?",
+    "fact": "Practice more and you improve faster."
+  },
+  "movers-most": {
+    "category": "general",
+    "definition": "The greatest amount of all.",
+    "definitionVi": "Nhiều nhất trong tất cả.",
+    "hint": "Most children love playing outside.",
+    "fact": "Most of Earth is covered by water."
+  },
+  "movers-mountain": {
+    "category": "nature",
+    "definition": "A very high hill with a peak.",
+    "definitionVi": "Núi cao có đỉnh.",
+    "hint": "Snow sits on top of tall mountains.",
+    "fact": "Mount Everest is the highest mountain on Earth."
+  },
+  "movers-moustache": {
+    "category": "body",
+    "definition": "Hair grown above a man's upper lip.",
+    "definitionVi": "Râu mép trên môi trên.",
+    "hint": "Some men shave it every morning.",
+    "fact": "Moustaches come in many shapes and sizes."
+  },
+  "movers-move": {
+    "category": "general",
+    "definition": "to change position or go somewhere.",
+    "definitionVi": "Di chuyển, chuyển chỗ.",
+    "hint": "Plants move slowly toward the sun.",
+    "fact": "Dance is a fun way to move your body."
+  },
+  "movers-movie": {
+    "category": "general",
+    "definition": "A story shown on a screen.",
+    "definitionVi": "Phim chiếu trên màn hình.",
+    "hint": "You watch it at the cinema.",
+    "fact": "Popcorn is a popular movie snack."
+  },
+  "movers-must": {
+    "category": "general",
+    "definition": "to have to do something; necessary.",
+    "definitionVi": "Phải làm; bắt buộc.",
+    "hint": "You must wear a uniform at some schools.",
+    "fact": "Must shows a strong rule or need."
+  }
+}

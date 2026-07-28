@@ -23,8 +23,7 @@ export interface VocabularyWord {
   phonetic: string
   definition: string
   definitionVi: string
-  sentence: string
-  sentences?: string[]
+  sentences: string[]
   category: string
   partOfSpeech: string
   choices: string[]
@@ -52,8 +51,7 @@ export interface QuizQuestion {
   phonetic: string
   definition: string
   definitionVi: string
-  sentence: string
-  sentences?: string[]
+  sentences: string[]
   category: string
   partOfSpeech: string
   choices: string[]
@@ -68,7 +66,7 @@ export interface VocabularySearchResult {
   word: string
   phonetic: string
   definition: string
-  sentence: string
+  sentences: string[]
   category: string
   partOfSpeech: string
   level: CambridgeLevel

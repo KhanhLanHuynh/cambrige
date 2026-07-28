@@ -1,0 +1,674 @@
+{
+  "flyers-gate": {
+    "category": "home",
+    "definition": "a door in a fence or wall, often outside",
+    "definitionVi": "cổng",
+    "hint": "Close the gate so pets cannot run onto the road.",
+    "fact": "Airports also have 'gates' where you get on your plane."
+  },
+  "flyers-geography": {
+    "category": "school",
+    "definition": "the school subject about countries, land, and maps",
+    "definitionVi": "môn địa lý",
+    "hint": "In geography, you learn about mountains, rivers, and countries.",
+    "fact": "Geography helps you understand maps of the whole world."
+  },
+  "flyers-get-to": {
+    "category": "travel",
+    "definition": "to arrive at a place",
+    "definitionVi": "đến được (một nơi nào đó)",
+    "hint": "Ask 'How do I get to the station?' for directions.",
+    "fact": "'Get to' is another way of saying 'arrive at'."
+  },
+  "flyers-glove": {
+    "category": "clothes",
+    "definition": "clothing that covers and warms your hand",
+    "definitionVi": "găng tay",
+    "hint": "Wear gloves to keep your hands warm in winter.",
+    "fact": "Gloves have a separate space for each finger and thumb."
+  },
+  "flyers-glue": {
+    "category": "school",
+    "definition": "a sticky liquid used to join things together",
+    "definitionVi": "keo dán",
+    "hint": "Use glue to stick paper shapes in art class.",
+    "fact": "Glue can be made from plants, animals, or chemicals."
+  },
+  "flyers-go-out": {
+    "category": "general",
+    "definition": "to leave your home to do something",
+    "definitionVi": "đi ra ngoài",
+    "hint": "We go out to play when the sun is shining.",
+    "fact": "'Go out' can also mean a light or fire stops burning."
+  },
+  "flyers-gold": {
+    "category": "general",
+    "definition": "having the colour of the shiny yellow metal gold",
+    "definitionVi": "màu vàng kim",
+    "hint": "The winner's medal is often gold.",
+    "fact": "Real gold never rusts, even after thousands of years."
+  },
+  "flyers-golf": {
+    "category": "sports",
+    "definition": "a game where you hit a small ball into holes",
+    "definitionVi": "môn gôn",
+    "hint": "You use a long stick called a club to play golf.",
+    "fact": "Golf is usually played outside on a large, grassy course."
+  },
+  "flyers-group": {
+    "category": "school",
+    "definition": "a number of people or things together",
+    "definitionVi": "nhóm",
+    "hint": "Work in a group of three for this activity.",
+    "fact": "Animals like wolves also live and hunt in groups."
+  },
+  "flyers-guess": {
+    "category": "school",
+    "definition": "an answer you give without being completely sure",
+    "definitionVi": "sự phỏng đoán",
+    "hint": "Have a guess even if you are not certain of the answer.",
+    "fact": "A good guess uses clues to make a smart choice."
+  },
+  "flyers-gym": {
+    "category": "places",
+    "definition": "a room or building with equipment for exercise",
+    "definitionVi": "phòng tập thể dục",
+    "hint": "You do sport and exercise in the school gym.",
+    "fact": "'Gym' is short for 'gymnasium'."
+  },
+  "flyers-half": {
+    "category": "school",
+    "definition": "one of two equal parts of something",
+    "definitionVi": "một nửa",
+    "hint": "Cut the apple in half to share it with a friend.",
+    "fact": "Two halves always make one whole thing."
+  },
+  "flyers-happen": {
+    "category": "general",
+    "definition": "to take place, or occur",
+    "definitionVi": "xảy ra",
+    "hint": "Ask 'What happened?' to find out about an event.",
+    "fact": "Stories often start by telling you what happened first."
+  },
+  "flyers-hard": {
+    "category": "school",
+    "definition": "difficult to do, or firm and solid",
+    "definitionVi": "khó, cứng",
+    "hint": "Some maths questions can be quite hard.",
+    "fact": "'Hard' can mean difficult, or it can mean not soft."
+  },
+  "flyers-hate": {
+    "category": "feelings",
+    "definition": "to dislike something very strongly",
+    "definitionVi": "ghét",
+    "hint": "Say 'I hate' only about things, not people, to be kind.",
+    "fact": "'Hate' is the strong opposite of 'love'."
+  },
+  "flyers-hear": {
+    "category": "body",
+    "definition": "to notice a sound with your ears",
+    "definitionVi": "nghe thấy",
+    "hint": "You hear music with your ears.",
+    "fact": "Bats can hear sounds that humans cannot hear at all."
+  },
+  "flyers-heavy": {
+    "category": "general",
+    "definition": "weighing a lot, not light",
+    "definitionVi": "nặng",
+    "hint": "A heavy bag is hard to carry far.",
+    "fact": "'Heavy' is the opposite of 'light'."
+  },
+  "flyers-high": {
+    "category": "nature",
+    "definition": "a long way up from the ground",
+    "definitionVi": "cao",
+    "hint": "Birds can fly very high in the sky.",
+    "fact": "'High' is the opposite of 'low'."
+  },
+  "flyers-hill": {
+    "category": "nature",
+    "definition": "a high area of land, smaller than a mountain",
+    "definitionVi": "quả đồi",
+    "hint": "It's fun to roll down a grassy hill.",
+    "fact": "A hill is like a small mountain."
+  },
+  "flyers-history": {
+    "category": "school",
+    "definition": "the school subject about things that happened long ago",
+    "definitionVi": "môn lịch sử",
+    "hint": "In history class, we learn about people from the past.",
+    "fact": "History helps us understand how the world became what it is today."
+  },
+  "flyers-hole": {
+    "category": "nature",
+    "definition": "an empty space or opening in something",
+    "definitionVi": "cái lỗ",
+    "hint": "Rabbits dig a hole to make their home.",
+    "fact": "Golfers try to hit the ball into a small hole."
+  },
+  "flyers-honey": {
+    "category": "food",
+    "definition": "a sweet, sticky food made by bees",
+    "definitionVi": "mật ong",
+    "hint": "Bears love to eat honey from a beehive.",
+    "fact": "Bees make honey from the nectar of flowers."
+  },
+  "flyers-hope": {
+    "category": "feelings",
+    "definition": "to want something to happen and think it might",
+    "definitionVi": "hy vọng",
+    "hint": "Say 'I hope it doesn't rain' before a picnic.",
+    "fact": "Hoping for good things can make you feel happy inside."
+  },
+  "flyers-horrible": {
+    "category": "feelings",
+    "definition": "very unpleasant or bad",
+    "definitionVi": "kinh khủng, tồi tệ",
+    "hint": "A horrible smell makes you want to hold your nose.",
+    "fact": "'Horrible' is a strong way to say something is bad."
+  },
+  "flyers-hotel": {
+    "category": "places",
+    "definition": "a building where people pay to stay the night",
+    "definitionVi": "khách sạn",
+    "hint": "Families often stay in a hotel when they travel.",
+    "fact": "Some hotels even have swimming pools for guests."
+  },
+  "flyers-hour": {
+    "category": "time",
+    "definition": "a unit of time equal to sixty minutes",
+    "definitionVi": "giờ (60 phút)",
+    "hint": "There are twenty-four hours in one day.",
+    "fact": "A short film usually lasts about one or two hours."
+  },
+  "flyers-how-long": {
+    "category": "time",
+    "definition": "used to ask about the amount of time something takes",
+    "definitionVi": "bao lâu",
+    "hint": "Ask 'How long is the film?' to find out its length.",
+    "fact": "'How long' can ask about time or about size too."
+  },
+  "flyers-hurry": {
+    "category": "general",
+    "definition": "to move or act quickly",
+    "definitionVi": "vội vàng, nhanh lên",
+    "hint": "Hurry up so you are not late for the bus!",
+    "fact": "When you hurry, your heart beats a little faster."
+  },
+  "flyers-husband": {
+    "category": "people",
+    "definition": "the man someone is married to",
+    "definitionVi": "chồng",
+    "hint": "A husband and wife are a married couple.",
+    "fact": "A woman's husband is part of her close family."
+  },
+  "flyers-important": {
+    "category": "school",
+    "definition": "very valuable or needing serious attention",
+    "definitionVi": "quan trọng",
+    "hint": "Listening carefully in class is important.",
+    "fact": "Remembering important dates, like birthdays, makes people happy."
+  },
+  "flyers-improve": {
+    "category": "school",
+    "definition": "to become better, or make something better",
+    "definitionVi": "cải thiện, tiến bộ",
+    "hint": "Practising every day helps you improve at reading.",
+    "fact": "Everyone can improve a skill with enough practice."
+  },
+  "flyers-information": {
+    "category": "school",
+    "definition": "facts or details about something",
+    "definitionVi": "thông tin",
+    "hint": "Books and the internet are full of useful information.",
+    "fact": "Libraries are great places to find information for a project."
+  },
+  "flyers-insect": {
+    "category": "animals",
+    "definition": "a small animal with six legs, like an ant or bee",
+    "definitionVi": "côn trùng",
+    "hint": "Ants, bees, and butterflies are all insects.",
+    "fact": "Insects are the largest group of animals on Earth."
+  },
+  "flyers-instead": {
+    "category": "general",
+    "definition": "in place of something else",
+    "definitionVi": "thay vì",
+    "hint": "Have juice instead of soda if you want something healthier.",
+    "fact": "'Instead' shows one thing replaces another."
+  },
+  "flyers-instrument": {
+    "category": "general",
+    "definition": "an object used to make music",
+    "definitionVi": "nhạc cụ",
+    "hint": "A piano, guitar, and drum are all instruments.",
+    "fact": "Learning to play an instrument takes lots of practice."
+  },
+  "flyers-interested": {
+    "category": "feelings",
+    "definition": "wanting to know or learn more about something",
+    "definitionVi": "quan tâm, thích thú",
+    "hint": "Say 'I'm interested in space' to share what you enjoy.",
+    "fact": "Being interested in a topic makes learning much more fun."
+  },
+  "flyers-interesting": {
+    "category": "feelings",
+    "definition": "holding your attention because it is enjoyable to learn about",
+    "definitionVi": "thú vị",
+    "hint": "A good book is often interesting from the very first page.",
+    "fact": "Interesting facts are fun to share with friends."
+  },
+  "flyers-invent": {
+    "category": "technology",
+    "definition": "to design or make something new for the first time",
+    "definitionVi": "phát minh",
+    "hint": "Thomas Edison helped invent the light bulb.",
+    "fact": "Children can invent new games with simple things at home."
+  },
+  "flyers-invitation": {
+    "category": "general",
+    "definition": "a card or message asking someone to an event",
+    "definitionVi": "thư mời",
+    "hint": "You send an invitation to ask friends to your party.",
+    "fact": "An invitation usually tells you the time, date, and place."
+  },
+  "flyers-jam": {
+    "category": "food",
+    "definition": "a sweet spread made from fruit and sugar",
+    "definitionVi": "mứt",
+    "hint": "You spread jam on toast or bread.",
+    "fact": "Jam is made by cooking fruit with a lot of sugar."
+  },
+  "flyers-job": {
+    "category": "jobs",
+    "definition": "the work a person does to earn money",
+    "definitionVi": "công việc, nghề nghiệp",
+    "hint": "Ask 'What job do you want?' to talk about the future.",
+    "fact": "There are thousands of different jobs people can do."
+  },
+  "flyers-join-a-club": {
+    "category": "school",
+    "definition": "to become a member of a club or group",
+    "definitionVi": "gia nhập câu lạc bộ",
+    "hint": "You can join a club to make new friends with the same hobby.",
+    "fact": "Joining a club is a fun way to try a new activity."
+  },
+  "flyers-journalist": {
+    "category": "jobs",
+    "definition": "a person who writes news stories",
+    "definitionVi": "nhà báo",
+    "hint": "A journalist asks questions and writes about what happens.",
+    "fact": "Journalists work for newspapers, TV, and websites."
+  },
+  "flyers-journey": {
+    "category": "travel",
+    "definition": "the act of travelling from one place to another",
+    "definitionVi": "chuyến đi, hành trình",
+    "hint": "A journey can be short, like to school, or very long.",
+    "fact": "'Journey' can describe a trip by car, plane, boat, or on foot."
+  },
+  "flyers-just": {
+    "category": "general",
+    "definition": "exactly, or only a moment ago",
+    "definitionVi": "vừa mới, chỉ",
+    "hint": "Say 'I just finished' to mean you finished a moment ago.",
+    "fact": "'Just' can mean 'only', 'exactly', or 'a moment ago'."
+  },
+  "flyers-keep": {
+    "category": "general",
+    "definition": "to have or hold something and not give it away",
+    "definitionVi": "giữ",
+    "hint": "You can keep your favourite drawing on your wall.",
+    "fact": "'Keep' can also mean to continue doing something."
+  },
+  "flyers-key": {
+    "category": "home",
+    "definition": "a metal tool used to lock or unlock a door",
+    "definitionVi": "chìa khóa",
+    "hint": "You need a key to open a locked door.",
+    "fact": "The first metal keys were used thousands of years ago."
+  },
+  "flyers-kilometre": {
+    "category": "travel",
+    "definition": "a unit used to measure distance",
+    "definitionVi": "kilômét (đơn vị đo khoảng cách)",
+    "hint": "A kilometre is about the length of ten football pitches.",
+    "fact": "There are one thousand metres in one kilometre."
+  },
+  "flyers-king": {
+    "category": "people",
+    "definition": "a man who rules a country, often born into the role",
+    "definitionVi": "vua",
+    "hint": "A king often wears a crown and lives in a palace.",
+    "fact": "Some countries still have a king or queen today."
+  },
+  "flyers-knee": {
+    "category": "body",
+    "definition": "the joint in the middle of your leg",
+    "definitionVi": "đầu gối",
+    "hint": "You bend your knee when you sit down.",
+    "fact": "Your knee helps you walk, run, and jump."
+  },
+  "flyers-knife": {
+    "category": "food",
+    "definition": "a tool with a sharp blade used for cutting",
+    "definitionVi": "con dao",
+    "hint": "Always ask an adult before using a sharp knife.",
+    "fact": "A knife, fork, and spoon are the main tools we eat with."
+  },
+  "flyers-land": {
+    "category": "travel",
+    "definition": "to come down and arrive on the ground after flying",
+    "definitionVi": "hạ cánh, đáp xuống",
+    "hint": "The plane will land at the airport soon.",
+    "fact": "'Land' is the opposite of 'take off'."
+  },
+  "flyers-language": {
+    "category": "school",
+    "definition": "the words a group of people use to talk",
+    "definitionVi": "ngôn ngữ",
+    "hint": "English is the language you are learning right now.",
+    "fact": "There are thousands of different languages spoken around the world."
+  },
+  "flyers-large": {
+    "category": "general",
+    "definition": "big in size or amount",
+    "definitionVi": "lớn, to",
+    "hint": "An elephant is a very large animal.",
+    "fact": "'Large' means almost the same as 'big'."
+  },
+  "flyers-late": {
+    "category": "time",
+    "definition": "after the expected or usual time",
+    "definitionVi": "muộn, trễ",
+    "hint": "Set an alarm so you are not late for school.",
+    "fact": "'Late' is the opposite of 'early'."
+  },
+  "flyers-later": {
+    "category": "time",
+    "definition": "at a time after now",
+    "definitionVi": "sau này, lát nữa",
+    "hint": "Say 'see you later' when you will meet again soon.",
+    "fact": "'Later' talks about the future, even if it's just in a few minutes."
+  },
+  "flyers-lazy": {
+    "category": "feelings",
+    "definition": "not wanting to work or be active",
+    "definitionVi": "lười biếng",
+    "hint": "It is easy to feel lazy on a rainy day.",
+    "fact": "Even lazy days can be good for resting your body."
+  },
+  "flyers-leave": {
+    "category": "travel",
+    "definition": "to go away from a place",
+    "definitionVi": "rời đi",
+    "hint": "We leave for school at eight o'clock.",
+    "fact": "'Leave' can also mean to not take something with you."
+  },
+  "flyers-left": {
+    "category": "places",
+    "definition": "on the side opposite to the right",
+    "definitionVi": "bên trái",
+    "hint": "Most people write with their right hand, but some use their left.",
+    "fact": "'Left' is the opposite of 'right'."
+  },
+  "flyers-let": {
+    "category": "general",
+    "definition": "to allow someone to do something",
+    "definitionVi": "cho phép",
+    "hint": "Ask 'Please let me try' when you want a turn.",
+    "fact": "'Let's' is short for 'let us', used to suggest doing something."
+  },
+  "flyers-lie": {
+    "category": "body",
+    "definition": "to rest flat on a surface, like a bed",
+    "definitionVi": "nằm",
+    "hint": "You lie down on your bed when you are tired.",
+    "fact": "'Lie' can also mean to say something that is not true."
+  },
+  "flyers-lift-ride": {
+    "category": "travel",
+    "definition": "a machine that carries people up or down in a building",
+    "definitionVi": "thang máy",
+    "hint": "Take the lift instead of the stairs to a high floor.",
+    "fact": "In American English, a lift is usually called an 'elevator'."
+  },
+  "flyers-light": {
+    "category": "general",
+    "definition": "not heavy, or having a lot of brightness",
+    "definitionVi": "nhẹ, sáng",
+    "hint": "A feather is very light.",
+    "fact": "'Light' can describe weight or brightness."
+  },
+  "flyers-look-after": {
+    "category": "health",
+    "definition": "to take care of someone or something",
+    "definitionVi": "chăm sóc",
+    "hint": "You look after a pet by feeding it every day.",
+    "fact": "Looking after younger children shows kindness and responsibility."
+  },
+  "flyers-look-like": {
+    "category": "body",
+    "definition": "to have a similar appearance to someone or something",
+    "definitionVi": "trông giống như",
+    "hint": "Say 'she looks like her mother' to compare appearances.",
+    "fact": "Twins often look exactly like each other."
+  },
+  "flyers-lovely": {
+    "category": "feelings",
+    "definition": "very nice or beautiful",
+    "definitionVi": "dễ thương, đáng yêu",
+    "hint": "Say 'what a lovely day' when the weather is nice.",
+    "fact": "'Lovely' is a warm, friendly way to say something is nice."
+  },
+  "flyers-low": {
+    "category": "nature",
+    "definition": "not high, close to the ground",
+    "definitionVi": "thấp",
+    "hint": "The ball rolled under the low table.",
+    "fact": "'Low' is the opposite of 'high'."
+  },
+  "flyers-lucky": {
+    "category": "feelings",
+    "definition": "having good things happen by chance",
+    "definitionVi": "may mắn",
+    "hint": "Say 'you're so lucky!' when a good surprise happens.",
+    "fact": "Some people think a four-leaf clover brings good luck."
+  },
+  "flyers-magazine": {
+    "category": "school",
+    "definition": "a thin book with stories and pictures, published often",
+    "definitionVi": "tạp chí",
+    "hint": "You can read a magazine about animals or sport.",
+    "fact": "New magazines come out every week or every month."
+  },
+  "flyers-make-sure": {
+    "category": "school",
+    "definition": "to check that something is definitely true or done",
+    "definitionVi": "đảm bảo, chắc chắn",
+    "hint": "Make sure you have your bag before you leave.",
+    "fact": "'Make sure' helps you avoid making silly mistakes."
+  },
+  "flyers-manager": {
+    "category": "jobs",
+    "definition": "a person who is in charge of a business or team",
+    "definitionVi": "người quản lý",
+    "hint": "A shop manager makes sure everything runs smoothly.",
+    "fact": "A football team also has a manager who plans their games."
+  },
+  "flyers-married": {
+    "category": "people",
+    "definition": "joined to someone as husband and wife",
+    "definitionVi": "đã kết hôn",
+    "hint": "Married people often wear a ring on their finger.",
+    "fact": "A wedding is the special day when two people get married."
+  },
+  "flyers-match-football": {
+    "category": "sports",
+    "definition": "a game of football played between two teams",
+    "definitionVi": "trận đấu bóng đá",
+    "hint": "Two teams play against each other in a football match.",
+    "fact": "A football match usually lasts ninety minutes."
+  },
+  "flyers-maths": {
+    "category": "school",
+    "definition": "the school subject about numbers and shapes",
+    "definitionVi": "môn toán",
+    "hint": "In maths, you learn to add, subtract, and count.",
+    "fact": "'Maths' is short for 'mathematics'."
+  },
+  "flyers-may": {
+    "category": "general",
+    "definition": "used to ask for or give permission",
+    "definitionVi": "có thể (xin phép)",
+    "hint": "Say 'May I go, please?' to ask politely.",
+    "fact": "'May' is a polite word for asking permission."
+  },
+  "flyers-meal": {
+    "category": "food",
+    "definition": "the food eaten at a certain time, like lunch",
+    "definitionVi": "bữa ăn",
+    "hint": "Breakfast, lunch, and dinner are all meals.",
+    "fact": "Many families enjoy eating a meal together."
+  },
+  "flyers-mechanic": {
+    "category": "jobs",
+    "definition": "a person who repairs machines, especially cars",
+    "definitionVi": "thợ máy",
+    "hint": "A mechanic fixes cars when they stop working.",
+    "fact": "Mechanics use special tools to find and fix problems."
+  },
+  "flyers-medicine": {
+    "category": "health",
+    "definition": "something you take to help you feel better when ill",
+    "definitionVi": "thuốc",
+    "hint": "A doctor tells you what medicine to take when you are sick.",
+    "fact": "Some medicine comes as a tablet, and some as a liquid."
+  },
+  "flyers-meet": {
+    "category": "people",
+    "definition": "to come together with someone",
+    "definitionVi": "gặp gỡ",
+    "hint": "Say 'nice to meet you' when you meet someone new.",
+    "fact": "You might meet a new friend on your first day of school."
+  },
+  "flyers-meeting": {
+    "category": "jobs",
+    "definition": "when people come together to talk about something",
+    "definitionVi": "cuộc họp",
+    "hint": "Grown-ups often have a meeting at work to make plans.",
+    "fact": "Meetings help people share ideas and make decisions together."
+  },
+  "flyers-member": {
+    "category": "school",
+    "definition": "a person who belongs to a group or club",
+    "definitionVi": "thành viên",
+    "hint": "Every member of the club gets a special badge.",
+    "fact": "You become a member when you officially join a group."
+  },
+  "flyers-metal": {
+    "category": "general",
+    "definition": "made from a hard, shiny material like iron or gold",
+    "definitionVi": "bằng kim loại",
+    "hint": "A metal spoon feels cold and hard.",
+    "fact": "Metal can be melted and shaped into many different things."
+  },
+  "flyers-midday": {
+    "category": "time",
+    "definition": "twelve o'clock in the middle of the day",
+    "definitionVi": "giữa trưa, 12 giờ trưa",
+    "hint": "The sun is highest in the sky at midday.",
+    "fact": "Midday is also called 'noon'."
+  },
+  "flyers-middle": {
+    "category": "places",
+    "definition": "the point in the centre of something",
+    "definitionVi": "chính giữa",
+    "hint": "Sit in the middle of the row to see the whole board.",
+    "fact": "Wednesday is right in the middle of the school week."
+  },
+  "flyers-midnight": {
+    "category": "time",
+    "definition": "twelve o'clock in the middle of the night",
+    "definitionVi": "nửa đêm, 12 giờ đêm",
+    "hint": "Some people stay up until midnight on New Year's Eve.",
+    "fact": "Midnight is the very start of a brand new day."
+  },
+  "flyers-might": {
+    "category": "general",
+    "definition": "used to say something is possibly true or could happen",
+    "definitionVi": "có thể (không chắc chắn)",
+    "hint": "Say 'it might rain' when you are not sure about the weather.",
+    "fact": "'Might' shows less certainty than 'will'."
+  },
+  "flyers-million": {
+    "category": "school",
+    "definition": "the number 1,000,000",
+    "definitionVi": "một triệu",
+    "hint": "A million is a thousand thousands.",
+    "fact": "If you counted to a million, it would take many days!"
+  },
+  "flyers-mind": {
+    "category": "feelings",
+    "definition": "to feel bothered or upset by something",
+    "definitionVi": "phiền lòng, để ý",
+    "hint": "Ask 'Do you mind if I sit here?' to be polite.",
+    "fact": "'I don't mind' means you are happy either way."
+  },
+  "flyers-minute": {
+    "category": "time",
+    "definition": "a unit of time equal to sixty seconds",
+    "definitionVi": "phút",
+    "hint": "There are sixty minutes in one hour.",
+    "fact": "It only takes a minute to brush your teeth!"
+  },
+  "flyers-missing": {
+    "category": "school",
+    "definition": "not in the place where it should be",
+    "definitionVi": "bị mất, bị thiếu",
+    "hint": "Look under the bed for your missing sock.",
+    "fact": "Posters sometimes ask for help finding a missing pet."
+  },
+  "flyers-mix": {
+    "category": "food",
+    "definition": "to combine different things together",
+    "definitionVi": "trộn",
+    "hint": "Mix blue and yellow paint to make green.",
+    "fact": "You mix flour, eggs, and sugar to make a cake."
+  },
+  "flyers-money": {
+    "category": "general",
+    "definition": "coins and notes used to buy things",
+    "definitionVi": "tiền",
+    "hint": "You need money to buy things at a shop.",
+    "fact": "Money can be coins, paper notes, or even numbers on a card."
+  },
+  "flyers-month": {
+    "category": "time",
+    "definition": "one of the twelve parts of a year",
+    "definitionVi": "tháng",
+    "hint": "There are twelve months in a year.",
+    "fact": "February is the shortest month of the year."
+  },
+  "flyers-motorway": {
+    "category": "travel",
+    "definition": "a wide road for cars to travel fast between cities",
+    "definitionVi": "đường cao tốc",
+    "hint": "Cars drive fast on a motorway between towns.",
+    "fact": "Motorways usually have several lanes for traffic."
+  },
+  "flyers-much": {
+    "category": "school",
+    "definition": "used to ask about or describe a large amount",
+    "definitionVi": "nhiều",
+    "hint": "Ask 'How much does it cost?' when shopping.",
+    "fact": "'Much' is usually used with things you cannot count, like water."
+  },
+  "flyers-museum": {
+    "category": "places",
+    "definition": "a building where old and interesting objects are shown",
+    "definitionVi": "bảo tàng",
+    "hint": "You can see dinosaur bones in a museum.",
+    "fact": "Some museums keep objects that are thousands of years old."
+  }
+}

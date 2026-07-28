@@ -8,7 +8,7 @@ import { useQuestStore } from '../../stores'
 import type { Learner, QuizAnswerResult, QuizQuestion, QuizSession } from '../../types'
 
 function pickExampleSentence(word: QuizQuestion) {
-  const pool = word.sentences?.length ? word.sentences : word.sentence ? [word.sentence] : []
+  const pool = word.sentences
   if (!pool.length) return ''
   return pool[Math.floor(Math.random() * pool.length)] ?? ''
 }
@@ -150,7 +150,7 @@ export function QuizPage({ learner, navigate }: { learner: Learner; navigate: (p
               </span>
             </div>
             {revealed ? (
-              <div className="sentence"><small>EXAMPLE SENTENCE</small><p>{exampleSentence || word.sentence}</p></div>
+              <div className="sentence"><small>EXAMPLE SENTENCE</small><p>{exampleSentence || word.sentences[0] || ''}</p></div>
             ) : null}
           </section>
           <div className="answers" aria-label="Answer choices">

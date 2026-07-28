@@ -40,7 +40,6 @@ export const ACHIEVEMENTS: AchievementDef[] = [
   { id: 'daily_goal', icon: '✅', label: 'Goal Getter', description: 'Reach your daily word goal' },
   { id: 'daily_goal_7', icon: '📅', label: 'Goal Streak', description: 'Reach your daily goal 7 days in a row' },
   { id: 'quest_first', icon: '📜', label: 'Quest Starter', description: 'Claim your first daily quest reward' },
-  { id: 'quest_bonus', icon: '🏅', label: 'Daily Champion', description: 'Claim the all-quests bonus in one day' },
   { id: 'gems_100', icon: '💎', label: 'Gem Gatherer', description: 'Earn 100 gems' },
   { id: 'gems_500', icon: '💰', label: 'Treasure Hunter', description: 'Earn 500 gems' },
   { id: 'gift_first', icon: '🎁', label: 'Wish Granted', description: 'Redeem your first gift' },

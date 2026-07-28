@@ -1,0 +1,1087 @@
+{
+  "starters-new": {
+    "category": "general",
+    "definition": "Not old; made or bought recently.",
+    "definitionVi": "Mới, chưa cũ.",
+    "hint": "A new toy still has its tag.",
+    "fact": "Baby animals are new to the world."
+  },
+  "starters-nice": {
+    "category": "feelings",
+    "definition": "Kind, pleasant, or enjoyable.",
+    "definitionVi": "Tốt, dễ thương, vui vẻ.",
+    "hint": "Say 'Have a nice day!' to be friendly.",
+    "fact": "Nice people smile and help others."
+  },
+  "starters-night": {
+    "category": "time",
+    "definition": "The dark time when you sleep.",
+    "definitionVi": "Ban đêm, khi trời tối.",
+    "hint": "The moon and stars come out at night.",
+    "fact": "Owls are awake at night."
+  },
+  "starters-no": {
+    "category": "general",
+    "definition": "A word that means not yes.",
+    "definitionVi": "Không — phủ nhận, không đồng ý.",
+    "hint": "Shake your head when you say no.",
+    "fact": "Saying no can keep you safe."
+  },
+  "starters-nose": {
+    "category": "body",
+    "definition": "The part of your face you smell with.",
+    "definitionVi": "Mũi — dùng để ngửi mùi.",
+    "hint": "It is between your two eyes.",
+    "fact": "Your nose can smell thousands of scents."
+  },
+  "starters-not": {
+    "category": "general",
+    "definition": "Shows something is untrue or wrong.",
+    "definitionVi": "Không phải, không làm.",
+    "hint": "I am not sad means you feel fine.",
+    "fact": "Not is a small word with big meaning."
+  },
+  "starters-now": {
+    "category": "time",
+    "definition": "At this moment, right here.",
+    "definitionVi": "Bây giờ, lúc này.",
+    "hint": "Do it now means do not wait.",
+    "fact": "Clocks help us know what time it is now."
+  },
+  "starters-number": {
+    "category": "school",
+    "definition": "A sign like 1, 2, or 3 for counting.",
+    "definitionVi": "Con số dùng để đếm.",
+    "hint": "Your age is a number.",
+    "fact": "Zero is a number that means none."
+  },
+  "starters-ok": {
+    "category": "general",
+    "definition": "Fine, good, or all right.",
+    "definitionVi": "Được rồi, ổn, không sao.",
+    "hint": "Thumbs up often means OK.",
+    "fact": "OK is understood in many countries."
+  },
+  "starters-old": {
+    "category": "people",
+    "definition": "Having lived for many years.",
+    "definitionVi": "Già, nhiều tuổi.",
+    "hint": "Grandpa and Grandma are old.",
+    "fact": "Old trees can be hundreds of years old."
+  },
+  "starters-onion": {
+    "category": "food",
+    "definition": "A round vegetable that makes you cry.",
+    "definitionVi": "Củ hành — ăn trong món ăn.",
+    "hint": "It has layers like a ball.",
+    "fact": "Onions grow under the ground."
+  },
+  "starters-open": {
+    "category": "general",
+    "definition": "Not closed; allowing people to enter.",
+    "definitionVi": "Mở, không đóng cửa.",
+    "hint": "The shop is open when you can go in.",
+    "fact": "Open doors let fresh air come in."
+  },
+  "starters-orange": {
+    "category": "general",
+    "definition": "A colour between red and yellow.",
+    "definitionVi": "Màu cam.",
+    "hint": "Carrots and pumpkins can be orange.",
+    "fact": "Orange is named after the fruit."
+  },
+  "starters-page": {
+    "category": "school",
+    "definition": "One side of paper in a book.",
+    "definitionVi": "Trang sách, một mặt giấy.",
+    "hint": "Turn the page to keep reading.",
+    "fact": "Books have many pages inside."
+  },
+  "starters-paint": {
+    "category": "school",
+    "definition": "Coloured liquid used for art.",
+    "definitionVi": "Sơn hoặc màu vẽ.",
+    "hint": "Artists use paint on paper.",
+    "fact": "Red and blue paint make purple."
+  },
+  "starters-painting": {
+    "category": "school",
+    "definition": "A picture made with paint.",
+    "definitionVi": "Bức tranh vẽ bằng màu.",
+    "hint": "You might hang one on the wall.",
+    "fact": "Some famous paintings are very old."
+  },
+  "starters-paper": {
+    "category": "school",
+    "definition": "Thin sheets you write or draw on.",
+    "definitionVi": "Giấy để viết hoặc vẽ.",
+    "hint": "Origami folds paper into shapes.",
+    "fact": "Paper comes from trees."
+  },
+  "starters-park": {
+    "category": "places",
+    "definition": "A green outdoor place to play.",
+    "definitionVi": "Công viên — nơi chơi ngoài trời.",
+    "hint": "Swings and slides are in a park.",
+    "fact": "Parks have trees, grass, and benches."
+  },
+  "starters-part": {
+    "category": "general",
+    "definition": "A piece of something bigger.",
+    "definitionVi": "Một phần của cái gì đó.",
+    "hint": "Your hand is part of your body.",
+    "fact": "A puzzle has many parts that fit together."
+  },
+  "starters-pea": {
+    "category": "food",
+    "definition": "A small round green vegetable.",
+    "definitionVi": "Hạt đậu xanh nhỏ, tròn.",
+    "hint": "Peas grow inside a pod.",
+    "fact": "Peas are good for your body."
+  },
+  "starters-pear": {
+    "category": "food",
+    "definition": "A sweet fruit that is narrow at the top.",
+    "definitionVi": "Quả lê — ngọt, hình thon.",
+    "hint": "It is softer than an apple.",
+    "fact": "Pears can be green or yellow."
+  },
+  "starters-pen": {
+    "category": "school",
+    "definition": "A tool that writes with ink.",
+    "definitionVi": "Bút mực để viết.",
+    "hint": "Blue or black ink comes from a pen.",
+    "fact": "Ballpoint pens were invented long ago."
+  },
+  "starters-pencil": {
+    "category": "school",
+    "definition": "A writing tool with lead inside.",
+    "definitionVi": "Bút chì để viết và vẽ.",
+    "hint": "You can erase pencil marks.",
+    "fact": "Pencil lead is made from graphite."
+  },
+  "starters-person": {
+    "category": "people",
+    "definition": "A human being — a man, woman, or child.",
+    "definitionVi": "Con người — ai cũng là một person.",
+    "hint": "Every person has a name.",
+    "fact": "There are billions of people on Earth."
+  },
+  "starters-pet": {
+    "category": "animals",
+    "definition": "An animal you keep at home.",
+    "definitionVi": "Thú cưng nuôi trong nhà.",
+    "hint": "Dogs and cats are common pets.",
+    "fact": "Pets need food, water, and love."
+  },
+  "starters-phone": {
+    "category": "technology",
+    "definition": "A device for talking to people far away.",
+    "definitionVi": "Điện thoại để gọi và nhắn tin.",
+    "hint": "You tap the screen to call Mum.",
+    "fact": "Phones can take photos too."
+  },
+  "starters-photo": {
+    "category": "technology",
+    "definition": "A picture taken with a camera.",
+    "definitionVi": "Ảnh chụp bằng máy ảnh.",
+    "hint": "Family photos go in albums.",
+    "fact": "The first photos were black and white."
+  },
+  "starters-piano": {
+    "category": "general",
+    "definition": "A large musical instrument with black and white keys.",
+    "definitionVi": "Đàn piano — nhạc cụ có phím.",
+    "hint": "You press keys to play tunes.",
+    "fact": "A piano can play very loud or soft."
+  },
+  "starters-pick-up": {
+    "category": "general",
+    "definition": "to lift something from the ground.",
+    "definitionVi": "Nhặt lên hoặc bế lên.",
+    "hint": "Pick up your toys from the floor.",
+    "fact": "You pick up a pencil to write."
+  },
+  "starters-picture": {
+    "category": "school",
+    "definition": "A drawing or photo you can look at.",
+    "definitionVi": "Hình ảnh hoặc bức tranh.",
+    "hint": "Books for kids have lots of pictures.",
+    "fact": "A picture can tell a story without words."
+  },
+  "starters-pie": {
+    "category": "food",
+    "definition": "Food baked in a round pastry crust.",
+    "definitionVi": "Bánh pie — nhân bọc trong vỏ bánh.",
+    "hint": "Apple pie is a famous dessert.",
+    "fact": "Pies can be sweet or savoury."
+  },
+  "starters-pineapple": {
+    "category": "food",
+    "definition": "A big tropical fruit with spiky skin.",
+    "definitionVi": "Quả dứa — to, vỏ gai, vị ngọt.",
+    "hint": "It has a leafy top like a crown.",
+    "fact": "Pineapples grow in hot countries."
+  },
+  "starters-pink": {
+    "category": "general",
+    "definition": "A light colour like a flower.",
+    "definitionVi": "Màu hồng.",
+    "hint": "Some pigs and flamingos look pink.",
+    "fact": "Pink is made by mixing red and white."
+  },
+  "starters-pl": {
+    "category": "general",
+    "definition": "A polite word when you ask for something.",
+    "definitionVi": "Xin vui lòng — nói lịch sự khi nhờ.",
+    "hint": "Say please when you want help.",
+    "fact": "Please and thank you are magic words."
+  },
+  "starters-plane": {
+    "category": "travel",
+    "definition": "A flying vehicle with wings.",
+    "definitionVi": "Máy bay — phương tiện bay trên trời.",
+    "hint": "Planes take off from an airport.",
+    "fact": "Big planes can carry hundreds of people."
+  },
+  "starters-play": {
+    "category": "general",
+    "definition": "to have fun with games or toys.",
+    "definitionVi": "Chơi, vui chơi.",
+    "hint": "Children play in the playground.",
+    "fact": "Playing helps you learn and make friends."
+  },
+  "starters-playground": {
+    "category": "places",
+    "definition": "An outdoor area with swings and slides.",
+    "definitionVi": "Sân chơi ở trường hoặc công viên.",
+    "hint": "You run and climb here at break time.",
+    "fact": "Playgrounds are built for safe fun."
+  },
+  "starters-point": {
+    "category": "general",
+    "definition": "to show something with your finger.",
+    "definitionVi": "Chỉ tay vào cái gì đó.",
+    "hint": "Point at the picture on the board.",
+    "fact": "Pointing helps others see what you mean."
+  },
+  "starters-polar-bear": {
+    "category": "animals",
+    "definition": "A big white bear that lives on ice.",
+    "definitionVi": "Gấu Bắc Cực — gấu trắng sống ở Bắc Cực.",
+    "hint": "It swims in icy cold water.",
+    "fact": "Polar bears have thick fur to stay warm."
+  },
+  "starters-poster": {
+    "category": "school",
+    "definition": "A big picture put up on a wall.",
+    "definitionVi": "Áp phích treo trên tường.",
+    "hint": "Classrooms have posters with letters.",
+    "fact": "Posters can teach or decorate a room."
+  },
+  "starters-potato": {
+    "category": "food",
+    "definition": "A brown vegetable that grows underground.",
+    "definitionVi": "Củ khoai tây.",
+    "hint": "Chips and fries are made from potatoes.",
+    "fact": "Potatoes can be baked, boiled, or mashed."
+  },
+  "starters-pron-here": {
+    "category": "general",
+    "definition": "In this place, where you are now.",
+    "definitionVi": "Ở đây, tại chỗ này.",
+    "hint": "Come here means come to this spot.",
+    "fact": "Here and there are place words."
+  },
+  "starters-pron-hit": {
+    "category": "sports",
+    "definition": "to strike something with force.",
+    "definitionVi": "Đánh trúng, va vào cái gì.",
+    "hint": "Hit the ball with a bat.",
+    "fact": "In tennis you hit the ball over the net."
+  },
+  "starters-purple": {
+    "category": "general",
+    "definition": "A colour made from red and blue.",
+    "definitionVi": "Màu tím.",
+    "hint": "Grapes and some flowers are purple.",
+    "fact": "Purple was once a royal colour."
+  },
+  "starters-put": {
+    "category": "general",
+    "definition": "to place something somewhere.",
+    "definitionVi": "Đặt, để cái gì ở đâu.",
+    "hint": "Put your bag on the chair.",
+    "fact": "Put your books away after class."
+  },
+  "starters-question": {
+    "category": "school",
+    "definition": "Words you ask when you want an answer.",
+    "definitionVi": "Câu hỏi khi muốn biết đáp án.",
+    "hint": "Questions often start with what or where.",
+    "fact": "A question mark (?) ends a question."
+  },
+  "starters-radio": {
+    "category": "technology",
+    "definition": "A device that plays music and news.",
+    "definitionVi": "Đài radio phát nhạc và tin tức.",
+    "hint": "You turn a knob to find a station.",
+    "fact": "Radios use invisible waves to send sound."
+  },
+  "starters-read": {
+    "category": "school",
+    "definition": "to look at words and understand them.",
+    "definitionVi": "Đọc sách hoặc chữ.",
+    "hint": "Read a story before bedtime.",
+    "fact": "Reading every day makes you smarter."
+  },
+  "starters-really": {
+    "category": "general",
+    "definition": "Very much or truly.",
+    "definitionVi": "Thật sự, rất.",
+    "hint": "I really like ice cream!",
+    "fact": "Really adds strong feeling to a sentence."
+  },
+  "starters-red": {
+    "category": "general",
+    "definition": "The colour of apples and fire trucks.",
+    "definitionVi": "Màu đỏ.",
+    "hint": "Stop signs are red.",
+    "fact": "Red is the first colour in a rainbow."
+  },
+  "starters-rice": {
+    "category": "food",
+    "definition": "Small white grains eaten with meals.",
+    "definitionVi": "Cơm, gạo — thức ăn chính.",
+    "hint": "Many Asian countries eat rice daily.",
+    "fact": "Rice grows in wet fields called paddies."
+  },
+  "starters-ride": {
+    "category": "travel",
+    "definition": "to sit on and travel by bike or horse.",
+    "definitionVi": "Cưỡi hoặc đi bằng xe đạp, ngựa.",
+    "hint": "I ride my bike to the park.",
+    "fact": "Riding a bike keeps you fit."
+  },
+  "starters-right": {
+    "category": "general",
+    "definition": "Correct, or the opposite of left.",
+    "definitionVi": "Đúng, hoặc bên phải.",
+    "hint": "Your right hand is usually stronger.",
+    "fact": "Right also means the correct answer."
+  },
+  "starters-robot": {
+    "category": "technology",
+    "definition": "A machine that can move and do jobs.",
+    "definitionVi": "Robot — máy móc biết làm việc.",
+    "hint": "Some robots look like people.",
+    "fact": "Robots help build cars in factories."
+  },
+  "starters-room": {
+    "category": "home",
+    "definition": "A space inside a house with walls.",
+    "definitionVi": "Căn phòng trong nhà.",
+    "hint": "Your bedroom is your own room.",
+    "fact": "Houses have rooms for sleeping and eating."
+  },
+  "starters-rubber": {
+    "category": "school",
+    "definition": "A small tool that removes pencil marks.",
+    "definitionVi": "Cục tẩy xóa chì.",
+    "hint": "Rub out a mistake with a rubber.",
+    "fact": "In America people say eraser instead."
+  },
+  "starters-rug": {
+    "category": "home",
+    "definition": "A soft carpet on the floor.",
+    "definitionVi": "Tấm thảm mềm trên sàn.",
+    "hint": "Sit on the rug for story time.",
+    "fact": "Rugs keep your feet warm."
+  },
+  "starters-ruler": {
+    "category": "school",
+    "definition": "A straight tool for measuring lines.",
+    "definitionVi": "Thước kẻ đo độ dài.",
+    "hint": "Draw straight lines with a ruler.",
+    "fact": "Rulers show centimetres and inches."
+  },
+  "starters-run": {
+    "category": "sports",
+    "definition": "to move fast on your feet.",
+    "definitionVi": "Chạy nhanh bằng chân.",
+    "hint": "Run in the playground at break.",
+    "fact": "Running is good exercise for your heart."
+  },
+  "starters-sad": {
+    "category": "feelings",
+    "definition": "Unhappy, wanting to cry.",
+    "definitionVi": "Buồn, muốn khóc.",
+    "hint": "A hug can help when you feel sad.",
+    "fact": "It is OK to feel sad sometimes."
+  },
+  "starters-sand": {
+    "category": "nature",
+    "definition": "Tiny grains on a beach or desert.",
+    "definitionVi": "Cát — hạt nhỏ ở bãi biển.",
+    "hint": "You build castles with wet sand.",
+    "fact": "Sand is made from tiny bits of rock."
+  },
+  "starters-sausage": {
+    "category": "food",
+    "definition": "Meat shaped like a long tube.",
+    "definitionVi": "Xúc xích — thịt nghiền bọc vỏ.",
+    "hint": "Sausages are often eaten at breakfast.",
+    "fact": "Sausages come in many flavours."
+  },
+  "starters-say": {
+    "category": "general",
+    "definition": "to speak words out loud.",
+    "definitionVi": "Nói, phát biểu.",
+    "hint": "Say hello when you meet someone.",
+    "fact": "People say about 7,000 words each day."
+  },
+  "starters-scary": {
+    "category": "feelings",
+    "definition": "Making you feel afraid.",
+    "definitionVi": "Đáng sợ, làm em sợ.",
+    "hint": "Dark forests can feel scary in stories.",
+    "fact": "Scary stories are fun when you are safe."
+  },
+  "starters-school": {
+    "category": "school",
+    "definition": "A place where children learn and study.",
+    "definitionVi": "Trường học — nơi em đi học.",
+    "hint": "Teachers work at school.",
+    "fact": "School helps you learn to read and count."
+  },
+  "starters-sea": {
+    "category": "nature",
+    "definition": "A very large area of salty water.",
+    "definitionVi": "Biển — nước mặn rộng lớn.",
+    "hint": "Fish and dolphins live in the sea.",
+    "fact": "The sea covers most of our planet."
+  },
+  "starters-see": {
+    "category": "general",
+    "definition": "to look at something with your eyes.",
+    "definitionVi": "Nhìn thấy bằng mắt.",
+    "hint": "I can see a bird in the tree.",
+    "fact": "Your eyes help you see colours and shapes."
+  },
+  "starters-sentence": {
+    "category": "school",
+    "definition": "A group of words that makes sense.",
+    "definitionVi": "Câu văn — nhóm từ có nghĩa.",
+    "hint": "Every sentence starts with a capital letter.",
+    "fact": "A sentence usually ends with a full stop."
+  },
+  "starters-shell": {
+    "category": "nature",
+    "definition": "A hard cover protecting some sea animals.",
+    "definitionVi": "Vỏ cứng bọc động vật biển.",
+    "hint": "You find shells on the beach.",
+    "fact": "Turtles carry shells on their backs."
+  },
+  "starters-ship": {
+    "category": "travel",
+    "definition": "A large boat that crosses the sea.",
+    "definitionVi": "Tàu thủy lớn đi trên biển.",
+    "hint": "Ships carry people and goods.",
+    "fact": "Some ships are as long as buildings."
+  },
+  "starters-shirt": {
+    "category": "clothes",
+    "definition": "Clothing you wear on your upper body.",
+    "definitionVi": "Áo sơ mi hoặc áo phông.",
+    "hint": "T-shirts are a type of shirt.",
+    "fact": "Shirts have buttons or pull over your head."
+  },
+  "starters-shoe": {
+    "category": "clothes",
+    "definition": "Something you wear on your foot.",
+    "definitionVi": "Giày đi trên chân.",
+    "hint": "Tie your shoelaces before running.",
+    "fact": "Left and right shoes are different shapes."
+  },
+  "starters-shop": {
+    "category": "places",
+    "definition": "A place where you buy things.",
+    "definitionVi": "Cửa hàng — nơi mua đồ.",
+    "hint": "You pay money at the shop.",
+    "fact": "Shops sell food, toys, and clothes."
+  },
+  "starters-short": {
+    "category": "general",
+    "definition": "Not long; small in height or length.",
+    "definitionVi": "Ngắn, thấp.",
+    "hint": "A mouse is short compared to a giraffe.",
+    "fact": "Short hair is easier to wash."
+  },
+  "starters-shorts": {
+    "category": "clothes",
+    "definition": "Trousers that stop above your knees.",
+    "definitionVi": "Quần đùi — quần ngắn.",
+    "hint": "Wear shorts on hot summer days.",
+    "fact": "Shorts are cool and comfy for playing."
+  },
+  "starters-show": {
+    "category": "general",
+    "definition": "to let someone see something.",
+    "definitionVi": "Cho xem, trình bày.",
+    "hint": "Show me your drawing, please.",
+    "fact": "Teachers show pictures on the board."
+  },
+  "starters-silly": {
+    "category": "feelings",
+    "definition": "Funny in a playful, not serious way.",
+    "definitionVi": "Ngớ ngẩn, buồn cười.",
+    "hint": "Silly faces make friends laugh.",
+    "fact": "Being silly sometimes helps everyone relax."
+  },
+  "starters-sing": {
+    "category": "general",
+    "definition": "to make music with your voice.",
+    "definitionVi": "Hát bằng giọng.",
+    "hint": "Sing happy birthday at a party.",
+    "fact": "Singing together is fun in class."
+  },
+  "starters-sister": {
+    "category": "people",
+    "definition": "A girl who has the same parents as you.",
+    "definitionVi": "Chị hoặc em gái trong gia đình.",
+    "hint": "She might be older or younger.",
+    "fact": "Sisters often play and share toys."
+  },
+  "starters-sit": {
+    "category": "home",
+    "definition": "to rest on a chair with your bottom.",
+    "definitionVi": "Ngồi xuống ghế.",
+    "hint": "Sit down at your desk in class.",
+    "fact": "Good posture means sitting up straight."
+  },
+  "starters-skateboard": {
+    "category": "sports",
+    "definition": "A board with wheels you ride on.",
+    "definitionVi": "Ván trượt có bánh xe.",
+    "hint": "You push with one foot to move.",
+    "fact": "Skateboards are popular in parks."
+  },
+  "starters-skateboarding": {
+    "category": "sports",
+    "definition": "Riding and doing tricks on a skateboard.",
+    "definitionVi": "Môn trượt ván.",
+    "hint": "Wear a helmet when skateboarding.",
+    "fact": "Skateboarding is an Olympic sport."
+  },
+  "starters-skirt": {
+    "category": "clothes",
+    "definition": "Clothing that hangs from the waist down.",
+    "definitionVi": "Váy — mặc từ eo trở xuống.",
+    "hint": "Girls and women often wear skirts.",
+    "fact": "Skirts can be long or short."
+  },
+  "starters-sleep": {
+    "category": "home",
+    "definition": "to rest with your eyes closed at night.",
+    "definitionVi": "Ngủ, nghỉ ban đêm.",
+    "hint": "Go to sleep when you feel tired.",
+    "fact": "Children need lots of sleep to grow."
+  },
+  "starters-small": {
+    "category": "general",
+    "definition": "Little, not big.",
+    "definitionVi": "Nhỏ, bé.",
+    "hint": "A mouse is smaller than an elephant.",
+    "fact": "Small seeds can grow into big trees."
+  },
+  "starters-smile": {
+    "category": "feelings",
+    "definition": "A happy look on your face.",
+    "definitionVi": "Nụ cười khi vui.",
+    "hint": "Smile when you meet a friend.",
+    "fact": "Smiling can make others smile too."
+  },
+  "starters-snake": {
+    "category": "animals",
+    "definition": "A long thin animal with no legs.",
+    "definitionVi": "Con rắn — dài, không chân.",
+    "hint": "Some snakes live in the jungle.",
+    "fact": "Snakes smell with their tongues."
+  },
+  "starters-soccer": {
+    "category": "sports",
+    "definition": "A team game kicking a ball into a goal.",
+    "definitionVi": "Bóng đá — đá bóng vào khung thành.",
+    "hint": "Also called football in the UK.",
+    "fact": "Soccer is the world's most popular sport."
+  },
+  "starters-sock": {
+    "category": "clothes",
+    "definition": "Soft clothing that covers your foot.",
+    "definitionVi": "Tất, vớ đi trong giày.",
+    "hint": "Wear socks inside your shoes.",
+    "fact": "Socks keep your feet warm and dry."
+  },
+  "starters-sofa": {
+    "category": "home",
+    "definition": "A long soft seat in the living room.",
+    "definitionVi": "Ghế sofa trong phòng khách.",
+    "hint": "The whole family sits on the sofa.",
+    "fact": "Some sofas can turn into beds."
+  },
+  "starters-song": {
+    "category": "general",
+    "definition": "Music with words you can sing.",
+    "definitionVi": "Bài hát có lời.",
+    "hint": "The alphabet song helps you learn letters.",
+    "fact": "Songs can tell stories or make you dance."
+  },
+  "starters-sorry": {
+    "category": "feelings",
+    "definition": "A word you say when you did something wrong.",
+    "definitionVi": "Xin lỗi khi mắc lỗi.",
+    "hint": "Say sorry if you bump into someone.",
+    "fact": "Sorry helps fix hurt feelings."
+  },
+  "starters-spell": {
+    "category": "school",
+    "definition": "to write a word letter by letter.",
+    "definitionVi": "Đánh vần từng chữ cái.",
+    "hint": "Spell your name for the teacher.",
+    "fact": "English spelling can be tricky."
+  },
+  "starters-spider": {
+    "category": "animals",
+    "definition": "A small creature with eight legs.",
+    "definitionVi": "Con nhện — có tám chân.",
+    "hint": "Spiders spin webs to catch flies.",
+    "fact": "Most spiders are harmless to people."
+  },
+  "starters-sport": {
+    "category": "sports",
+    "definition": "A game or activity with physical exercise.",
+    "definitionVi": "Môn thể thao.",
+    "hint": "Football, tennis, and swimming are sports.",
+    "fact": "Sport keeps your body strong and healthy."
+  },
+  "starters-stand": {
+    "category": "general",
+    "definition": "to be on your feet, not sitting.",
+    "definitionVi": "Đứng trên chân.",
+    "hint": "Stand up when the teacher arrives.",
+    "fact": "Standing in a line keeps order."
+  },
+  "starters-start": {
+    "category": "general",
+    "definition": "to begin doing something.",
+    "definitionVi": "Bắt đầu làm gì.",
+    "hint": "Start your work when the bell rings.",
+    "fact": "Every race starts with a signal."
+  },
+  "starters-stop": {
+    "category": "general",
+    "definition": "to finish or not continue.",
+    "definitionVi": "Dừng lại, ngừng.",
+    "hint": "Stop at a red traffic light.",
+    "fact": "Stop signs are red and octagonal."
+  },
+  "starters-store": {
+    "category": "places",
+    "definition": "A shop where you buy things.",
+    "definitionVi": "Cửa hàng — nơi mua sắm.",
+    "hint": "Americans say store instead of shop.",
+    "fact": "Toy stores sell games and dolls."
+  },
+  "starters-story": {
+    "category": "school",
+    "definition": "A tale about people, animals, or events.",
+    "definitionVi": "Câu chuyện, truyện kể.",
+    "hint": "Bedtime stories help you sleep.",
+    "fact": "Stories can be funny, scary, or exciting."
+  },
+  "starters-street": {
+    "category": "places",
+    "definition": "A road in a town with houses.",
+    "definitionVi": "Con phố, đường phố.",
+    "hint": "Look both ways before crossing the street.",
+    "fact": "Streets have names like Oak Street."
+  },
+  "starters-sun": {
+    "category": "weather",
+    "definition": "The bright star that gives us light.",
+    "definitionVi": "Mặt trời — chiếu sáng ban ngày.",
+    "hint": "Never look straight at the sun.",
+    "fact": "The sun helps plants grow."
+  },
+  "starters-sweet-s": {
+    "category": "food",
+    "definition": "Candy or sugary treats.",
+    "definitionVi": "Kẹo ngọt, đồ ngọt.",
+    "hint": "Eat sweets only sometimes.",
+    "fact": "Too many sweets are bad for teeth."
+  },
+  "starters-swim": {
+    "category": "sports",
+    "definition": "to move through water using your arms.",
+    "definitionVi": "Bơi trong nước.",
+    "hint": "Swim in a pool with an adult nearby.",
+    "fact": "Fish swim but people must learn how."
+  },
+  "starters-t-shirt": {
+    "category": "clothes",
+    "definition": "A casual shirt with short sleeves.",
+    "definitionVi": "Áo phông ngắn tay.",
+    "hint": "T-shirts often have pictures or words.",
+    "fact": "T-shirts are named for their T shape."
+  },
+  "starters-table": {
+    "category": "home",
+    "definition": "Furniture with a flat top and legs.",
+    "definitionVi": "Cái bàn — ăn hoặc học trên bàn.",
+    "hint": "You eat dinner at the table.",
+    "fact": "Desks are tables for writing."
+  },
+  "starters-table-tennis": {
+    "category": "sports",
+    "definition": "A fast game hitting a ball over a net.",
+    "definitionVi": "Bóng bàn — đánh bóng qua lưới.",
+    "hint": "Also called ping-pong.",
+    "fact": "Table tennis uses small paddles."
+  },
+  "starters-tablet": {
+    "category": "technology",
+    "definition": "A flat screen computer you touch.",
+    "definitionVi": "Máy tính bảng cảm ứng.",
+    "hint": "You tap apps on a tablet.",
+    "fact": "Tablets are bigger than phones."
+  },
+  "starters-tail": {
+    "category": "animals",
+    "definition": "The long part at the back of an animal.",
+    "definitionVi": "Đuôi — phía sau cơ thể con vật.",
+    "hint": "Dogs wag their tails when happy.",
+    "fact": "Monkeys use their tails to hold branches."
+  },
+  "starters-take-a-photo": {
+    "category": "technology",
+    "definition": "to use a camera to make a picture.",
+    "definitionVi": "Chụp ảnh bằng máy ảnh.",
+    "hint": "Say cheese when someone takes your photo.",
+    "fact": "Phones can take photos too."
+  },
+  "starters-talk": {
+    "category": "general",
+    "definition": "to speak with someone.",
+    "definitionVi": "Nói chuyện với ai.",
+    "hint": "Talk quietly in the library.",
+    "fact": "Talking helps you share ideas."
+  },
+  "starters-teacher": {
+    "category": "jobs",
+    "definition": "A person who helps children learn.",
+    "definitionVi": "Thầy cô giáo dạy em học.",
+    "hint": "Your teacher reads stories and sets homework.",
+    "fact": "Teachers work in schools every weekday."
+  },
+  "starters-teddy-bear": {
+    "category": "general",
+    "definition": "A soft toy bear for cuddling.",
+    "definitionVi": "Gấu bông — thú nhồi bông.",
+    "hint": "Many children sleep with a teddy bear.",
+    "fact": "Teddy bears are named after a US president."
+  },
+  "starters-television": {
+    "category": "technology",
+    "definition": "A screen that shows programmes and films.",
+    "definitionVi": "Ti-vi — xem chương trình và phim.",
+    "hint": "Families watch television together.",
+    "fact": "TV is short for television."
+  },
+  "starters-tell": {
+    "category": "general",
+    "definition": "to say something to someone.",
+    "definitionVi": "Kể, nói cho ai biết.",
+    "hint": "Tell me a story, please.",
+    "fact": "Tell and say both mean speak."
+  },
+  "starters-tennis": {
+    "category": "sports",
+    "definition": "A game hitting a ball over a net.",
+    "definitionVi": "Quần vợt — đánh bóng qua lưới.",
+    "hint": "Tennis players use a racket.",
+    "fact": "Wimbledon is a famous tennis tournament."
+  },
+  "starters-tennis-racket": {
+    "category": "sports",
+    "definition": "The bat used to hit a tennis ball.",
+    "definitionVi": "Vợt tennis.",
+    "hint": "Hold the racket and swing at the ball.",
+    "fact": "Rackets have strings in the middle."
+  },
+  "starters-there": {
+    "category": "general",
+    "definition": "In or at that place, not here.",
+    "definitionVi": "Ở đó, tại chỗ kia.",
+    "hint": "Look over there by the tree.",
+    "fact": "There points to a place away from you."
+  },
+  "starters-thing": {
+    "category": "general",
+    "definition": "An object you can see or touch.",
+    "definitionVi": "Vật, đồ vật.",
+    "hint": "A book, ball, and cup are all things.",
+    "fact": "Thing is a useful word when you forget the name."
+  },
+  "starters-throw": {
+    "category": "sports",
+    "definition": "to send something through the air.",
+    "definitionVi": "Ném, quăng cái gì đi.",
+    "hint": "Throw the ball to your friend.",
+    "fact": "Throwing hard helps in baseball."
+  },
+  "starters-tick": {
+    "category": "animals",
+    "definition": "A tiny insect that bites animals.",
+    "definitionVi": "Con ve — côn trùng nhỏ bám da.",
+    "hint": "Check your dog for ticks after walks.",
+    "fact": "Ticks live in grass and woods."
+  },
+  "starters-tiger": {
+    "category": "animals",
+    "definition": "A big wild cat with orange stripes.",
+    "definitionVi": "Con hổ — mèo lớn sọc cam đen.",
+    "hint": "Tigers live in jungles in Asia.",
+    "fact": "Tigers are excellent swimmers."
+  },
+  "starters-today": {
+    "category": "time",
+    "definition": "This day, not yesterday or tomorrow.",
+    "definitionVi": "Hôm nay.",
+    "hint": "What day is it today?",
+    "fact": "Today will never come again."
+  },
+  "starters-tomato": {
+    "category": "food",
+    "definition": "A round red fruit used in salads.",
+    "definitionVi": "Quả cà chua — đỏ, ăn trong salad.",
+    "hint": "Tomatoes grow on vines.",
+    "fact": "Tomatoes are fruits but taste savoury."
+  },
+  "starters-too": {
+    "category": "general",
+    "definition": "Also, or more than enough.",
+    "definitionVi": "Cũng vậy, hoặc quá mức.",
+    "hint": "I like cats too means you also like them.",
+    "fact": "Too much sugar is not healthy."
+  },
+  "starters-toy": {
+    "category": "general",
+    "definition": "Something children play with.",
+    "definitionVi": "Đồ chơi.",
+    "hint": "Dolls, cars, and blocks are toys.",
+    "fact": "Toys help children use their imagination."
+  },
+  "starters-train": {
+    "category": "travel",
+    "definition": "A long vehicle that runs on rails.",
+    "definitionVi": "Tàu hỏa chạy trên đường ray.",
+    "hint": "Trains stop at stations.",
+    "fact": "Some trains go faster than cars."
+  },
+  "starters-tree": {
+    "category": "nature",
+    "definition": "A tall plant with a trunk and branches.",
+    "definitionVi": "Cây — thân to, nhiều cành.",
+    "hint": "Birds build nests in trees.",
+    "fact": "Trees give us oxygen to breathe."
+  },
+  "starters-trousers": {
+    "category": "clothes",
+    "definition": "Clothing that covers both legs.",
+    "definitionVi": "Quần dài che hai chân.",
+    "hint": "Also called pants in America.",
+    "fact": "Trousers have a zip or buttons."
+  },
+  "starters-truck": {
+    "category": "travel",
+    "definition": "A large vehicle for carrying goods.",
+    "definitionVi": "Xe tải chở hàng.",
+    "hint": "Ice cream trucks play music.",
+    "fact": "Fire trucks help put out fires."
+  },
+  "starters-try": {
+    "category": "general",
+    "definition": "to attempt to do something.",
+    "definitionVi": "Thử, cố gắng làm.",
+    "hint": "Try again if you do not succeed.",
+    "fact": "Trying new things helps you learn."
+  },
+  "starters-tv": {
+    "category": "technology",
+    "definition": "A screen for watching shows at home.",
+    "definitionVi": "Ti-vi viết tắt của television.",
+    "hint": "TV is in the living room.",
+    "fact": "Cartoons are popular on TV."
+  },
+  "starters-ugly": {
+    "category": "feelings",
+    "definition": "Not nice to look at.",
+    "definitionVi": "Xấu, không đẹp.",
+    "hint": "Kind people do not call others ugly.",
+    "fact": "Everyone is beautiful in their own way."
+  },
+  "starters-understand": {
+    "category": "school",
+    "definition": "to know the meaning of something.",
+    "definitionVi": "Hiểu, nắm được ý.",
+    "hint": "Raise your hand if you understand.",
+    "fact": "Understanding takes listening and thinking."
+  },
+  "starters-very": {
+    "category": "general",
+    "definition": "A lot; to a high degree.",
+    "definitionVi": "Rất, lắm.",
+    "hint": "I am very happy today!",
+    "fact": "Very makes words stronger."
+  },
+  "starters-walk": {
+    "category": "general",
+    "definition": "to move on foot at a normal speed.",
+    "definitionVi": "Đi bộ.",
+    "hint": "Walk to school with a friend.",
+    "fact": "Walking is healthy and good for Earth."
+  },
+  "starters-wall": {
+    "category": "home",
+    "definition": "The side of a room or building.",
+    "definitionVi": "Bức tường của phòng hoặc nhà.",
+    "hint": "Pictures hang on the wall.",
+    "fact": "Walls keep rooms warm and private."
+  },
+  "starters-want": {
+    "category": "general",
+    "definition": "to wish for or would like something.",
+    "definitionVi": "Muốn có cái gì.",
+    "hint": "I want an ice cream, please.",
+    "fact": "Want tells others what you hope for."
+  },
+  "starters-watch": {
+    "category": "technology",
+    "definition": "A small clock you wear on your wrist.",
+    "definitionVi": "Đồng hồ đeo tay.",
+    "hint": "Check the time on your watch.",
+    "fact": "Some watches do not need batteries."
+  },
+  "starters-water": {
+    "category": "food",
+    "definition": "A clear drink that all life needs.",
+    "definitionVi": "Nước uống — cần mỗi ngày.",
+    "hint": "Drink water when you are thirsty.",
+    "fact": "Your body is mostly made of water."
+  },
+  "starters-watermelon": {
+    "category": "food",
+    "definition": "A big green fruit with red juicy inside.",
+    "definitionVi": "Quả dưa hấu — to, ruột đỏ ngọt.",
+    "hint": "Watermelon is perfect on hot days.",
+    "fact": "Watermelons are mostly water."
+  },
+  "starters-wave": {
+    "category": "general",
+    "definition": "to move your hand to say hello.",
+    "definitionVi": "Vẫy tay chào.",
+    "hint": "Wave goodbye when someone leaves.",
+    "fact": "Waving is friendly in every country."
+  },
+  "starters-wear": {
+    "category": "clothes",
+    "definition": "to have clothes on your body.",
+    "definitionVi": "Mặc quần áo.",
+    "hint": "Wear a coat when it is cold.",
+    "fact": "People wear different clothes in summer."
+  },
+  "starters-white": {
+    "category": "general",
+    "definition": "The colour of snow and clouds.",
+    "definitionVi": "Màu trắng.",
+    "hint": "Paper and milk are white.",
+    "fact": "White light contains all colours."
+  },
+  "starters-window": {
+    "category": "home",
+    "definition": "An opening in a wall with glass.",
+    "definitionVi": "Cửa sổ — nhìn ra ngoài.",
+    "hint": "Open the window for fresh air.",
+    "fact": "Windows let sunlight into your room."
+  },
+  "starters-woman": {
+    "category": "people",
+    "definition": "An adult female person.",
+    "definitionVi": "Người phụ nữ trưởng thành.",
+    "hint": "Your mother is a woman.",
+    "fact": "Women can be doctors, teachers, or pilots."
+  },
+  "starters-word": {
+    "category": "school",
+    "definition": "A single unit of language with meaning.",
+    "definitionVi": "Từ vựng — một từ có nghĩa.",
+    "hint": "Cat is a short word with three letters.",
+    "fact": "English has hundreds of thousands of words."
+  },
+  "starters-would-like": {
+    "category": "general",
+    "definition": "to want something in a polite way.",
+    "definitionVi": "Muốn — nói lịch sự hơn want.",
+    "hint": "I would like some juice, please.",
+    "fact": "Would like sounds nicer than I want."
+  },
+  "starters-write": {
+    "category": "school",
+    "definition": "to make letters and words on paper.",
+    "definitionVi": "Viết chữ lên giấy.",
+    "hint": "Write your name at the top.",
+    "fact": "Writing helps you remember things."
+  },
+  "starters-year": {
+    "category": "time",
+    "definition": "Twelve months, like January to December.",
+    "definitionVi": "Một năm có mười hai tháng.",
+    "hint": "Your birthday comes once a year.",
+    "fact": "A year has 365 days."
+  },
+  "starters-yellow": {
+    "category": "general",
+    "definition": "The colour of the sun and bananas.",
+    "definitionVi": "Màu vàng.",
+    "hint": "School buses are often yellow.",
+    "fact": "Yellow is bright and easy to see."
+  },
+  "starters-yes": {
+    "category": "general",
+    "definition": "A word that means you agree.",
+    "definitionVi": "Vâng, có — đồng ý.",
+    "hint": "Nod your head when you say yes.",
+    "fact": "Yes is one of the first words children learn."
+  },
+  "starters-young": {
+    "category": "people",
+    "definition": "Not old; still a child or teenager.",
+    "definitionVi": "Còn trẻ, còn nhỏ.",
+    "hint": "A puppy is a young dog.",
+    "fact": "Young animals need extra care."
+  },
+  "starters-zebra": {
+    "category": "animals",
+    "definition": "An African horse with black stripes.",
+    "definitionVi": "Ngựa vằn — sọc đen trắng.",
+    "hint": "No two zebras have the same stripes.",
+    "fact": "Zebras live in groups called herds."
+  },
+  "starters-zoo": {
+    "category": "places",
+    "definition": "A place where wild animals are kept.",
+    "definitionVi": "Sở thú — xem động vật hoang dã.",
+    "hint": "You see lions and monkeys at the zoo.",
+    "fact": "Zoos help protect endangered animals."
+  }
+}

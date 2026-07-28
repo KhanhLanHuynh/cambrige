@@ -516,7 +516,7 @@ function buildSentences(word) {
   // Keep the most relevant scene lines first; rotate only the remainder for variety.
   const pinned = pool.slice(0, Math.min(4, pool.length))
   const rest = rotate(pool.slice(pinned.length), seed)
-  const existing = word.sentence ? [tidySentence(word.sentence)] : []
+  const existing = Array.isArray(word.sentences) ? word.sentences.map(tidySentence).filter(Boolean) : []
   const merged = uniqueSentences([...pinned, ...rest, ...existing])
 
   if (merged.length >= TARGET) return merged.slice(0, TARGET)
@@ -539,7 +539,6 @@ function main() {
   for (const word of data.words) {
     const sentences = buildSentences(word)
     word.sentences = sentences
-    word.sentence = sentences[0]
   }
 
   writeVocabularyByLevel(data.words, {

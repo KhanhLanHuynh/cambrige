@@ -6,12 +6,12 @@ Place Cambridge-aligned word images here (PNG/SVG/WebP).
 
 - Path: `words/{wordId}.webp` (served as `/assets/images/words/{wordId}.webp`)
 - Example: `words/starters-armchair.webp` → `/assets/images/words/starters-armchair.webp`
-- Size: ~512×512 WebP (contain, transparent padding)
+- Size: ~1024×1024 WebP (contain, transparent padding)
 - Shown in the quiz word hero **only after a correct answer**. If missing, the rocket icon remains.
 
 ## Fetching open-license images
 
-The script downloads from **Openverse** (primary) and **Wikipedia pageimages** (fallback). Only open / reusable licenses are requested. Attribution is stored on each word as `imageCredit` and in `scripts/.image-attribution.json`. Words with no match are listed in `scripts/.image-missing.json`.
+The script downloads from **Openverse** (primary, prefers large illustrations) and **Wikipedia pageimages** (fallback). It scores candidates for lemma relevance and kid-safe tags, rejects tiny sources (<640px), and skips abstract/function words. Only open / reusable licenses are requested. Attribution is stored on each word as `imageCredit` and in `scripts/.image-attribution.json`. Words with no match are listed in `scripts/.image-missing.json`.
 
 ```bash
 # All levels (resume-safe)
@@ -23,4 +23,4 @@ node scripts/generate-word-images.mjs --limit=20
 node scripts/generate-word-images.mjs --force
 ```
 
-Review attributions before shipping images in production. Abstract words may remain without art; the UI falls back to the rocket.
+Review attributions before shipping images in production. Abstract words may remain without art; the UI falls back to the rocket. Re-fetch existing assets with `--force` after changing scoring rules.

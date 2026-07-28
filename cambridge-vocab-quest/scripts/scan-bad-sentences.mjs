@@ -137,7 +137,8 @@ const data = loadAllVocabulary()
 const badWords = []
 
 for (const word of data.words) {
-  const sentences = [word.sentence, ...(word.sentences || [])].filter(Boolean)
+  const sentences = [...new Set((word.sentences || []).filter(Boolean))]
+  const primary = sentences[0] || ''
   const hits = []
   for (const sentence of sentences) {
     const issues = classifyMismatch(word.word, word.definition || '', word.category || '', sentence)
@@ -151,7 +152,7 @@ for (const word of data.words) {
       pos: word.partOfSpeech,
       category: word.category,
       definition: word.definition,
-      primary: word.sentence,
+      primary,
       badCount: hits.length,
       samples: hits.slice(0, 3),
       issueTypes: [...new Set(hits.flatMap((h) => h.issues))],
