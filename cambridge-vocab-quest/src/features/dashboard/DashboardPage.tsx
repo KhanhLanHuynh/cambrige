@@ -1,6 +1,6 @@
 import {
-  BookOpen, Clock3, Download, Gift, LockKeyhole, Plus, Search,
-  Settings, ShieldCheck, Target, UserRound, X, Check,
+  Download, Gift, LockKeyhole, Plus, Search,
+  ShieldCheck, X, Check,
 } from 'lucide-react'
 import { useEffect, useMemo, useState, type FormEvent } from 'react'
 import { Badge, Button, Progress } from '../../components/ui'
@@ -11,10 +11,10 @@ import type {
 } from '../../types'
 
 interface DashboardSummary {
-  activity: number[]
+  activity: Array<{ learnerId: string; name: string; values: number[] }>
   masteredThisWeek: number
   masteryByLevel: Array<{ label: string; value: number; count: number }>
-  learners: Array<Learner & { totalAnswers: number; accuracy: number; atRiskWords: number; settings?: LearnerSettings }>
+  learners: Array<Learner & { totalAnswers: number; accuracy: number; atRiskWords: number; masteredThisWeek: number; settings?: LearnerSettings }>
   wordHealth: Array<{
     id: string
     word: string
@@ -32,27 +32,37 @@ interface DashboardSummary {
   }
 }
 
+const ACTIVITY_COLORS = ['#00dcff', '#8b50e6', '#86ff3a', '#ff477e', '#ffb020', '#5eead4']
+
+function activityPoints(values: number[]) {
+  const last = Math.max(1, values.length - 1)
+  return values.map((value, index) => `${index * (100 / last)},${100 - value}`).join(' ')
+}
+
 function newGiftDraft(): GiftDefinition {
   return { id: crypto.randomUUID(), name: '', costGems: 100 }
 }
 
 export function SettingsModal({
   onClose,
-  initial,
+  initialByLearner,
   onLearnersChanged,
 }: {
   onClose: () => void
-  initial?: LearnerSettings | null
+  initialByLearner?: Record<string, LearnerSettings>
   onLearnersChanged?: () => void
 }) {
   const learners = useSessionStore((state) => state.learners)
   const removeLearner = useSessionStore((state) => state.removeLearner)
   const updateLearner = useSessionStore((state) => state.updateLearner)
+  const [settingsTargetId, setSettingsTargetId] = useState(learners[0]?.id ?? '')
   const [saved, setSaved] = useState(false)
   const [catalogSaved, setCatalogSaved] = useState(false)
   const [error, setError] = useState('')
   const [catalogError, setCatalogError] = useState('')
-  const [settings, setSettings] = useState<LearnerSettings | null>(initial ?? null)
+  const [settings, setSettings] = useState<LearnerSettings | null>(
+    settingsTargetId ? (initialByLearner?.[settingsTargetId] ?? null) : null,
+  )
   const [catalog, setCatalog] = useState<GiftDefinition[]>([])
   const [catalogLoading, setCatalogLoading] = useState(true)
   const [pendingDelete, setPendingDelete] = useState<Learner | null>(null)
@@ -70,11 +80,35 @@ export function SettingsModal({
   const [editSaved, setEditSaved] = useState(false)
 
   useEffect(() => {
-    if (initial) {
-      setSettings(initial)
+    if (!learners.length) {
+      setSettingsTargetId('')
       return
     }
-    api<{ settings: LearnerSettings }>('/settings')
+    if (!learners.some((entry) => entry.id === settingsTargetId)) {
+      setSettingsTargetId(learners[0].id)
+    }
+  }, [learners, settingsTargetId])
+
+  useEffect(() => {
+    if (!settingsTargetId) {
+      setSettings({
+        dailyGoal: 10,
+        dailyLimitMinutes: 45,
+        reviewMix: 25,
+        timedModesEnabled: true,
+        focusMode: false,
+        soundEnabled: true,
+        hintsEnabled: true,
+      })
+      return
+    }
+    const seeded = initialByLearner?.[settingsTargetId]
+    if (seeded) {
+      setSettings(seeded)
+      return
+    }
+    setSettings(null)
+    api<{ settings: LearnerSettings }>(`/settings?learnerId=${encodeURIComponent(settingsTargetId)}`)
       .then((response) => setSettings(response.settings))
       .catch(() => setSettings({
         dailyGoal: 10,
@@ -85,7 +119,7 @@ export function SettingsModal({
         soundEnabled: true,
         hintsEnabled: true,
       }))
-  }, [initial])
+  }, [settingsTargetId, initialByLearner])
 
   useEffect(() => {
     api<{ catalog: GiftDefinition[] }>('/parent/gifts')
@@ -96,11 +130,16 @@ export function SettingsModal({
 
   const save = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    if (!settingsTargetId) {
+      setError('Add a learner before saving experience settings')
+      return
+    }
     const data = new FormData(event.currentTarget)
     try {
       const response = await api<{ settings: LearnerSettings }>('/settings', {
         method: 'PATCH',
         body: {
+          learnerId: settingsTargetId,
           dailyLimitMinutes: Number(data.get('dailyLimitMinutes')),
           reviewMix: Number(data.get('reviewMix')),
           focusMode: data.get('focusMode') === 'on',
@@ -112,6 +151,7 @@ export function SettingsModal({
       setSettings(response.settings)
       setSaved(true)
       setError('')
+      onLearnersChanged?.()
     } catch (requestError) {
       setError(requestError instanceof ApiError ? requestError.message : 'Could not save settings')
     }
@@ -230,8 +270,26 @@ export function SettingsModal({
       <section className="modal settings-modal" role="dialog" aria-modal="true">
         <button className="modal-close" onClick={onClose} aria-label="Close settings"><X /></button>
         <h2>Parent control center</h2>
-        <p>Manage the selected learner’s experience.</p>
-        <form onSubmit={save}>
+        <p>Manage experience settings and profiles for every learner on this account.</p>
+        {learners.length > 0 && (
+          <label className="settings-learner-picker">
+            Experience settings for
+            <select
+              value={settingsTargetId}
+              aria-label="Learner for experience settings"
+              onChange={(event) => {
+                setSettingsTargetId(event.target.value)
+                setSaved(false)
+                setError('')
+              }}
+            >
+              {learners.map((entry) => (
+                <option key={entry.id} value={entry.id}>{entry.avatar} {entry.name}</option>
+              ))}
+            </select>
+          </label>
+        )}
+        <form key={settingsTargetId} onSubmit={save}>
           <label>
             Daily learning limit
             <select name="dailyLimitMinutes" defaultValue={String(settings.dailyLimitMinutes)}>
@@ -267,7 +325,7 @@ export function SettingsModal({
           </label>
           {error && <div className="form-error">{error}</div>}
           {saved && <div className="save-success"><Check /> Settings saved</div>}
-          <Button type="submit">Save settings</Button>
+          <Button type="submit" disabled={!settingsTargetId}>Save settings</Button>
         </form>
 
         <div className="learners-manager">
@@ -627,7 +685,7 @@ export function DashboardPage({
   const [redeemOpen, setRedeemOpen] = useState(false)
   const [assignStatus, setAssignStatus] = useState('')
   const [summary, setSummary] = useState<DashboardSummary | null>(null)
-  const [assignments, setAssignments] = useState<Array<{ id: string; level: CambridgeLevel; categories: string[] }>>([])
+  const [assignments, setAssignments] = useState<Array<{ id: string; learnerId: string; level: CambridgeLevel; categories: string[] }>>([])
   const [pendingItems, setPendingItems] = useState<GiftRedemption[]>([])
   const healthRows = summary?.wordHealth ?? []
   const visibleWords = useMemo(
@@ -636,9 +694,15 @@ export function DashboardPage({
   )
   const pageCount = Math.max(1, Math.ceil(visibleWords.length / 5))
   const pagedWords = visibleWords.slice(page * 5, page * 5 + 5)
-  const chartData = summary?.activity.length ? summary.activity : [0, 0, 0, 0, 0, 0, 0]
-  const chartPoints = chartData.map((value, index) => `${index * (100 / Math.max(1, chartData.length - 1))},${100 - value}`).join(' ')
-  const trackedLearner = summary?.learners[0]
+  const activitySeries = summary?.activity ?? []
+  const householdLearners = summary?.learners ?? []
+  const settingsByLearner = useMemo(() => {
+    const map: Record<string, LearnerSettings> = {}
+    for (const learner of householdLearners) {
+      if (learner.settings) map[learner.id] = learner.settings
+    }
+    return map
+  }, [householdLearners])
   const academicYear = `${new Date().getFullYear() - 1}–${String(new Date().getFullYear()).slice(2)}`
   const pendingCount = pendingItems.length
 
@@ -650,7 +714,7 @@ export function DashboardPage({
     if (!adultUnlocked) return
     Promise.all([
       api<DashboardSummary>('/parent/dashboard'),
-      api<{ assignments: Array<{ id: string; level: CambridgeLevel; categories: string[] }> }>('/curriculum/assignments'),
+      api<{ assignments: Array<{ id: string; learnerId: string; level: CambridgeLevel; categories: string[] }> }>('/curriculum/assignments'),
     ])
       .then(([dashboard, curriculum]) => {
         setSummary(dashboard)
@@ -669,14 +733,25 @@ export function DashboardPage({
   useEffect(() => setPage(0), [query, health])
 
   const assignReview = async () => {
-    if (!trackedLearner) return
+    if (!householdLearners.length) {
+      setAssignStatus('Add a learner before assigning review tasks')
+      return
+    }
     try {
-      const response = await api<{ assignment: { id: string; level: CambridgeLevel; categories: string[] } }>('/curriculum/assignments', {
-        method: 'POST',
-        body: { learnerId: trackedLearner.id, level: trackedLearner.level, categories: ['nature', 'space'] },
-      })
-      setAssignments((current) => [...current, response.assignment])
-      setAssignStatus('Review task assigned')
+      const created = await Promise.all(
+        householdLearners.map((learner) =>
+          api<{ assignment: { id: string; learnerId: string; level: CambridgeLevel; categories: string[] } }>('/curriculum/assignments', {
+            method: 'POST',
+            body: { learnerId: learner.id, level: learner.level, categories: ['nature', 'space'] },
+          }).then((response) => response.assignment),
+        ),
+      )
+      setAssignments((current) => [...current, ...created])
+      setAssignStatus(
+        created.length === 1
+          ? 'Review task assigned'
+          : `Review tasks assigned to ${created.length} learners`,
+      )
     } catch (error) {
       setAssignStatus(error instanceof ApiError ? error.message : 'Could not assign task')
     }
@@ -714,11 +789,20 @@ export function DashboardPage({
         <div>
           <Badge tone="lime">ACADEMIC YEAR {academicYear}</Badge>
           <h1>Welcome Back, Educator</h1>
-          <p>
-            {trackedLearner
-              ? `${trackedLearner.name} has practised ${summary?.masteredThisWeek ?? 0} Cambridge English words this week. Check the Health Matrix below to see which areas need review.`
-              : 'Unlock learner activity to see weekly progress.'}
-          </p>
+          {summary?.learners.length
+            ? (
+              <>
+                <ul className="hero-learner-summary">
+                  {summary.learners.map((learner) => (
+                    <li key={learner.id}>
+                      {learner.name} has practised {learner.masteredThisWeek} Cambridge English words this week.
+                    </li>
+                  ))}
+                </ul>
+                <p>Check the Health Matrix below to see which areas need review.</p>
+              </>
+            )
+            : <p>Unlock learner activity to see weekly progress.</p>}
           <div className="dashboard-hero-actions">
             <Button variant="secondary" onClick={() => void downloadFromApi('/parent/weekly-report.csv', 'weekly-report.csv')}><Download /> Weekly Report</Button>
             <Button variant="secondary" onClick={() => setSettingsOpen(true)}>Curriculum Settings</Button>
@@ -729,27 +813,72 @@ export function DashboardPage({
         </div>
         <div className="hero-visual">📚<span>📈</span></div>
       </section>
-      <div className="metrics">
-        {[
-          { icon: BookOpen, label: 'Words Practised', value: String(trackedLearner?.totalAnswers ?? 0), delta: '+ live' },
-          { icon: Clock3, label: 'Learning Streak', value: `${trackedLearner?.streak ?? 0}d`, delta: 'current' },
-          { icon: Target, label: 'Quiz Accuracy', value: `${trackedLearner?.accuracy ?? 0}%`, delta: 'all time' },
-          { icon: UserRound, label: 'Words At Risk', value: String(trackedLearner?.atRiskWords ?? 0), delta: 'review' },
-        ].map(({ icon: Icon, label, value, delta }) => (
-          <article className="card" key={label}><span><Icon /></span><Badge tone="lime">{delta}</Badge><small>{label}</small><strong>{value}</strong></article>
-        ))}
+      <div className="learner-metrics-grid">
+        {householdLearners.length
+          ? (
+            <div className="table-scroll card">
+              <table className="learner-metrics-table">
+                <thead>
+                  <tr>
+                    <th>Learner</th>
+                    <th>Level</th>
+                    <th>Words Practised</th>
+                    <th>Learning Streak</th>
+                    <th>Quiz Accuracy</th>
+                    <th>Words At Risk</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {householdLearners.map((learner) => (
+                    <tr key={learner.id}>
+                      <td>
+                        <span className="learner-metrics-name">
+                          <span aria-hidden="true">{learner.avatar}</span>
+                          {learner.name}
+                        </span>
+                      </td>
+                      <td>{learner.level}</td>
+                      <td>{learner.totalAnswers ?? 0}</td>
+                      <td>{learner.streak ?? 0}d</td>
+                      <td>{learner.accuracy ?? 0}%</td>
+                      <td>{learner.atRiskWords ?? 0}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )
+          : <p className="no-results">No learners yet. Add profiles to see practise metrics.</p>}
       </div>
       <div className="charts">
         <section className="card activity-chart">
           <div className="section-heading">
             <div><h2>Learning Activity</h2><p>Daily vocabulary engagement over the last 7 days</p></div>
-            <span><i className="cyan-dot" /> Reviewed &nbsp; <i className="violet-dot" /> New Words</span>
+            <span className="activity-legend">
+              {activitySeries.length
+                ? activitySeries.map((series, index) => (
+                  <span key={series.learnerId}>
+                    <i className="legend-dot" style={{ background: ACTIVITY_COLORS[index % ACTIVITY_COLORS.length] }} />
+                    {series.name}
+                  </span>
+                ))
+                : 'No learners yet'}
+            </span>
           </div>
-          <svg viewBox="0 0 100 100" preserveAspectRatio="none" role="img" aria-label="Learning activity trending upward">
-            <defs><linearGradient id="area" x1="0" y1="0" x2="0" y2="1"><stop stopColor="#00dcff" stopOpacity=".65" /><stop offset="1" stopColor="#00dcff" stopOpacity="0" /></linearGradient></defs>
-            <polygon points={`0,100 ${chartPoints} 100,100`} fill="url(#area)" />
-            <polyline points={chartPoints} fill="none" stroke="#00dcff" strokeWidth="2" vectorEffect="non-scaling-stroke" />
-          </svg>
+          <div className="activity-plot">
+            <svg viewBox="0 0 100 100" preserveAspectRatio="none" role="img" aria-label="Learning activity by learner over the last 7 days">
+              {activitySeries.map((series, index) => (
+                <polyline
+                  key={series.learnerId}
+                  points={activityPoints(series.values.length ? series.values : [0, 0, 0, 0, 0, 0, 0])}
+                  fill="none"
+                  stroke={ACTIVITY_COLORS[index % ACTIVITY_COLORS.length]}
+                  strokeWidth="2"
+                  vectorEffect="non-scaling-stroke"
+                />
+              ))}
+            </svg>
+          </div>
           <div className="chart-labels"><span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span><span>SAT</span><span>SUN</span></div>
         </section>
         <section className="card mastery-chart">
@@ -761,7 +890,12 @@ export function DashboardPage({
             { label: 'Flyers', value: 0, count: 0 },
             { label: 'Preliminary', value: 0, count: 0 },
           ]).map((item) => (
-            <div key={item.label}><span>{item.label} ({item.count})</span><i style={{ width: `${item.value}%` }} /></div>
+            <div key={item.label}>
+              <span>{item.label} ({item.count})</span>
+              <div className="mastery-bar-track">
+                <i style={{ width: `${item.value}%` }} />
+              </div>
+            </div>
           ))}
         </section>
       </div>
@@ -815,42 +949,26 @@ export function DashboardPage({
           </div>
           <div className="curriculum-grid">
             {assignments.length
-              ? assignments.map((assignment) => (
-                <article className="card" key={assignment.id}>
-                  <Badge>ACTIVE</Badge>
-                  <h3>{assignment.categories.join(' & ') || 'General vocabulary review'}</h3>
-                  <small>{assignment.level}</small>
-                  <span>Mastery Progress <b>{trackedLearner?.accuracy ?? 0}%</b></span>
-                  <Progress value={trackedLearner?.accuracy ?? 0} />
-                  <p>👨‍🚀 {trackedLearner?.name ?? 'Learner'}</p>
-                </article>
-              ))
+              ? assignments.map((assignment) => {
+                const assignee = householdLearners.find((learner) => learner.id === assignment.learnerId)
+                return (
+                  <article className="card" key={assignment.id}>
+                    <Badge>ACTIVE</Badge>
+                    <h3>{assignment.categories.join(' & ') || 'General vocabulary review'}</h3>
+                    <small>{assignment.level}</small>
+                    <span>Mastery Progress <b>{assignee?.accuracy ?? 0}%</b></span>
+                    <Progress value={assignee?.accuracy ?? 0} />
+                    <p>{assignee ? `${assignee.avatar} ${assignee.name}` : 'Learner'}</p>
+                  </article>
+                )
+              })
               : <p className="no-results">No assignments yet. Create a review task to guide the next quiz.</p>}
           </div>
         </section>
-        <aside className="card quick-controls">
-          <h2>Quick Controls</h2>
-          <button type="button" onClick={() => setSettingsOpen(true)}>
-            <span><Settings /></span>
-            <strong>Daily Limit<small>{trackedLearner?.settings?.dailyLimitMinutes ?? 45}m / day</small></strong>
-            <b>Edit</b>
-          </button>
-          <button type="button" onClick={() => setSettingsOpen(true)}>
-            <span><Settings /></span>
-            <strong>Focus Mode<small>{trackedLearner?.settings?.focusMode ? 'On' : 'Off'}</small></strong>
-            <b>Edit</b>
-          </button>
-          <button type="button" onClick={() => setSettingsOpen(true)}>
-            <span><Gift /></span>
-            <strong>Gift catalog<small>Real-world rewards</small></strong>
-            <b>Edit</b>
-          </button>
-          <Button onClick={() => setSettingsOpen(true)}>Open Parent Control Center</Button>
-        </aside>
       </div>
       {settingsOpen && (
         <SettingsModal
-          initial={trackedLearner?.settings}
+          initialByLearner={settingsByLearner}
           onLearnersChanged={() => {
             void api<DashboardSummary>('/parent/dashboard')
               .then((dashboard) => {

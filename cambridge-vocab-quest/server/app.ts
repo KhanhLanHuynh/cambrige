@@ -12,6 +12,7 @@ import {
   learnerSelectSchema,
   learnerUpdateSchema,
   loginSchema,
+  MAX_LEARNERS_PER_PARENT,
   parentGateSchema,
   passwordResetConfirmSchema,
   passwordResetRequestSchema,
@@ -19,6 +20,7 @@ import {
   quizAnswerSchema,
   quizCreateSchema,
   registerSchema,
+  settingsQuerySchema,
   settingsSchema,
 } from '../shared/schemas.js'
 import type { CambridgeLevel, SafeLearner } from '../shared/types.js'
@@ -322,6 +324,22 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
     return { session, learner }
   }
 
+  function ownedLearner(session: SessionRecord, learnerId?: string): LearnerRecord {
+    if (learnerId) {
+      const learner = store.read((database) =>
+        database.learners.find((item) => item.id === learnerId && item.userId === session.userId),
+      )
+      if (!learner) throw new HttpError(404, 'Learner not found')
+      return learner
+    }
+    if (!session.selectedLearnerId) throw new HttpError(409, 'Select a learner first')
+    const learner = store.read((database) =>
+      database.learners.find((item) => item.id === session.selectedLearnerId && item.userId === session.userId),
+    )
+    if (!learner) throw new HttpError(404, 'Learner not found')
+    return learner
+  }
+
   async function issueSession(userId: string, reply: FastifyReply): Promise<void> {
     const token = createSessionToken()
     const expiresAt = new Date(Date.now() + SESSION_AGE_SECONDS * 1000).toISOString()
@@ -490,7 +508,13 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
       settings: defaultSettings(),
       createdAt: new Date().toISOString(),
     }
-    await store.update((database) => database.learners.push(learner))
+    await store.update((database) => {
+      const count = database.learners.filter((entry) => entry.userId === session.userId).length
+      if (count >= MAX_LEARNERS_PER_PARENT) {
+        throw new HttpError(409, 'Maximum of 5 learners allowed')
+      }
+      database.learners.push(learner)
+    })
     return reply.code(201).send({ learner: safeLearner(learner) })
   })
 
@@ -936,12 +960,18 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
     const allAttempts = store.read((database) =>
       database.attempts.filter((attempt) => learnerIds.includes(attempt.learnerId)),
     )
-    const dailyCounts = Array.from({ length: 7 }, (_, offset) => {
-      const date = new Date(Date.now() - (6 - offset) * 86_400_000).toISOString().slice(0, 10)
-      return allAttempts.filter((attempt) => attempt.answeredAt.slice(0, 10) === date).length
-    })
-    const peakDailyCount = Math.max(1, ...dailyCounts)
-    const weekStart = new Date(Date.now() - 6 * 86_400_000).toISOString().slice(0, 10)
+    const dates = Array.from({ length: 7 }, (_, offset) =>
+      new Date(Date.now() - (6 - offset) * 86_400_000).toISOString().slice(0, 10),
+    )
+    const activityCounts = learners.map((learner) => ({
+      learnerId: learner.id,
+      name: learner.nickname,
+      counts: dates.map((date) =>
+        allAttempts.filter((attempt) => attempt.learnerId === learner.id && attempt.answeredAt.slice(0, 10) === date).length,
+      ),
+    }))
+    const peakDailyCount = Math.max(1, ...activityCounts.flatMap((series) => series.counts))
+    const weekStart = dates[0]
     const masteredThisWeek = new Set(
       allAttempts
         .filter((attempt) => attempt.correct && attempt.answeredAt.slice(0, 10) >= weekStart)
@@ -958,7 +988,11 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
     const levelPeak = Math.max(1, ...Object.values(levelCounts))
 
     return {
-      activity: dailyCounts.map((count) => Math.round((count / peakDailyCount) * 100)),
+      activity: activityCounts.map((series) => ({
+        learnerId: series.learnerId,
+        name: series.name,
+        values: series.counts.map((count) => Math.round((count / peakDailyCount) * 100)),
+      })),
       masteredThisWeek,
       masteryByLevel: (Object.entries(levelCounts) as Array<[CambridgeLevel, number]>).map(([label, count]) => ({
         label,
@@ -977,6 +1011,11 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
           atRiskWords: [...new Set(attempts.map((attempt) => attempt.wordId))].filter((wordId) =>
             healthForAttempts(attempts.filter((attempt) => attempt.wordId === wordId)) === 'At risk',
           ).length,
+          masteredThisWeek: new Set(
+            attempts
+              .filter((attempt) => attempt.correct && attempt.answeredAt.slice(0, 10) >= weekStart)
+              .map((attempt) => attempt.wordId),
+          ).size,
         }
       }),
       wordHealth: vocabulary.flatMap((word) => {
@@ -1231,19 +1270,21 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
   })
 
   app.get('/api/settings', async (request) => {
-    requireParent(request)
-    const { learner } = requireLearner(request)
+    const session = requireParent(request)
+    const query = parse(settingsQuerySchema, request.query ?? {})
+    const learner = ownedLearner(session, query.learnerId)
     return { settings: learner.settings }
   })
 
   app.patch('/api/settings', async (request) => {
-    requireParent(request)
-    const { learner } = requireLearner(request)
+    const session = requireParent(request)
     const body = parse(settingsSchema, request.body)
+    const { learnerId, ...patch } = body
+    const learner = ownedLearner(session, learnerId)
     const settings = await store.update((database) => {
       const current = database.learners.find((item) => item.id === learner.id)
       if (!current) throw new HttpError(404, 'Learner not found')
-      current.settings = { ...current.settings, ...body }
+      current.settings = { ...current.settings, ...patch }
       return current.settings
     })
     return { settings }

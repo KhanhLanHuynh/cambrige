@@ -50,6 +50,37 @@ describe('Cambridge Vocab Quest API', () => {
     await app.close()
   }, 20_000)
 
+  it('rejects creating more than 5 learners for one parent', async () => {
+    const app = await testApp()
+    const registration = await app.inject({
+      method: 'POST',
+      url: '/api/auth/register',
+      payload: { name: 'Parent', email: 'max-learners@example.com', password: 'A-secure-password1' },
+    })
+    expect(registration.statusCode).toBe(201)
+    const cookie = registration.cookies[0]?.name + '=' + registration.cookies[0]?.value
+
+    for (let index = 1; index <= 5; index++) {
+      const creation = await app.inject({
+        method: 'POST',
+        url: '/api/learners',
+        headers: { cookie },
+        payload: { name: `Learner ${index}`, level: 'Starters' },
+      })
+      expect(creation.statusCode).toBe(201)
+    }
+
+    const blocked = await app.inject({
+      method: 'POST',
+      url: '/api/learners',
+      headers: { cookie },
+      payload: { name: 'Learner 6', level: 'Starters' },
+    })
+    expect(blocked.statusCode).toBe(409)
+    expect(blocked.json().error).toBe('Maximum of 5 learners allowed')
+    await app.close()
+  }, 20_000)
+
   it('requires the learner PIN and accepts a quiz answer once', async () => {
     const app = await testApp()
     const registration = await app.inject({
@@ -216,6 +247,92 @@ describe('Cambridge Vocab Quest API', () => {
     expect(weeklyReport.body).toContain('Explorer')
     expect(weeklyReport.body).toContain('Words Mastered This Week')
     expect(weeklyReport.body).toContain('Daily Activity')
+    await app.close()
+  }, 20_000)
+
+  it('reads and patches settings for an explicit learnerId when parent-verified', async () => {
+    const app = await testApp()
+    const registration = await app.inject({
+      method: 'POST',
+      url: '/api/auth/register',
+      payload: { name: 'Parent', email: 'settings-multi@example.com', password: 'A-secure-password1' },
+    })
+    const cookie = registration.cookies[0]?.name + '=' + registration.cookies[0]?.value
+    const first = await app.inject({
+      method: 'POST',
+      url: '/api/learners',
+      headers: { cookie },
+      payload: { name: 'Ada', level: 'Starters' },
+    })
+    const second = await app.inject({
+      method: 'POST',
+      url: '/api/learners',
+      headers: { cookie },
+      payload: { name: 'Ben', level: 'Movers' },
+    })
+    const adaId = first.json().learner.id as string
+    const benId = second.json().learner.id as string
+
+    await app.inject({
+      method: 'POST',
+      url: '/api/learners/select',
+      headers: { cookie },
+      payload: { learnerId: adaId },
+    })
+    await app.inject({
+      method: 'POST',
+      url: '/api/auth/parent-gate',
+      headers: { cookie },
+      payload: { password: 'A-secure-password1' },
+    })
+
+    const patchBen = await app.inject({
+      method: 'PATCH',
+      url: '/api/settings',
+      headers: { cookie },
+      payload: {
+        learnerId: benId,
+        dailyLimitMinutes: 15,
+        focusMode: true,
+        hintsEnabled: false,
+      },
+    })
+    expect(patchBen.statusCode).toBe(200)
+    expect(patchBen.json().settings).toMatchObject({
+      dailyLimitMinutes: 15,
+      focusMode: true,
+      hintsEnabled: false,
+    })
+
+    const getBen = await app.inject({
+      method: 'GET',
+      url: `/api/settings?learnerId=${benId}`,
+      headers: { cookie },
+    })
+    expect(getBen.statusCode).toBe(200)
+    expect(getBen.json().settings).toMatchObject({
+      dailyLimitMinutes: 15,
+      focusMode: true,
+      hintsEnabled: false,
+    })
+
+    const getAda = await app.inject({
+      method: 'GET',
+      url: `/api/settings?learnerId=${adaId}`,
+      headers: { cookie },
+    })
+    expect(getAda.statusCode).toBe(200)
+    expect(getAda.json().settings.focusMode).toBe(false)
+    expect(getAda.json().settings.dailyLimitMinutes).not.toBe(15)
+
+    const unknown = await app.inject({
+      method: 'PATCH',
+      url: '/api/settings',
+      headers: { cookie },
+      payload: { learnerId: '00000000-0000-4000-8000-000000000000', focusMode: true },
+    })
+    expect(unknown.statusCode).toBe(404)
+
     await app.close()
   }, 20_000)
 

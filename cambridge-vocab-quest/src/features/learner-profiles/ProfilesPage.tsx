@@ -1,5 +1,6 @@
 import { Plus, Rocket, Sparkles, X } from 'lucide-react'
 import { useState, type FormEvent } from 'react'
+import { MAX_LEARNERS_PER_PARENT } from '../../../shared/schemas'
 import { Badge, Button, Logo } from '../../components/ui'
 import { api, ApiError } from '../../lib'
 import { useSessionStore } from '../../stores'
@@ -65,8 +66,13 @@ export function ProfilesPage({ navigate }: { navigate: (path: string) => void })
               <span>{learner.avatar}</span><strong>{learner.name}</strong><small>Level {learner.level} • {learner.gems} gems</small>
             </button>
           ))}
-          <button className="learner-card add-card" onClick={() => setCreating(true)}><Plus /><strong>Add learner</strong><small>Create a new journey</small></button>
+          {learners.length < MAX_LEARNERS_PER_PARENT && (
+            <button className="learner-card add-card" onClick={() => setCreating(true)}><Plus /><strong>Add learner</strong><small>Create a new journey</small></button>
+          )}
         </div>
+        {learners.length >= MAX_LEARNERS_PER_PARENT && (
+          <p className="profile-limit-note">You can have up to {MAX_LEARNERS_PER_PARENT} learners.</p>
+        )}
       </main>
       {(creating || selected) && (
         <div className="modal-backdrop" role="presentation">

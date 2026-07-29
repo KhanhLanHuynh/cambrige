@@ -31,6 +31,9 @@ export const questClaimSchema = z.object({
   questId: z.string().trim().min(1).max(40),
 })
 
+/** Max learners an adult account may create. */
+export const MAX_LEARNERS_PER_PARENT = 5
+
 export const learnerCreateSchema = z.object({
   name: z.string().trim().min(1).max(40),
   avatar: z.string().trim().min(1).max(40).default('owl'),
@@ -88,6 +91,7 @@ export const quizAnswerSchema = z.object({
 })
 
 export const settingsSchema = z.object({
+  learnerId: z.string().uuid().optional(),
   dailyGoal: z.number().int().min(1).max(50).optional(),
   dailyLimitMinutes: z.union([z.literal(15), z.literal(30), z.literal(45), z.literal(60)]).optional(),
   reviewMix: z.union([z.literal(10), z.literal(25), z.literal(40)]).optional(),
@@ -95,6 +99,10 @@ export const settingsSchema = z.object({
   focusMode: z.boolean().optional(),
   soundEnabled: z.boolean().optional(),
   hintsEnabled: z.boolean().optional(),
+})
+
+export const settingsQuerySchema = z.object({
+  learnerId: z.string().uuid().optional(),
 })
 
 export const assignmentSchema = z.object({
