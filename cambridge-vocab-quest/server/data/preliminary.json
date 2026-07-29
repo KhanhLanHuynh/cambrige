@@ -9,7 +9,7 @@
     "quizChoicesRebuiltAt": "2026-07-28T04:15:25.499Z",
     "factsGeneratedAt": "2026-07-26T03:31:57.008Z",
     "factsMode": "curated+wikipedia",
-    "imagesFetchedAt": "2026-07-28T09:26:15.644Z",
+    "imagesFetchedAt": "2026-07-29T03:21:28.281Z",
     "contentRegeneratedAt": "2026-07-28T04:15:24.867Z",
     "contentPack": "starters-content-pack"
   },
@@ -408,7 +408,7 @@
         "We talked about an access in class."
       ],
       "image": "/assets/images/words/preliminary-access.webp",
-      "imageCredit": "U.S. Embassy Jerusalem · CC BY 2.0 · flickr · https://www.flickr.com/photos/46886434@N04/25999667222"
+      "imageCredit": "Sarah Krichen WMFr · CC BY-SA 4.0 · wikimedia · https://commons.wikimedia.org/w/index.php?curid=94805312"
     },
     {
       "id": "preliminary-easy-access-to-the-city-centre-accident",
@@ -608,7 +608,9 @@
         "My favourite thing is an accountant.",
         "Sam found an accountant in the book.",
         "We talked about an accountant in class."
-      ]
+      ],
+      "image": "/assets/images/words/preliminary-accountant.webp",
+      "imageCredit": "numberstumper · CC BY-SA 2.0 · flickr · https://www.flickr.com/photos/69319106@N00/389666281"
     },
     {
       "id": "preliminary-accurate",
@@ -2154,7 +2156,7 @@
         "Children learn along with games."
       ],
       "image": "/assets/images/words/preliminary-along.webp",
-      "imageCredit": "andyarthur · CC BY 2.0 · flickr · https://www.flickr.com/photos/45846171@N04/5788100216"
+      "imageCredit": "Wikiwillz · CC BY-SA 4.0 · wikimedia · https://commons.wikimedia.org/w/index.php?curid=135871913"
     },
     {
       "id": "preliminary-aloud",
@@ -5164,7 +5166,7 @@
         "Smile — you look basic!"
       ],
       "image": "/assets/images/words/preliminary-basic.webp",
-      "imageCredit": "eevblog · CC BY 2.0 · flickr · https://www.flickr.com/photos/58072483@N02/19270733820"
+      "imageCredit": "Petteri Aimonen · CC CC0 1.0 · wikimedia · https://commons.wikimedia.org/w/index.php?curid=17475883"
     },
     {
       "id": "preliminary-basin",
@@ -12462,7 +12464,9 @@
         "My favourite thing is a competitor.",
         "Sam found a competitor in the book.",
         "We talked about a competitor in class."
-      ]
+      ],
+      "image": "/assets/images/words/preliminary-competitor.webp",
+      "imageCredit": "Boston Public Library · CC BY 2.0 · flickr · https://www.flickr.com/photos/24029425@N06/7986205610"
     },
     {
       "id": "preliminary-complain",
@@ -17550,7 +17554,7 @@
         "We talked about a demand in class."
       ],
       "image": "/assets/images/words/preliminary-demand.webp",
-      "imageCredit": "SilverStar at English Wikipedia · CC BY 2.5 · wikimedia · https://commons.wikimedia.org/w/index.php?curid=4681584"
+      "imageCredit": "Stefan Gössling, Andreas Humpe · CC BY 4.0 · wikimedia · https://commons.wikimedia.org/w/index.php?curid=129241348"
     },
     {
       "id": "preliminary-depart",
@@ -18828,7 +18832,7 @@
         "Smile — you look due!"
       ],
       "image": "/assets/images/words/preliminary-due.webp",
-      "imageCredit": "zugaldia · CC BY 2.0 · flickr · https://www.flickr.com/photos/23526149@N00/3110761639"
+      "imageCredit": "Calsidyrose · CC BY 2.0 · flickr · https://www.flickr.com/photos/17557997@N02/6033655868"
     },
     {
       "id": "preliminary-dull",
@@ -19300,7 +19304,9 @@
         "Why do you feel easygoing?",
         "We all feel easygoing sometimes.",
         "Smile — you look easygoing!"
-      ]
+      ],
+      "image": "/assets/images/words/preliminary-easygoing.webp",
+      "imageCredit": "Boston Public Library · CC BY 2.0 · flickr · https://www.flickr.com/photos/24029425@N06/8902352771"
     },
     {
       "id": "preliminary-economics",
@@ -24360,7 +24366,7 @@
         "My teacher asked us to forgive."
       ],
       "image": "/assets/images/words/preliminary-forgive.webp",
-      "imageCredit": "andymangold · CC BY 2.0 · flickr · https://www.flickr.com/photos/30116130@N03/4310340530"
+      "imageCredit": "Unknown · CC CC0 1.0 · rawpixel · https://www.rawpixel.com/image/7655422/image-vintage-art-public-domain"
     },
     {
       "id": "preliminary-form",
@@ -29416,9 +29422,7 @@
         "My favourite thing is the for hire.",
         "Lily found the for hire in the book.",
         "We talked about the for hire in class."
-      ],
-      "image": "/assets/images/words/preliminary-for-hire.webp",
-      "imageCredit": "AV Hire London · CC BY 2.0 · flickr · https://www.flickr.com/photos/56507339@N02/5579120811"
+      ]
     },
     {
       "id": "preliminary-historic",
@@ -33474,7 +33478,7 @@
         "We talked about a lack in class."
       ],
       "image": "/assets/images/words/preliminary-lack.webp",
-      "imageCredit": "sludgegulper · CC BY-SA 2.0 · flickr · https://www.flickr.com/photos/28179929@N08/3220627610"
+      "imageCredit": "Boston Public Library · CC BY 2.0 · flickr · https://www.flickr.com/photos/24029425@N06/8384574076"
     },
     {
       "id": "preliminary-ladder",
@@ -34284,7 +34288,7 @@
         "Children learn less with games."
       ],
       "image": "/assets/images/words/preliminary-less.webp",
-      "imageCredit": "Tim Pierce · CC BY 2.0 · flickr · https://www.flickr.com/photos/48439369@N00/4520862683"
+      "imageCredit": "Jacopo de' Barbari · CC CC0 1.0 · wikimedia · https://commons.wikimedia.org/w/index.php?curid=76014272"
     },
     {
       "id": "preliminary-let-s-go-out-tonight-letter",
@@ -36326,7 +36330,9 @@
         "My favourite thing is the shopping mall man.",
         "Zoe found the shopping mall man in the book.",
         "We talked about the shopping mall man in class."
-      ]
+      ],
+      "image": "/assets/images/words/preliminary-shopping-mall-man.webp",
+      "imageCredit": "HerryLawford · CC BY 2.0 · flickr · https://www.flickr.com/photos/32662631@N00/4353112955"
     },
     {
       "id": "preliminary-manage",
@@ -49400,7 +49406,7 @@
         "We talked about a recipe in class."
       ],
       "image": "/assets/images/words/preliminary-recipe.webp",
-      "imageCredit": "dane brian · CC BY-SA 2.0 · flickr · https://www.flickr.com/photos/12955651@N07/3814973676"
+      "imageCredit": "Author & Illustrator: Karl Muffler · CC BY 4.0 · museumsvictoria · https://collections.museumsvictoria.com.au/items/1346963"
     },
     {
       "id": "preliminary-recognise",
@@ -49562,7 +49568,9 @@
         "My favourite thing is the to break a record.",
         "Noah found the to break a record in the book.",
         "We talked about the to break a record in class."
-      ]
+      ],
+      "image": "/assets/images/words/preliminary-to-break-a-record.webp",
+      "imageCredit": "GDS Infographics · CC BY 2.0 · flickr · https://www.flickr.com/photos/43157614@N06/4554359577"
     },
     {
       "id": "preliminary-to-record-a-song",
@@ -57522,7 +57530,7 @@
         "We talked about a situation in class."
       ],
       "image": "/assets/images/words/preliminary-situation.webp",
-      "imageCredit": "Beverly & Pack · CC BY 2.0 · flickr · https://www.flickr.com/photos/10101046@N06/3451927303"
+      "imageCredit": "Jules* · CC BY-SA 4.0 · wikimedia · https://commons.wikimedia.org/w/index.php?curid=136211758"
     },
     {
       "id": "preliminary-size",
@@ -57658,7 +57666,7 @@
         "We talked about a skill in class."
       ],
       "image": "/assets/images/words/preliminary-skill.webp",
-      "imageCredit": "dotcompals · CC BY 2.0 · flickr · https://www.flickr.com/photos/27717684@N00/3230117979"
+      "imageCredit": "Digits.co.uk Images · CC BY 2.0 · wikimedia · https://commons.wikimedia.org/w/index.php?curid=116832046"
     },
     {
       "id": "preliminary-skin",
@@ -58194,7 +58202,7 @@
         "We talked about a snowfall in class."
       ],
       "image": "/assets/images/words/preliminary-snowfall.webp",
-      "imageCredit": "NASA Goddard Photo and Video · CC BY 2.0 · flickr · https://www.flickr.com/photos/24662369@N07/6309799542"
+      "imageCredit": "Rajani Gairshail · CC BY-SA 4.0 · wikimedia · https://commons.wikimedia.org/w/index.php?curid=182865749"
     },
     {
       "id": "preliminary-soap-opera",
@@ -58430,7 +58438,7 @@
         "We talked about a soldier in class."
       ],
       "image": "/assets/images/words/preliminary-soldier.webp",
-      "imageCredit": "Roman Harak · CC BY-SA 2.0 · flickr · https://www.flickr.com/photos/51812388@N02/5381388280"
+      "imageCredit": "Unknown · CC BY 4.0 · wikimedia · https://commons.wikimedia.org/w/index.php?curid=36097626"
     },
     {
       "id": "preliminary-solution",
@@ -58498,7 +58506,7 @@
         "We talked about a solve in class."
       ],
       "image": "/assets/images/words/preliminary-solve.webp",
-      "imageCredit": "jurvetson · CC BY 2.0 · flickr · https://www.flickr.com/photos/44124348109@N01/12399134224"
+      "imageCredit": "Drawnalism for Open UK · CC BY-SA 4.0 · wikimedia · https://commons.wikimedia.org/w/index.php?curid=128596817"
     },
     {
       "id": "preliminary-somehow",
@@ -59062,7 +59070,7 @@
         "My teacher asked us to spare."
       ],
       "image": "/assets/images/words/preliminary-spare.webp",
-      "imageCredit": "earthmoving equipment parts · CC BY-SA 2.0 · flickr · https://www.flickr.com/photos/43510899@N05/4007990663"
+      "imageCredit": "bhl · CC CC0 1.0 · rawpixel · https://www.rawpixel.com/image/386467/free-illustration-image-fish-george-shaw-vintage"
     },
     {
       "id": "preliminary-spare-time",
@@ -61650,7 +61658,7 @@
         "We talked about a suggestion in class."
       ],
       "image": "/assets/images/words/preliminary-suggestion.webp",
-      "imageCredit": "sethoscope · CC BY-SA 2.0 · flickr · https://www.flickr.com/photos/57845051@N00/2352330747"
+      "imageCredit": "Tobias1984 · CC BY-SA 4.0 · wikimedia · https://commons.wikimedia.org/w/index.php?curid=50144593"
     },
     {
       "id": "preliminary-suit",
@@ -63774,7 +63782,7 @@
         "We talked about a tense in class."
       ],
       "image": "/assets/images/words/preliminary-tense.webp",
-      "imageCredit": "kevin dooley · CC BY 2.0 · flickr · https://www.flickr.com/photos/12836528@N00/4114167117"
+      "imageCredit": "Samar kharel · CC BY-SA 4.0 · wikimedia · https://commons.wikimedia.org/w/index.php?curid=68041929"
     },
     {
       "id": "preliminary-term",
@@ -64804,7 +64812,7 @@
         "We talked about a tip in class."
       ],
       "image": "/assets/images/words/preliminary-tip.webp",
-      "imageCredit": "planeta · CC BY-SA 2.0 · flickr · https://www.flickr.com/photos/19047782@N00/317782969"
+      "imageCredit": "Digits.co.uk Images · CC BY 2.0 · wikimedia · https://commons.wikimedia.org/w/index.php?curid=116814389"
     },
     {
       "id": "preliminary-tiring",
@@ -65104,7 +65112,7 @@
         "Smile — you look top of the class!"
       ],
       "image": "/assets/images/words/preliminary-top-of-the-class.webp",
-      "imageCredit": "Sean MacEntee · CC BY 2.0 · flickr · https://www.flickr.com/photos/18090920@N07/4660972933"
+      "imageCredit": "Giuseppe Molteni · CC BY-SA 3.0 · wikimedia · https://commons.wikimedia.org/w/index.php?curid=16416668"
     },
     {
       "id": "preliminary-at-the-top-of-his-voice",
@@ -67088,7 +67096,9 @@
         "Why do you feel uncomfortable?",
         "We all feel uncomfortable sometimes.",
         "Smile — you look uncomfortable!"
-      ]
+      ],
+      "image": "/assets/images/words/preliminary-uncomfortable.webp",
+      "imageCredit": "Boston Public Library · CC BY 2.0 · flickr · https://www.flickr.com/photos/24029425@N06/9404725972"
     },
     {
       "id": "preliminary-underground",
