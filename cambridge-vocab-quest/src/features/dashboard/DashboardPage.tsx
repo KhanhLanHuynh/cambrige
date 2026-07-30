@@ -43,94 +43,44 @@ function newGiftDraft(): GiftDefinition {
   return { id: crypto.randomUUID(), name: '', costGems: 100 }
 }
 
+const DEFAULT_SETTINGS: LearnerSettings = {
+  dailyGoal: 10,
+  dailyLimitMinutes: 45,
+  reviewMix: 25,
+  timedModesEnabled: true,
+  focusMode: false,
+  soundEnabled: true,
+  hintsEnabled: true,
+}
+
 export function SettingsModal({
   onClose,
-  initialByLearner,
+  initialSettings,
   onLearnersChanged,
 }: {
   onClose: () => void
-  initialByLearner?: Record<string, LearnerSettings>
+  initialSettings?: LearnerSettings | null
   onLearnersChanged?: () => void
 }) {
   const learners = useSessionStore((state) => state.learners)
-  const removeLearner = useSessionStore((state) => state.removeLearner)
-  const updateLearner = useSessionStore((state) => state.updateLearner)
-  const [settingsTargetId, setSettingsTargetId] = useState(learners[0]?.id ?? '')
   const [saved, setSaved] = useState(false)
-  const [catalogSaved, setCatalogSaved] = useState(false)
   const [error, setError] = useState('')
-  const [catalogError, setCatalogError] = useState('')
-  const [settings, setSettings] = useState<LearnerSettings | null>(
-    settingsTargetId ? (initialByLearner?.[settingsTargetId] ?? null) : null,
-  )
-  const [catalog, setCatalog] = useState<GiftDefinition[]>([])
-  const [catalogLoading, setCatalogLoading] = useState(true)
-  const [pendingDelete, setPendingDelete] = useState<Learner | null>(null)
-  const [confirmName, setConfirmName] = useState('')
-  const [deleteError, setDeleteError] = useState('')
-  const [deleteBusy, setDeleteBusy] = useState(false)
-  const [editing, setEditing] = useState<Learner | null>(null)
-  const [editName, setEditName] = useState('')
-  const [editAvatar, setEditAvatar] = useState('🚀')
-  const [editLevel, setEditLevel] = useState<CambridgeLevel>('Starters')
-  const [editPin, setEditPin] = useState('')
-  const [clearPin, setClearPin] = useState(false)
-  const [editError, setEditError] = useState('')
-  const [editBusy, setEditBusy] = useState(false)
-  const [editSaved, setEditSaved] = useState(false)
+  const [settings, setSettings] = useState<LearnerSettings | null>(initialSettings ?? null)
 
   useEffect(() => {
-    if (!learners.length) {
-      setSettingsTargetId('')
-      return
-    }
-    if (!learners.some((entry) => entry.id === settingsTargetId)) {
-      setSettingsTargetId(learners[0].id)
-    }
-  }, [learners, settingsTargetId])
-
-  useEffect(() => {
-    if (!settingsTargetId) {
-      setSettings({
-        dailyGoal: 10,
-        dailyLimitMinutes: 45,
-        reviewMix: 25,
-        timedModesEnabled: true,
-        focusMode: false,
-        soundEnabled: true,
-        hintsEnabled: true,
-      })
-      return
-    }
-    const seeded = initialByLearner?.[settingsTargetId]
-    if (seeded) {
-      setSettings(seeded)
+    if (initialSettings) {
+      setSettings(initialSettings)
       return
     }
     setSettings(null)
-    api<{ settings: LearnerSettings }>(`/settings?learnerId=${encodeURIComponent(settingsTargetId)}`)
+    api<{ settings: LearnerSettings }>('/settings')
       .then((response) => setSettings(response.settings))
-      .catch(() => setSettings({
-        dailyGoal: 10,
-        dailyLimitMinutes: 45,
-        reviewMix: 25,
-        timedModesEnabled: true,
-        focusMode: false,
-        soundEnabled: true,
-        hintsEnabled: true,
-      }))
-  }, [settingsTargetId, initialByLearner])
-
-  useEffect(() => {
-    api<{ catalog: GiftDefinition[] }>('/parent/gifts')
-      .then((response) => setCatalog(response.catalog))
-      .catch(() => setCatalog([]))
-      .finally(() => setCatalogLoading(false))
-  }, [])
+      .catch(() => setSettings(DEFAULT_SETTINGS))
+  }, [initialSettings])
 
   const save = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    if (!settingsTargetId) {
+    if (!learners.length) {
       setError('Add a learner before saving experience settings')
       return
     }
@@ -139,7 +89,6 @@ export function SettingsModal({
       const response = await api<{ settings: LearnerSettings }>('/settings', {
         method: 'PATCH',
         body: {
-          learnerId: settingsTargetId,
           dailyLimitMinutes: Number(data.get('dailyLimitMinutes')),
           reviewMix: Number(data.get('reviewMix')),
           focusMode: data.get('focusMode') === 'on',
@@ -157,110 +106,6 @@ export function SettingsModal({
     }
   }
 
-  const saveCatalog = async () => {
-    if (catalog.some((gift) => !gift.name.trim())) {
-      setCatalogError('Give every gift a name, or remove empty rows')
-      return
-    }
-    const cleaned = catalog.map((gift) => ({ ...gift, name: gift.name.trim() }))
-    try {
-      const response = await api<{ catalog: GiftDefinition[] }>('/parent/gifts', {
-        method: 'PUT',
-        body: { gifts: cleaned },
-      })
-      setCatalog(response.catalog)
-      setCatalogSaved(true)
-      setCatalogError('')
-    } catch (requestError) {
-      setCatalogError(requestError instanceof ApiError ? requestError.message : 'Could not save gift catalog')
-    }
-  }
-
-  const confirmDelete = async () => {
-    if (!pendingDelete) return
-    if (confirmName.trim() !== pendingDelete.name) {
-      setDeleteError('Type the learner’s name exactly to confirm')
-      return
-    }
-    setDeleteBusy(true)
-    setDeleteError('')
-    try {
-      await api(`/learners/${pendingDelete.id}`, { method: 'DELETE' })
-      removeLearner(pendingDelete.id)
-      setPendingDelete(null)
-      setConfirmName('')
-      onLearnersChanged?.()
-    } catch (requestError) {
-      setDeleteError(requestError instanceof ApiError ? requestError.message : 'Could not delete learner')
-    } finally {
-      setDeleteBusy(false)
-    }
-  }
-
-  const openEdit = (entry: Learner) => {
-    setEditing(entry)
-    setEditName(entry.name)
-    setEditAvatar(entry.avatar || '🚀')
-    setEditLevel(entry.level)
-    setEditPin('')
-    setClearPin(false)
-    setEditError('')
-    setEditSaved(false)
-    setPendingDelete(null)
-    setConfirmName('')
-    setDeleteError('')
-  }
-
-  const saveEdit = async () => {
-    if (!editing) return
-    const name = editName.trim()
-    if (name.length < 1) {
-      setEditError('Enter a display name')
-      return
-    }
-    if (editPin && !/^\d{4,6}$/.test(editPin)) {
-      setEditError('PIN must be 4–6 digits')
-      return
-    }
-    if (clearPin && editPin) {
-      setEditError('Provide a new PIN or clear the PIN, not both')
-      return
-    }
-
-    const body: {
-      name: string
-      avatar: string
-      level: CambridgeLevel
-      pin?: string
-      clearPin?: boolean
-    } = {
-      name,
-      avatar: editAvatar,
-      level: editLevel,
-    }
-    if (clearPin) body.clearPin = true
-    else if (editPin) body.pin = editPin
-
-    setEditBusy(true)
-    setEditError('')
-    try {
-      const response = await api<{ learner: Learner }>(`/learners/${editing.id}`, {
-        method: 'PATCH',
-        body,
-      })
-      updateLearner(response.learner)
-      setEditing(response.learner)
-      setEditPin('')
-      setClearPin(false)
-      setEditSaved(true)
-      onLearnersChanged?.()
-    } catch (requestError) {
-      setEditError(requestError instanceof ApiError ? requestError.message : 'Could not update learner')
-    } finally {
-      setEditBusy(false)
-    }
-  }
-
   if (!settings) {
     return <div className="modal-backdrop"><section className="modal settings-modal"><p>Loading settings…</p></section></div>
   }
@@ -270,26 +115,8 @@ export function SettingsModal({
       <section className="modal settings-modal" role="dialog" aria-modal="true">
         <button className="modal-close" onClick={onClose} aria-label="Close settings"><X /></button>
         <h2>Parent control center</h2>
-        <p>Manage experience settings and profiles for every learner on this account.</p>
-        {learners.length > 0 && (
-          <label className="settings-learner-picker">
-            Experience settings for
-            <select
-              value={settingsTargetId}
-              aria-label="Learner for experience settings"
-              onChange={(event) => {
-                setSettingsTargetId(event.target.value)
-                setSaved(false)
-                setError('')
-              }}
-            >
-              {learners.map((entry) => (
-                <option key={entry.id} value={entry.id}>{entry.avatar} {entry.name}</option>
-              ))}
-            </select>
-          </label>
-        )}
-        <form key={settingsTargetId} onSubmit={save}>
+        <p>Manage experience settings for every learner on this account.</p>
+        <form onSubmit={save}>
           <label>
             Daily learning limit
             <select name="dailyLimitMinutes" defaultValue={String(settings.dailyLimitMinutes)}>
@@ -325,189 +152,52 @@ export function SettingsModal({
           </label>
           {error && <div className="form-error">{error}</div>}
           {saved && <div className="save-success"><Check /> Settings saved</div>}
-          <Button type="submit" disabled={!settingsTargetId}>Save settings</Button>
+          <Button type="submit" disabled={!learners.length}>Save settings</Button>
         </form>
+      </section>
+    </div>
+  )
+}
 
-        <div className="learners-manager">
-          <h3>Learners</h3>
-          <p>Edit or remove learner profiles. Deleting permanently removes progress, quizzes, and gift requests.</p>
-          <ul className="learners-manager-list">
-            {learners.map((entry) => (
-              <li key={entry.id}>
-                <span className="learners-manager-avatar" aria-hidden="true">{entry.avatar}</span>
-                <span>
-                  <strong>{entry.name}</strong>
-                  <small>{entry.gems ?? 0} gems · Level {entry.level}{entry.hasPin ? ' · PIN' : ''}</small>
-                </span>
-                <span className="learners-manager-actions">
-                  <button
-                    type="button"
-                    className="text-link"
-                    onClick={() => openEdit(entry)}
-                  >
-                    Edit
-                  </button>
-                  <button
-                    type="button"
-                    className="text-link danger-link"
-                    onClick={() => {
-                      setPendingDelete(entry)
-                      setConfirmName('')
-                      setDeleteError('')
-                      setEditing(null)
-                      setEditError('')
-                      setEditSaved(false)
-                    }}
-                  >
-                    Delete
-                  </button>
-                </span>
-              </li>
-            ))}
-          </ul>
-          {!learners.length && <p className="no-results">No learners on this account.</p>}
-          {editing && (
-            <div className="edit-learner-form">
-              <strong>Edit {editing.name}</strong>
-              <label>
-                Display name
-                <input
-                  aria-label="Learner display name"
-                  value={editName}
-                  maxLength={40}
-                  autoFocus
-                  onChange={(event) => {
-                    setEditName(event.target.value)
-                    setEditSaved(false)
-                  }}
-                />
-              </label>
-              <label>
-                Avatar
-                <select
-                  aria-label="Learner avatar"
-                  value={editAvatar}
-                  onChange={(event) => {
-                    setEditAvatar(event.target.value)
-                    setEditSaved(false)
-                  }}
-                >
-                  {!['🚀', '🦊', '🐼', '🦄', '🤖'].includes(editAvatar) && (
-                    <option value={editAvatar}>{editAvatar}</option>
-                  )}
-                  <option>🚀</option>
-                  <option>🦊</option>
-                  <option>🐼</option>
-                  <option>🦄</option>
-                  <option>🤖</option>
-                </select>
-              </label>
-              <label>
-                Cambridge level
-                <select
-                  aria-label="Learner Cambridge level"
-                  value={editLevel}
-                  onChange={(event) => {
-                    setEditLevel(event.target.value as CambridgeLevel)
-                    setEditSaved(false)
-                  }}
-                >
-                  <option>Starters</option>
-                  <option>Movers</option>
-                  <option>Flyers</option>
-                  <option>Preliminary</option>
-                </select>
-              </label>
-              <label>
-                New PIN (optional)
-                <input
-                  aria-label="New learner PIN"
-                  inputMode="numeric"
-                  maxLength={6}
-                  value={editPin}
-                  placeholder={editing.hasPin ? 'Leave blank to keep current PIN' : 'Optional 4–6 digits'}
-                  disabled={clearPin}
-                  onChange={(event) => {
-                    setEditPin(event.target.value.replace(/\D/g, '').slice(0, 6))
-                    setEditSaved(false)
-                  }}
-                />
-              </label>
-              {editing.hasPin && (
-                <label className="toggle-row">
-                  <span><strong>Remove PIN</strong><small>Allow open access without a PIN</small></span>
-                  <input
-                    type="checkbox"
-                    checked={clearPin}
-                    onChange={(event) => {
-                      setClearPin(event.target.checked)
-                      if (event.target.checked) setEditPin('')
-                      setEditSaved(false)
-                    }}
-                  />
-                </label>
-              )}
-              {editError && <div className="form-error">{editError}</div>}
-              {editSaved && <div className="save-success"><Check /> Learner updated</div>}
-              <div className="gift-editor-actions">
-                <Button
-                  type="button"
-                  variant="secondary"
-                  disabled={editBusy}
-                  onClick={() => {
-                    setEditing(null)
-                    setEditError('')
-                    setEditSaved(false)
-                  }}
-                >
-                  Cancel
-                </Button>
-                <Button type="button" disabled={editBusy} onClick={() => void saveEdit()}>
-                  Save learner
-                </Button>
-              </div>
-            </div>
-          )}
-          {pendingDelete && (
-            <div className="delete-learner-confirm">
-              <strong>Delete {pendingDelete.name}?</strong>
-              <p>This cannot be undone. Type <b>{pendingDelete.name}</b> to confirm.</p>
-              <input
-                aria-label="Type learner name to confirm delete"
-                value={confirmName}
-                placeholder={pendingDelete.name}
-                autoFocus
-                onChange={(event) => setConfirmName(event.target.value)}
-              />
-              {deleteError && <div className="form-error">{deleteError}</div>}
-              <div className="gift-editor-actions">
-                <Button
-                  type="button"
-                  variant="secondary"
-                  disabled={deleteBusy}
-                  onClick={() => {
-                    setPendingDelete(null)
-                    setConfirmName('')
-                    setDeleteError('')
-                  }}
-                >
-                  Cancel
-                </Button>
-                <Button
-                  type="button"
-                  disabled={deleteBusy || confirmName.trim() !== pendingDelete.name}
-                  onClick={() => void confirmDelete()}
-                >
-                  Delete forever
-                </Button>
-              </div>
-            </div>
-          )}
-        </div>
+function GiftCatalogModal({ onClose }: { onClose: () => void }) {
+  const [catalog, setCatalog] = useState<GiftDefinition[]>([])
+  const [catalogLoading, setCatalogLoading] = useState(true)
+  const [catalogSaved, setCatalogSaved] = useState(false)
+  const [catalogError, setCatalogError] = useState('')
 
+  useEffect(() => {
+    api<{ catalog: GiftDefinition[] }>('/parent/gifts')
+      .then((response) => setCatalog(response.catalog))
+      .catch(() => setCatalog([]))
+      .finally(() => setCatalogLoading(false))
+  }, [])
+
+  const saveCatalog = async () => {
+    if (catalog.some((gift) => !gift.name.trim())) {
+      setCatalogError('Give every gift a name, or remove empty rows')
+      return
+    }
+    const cleaned = catalog.map((gift) => ({ ...gift, name: gift.name.trim() }))
+    try {
+      const response = await api<{ catalog: GiftDefinition[] }>('/parent/gifts', {
+        method: 'PUT',
+        body: { gifts: cleaned },
+      })
+      setCatalog(response.catalog)
+      setCatalogSaved(true)
+      setCatalogError('')
+    } catch (requestError) {
+      setCatalogError(requestError instanceof ApiError ? requestError.message : 'Could not save gift catalog')
+    }
+  }
+
+  return (
+    <div className="modal-backdrop">
+      <section className="modal settings-modal gift-catalog-modal" role="dialog" aria-modal="true">
+        <button className="modal-close" onClick={onClose} aria-label="Close gifts"><X /></button>
+        <h2>Real-world gifts</h2>
+        <p>Define gifts learners can request with gems. Approve requests from the learner table.</p>
         <div className="gift-catalog-editor">
-          <h3>Real-world gifts</h3>
-          <p>Define gifts learners can request with gems. You confirm each request in Analytics.</p>
           {catalogLoading
             ? <p>Loading gift catalog…</p>
             : (
@@ -576,92 +266,178 @@ export function SettingsModal({
   )
 }
 
-function RedeemModal({
+type AssignmentRecord = { id: string; learnerId: string; level: CambridgeLevel; categories: string[] }
+
+function AssignReviewModal({
+  learners,
+  assignments,
   onClose,
-  initialPending,
-  onResolved,
+  onAssigned,
+  onParentLocked,
 }: {
+  learners: Array<Learner & { level: CambridgeLevel }>
+  assignments: AssignmentRecord[]
   onClose: () => void
-  initialPending: GiftRedemption[]
-  onResolved: (remaining: GiftRedemption[]) => void
+  onAssigned: (assignment: AssignmentRecord) => void
+  onParentLocked: () => void
 }) {
-  const [pending, setPending] = useState(initialPending)
+  const assignedLearnerIds = useMemo(
+    () => new Set(assignments.map((item) => item.learnerId)),
+    [assignments],
+  )
+  const eligibleLearners = useMemo(
+    () => learners.filter((entry) => !assignedLearnerIds.has(entry.id)),
+    [learners, assignedLearnerIds],
+  )
+  const [learnerId, setLearnerId] = useState(eligibleLearners[0]?.id ?? '')
+  const [categories, setCategories] = useState<string[]>([])
+  const [selected, setSelected] = useState<string[]>([])
+  const [loadingCategories, setLoadingCategories] = useState(false)
+  const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
-  const [busyId, setBusyId] = useState<string | null>(null)
-  const [loading, setLoading] = useState(true)
+
+  const selectedLearner = eligibleLearners.find((entry) => entry.id === learnerId)
 
   useEffect(() => {
-    let cancelled = false
-    api<{ pendingRedemptions: GiftRedemption[] }>('/parent/gifts')
+    if (!eligibleLearners.length) {
+      setLearnerId('')
+      return
+    }
+    if (!eligibleLearners.some((entry) => entry.id === learnerId)) {
+      setLearnerId(eligibleLearners[0].id)
+    }
+  }, [eligibleLearners, learnerId])
+
+  useEffect(() => {
+    if (!selectedLearner) {
+      setCategories([])
+      setSelected([])
+      return
+    }
+    let active = true
+    setLoadingCategories(true)
+    setSelected([])
+    setError('')
+    api<{ categories: string[] }>(`/vocabulary/categories?level=${encodeURIComponent(selectedLearner.level)}`)
       .then((response) => {
-        if (cancelled) return
-        setPending(response.pendingRedemptions)
-        onResolved(response.pendingRedemptions)
+        if (active) setCategories(response.categories)
       })
       .catch((requestError) => {
-        if (cancelled) return
-        setError(requestError instanceof ApiError ? requestError.message : 'Could not load gift requests')
+        if (!active) return
+        if (requestError instanceof ApiError && requestError.status === 403) {
+          onParentLocked()
+          return
+        }
+        setCategories([])
+        setError(requestError instanceof ApiError ? requestError.message : 'Could not load categories')
       })
       .finally(() => {
-        if (!cancelled) setLoading(false)
+        if (active) setLoadingCategories(false)
       })
-    return () => { cancelled = true }
-    // Load once when the modal opens
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    return () => { active = false }
+  }, [selectedLearner, onParentLocked])
 
-  const resolve = async (id: string, action: 'approve' | 'reject') => {
-    setBusyId(id)
+  const toggleCategory = (category: string) => {
+    setSelected((current) =>
+      current.includes(category)
+        ? current.filter((item) => item !== category)
+        : [...current, category],
+    )
+  }
+
+  const submit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    if (!selectedLearner) {
+      setError(
+        learners.length
+          ? 'Every learner already has a review task. Remove one before assigning a new one.'
+          : 'Add a learner before assigning review tasks',
+      )
+      return
+    }
+    if (!selected.length) {
+      setError('Select at least one category')
+      return
+    }
+    setBusy(true)
     setError('')
     try {
-      await api(`/parent/redemptions/${id}/${action}`, { method: 'POST' })
-      const remaining = pending.filter((item) => item.id !== id)
-      setPending(remaining)
-      onResolved(remaining)
+      const response = await api<{ assignment: AssignmentRecord }>('/curriculum/assignments', {
+        method: 'POST',
+        body: {
+          learnerId: selectedLearner.id,
+          level: selectedLearner.level,
+          categories: selected,
+        },
+      })
+      onAssigned(response.assignment)
+      onClose()
     } catch (requestError) {
-      setError(requestError instanceof ApiError ? requestError.message : `Could not ${action} request`)
+      if (requestError instanceof ApiError && requestError.status === 403) {
+        onParentLocked()
+        return
+      }
+      setError(requestError instanceof ApiError ? requestError.message : 'Could not assign task')
     } finally {
-      setBusyId(null)
+      setBusy(false)
     }
   }
 
   return (
     <div className="modal-backdrop">
-      <section className="modal settings-modal redeem-modal" role="dialog" aria-modal="true">
-        <button className="modal-close" onClick={onClose} aria-label="Close redeem"><X /></button>
-        <h2>Redeem gifts</h2>
-        <p>Approve a request when you hand over the real-world gift. Gems are deducted only on approval.</p>
-        {loading && <p>Loading requests…</p>}
-        {!loading && !pending.length && <p className="no-results">No pending gift requests.</p>}
-        <ul className="redeem-list">
-          {pending.map((item) => (
-            <li key={item.id}>
-              <div>
-                <strong>{item.giftName}</strong>
-                <small>
-                  {item.learnerName ?? 'Learner'} · {item.costGems} gems
-                  {typeof item.learnerGems === 'number' ? ` · ${item.learnerGems} on hand` : ''}
-                </small>
-              </div>
-              <div className="redeem-actions">
-                <Button
-                  variant="secondary"
-                  disabled={busyId === item.id}
-                  onClick={() => void resolve(item.id, 'reject')}
+      <section className="modal settings-modal assign-review-modal" role="dialog" aria-modal="true">
+        <button className="modal-close" onClick={onClose} aria-label="Close assign review"><X /></button>
+        <h2>Assign review task</h2>
+        <p>Choose a learner and the vocabulary categories to focus on next.</p>
+        {!eligibleLearners.length
+          ? (
+            <p className="no-results">
+              {learners.length
+                ? 'Every learner already has a review task. Remove one before assigning a new one.'
+                : 'Add a learner before assigning review tasks.'}
+            </p>
+          )
+          : (
+            <form onSubmit={submit}>
+              <label>
+                Learner
+                <select
+                  value={learnerId}
+                  aria-label="Learner for review task"
+                  onChange={(event) => setLearnerId(event.target.value)}
                 >
-                  Reject
-                </Button>
-                <Button
-                  disabled={busyId === item.id || (item.learnerGems ?? 0) < item.costGems}
-                  onClick={() => void resolve(item.id, 'approve')}
-                >
-                  Approve
-                </Button>
-              </div>
-            </li>
-          ))}
-        </ul>
-        {error && <div className="form-error">{error}</div>}
+                  {eligibleLearners.map((entry) => (
+                    <option key={entry.id} value={entry.id}>{entry.avatar} {entry.name} ({entry.level})</option>
+                  ))}
+                </select>
+              </label>
+              <fieldset className="category-picker" disabled={loadingCategories || !selectedLearner}>
+                <legend>Categories</legend>
+                {loadingCategories
+                  ? <p>Loading categories…</p>
+                  : categories.length
+                    ? (
+                      <div className="category-picker-grid">
+                        {categories.map((category) => (
+                          <label key={category} className="category-chip">
+                            <input
+                              type="checkbox"
+                              checked={selected.includes(category)}
+                              onChange={() => toggleCategory(category)}
+                            />
+                            <span>{category}</span>
+                          </label>
+                        ))}
+                      </div>
+                    )
+                    : <p className="no-results">No categories available for this level.</p>}
+              </fieldset>
+              {error && <div className="form-error">{error}</div>}
+              <Button type="submit" disabled={busy || !learnerId || !selected.length}>
+                {busy ? 'Assigning…' : 'Assign review task'}
+              </Button>
+            </form>
+          )}
       </section>
     </div>
   )
@@ -677,16 +453,35 @@ export function DashboardPage({
   const adultUnlocked = useSessionStore((state) => state.adultUnlocked)
   const unlockAdult = useSessionStore((state) => state.unlockAdult)
   const lockAdult = useSessionStore((state) => state.lockAdult)
+  const removeLearner = useSessionStore((state) => state.removeLearner)
+  const updateLearner = useSessionStore((state) => state.updateLearner)
   const [gateError, setGateError] = useState('')
   const [query, setQuery] = useState('')
   const [health, setHealth] = useState<'All' | WordHealth>('All')
   const [page, setPage] = useState(0)
   const [settingsOpen, setSettingsOpen] = useState(openSettings)
-  const [redeemOpen, setRedeemOpen] = useState(false)
+  const [giftsOpen, setGiftsOpen] = useState(false)
+  const [assignOpen, setAssignOpen] = useState(false)
   const [assignStatus, setAssignStatus] = useState('')
   const [summary, setSummary] = useState<DashboardSummary | null>(null)
   const [assignments, setAssignments] = useState<Array<{ id: string; learnerId: string; level: CambridgeLevel; categories: string[] }>>([])
   const [pendingItems, setPendingItems] = useState<GiftRedemption[]>([])
+  const [redeeming, setRedeeming] = useState<GiftRedemption | null>(null)
+  const [redeemError, setRedeemError] = useState('')
+  const [redeemBusy, setRedeemBusy] = useState(false)
+  const [pendingDelete, setPendingDelete] = useState<Learner | null>(null)
+  const [confirmName, setConfirmName] = useState('')
+  const [deleteError, setDeleteError] = useState('')
+  const [deleteBusy, setDeleteBusy] = useState(false)
+  const [editing, setEditing] = useState<Learner | null>(null)
+  const [editName, setEditName] = useState('')
+  const [editAvatar, setEditAvatar] = useState('🚀')
+  const [editLevel, setEditLevel] = useState<CambridgeLevel>('Starters')
+  const [editPin, setEditPin] = useState('')
+  const [clearPin, setClearPin] = useState(false)
+  const [editError, setEditError] = useState('')
+  const [editBusy, setEditBusy] = useState(false)
+  const [editSaved, setEditSaved] = useState(false)
   const healthRows = summary?.wordHealth ?? []
   const visibleWords = useMemo(
     () => healthRows.filter((word) => word.word.toLowerCase().includes(query.toLowerCase()) && (health === 'All' || word.health === health)),
@@ -696,15 +491,11 @@ export function DashboardPage({
   const pagedWords = visibleWords.slice(page * 5, page * 5 + 5)
   const activitySeries = summary?.activity ?? []
   const householdLearners = summary?.learners ?? []
-  const settingsByLearner = useMemo(() => {
-    const map: Record<string, LearnerSettings> = {}
-    for (const learner of householdLearners) {
-      if (learner.settings) map[learner.id] = learner.settings
-    }
-    return map
-  }, [householdLearners])
+  const sharedSettings = useMemo(
+    () => householdLearners.find((learner) => learner.settings)?.settings ?? null,
+    [householdLearners],
+  )
   const academicYear = `${new Date().getFullYear() - 1}–${String(new Date().getFullYear()).slice(2)}`
-  const pendingCount = pendingItems.length
 
   useEffect(() => {
     setSettingsOpen(openSettings)
@@ -732,28 +523,149 @@ export function DashboardPage({
 
   useEffect(() => setPage(0), [query, health])
 
-  const assignReview = async () => {
+  const refreshDashboard = () => {
+    void api<DashboardSummary>('/parent/dashboard')
+      .then((dashboard) => {
+        setSummary(dashboard)
+        setPendingItems(dashboard.pendingRedemptions?.items ?? [])
+      })
+      .catch(() => undefined)
+  }
+
+  const openEdit = (entry: Learner) => {
+    setEditing(entry)
+    setEditName(entry.name)
+    setEditAvatar(entry.avatar || '🚀')
+    setEditLevel(entry.level)
+    setEditPin('')
+    setClearPin(false)
+    setEditError('')
+    setEditSaved(false)
+    setPendingDelete(null)
+    setConfirmName('')
+    setDeleteError('')
+    setRedeeming(null)
+    setRedeemError('')
+  }
+
+  const openRedeem = (item: GiftRedemption) => {
+    setRedeeming(item)
+    setRedeemError('')
+    setEditing(null)
+    setEditError('')
+    setEditSaved(false)
+    setPendingDelete(null)
+    setConfirmName('')
+    setDeleteError('')
+  }
+
+  const resolveRedeem = async (action: 'approve' | 'reject') => {
+    if (!redeeming) return
+    setRedeemBusy(true)
+    setRedeemError('')
+    try {
+      await api(`/parent/redemptions/${redeeming.id}/${action}`, { method: 'POST' })
+      setPendingItems((current) => current.filter((item) => item.id !== redeeming.id))
+      setRedeeming(null)
+      refreshDashboard()
+    } catch (requestError) {
+      setRedeemError(requestError instanceof ApiError ? requestError.message : `Could not ${action} request`)
+    } finally {
+      setRedeemBusy(false)
+    }
+  }
+
+  const saveEdit = async () => {
+    if (!editing) return
+    const name = editName.trim()
+    if (name.length < 1) {
+      setEditError('Enter a display name')
+      return
+    }
+    if (editPin && !/^\d{4,6}$/.test(editPin)) {
+      setEditError('PIN must be 4–6 digits')
+      return
+    }
+    if (clearPin && editPin) {
+      setEditError('Provide a new PIN or clear the PIN, not both')
+      return
+    }
+
+    const body: {
+      name: string
+      avatar: string
+      level: CambridgeLevel
+      pin?: string
+      clearPin?: boolean
+    } = {
+      name,
+      avatar: editAvatar,
+      level: editLevel,
+    }
+    if (clearPin) body.clearPin = true
+    else if (editPin) body.pin = editPin
+
+    setEditBusy(true)
+    setEditError('')
+    try {
+      const response = await api<{ learner: Learner }>(`/learners/${editing.id}`, {
+        method: 'PATCH',
+        body,
+      })
+      updateLearner(response.learner)
+      setEditing(response.learner)
+      setEditPin('')
+      setClearPin(false)
+      setEditSaved(true)
+      refreshDashboard()
+    } catch (requestError) {
+      setEditError(requestError instanceof ApiError ? requestError.message : 'Could not update learner')
+    } finally {
+      setEditBusy(false)
+    }
+  }
+
+  const confirmDelete = async () => {
+    if (!pendingDelete) return
+    if (confirmName.trim() !== pendingDelete.name) {
+      setDeleteError('Type the learner’s name exactly to confirm')
+      return
+    }
+    setDeleteBusy(true)
+    setDeleteError('')
+    try {
+      await api(`/learners/${pendingDelete.id}`, { method: 'DELETE' })
+      removeLearner(pendingDelete.id)
+      setPendingDelete(null)
+      setConfirmName('')
+      refreshDashboard()
+    } catch (requestError) {
+      setDeleteError(requestError instanceof ApiError ? requestError.message : 'Could not delete learner')
+    } finally {
+      setDeleteBusy(false)
+    }
+  }
+
+  const openAssignReview = () => {
     if (!householdLearners.length) {
       setAssignStatus('Add a learner before assigning review tasks')
       return
     }
+    setAssignStatus('')
+    setAssignOpen(true)
+  }
+
+  const removeAssignment = async (assignmentId: string) => {
     try {
-      const created = await Promise.all(
-        householdLearners.map((learner) =>
-          api<{ assignment: { id: string; learnerId: string; level: CambridgeLevel; categories: string[] } }>('/curriculum/assignments', {
-            method: 'POST',
-            body: { learnerId: learner.id, level: learner.level, categories: ['nature', 'space'] },
-          }).then((response) => response.assignment),
-        ),
-      )
-      setAssignments((current) => [...current, ...created])
-      setAssignStatus(
-        created.length === 1
-          ? 'Review task assigned'
-          : `Review tasks assigned to ${created.length} learners`,
-      )
+      await api(`/curriculum/assignments/${assignmentId}`, { method: 'DELETE' })
+      setAssignments((current) => current.filter((item) => item.id !== assignmentId))
+      setAssignStatus('Review task removed')
     } catch (error) {
-      setAssignStatus(error instanceof ApiError ? error.message : 'Could not assign task')
+      if (error instanceof ApiError && error.status === 403) {
+        lockAdult()
+        return
+      }
+      setAssignStatus(error instanceof ApiError ? error.message : 'Could not remove review task')
     }
   }
 
@@ -806,8 +718,8 @@ export function DashboardPage({
           <div className="dashboard-hero-actions">
             <Button variant="secondary" onClick={() => void downloadFromApi('/parent/weekly-report.csv', 'weekly-report.csv')}><Download /> Weekly Report</Button>
             <Button variant="secondary" onClick={() => setSettingsOpen(true)}>Curriculum Settings</Button>
-            <Button variant="secondary" onClick={() => setRedeemOpen(true)}>
-              <Gift /> Redeem{pendingCount ? ` (${pendingCount})` : ''}
+            <Button variant="secondary" onClick={() => setGiftsOpen(true)}>
+              <Gift /> Real-world gifts
             </Button>
           </div>
         </div>
@@ -816,37 +728,256 @@ export function DashboardPage({
       <div className="learner-metrics-grid">
         {householdLearners.length
           ? (
-            <div className="table-scroll card">
-              <table className="learner-metrics-table">
-                <thead>
-                  <tr>
-                    <th>Learner</th>
-                    <th>Level</th>
-                    <th>Words Practised</th>
-                    <th>Learning Streak</th>
-                    <th>Quiz Accuracy</th>
-                    <th>Words At Risk</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {householdLearners.map((learner) => (
-                    <tr key={learner.id}>
-                      <td>
-                        <span className="learner-metrics-name">
-                          <span aria-hidden="true">{learner.avatar}</span>
-                          {learner.name}
-                        </span>
-                      </td>
-                      <td>{learner.level}</td>
-                      <td>{learner.totalAnswers ?? 0}</td>
-                      <td>{learner.streak ?? 0}d</td>
-                      <td>{learner.accuracy ?? 0}%</td>
-                      <td>{learner.atRiskWords ?? 0}</td>
+            <>
+              <div className="table-scroll card">
+                <table className="learner-metrics-table">
+                  <thead>
+                    <tr>
+                      <th>Learner</th>
+                      <th>Level</th>
+                      <th>Words Practised</th>
+                      <th>Learning Streak</th>
+                      <th>Quiz Accuracy</th>
+                      <th>Words At Risk</th>
+                      <th>Actions</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                  </thead>
+                  <tbody>
+                    {householdLearners.map((learner) => {
+                      const pendingGift = pendingItems.find((item) => item.learnerId === learner.id)
+                      return (
+                      <tr key={learner.id}>
+                        <td>
+                          <span className="learner-metrics-name">
+                            <span aria-hidden="true">{learner.avatar}</span>
+                            {learner.name}
+                          </span>
+                        </td>
+                        <td>{learner.level}</td>
+                        <td>{learner.totalAnswers ?? 0}</td>
+                        <td>{learner.streak ?? 0}d</td>
+                        <td>{learner.accuracy ?? 0}%</td>
+                        <td>{learner.atRiskWords ?? 0}</td>
+                        <td>
+                          <span className="learner-metrics-actions">
+                            <button
+                              type="button"
+                              className="text-link"
+                              onClick={() => openEdit(learner)}
+                            >
+                              Edit
+                            </button>
+                            <button
+                              type="button"
+                              className="text-link danger-link"
+                              onClick={() => {
+                                setPendingDelete(learner)
+                                setConfirmName('')
+                                setDeleteError('')
+                                setEditing(null)
+                                setEditError('')
+                                setEditSaved(false)
+                                setRedeeming(null)
+                                setRedeemError('')
+                              }}
+                            >
+                              Delete
+                            </button>
+                            <button
+                              type="button"
+                              className="text-link"
+                              disabled={!pendingGift}
+                              onClick={() => {
+                                if (pendingGift) openRedeem(pendingGift)
+                              }}
+                            >
+                              Redeem
+                            </button>
+                          </span>
+                        </td>
+                      </tr>
+                      )
+                    })}
+                  </tbody>
+                </table>
+              </div>
+              {editing && (
+                <div className="edit-learner-form">
+                  <strong>Edit {editing.name}</strong>
+                  <label>
+                    Display name
+                    <input
+                      aria-label="Learner display name"
+                      value={editName}
+                      maxLength={40}
+                      autoFocus
+                      onChange={(event) => {
+                        setEditName(event.target.value)
+                        setEditSaved(false)
+                      }}
+                    />
+                  </label>
+                  <label>
+                    Avatar
+                    <select
+                      aria-label="Learner avatar"
+                      value={editAvatar}
+                      onChange={(event) => {
+                        setEditAvatar(event.target.value)
+                        setEditSaved(false)
+                      }}
+                    >
+                      {!['🚀', '🦊', '🐼', '🦄', '🤖'].includes(editAvatar) && (
+                        <option value={editAvatar}>{editAvatar}</option>
+                      )}
+                      <option>🚀</option>
+                      <option>🦊</option>
+                      <option>🐼</option>
+                      <option>🦄</option>
+                      <option>🤖</option>
+                    </select>
+                  </label>
+                  <label>
+                    Cambridge level
+                    <select
+                      aria-label="Learner Cambridge level"
+                      value={editLevel}
+                      onChange={(event) => {
+                        setEditLevel(event.target.value as CambridgeLevel)
+                        setEditSaved(false)
+                      }}
+                    >
+                      <option>Starters</option>
+                      <option>Movers</option>
+                      <option>Flyers</option>
+                      <option>Preliminary</option>
+                    </select>
+                  </label>
+                  <label>
+                    New PIN (optional)
+                    <input
+                      aria-label="New learner PIN"
+                      inputMode="numeric"
+                      maxLength={6}
+                      value={editPin}
+                      placeholder={editing.hasPin ? 'Leave blank to keep current PIN' : 'Optional 4–6 digits'}
+                      disabled={clearPin}
+                      onChange={(event) => {
+                        setEditPin(event.target.value.replace(/\D/g, '').slice(0, 6))
+                        setEditSaved(false)
+                      }}
+                    />
+                  </label>
+                  {editing.hasPin && (
+                    <label className="toggle-row">
+                      <span><strong>Remove PIN</strong><small>Allow open access without a PIN</small></span>
+                      <input
+                        type="checkbox"
+                        checked={clearPin}
+                        onChange={(event) => {
+                          setClearPin(event.target.checked)
+                          if (event.target.checked) setEditPin('')
+                          setEditSaved(false)
+                        }}
+                      />
+                    </label>
+                  )}
+                  {editError && <div className="form-error">{editError}</div>}
+                  {editSaved && <div className="save-success"><Check /> Learner updated</div>}
+                  <div className="gift-editor-actions">
+                    <Button
+                      type="button"
+                      variant="secondary"
+                      disabled={editBusy}
+                      onClick={() => {
+                        setEditing(null)
+                        setEditError('')
+                        setEditSaved(false)
+                      }}
+                    >
+                      Cancel
+                    </Button>
+                    <Button type="button" disabled={editBusy} onClick={() => void saveEdit()}>
+                      Save learner
+                    </Button>
+                  </div>
+                </div>
+              )}
+              {pendingDelete && (
+                <div className="delete-learner-confirm">
+                  <strong>Delete {pendingDelete.name}?</strong>
+                  <p>This cannot be undone. Type <b>{pendingDelete.name}</b> to confirm.</p>
+                  <input
+                    aria-label="Type learner name to confirm delete"
+                    value={confirmName}
+                    placeholder={pendingDelete.name}
+                    autoFocus
+                    onChange={(event) => setConfirmName(event.target.value)}
+                  />
+                  {deleteError && <div className="form-error">{deleteError}</div>}
+                  <div className="gift-editor-actions">
+                    <Button
+                      type="button"
+                      variant="secondary"
+                      disabled={deleteBusy}
+                      onClick={() => {
+                        setPendingDelete(null)
+                        setConfirmName('')
+                        setDeleteError('')
+                      }}
+                    >
+                      Cancel
+                    </Button>
+                    <Button
+                      type="button"
+                      disabled={deleteBusy || confirmName.trim() !== pendingDelete.name}
+                      onClick={() => void confirmDelete()}
+                    >
+                      Delete forever
+                    </Button>
+                  </div>
+                </div>
+              )}
+              {redeeming && (
+                <div className="redeem-learner-panel">
+                  <strong>Redeem {redeeming.giftName}</strong>
+                  <p>
+                    {redeeming.learnerName ?? 'Learner'} requested this gift for {redeeming.costGems} gems
+                    {typeof redeeming.learnerGems === 'number' ? ` · ${redeeming.learnerGems} on hand` : ''}.
+                    Approve when you hand over the real-world gift. Gems are deducted only on approval.
+                  </p>
+                  {redeemError && <div className="form-error">{redeemError}</div>}
+                  <div className="redeem-actions">
+                    <Button
+                      type="button"
+                      variant="secondary"
+                      disabled={redeemBusy}
+                      onClick={() => {
+                        setRedeeming(null)
+                        setRedeemError('')
+                      }}
+                    >
+                      Cancel
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="secondary"
+                      disabled={redeemBusy}
+                      onClick={() => void resolveRedeem('reject')}
+                    >
+                      Reject
+                    </Button>
+                    <Button
+                      type="button"
+                      disabled={redeemBusy || (redeeming.learnerGems ?? 0) < redeeming.costGems}
+                      onClick={() => void resolveRedeem('approve')}
+                    >
+                      Approve
+                    </Button>
+                  </div>
+                </div>
+              )}
+            </>
           )
           : <p className="no-results">No learners yet. Add profiles to see practise metrics.</p>}
       </div>
@@ -945,7 +1076,7 @@ export function DashboardPage({
         <section>
           <div className="section-heading">
             <div><h2>Assigned Curriculum</h2>{assignStatus && <p aria-live="polite">{assignStatus}</p>}</div>
-            <Button variant="secondary" onClick={() => void assignReview()}><Plus /> Assign Review Task</Button>
+            <Button variant="secondary" onClick={openAssignReview}><Plus /> Assign Review Task</Button>
           </div>
           <div className="curriculum-grid">
             {assignments.length
@@ -958,7 +1089,16 @@ export function DashboardPage({
                     <small>{assignment.level}</small>
                     <span>Mastery Progress <b>{assignee?.accuracy ?? 0}%</b></span>
                     <Progress value={assignee?.accuracy ?? 0} />
-                    <p>{assignee ? `${assignee.avatar} ${assignee.name}` : 'Learner'}</p>
+                    <p>
+                      <span>{assignee ? `${assignee.avatar} ${assignee.name}` : 'Learner'}</span>
+                      <button
+                        type="button"
+                        className="text-link danger-link"
+                        onClick={() => void removeAssignment(assignment.id)}
+                      >
+                        Remove
+                      </button>
+                    </p>
                   </article>
                 )
               })
@@ -968,23 +1108,24 @@ export function DashboardPage({
       </div>
       {settingsOpen && (
         <SettingsModal
-          initialByLearner={settingsByLearner}
-          onLearnersChanged={() => {
-            void api<DashboardSummary>('/parent/dashboard')
-              .then((dashboard) => {
-                setSummary(dashboard)
-                setPendingItems(dashboard.pendingRedemptions?.items ?? [])
-              })
-              .catch(() => undefined)
-          }}
+          initialSettings={sharedSettings}
+          onLearnersChanged={refreshDashboard}
           onClose={() => { setSettingsOpen(false); if (openSettings) navigate('/dashboard') }}
         />
       )}
-      {redeemOpen && (
-        <RedeemModal
-          initialPending={pendingItems}
-          onClose={() => setRedeemOpen(false)}
-          onResolved={setPendingItems}
+      {giftsOpen && (
+        <GiftCatalogModal onClose={() => setGiftsOpen(false)} />
+      )}
+      {assignOpen && (
+        <AssignReviewModal
+          learners={householdLearners}
+          assignments={assignments}
+          onClose={() => setAssignOpen(false)}
+          onParentLocked={lockAdult}
+          onAssigned={(assignment) => {
+            setAssignments((current) => [...current, assignment])
+            setAssignStatus('Review task assigned')
+          }}
         />
       )}
     </>

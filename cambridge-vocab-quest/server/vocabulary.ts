@@ -20,6 +20,11 @@ function loadLevelFile(filename: string): VocabularyWord[] {
 
 export const vocabulary: VocabularyWord[] = LEVEL_FILES.flatMap(loadLevelFile)
 
+export function listCategories(level?: CambridgeLevel): string[] {
+  const pool = level ? vocabulary.filter((word) => word.level === level) : vocabulary
+  return [...new Set(pool.map((word) => word.category))].sort((a, b) => a.localeCompare(b))
+}
+
 function toSearchResult(word: VocabularyWord): VocabularySearchResult {
   return {
     id: word.id,

@@ -23,12 +23,22 @@ file-backed API at `http://localhost:3001`.
 The seed command creates a demo adult account and learner profile. See the
 terminal output from `npm run seed` for the current demo credentials.
 
+Parent accounts are host-provisioned only. The auth UI is sign-in only; use the
+CLI scripts below to create parents or reset passwords on the host.
+
+```bash
+npm run parent:create -- --name "Jamie" --email parent@example.com --password "A-secure-password1"
+npm run parent:reset-password -- --email parent@example.com --password "NewSecurePass1!"
+```
+
 ## Commands
 
 - `npm run dev` — run the web app and API together
 - `npm run dev:web` — run only Vite
 - `npm run dev:api` — run only the JSON API
 - `npm run seed` — reset local demo data
+- `npm run parent:create` — create a parent account in the data store
+- `npm run parent:reset-password` — reset a parent password (clears their sessions)
 - `npm run typecheck` — check TypeScript
 - `npm run lint` — run Oxlint
 - `npm test` — run unit, component, and API tests
@@ -55,9 +65,6 @@ multi-instance deployment or high write concurrency.
 - `DATA_BACKEND=json|sqlite` — persistence backend
 - `DATA_FILE` — path to JSON or SQLite file
 - `SEED_ON_START=true` — seed demo account when the API boots
-
-Password reset is available in the auth UI. In non-production, the request
-endpoint returns a `resetToken` for local testing.
 
 ## Privacy and security assumptions
 

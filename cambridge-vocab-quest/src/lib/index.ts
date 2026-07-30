@@ -36,6 +36,8 @@ export async function api<T>(path: string, options: ApiOptions = {}): Promise<T>
     if (method === 'GET') await setCached(cacheKey, result)
     return result as T
   } catch (error) {
+    // Never mask auth/permission failures with stale cache — only fall back when offline/network fails.
+    if (error instanceof ApiError) throw error
     if (method === 'GET') {
       const cached = await getCached<T>(cacheKey)
       if (cached !== undefined) return cached

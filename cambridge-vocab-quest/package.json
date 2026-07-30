@@ -9,6 +9,8 @@
     "dev:api": "tsx watch server/index.ts",
     "start:api": "tsx server/index.ts",
     "seed": "tsx server/seed.ts",
+    "parent:create": "tsx server/admin-parent.ts create",
+    "parent:reset-password": "tsx server/admin-parent.ts reset-password",
     "vocab:build": "node scripts/build-cambridge-vocab.mjs",
     "vocab:enrich": "node scripts/enrich-vocab.mjs",
     "vocab:choices": "node scripts/rebuild-quiz-choices.mjs",

@@ -3,18 +3,15 @@ import { mkdtemp, rm } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { afterEach, describe, expect, it } from 'vitest'
+import type { FastifyInstance } from 'fastify'
+import { createParent } from './admin-parent.js'
 import { buildApp } from './app.js'
-import { JsonStore } from './store.js'
+import { JsonStore, type DataStore } from './store.js'
 
 const directories: string[] = []
+const DEFAULT_PASSWORD = 'A-secure-password1'
 
 async function testApp() {
-  const directory = await mkdtemp(join(tmpdir(), 'cvq-'))
-  directories.push(directory)
-  return buildApp({ store: new JsonStore(join(directory, 'database.json')) })
-}
-
-async function testAppWithStore() {
   const directory = await mkdtemp(join(tmpdir(), 'cvq-'))
   directories.push(directory)
   const store = new JsonStore(join(directory, 'database.json'))
@@ -22,20 +19,45 @@ async function testAppWithStore() {
   return { app, store }
 }
 
+async function testAppWithStore() {
+  return testApp()
+}
+
+async function signInAsParent(
+  app: FastifyInstance,
+  store: DataStore,
+  options: { name?: string; email: string; password?: string },
+) {
+  const password = options.password ?? DEFAULT_PASSWORD
+  await createParent(store, {
+    name: options.name ?? 'Parent',
+    email: options.email,
+    password,
+  })
+  const login = await app.inject({
+    method: 'POST',
+    url: '/api/auth/login',
+    payload: { email: options.email.toLowerCase(), password },
+  })
+  expect(login.statusCode).toBe(200)
+  return `${login.cookies[0]?.name}=${login.cookies[0]?.value}`
+}
+
 afterEach(async () => {
   await Promise.all(directories.splice(0).map((directory) => rm(directory, { recursive: true, force: true })))
 })
 
 describe('Cambridge Vocab Quest API', () => {
-  it('registers an adult and creates a learner without exposing secrets', async () => {
-    const app = await testApp()
-    const registration = await app.inject({
+  it('rejects public registration and signs in a host-created parent', async () => {
+    const { app, store } = await testApp()
+    const blocked = await app.inject({
       method: 'POST',
       url: '/api/auth/register',
       payload: { name: 'Parent', email: 'parent@example.com', password: 'A-secure-password1' },
     })
-    expect(registration.statusCode).toBe(201)
-    const cookie = registration.cookies[0]?.name + '=' + registration.cookies[0]?.value
+    expect(blocked.statusCode).toBe(404)
+
+    const cookie = await signInAsParent(app, store, { name: 'Parent', email: 'parent@example.com' })
 
     const creation = await app.inject({
       method: 'POST',
@@ -51,14 +73,8 @@ describe('Cambridge Vocab Quest API', () => {
   }, 20_000)
 
   it('rejects creating more than 5 learners for one parent', async () => {
-    const app = await testApp()
-    const registration = await app.inject({
-      method: 'POST',
-      url: '/api/auth/register',
-      payload: { name: 'Parent', email: 'max-learners@example.com', password: 'A-secure-password1' },
-    })
-    expect(registration.statusCode).toBe(201)
-    const cookie = registration.cookies[0]?.name + '=' + registration.cookies[0]?.value
+    const { app, store } = await testApp()
+    const cookie = await signInAsParent(app, store, { name: 'Parent', email: 'max-learners@example.com' })
 
     for (let index = 1; index <= 5; index++) {
       const creation = await app.inject({
@@ -82,13 +98,8 @@ describe('Cambridge Vocab Quest API', () => {
   }, 20_000)
 
   it('requires the learner PIN and accepts a quiz answer once', async () => {
-    const app = await testApp()
-    const registration = await app.inject({
-      method: 'POST',
-      url: '/api/auth/register',
-      payload: { name: 'Parent', email: 'quiz@example.com', password: 'A-secure-password1' },
-    })
-    const cookie = registration.cookies[0]?.name + '=' + registration.cookies[0]?.value
+    const { app, store } = await testApp()
+    const cookie = await signInAsParent(app, store, { name: 'Parent', email: 'quiz@example.com' })
     const creation = await app.inject({
       method: 'POST',
       url: '/api/learners',
@@ -141,13 +152,8 @@ describe('Cambridge Vocab Quest API', () => {
 
   it('awards half gems when a higher-level learner practices a lower-level stop', async () => {
     const { vocabulary } = await import('./vocabulary.js')
-    const app = await testApp()
-    const registration = await app.inject({
-      method: 'POST',
-      url: '/api/auth/register',
-      payload: { name: 'Parent', email: 'half-gems@example.com', password: 'A-secure-password1' },
-    })
-    const cookie = registration.cookies[0]?.name + '=' + registration.cookies[0]?.value
+    const { app, store } = await testApp()
+    const cookie = await signInAsParent(app, store, { name: 'Parent', email: 'half-gems@example.com' })
     const creation = await app.inject({
       method: 'POST',
       url: '/api/learners',
@@ -206,13 +212,8 @@ describe('Cambridge Vocab Quest API', () => {
   }, 20_000)
 
   it('requires adult password verification after entering learner mode', async () => {
-    const app = await testApp()
-    const registration = await app.inject({
-      method: 'POST',
-      url: '/api/auth/register',
-      payload: { name: 'Parent', email: 'gate@example.com', password: 'A-secure-password1' },
-    })
-    const cookie = registration.cookies[0]?.name + '=' + registration.cookies[0]?.value
+    const { app, store } = await testApp()
+    const cookie = await signInAsParent(app, store, { name: 'Parent', email: 'gate@example.com' })
     const creation = await app.inject({
       method: 'POST',
       url: '/api/learners',
@@ -250,14 +251,9 @@ describe('Cambridge Vocab Quest API', () => {
     await app.close()
   }, 20_000)
 
-  it('reads and patches settings for an explicit learnerId when parent-verified', async () => {
-    const app = await testApp()
-    const registration = await app.inject({
-      method: 'POST',
-      url: '/api/auth/register',
-      payload: { name: 'Parent', email: 'settings-multi@example.com', password: 'A-secure-password1' },
-    })
-    const cookie = registration.cookies[0]?.name + '=' + registration.cookies[0]?.value
+  it('patches settings for every learner on the parent account', async () => {
+    const { app, store } = await testApp()
+    const cookie = await signInAsParent(app, store, { name: 'Parent', email: 'settings-multi@example.com' })
     const first = await app.inject({
       method: 'POST',
       url: '/api/learners',
@@ -286,19 +282,18 @@ describe('Cambridge Vocab Quest API', () => {
       payload: { password: 'A-secure-password1' },
     })
 
-    const patchBen = await app.inject({
+    const patch = await app.inject({
       method: 'PATCH',
       url: '/api/settings',
       headers: { cookie },
       payload: {
-        learnerId: benId,
         dailyLimitMinutes: 15,
         focusMode: true,
         hintsEnabled: false,
       },
     })
-    expect(patchBen.statusCode).toBe(200)
-    expect(patchBen.json().settings).toMatchObject({
+    expect(patch.statusCode).toBe(200)
+    expect(patch.json().settings).toMatchObject({
       dailyLimitMinutes: 15,
       focusMode: true,
       hintsEnabled: false,
@@ -322,29 +317,34 @@ describe('Cambridge Vocab Quest API', () => {
       headers: { cookie },
     })
     expect(getAda.statusCode).toBe(200)
-    expect(getAda.json().settings.focusMode).toBe(false)
-    expect(getAda.json().settings.dailyLimitMinutes).not.toBe(15)
+    expect(getAda.json().settings).toMatchObject({
+      dailyLimitMinutes: 15,
+      focusMode: true,
+      hintsEnabled: false,
+    })
 
-    const unknown = await app.inject({
+    const emptyParent = await signInAsParent(app, store, { name: 'Empty', email: 'settings-empty@example.com' })
+    await app.inject({
+      method: 'POST',
+      url: '/api/auth/parent-gate',
+      headers: { cookie: emptyParent },
+      payload: { password: 'A-secure-password1' },
+    })
+    const noLearners = await app.inject({
       method: 'PATCH',
       url: '/api/settings',
-      headers: { cookie },
-      payload: { learnerId: '00000000-0000-4000-8000-000000000000', focusMode: true },
+      headers: { cookie: emptyParent },
+      payload: { focusMode: true },
     })
-    expect(unknown.statusCode).toBe(404)
+    expect(noLearners.statusCode).toBe(409)
 
     await app.close()
   }, 20_000)
 
   it('claims a completed daily quest reward once', async () => {
     const { vocabulary } = await import('./vocabulary.js')
-    const app = await testApp()
-    const registration = await app.inject({
-      method: 'POST',
-      url: '/api/auth/register',
-      payload: { name: 'Parent', email: 'quest@example.com', password: 'A-secure-password1' },
-    })
-    const cookie = registration.cookies[0]?.name + '=' + registration.cookies[0]?.value
+    const { app, store } = await testApp()
+    const cookie = await signInAsParent(app, store, { name: 'Parent', email: 'quest@example.com' })
     const creation = await app.inject({
       method: 'POST',
       url: '/api/learners',
@@ -412,12 +412,7 @@ describe('Cambridge Vocab Quest API', () => {
     const store = new JsonStore(join(directory, 'database.json'))
     const app = await buildApp({ store })
 
-    const registration = await app.inject({
-      method: 'POST',
-      url: '/api/auth/register',
-      payload: { name: 'Parent', email: 'adaptive-quest@example.com', password: 'A-secure-password1' },
-    })
-    const cookie = registration.cookies[0]?.name + '=' + registration.cookies[0]?.value
+    const cookie = await signInAsParent(app, store, { name: 'Parent', email: 'adaptive-quest@example.com' })
     const creation = await app.inject({
       method: 'POST',
       url: '/api/learners',
@@ -521,13 +516,8 @@ describe('Cambridge Vocab Quest API', () => {
 
   it('counts lower unlocked map practice when profile level is ahead of earned progress', async () => {
     const { vocabulary } = await import('./vocabulary.js')
-    const app = await testApp()
-    const registration = await app.inject({
-      method: 'POST',
-      url: '/api/auth/register',
-      payload: { name: 'Parent', email: 'profile-ahead-quest@example.com', password: 'A-secure-password1' },
-    })
-    const cookie = registration.cookies[0]?.name + '=' + registration.cookies[0]?.value
+    const { app, store } = await testApp()
+    const cookie = await signInAsParent(app, store, { name: 'Parent', email: 'profile-ahead-quest@example.com' })
     const creation = await app.inject({
       method: 'POST',
       url: '/api/learners',
@@ -581,13 +571,8 @@ describe('Cambridge Vocab Quest API', () => {
 
   it('claims all completed daily quests in one request', async () => {
     const { vocabulary } = await import('./vocabulary.js')
-    const app = await testApp()
-    const registration = await app.inject({
-      method: 'POST',
-      url: '/api/auth/register',
-      payload: { name: 'Parent', email: 'claim-all@example.com', password: 'A-secure-password1' },
-    })
-    const cookie = registration.cookies[0]?.name + '=' + registration.cookies[0]?.value
+    const { app, store } = await testApp()
+    const cookie = await signInAsParent(app, store, { name: 'Parent', email: 'claim-all@example.com' })
     const creation = await app.inject({
       method: 'POST',
       url: '/api/learners',
@@ -653,12 +638,7 @@ describe('Cambridge Vocab Quest API', () => {
     const store = new JsonStore(join(directory, 'database.json'))
     const app = await buildApp({ store })
 
-    const registration = await app.inject({
-      method: 'POST',
-      url: '/api/auth/register',
-      payload: { name: 'Parent', email: `quest-${level.toLowerCase()}@example.com`, password: 'A-secure-password1' },
-    })
-    const cookie = registration.cookies[0]?.name + '=' + registration.cookies[0]?.value
+    const cookie = await signInAsParent(app, store, { name: 'Parent', email: `quest-${level.toLowerCase()}@example.com` })
     const creation = await app.inject({
       method: 'POST',
       url: '/api/learners',
@@ -703,13 +683,8 @@ describe('Cambridge Vocab Quest API', () => {
   }, 20_000)
 
   it('unlocks map stops starters-first with Nature Valley open at zero correct', async () => {
-    const app = await testApp()
-    const registration = await app.inject({
-      method: 'POST',
-      url: '/api/auth/register',
-      payload: { name: 'Parent', email: 'map@example.com', password: 'A-secure-password1' },
-    })
-    const cookie = registration.cookies[0]?.name + '=' + registration.cookies[0]?.value
+    const { app, store } = await testApp()
+    const cookie = await signInAsParent(app, store, { name: 'Parent', email: 'map@example.com' })
     const creation = await app.inject({
       method: 'POST',
       url: '/api/learners',
@@ -761,13 +736,8 @@ describe('Cambridge Vocab Quest API', () => {
   }, 20_000)
 
   it('unlocks map stops at or below a Flyers learner level', async () => {
-    const app = await testApp()
-    const registration = await app.inject({
-      method: 'POST',
-      url: '/api/auth/register',
-      payload: { name: 'Parent', email: 'flyers-map@example.com', password: 'A-secure-password1' },
-    })
-    const cookie = registration.cookies[0]?.name + '=' + registration.cookies[0]?.value
+    const { app, store } = await testApp()
+    const cookie = await signInAsParent(app, store, { name: 'Parent', email: 'flyers-map@example.com' })
     const creation = await app.inject({
       method: 'POST',
       url: '/api/learners',
@@ -812,12 +782,7 @@ describe('Cambridge Vocab Quest API', () => {
 
   it('promotes learner level when correct answers unlock a higher map stop', async () => {
     const { app, store } = await testAppWithStore()
-    const registration = await app.inject({
-      method: 'POST',
-      url: '/api/auth/register',
-      payload: { name: 'Parent', email: 'promote@example.com', password: 'A-secure-password1' },
-    })
-    const cookie = registration.cookies[0]?.name + '=' + registration.cookies[0]?.value
+    const cookie = await signInAsParent(app, store, { name: 'Parent', email: 'promote@example.com' })
     const creation = await app.inject({
       method: 'POST',
       url: '/api/learners',
@@ -868,13 +833,8 @@ describe('Cambridge Vocab Quest API', () => {
   }, 20_000)
 
   it('searches vocabulary for a selected learner without exposing answers', async () => {
-    const app = await testApp()
-    const registration = await app.inject({
-      method: 'POST',
-      url: '/api/auth/register',
-      payload: { name: 'Parent', email: 'search@example.com', password: 'A-secure-password1' },
-    })
-    const cookie = registration.cookies[0]?.name + '=' + registration.cookies[0]?.value
+    const { app, store } = await testApp()
+    const cookie = await signInAsParent(app, store, { name: 'Parent', email: 'search@example.com' })
     const creation = await app.inject({
       method: 'POST',
       url: '/api/learners',
@@ -917,14 +877,142 @@ describe('Cambridge Vocab Quest API', () => {
     await app.close()
   }, 20_000)
 
-  it('deletes a learner after parent verification and cascades related data', async () => {
-    const app = await testApp()
-    const registration = await app.inject({
+  it('lists vocabulary categories for a Cambridge level when parent-verified', async () => {
+    const { app, store } = await testApp()
+    const cookie = await signInAsParent(app, store, { name: 'Parent', email: 'categories@example.com' })
+    const creation = await app.inject({
       method: 'POST',
-      url: '/api/auth/register',
-      payload: { name: 'Parent', email: 'delete@example.com', password: 'A-secure-password1' },
+      url: '/api/learners',
+      headers: { cookie },
+      payload: { name: 'Explorer', level: 'Starters' },
     })
-    const cookie = registration.cookies[0]?.name + '=' + registration.cookies[0]?.value
+    await app.inject({
+      method: 'POST',
+      url: '/api/learners/select',
+      headers: { cookie },
+      payload: { learnerId: creation.json().learner.id },
+    })
+    await app.inject({
+      method: 'POST',
+      url: '/api/auth/parent-gate',
+      headers: { cookie },
+      payload: { password: 'A-secure-password1' },
+    })
+
+    const starters = await app.inject({
+      method: 'GET',
+      url: '/api/vocabulary/categories?level=Starters',
+      headers: { cookie },
+    })
+    expect(starters.statusCode).toBe(200)
+    const starterCategories = starters.json().categories as string[]
+    expect(starterCategories).toContain('nature')
+    expect(starterCategories).toContain('animals')
+    expect(starterCategories).not.toContain('health')
+    expect(starterCategories).not.toContain('space')
+
+    const movers = await app.inject({
+      method: 'GET',
+      url: '/api/vocabulary/categories?level=Movers',
+      headers: { cookie },
+    })
+    expect(movers.statusCode).toBe(200)
+    expect(movers.json().categories).toContain('health')
+
+    await app.close()
+  }, 20_000)
+
+  it('creates and deletes a curriculum assignment when parent-verified', async () => {
+    const { app, store } = await testApp()
+    const cookie = await signInAsParent(app, store, { name: 'Parent', email: 'assign-delete@example.com' })
+    const first = await app.inject({
+      method: 'POST',
+      url: '/api/learners',
+      headers: { cookie },
+      payload: { name: 'Explorer', level: 'Starters' },
+    })
+    const second = await app.inject({
+      method: 'POST',
+      url: '/api/learners',
+      headers: { cookie },
+      payload: { name: 'Buddy', level: 'Movers' },
+    })
+    const learnerId = first.json().learner.id as string
+    const otherLearnerId = second.json().learner.id as string
+    await app.inject({
+      method: 'POST',
+      url: '/api/learners/select',
+      headers: { cookie },
+      payload: { learnerId },
+    })
+    await app.inject({
+      method: 'POST',
+      url: '/api/auth/parent-gate',
+      headers: { cookie },
+      payload: { password: 'A-secure-password1' },
+    })
+
+    const created = await app.inject({
+      method: 'POST',
+      url: '/api/curriculum/assignments',
+      headers: { cookie },
+      payload: { learnerId, level: 'Starters', categories: ['animals', 'food'] },
+    })
+    expect(created.statusCode).toBe(201)
+    const assignmentId = created.json().assignment.id as string
+
+    const duplicate = await app.inject({
+      method: 'POST',
+      url: '/api/curriculum/assignments',
+      headers: { cookie },
+      payload: { learnerId, level: 'Starters', categories: ['nature'] },
+    })
+    expect(duplicate.statusCode).toBe(409)
+
+    const other = await app.inject({
+      method: 'POST',
+      url: '/api/curriculum/assignments',
+      headers: { cookie },
+      payload: { learnerId: otherLearnerId, level: 'Movers', categories: ['sports'] },
+    })
+    expect(other.statusCode).toBe(201)
+
+    const removed = await app.inject({
+      method: 'DELETE',
+      url: `/api/curriculum/assignments/${assignmentId}`,
+      headers: { cookie },
+    })
+    expect(removed.statusCode).toBe(204)
+
+    const recreated = await app.inject({
+      method: 'POST',
+      url: '/api/curriculum/assignments',
+      headers: { cookie },
+      payload: { learnerId, level: 'Starters', categories: ['school'] },
+    })
+    expect(recreated.statusCode).toBe(201)
+
+    const list = await app.inject({
+      method: 'GET',
+      url: '/api/curriculum/assignments',
+      headers: { cookie },
+    })
+    expect(list.statusCode).toBe(200)
+    expect(list.json().assignments).toHaveLength(2)
+
+    const unknown = await app.inject({
+      method: 'DELETE',
+      url: '/api/curriculum/assignments/00000000-0000-4000-8000-000000000000',
+      headers: { cookie },
+    })
+    expect(unknown.statusCode).toBe(404)
+
+    await app.close()
+  }, 20_000)
+
+  it('deletes a learner after parent verification and cascades related data', async () => {
+    const { app, store } = await testApp()
+    const cookie = await signInAsParent(app, store, { name: 'Parent', email: 'delete@example.com' })
     const creation = await app.inject({
       method: 'POST',
       url: '/api/learners',
@@ -983,12 +1071,7 @@ describe('Cambridge Vocab Quest API', () => {
       headers: { cookie },
     })).statusCode).toBe(404)
 
-    const otherParent = await app.inject({
-      method: 'POST',
-      url: '/api/auth/register',
-      payload: { name: 'Other', email: 'other-delete@example.com', password: 'A-secure-password1' },
-    })
-    const otherCookie = otherParent.cookies[0]?.name + '=' + otherParent.cookies[0]?.value
+    const otherCookie = await signInAsParent(app, store, { name: 'Other', email: 'other-delete@example.com' })
     const otherLearner = await app.inject({
       method: 'POST',
       url: '/api/learners',
@@ -1005,13 +1088,8 @@ describe('Cambridge Vocab Quest API', () => {
   }, 20_000)
 
   it('updates a learner after parent verification and validates PIN changes', async () => {
-    const app = await testApp()
-    const registration = await app.inject({
-      method: 'POST',
-      url: '/api/auth/register',
-      payload: { name: 'Parent', email: 'edit-learner@example.com', password: 'A-secure-password1' },
-    })
-    const cookie = registration.cookies[0]?.name + '=' + registration.cookies[0]?.value
+    const { app, store } = await testApp()
+    const cookie = await signInAsParent(app, store, { name: 'Parent', email: 'edit-learner@example.com' })
     const creation = await app.inject({
       method: 'POST',
       url: '/api/learners',
@@ -1085,12 +1163,7 @@ describe('Cambridge Vocab Quest API', () => {
       payload: { name: 'Ghost' },
     })).statusCode).toBe(404)
 
-    const otherParent = await app.inject({
-      method: 'POST',
-      url: '/api/auth/register',
-      payload: { name: 'Other', email: 'other-edit@example.com', password: 'A-secure-password1' },
-    })
-    const otherCookie = otherParent.cookies[0]?.name + '=' + otherParent.cookies[0]?.value
+    const otherCookie = await signInAsParent(app, store, { name: 'Other', email: 'other-edit@example.com' })
     expect((await app.inject({
       method: 'POST',
       url: '/api/auth/parent-gate',
@@ -1110,12 +1183,7 @@ describe('Cambridge Vocab Quest API', () => {
   it('ranks hub journey weakest-first and supports focus/review quiz sessions', async () => {
     const { vocabulary } = await import('./vocabulary.js')
     const { app, store } = await testAppWithStore()
-    const registration = await app.inject({
-      method: 'POST',
-      url: '/api/auth/register',
-      payload: { name: 'Parent', email: 'journey@example.com', password: 'A-secure-password1' },
-    })
-    const cookie = registration.cookies[0]?.name + '=' + registration.cookies[0]?.value
+    const cookie = await signInAsParent(app, store, { name: 'Parent', email: 'journey@example.com' })
     const creation = await app.inject({
       method: 'POST',
       url: '/api/learners',

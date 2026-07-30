@@ -1,4 +1,4 @@
-import { randomBytes, randomUUID } from 'node:crypto'
+import { randomUUID } from 'node:crypto'
 import Fastify, { type FastifyInstance, type FastifyReply, type FastifyRequest } from 'fastify'
 import cookie from '@fastify/cookie'
 import cors from '@fastify/cors'
@@ -14,12 +14,9 @@ import {
   loginSchema,
   MAX_LEARNERS_PER_PARENT,
   parentGateSchema,
-  passwordResetConfirmSchema,
-  passwordResetRequestSchema,
   questClaimSchema,
   quizAnswerSchema,
   quizCreateSchema,
-  registerSchema,
   settingsQuerySchema,
   settingsSchema,
 } from '../shared/schemas.js'
@@ -37,7 +34,7 @@ import {
   type LearnerRecord,
   type SessionRecord,
 } from './store.js'
-import { searchVocabulary, selectVocabulary, vocabulary } from './vocabulary.js'
+import { listCategories, searchVocabulary, selectVocabulary, vocabulary } from './vocabulary.js'
 
 const SESSION_COOKIE = 'cvq_session'
 const SESSION_AGE_SECONDS = 60 * 60 * 24 * 14
@@ -47,6 +44,9 @@ const vocabularySearchQuery = z.object({
   q: z.string().optional().default(''),
   level: z.enum(cambridgeLevels).optional(),
   limit: z.coerce.number().int().min(1).max(25).optional(),
+})
+const vocabularyCategoriesQuery = z.object({
+  level: z.enum(cambridgeLevels).optional(),
 })
 
 const MAP_THRESHOLDS = {
@@ -365,25 +365,6 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
 
   app.get('/api/health', async () => ({ ok: true }))
 
-  app.post('/api/auth/register', {
-    config: { rateLimit: { max: 8, timeWindow: '15 minutes' } },
-  }, async (request, reply) => {
-    const body = parse(registerSchema, request.body)
-    const duplicate = store.read((database) => database.users.some((user) => user.email === body.email))
-    if (duplicate) throw new HttpError(409, 'An account with that email already exists')
-    const user = {
-      id: randomUUID(),
-      name: body.name,
-      email: body.email,
-      passwordHash: await hashSecret(body.password),
-      createdAt: new Date().toISOString(),
-      giftCatalog: [],
-    }
-    await store.update((database) => database.users.push(user))
-    await issueSession(user.id, reply)
-    return reply.code(201).send({ user: { id: user.id, name: user.name, email: user.email } })
-  })
-
   app.post('/api/auth/login', {
     config: { rateLimit: { max: 10, timeWindow: '15 minutes' } },
   }, async (request, reply) => {
@@ -394,47 +375,6 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
     }
     await issueSession(user.id, reply)
     return { user: { id: user.id, name: user.name, email: user.email } }
-  })
-
-  app.post('/api/auth/password-reset/request', {
-    config: { rateLimit: { max: 5, timeWindow: '15 minutes' } },
-  }, async (request) => {
-    const body = parse(passwordResetRequestSchema, request.body)
-    const user = store.read((database) => database.users.find((item) => item.email === body.email))
-    const token = randomBytes(32).toString('base64url')
-    if (user) {
-      await store.update((database) => {
-        database.passwordResets = database.passwordResets.filter((item) => item.email !== body.email)
-        database.passwordResets.push({
-          email: body.email,
-          tokenHash: digestToken(token),
-          expiresAt: new Date(Date.now() + 60 * 60 * 1000).toISOString(),
-        })
-      })
-    }
-    const payload: { ok: true; resetToken?: string } = { ok: true }
-    if (process.env.NODE_ENV !== 'production' && user) payload.resetToken = token
-    return payload
-  })
-
-  app.post('/api/auth/password-reset/confirm', {
-    config: { rateLimit: { max: 5, timeWindow: '15 minutes' } },
-  }, async (request) => {
-    const body = parse(passwordResetConfirmSchema, request.body)
-    const tokenHash = digestToken(body.token)
-    const reset = store.read((database) =>
-      database.passwordResets.find((item) => item.tokenHash === tokenHash && Date.parse(item.expiresAt) > Date.now()),
-    )
-    if (!reset) throw new HttpError(400, 'Reset link is invalid or expired')
-    const passwordHash = await hashSecret(body.password)
-    await store.update((database) => {
-      const user = database.users.find((item) => item.email === reset.email)
-      if (!user) throw new HttpError(404, 'Account not found')
-      user.passwordHash = passwordHash
-      database.passwordResets = database.passwordResets.filter((item) => item.email !== reset.email)
-      database.sessions = database.sessions.filter((session) => session.userId !== user.id)
-    })
-    return { ok: true }
   })
 
   app.post('/api/auth/logout', async (request, reply) => {
@@ -491,6 +431,9 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
   app.post('/api/learners', async (request, reply) => {
     const session = requireSession(request)
     const body = parse(learnerCreateSchema, request.body)
+    const siblingSettings = store.read((database) =>
+      database.learners.find((entry) => entry.userId === session.userId)?.settings,
+    )
     const learner: LearnerRecord = {
       id: randomUUID(),
       userId: session.userId,
@@ -505,7 +448,7 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
       perfectQuizCount: 0,
       minutesPractisedToday: 0,
       completedQuizToday: false,
-      settings: defaultSettings(),
+      settings: siblingSettings ? { ...siblingSettings } : defaultSettings(),
       createdAt: new Date().toISOString(),
     }
     await store.update((database) => {
@@ -587,6 +530,12 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
     requireLearner(request)
     const query = parse(vocabularySearchQuery, request.query ?? {})
     return { results: searchVocabulary(query.q, { level: query.level, limit: query.limit }) }
+  })
+
+  app.get('/api/vocabulary/categories', async (request) => {
+    requireParent(request)
+    const query = parse(vocabularyCategoriesQuery, request.query ?? {})
+    return { categories: listCategories(query.level) }
   })
 
   app.get('/api/learner/hub', async (request) => {
@@ -1279,13 +1228,14 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
   app.patch('/api/settings', async (request) => {
     const session = requireParent(request)
     const body = parse(settingsSchema, request.body)
-    const { learnerId, ...patch } = body
-    const learner = ownedLearner(session, learnerId)
+    const { learnerId: _learnerId, ...patch } = body
     const settings = await store.update((database) => {
-      const current = database.learners.find((item) => item.id === learner.id)
-      if (!current) throw new HttpError(404, 'Learner not found')
-      current.settings = { ...current.settings, ...patch }
-      return current.settings
+      const owned = database.learners.filter((item) => item.userId === session.userId)
+      if (!owned.length) throw new HttpError(409, 'Add a learner before saving experience settings')
+      for (const current of owned) {
+        current.settings = { ...current.settings, ...patch }
+      }
+      return owned[0].settings
     })
     return { settings }
   })
@@ -1306,6 +1256,14 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
       database.learners.some((learner) => learner.id === body.learnerId && learner.userId === session.userId),
     )
     if (!ownsLearner) throw new HttpError(404, 'Learner not found')
+    const alreadyAssigned = store.read((database) =>
+      database.assignments.some(
+        (assignment) => assignment.learnerId === body.learnerId && assignment.userId === session.userId,
+      ),
+    )
+    if (alreadyAssigned) {
+      throw new HttpError(409, 'This learner already has a review task. Remove it before assigning a new one.')
+    }
     const assignment = {
       id: randomUUID(),
       userId: session.userId,
@@ -1314,6 +1272,21 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
     }
     await store.update((database) => database.assignments.push(assignment))
     return reply.code(201).send({ assignment })
+  })
+
+  app.delete('/api/curriculum/assignments/:id', async (request, reply) => {
+    const session = requireParent(request)
+    const { id } = parse(idParams, request.params)
+    const exists = store.read((database) =>
+      database.assignments.some((assignment) => assignment.id === id && assignment.userId === session.userId),
+    )
+    if (!exists) throw new HttpError(404, 'Assignment not found')
+    await store.update((database) => {
+      database.assignments = database.assignments.filter(
+        (assignment) => !(assignment.id === id && assignment.userId === session.userId),
+      )
+    })
+    return reply.code(204).send()
   })
 
   app.get('/api/parent/word-health.csv', async (request, reply) => {
