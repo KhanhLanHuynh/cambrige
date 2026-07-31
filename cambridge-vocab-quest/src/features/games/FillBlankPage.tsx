@@ -1,7 +1,7 @@
 import { ArrowLeft, Check } from 'lucide-react'
 import { useEffect, useMemo, useState, type FormEvent } from 'react'
 import { Badge, Button, Progress } from '../../components/ui'
-import { api, ApiError, speakAnswerFeedback } from '../../lib'
+import { api, ApiError, pickRandomSentence, speakAnswerFeedback } from '../../lib'
 import type { Learner, QuizAnswerResult, QuizQuestion, QuizSession } from '../../types'
 
 type CreatedSession = QuizSession & {
@@ -18,31 +18,12 @@ function blankSentence(question: QuizQuestion) {
   const withWord = pool.filter((sentence) =>
     target ? new RegExp(`\\b${escapeRegExp(target)}\\b`, 'i').test(sentence) : false,
   )
-  // Prefer classroom-safe lines; avoid leftover nonsense templates.
-  const ranked = [...withWord].sort((a, b) => scoreSentence(a, target) - scoreSentence(b, target))
-  const match = ranked[0] ?? pool[0] ?? (target ? `Write the word: ${target}` : 'Write the missing word.')
+  const match =
+    pickRandomSentence(withWord) ||
+    pickRandomSentence(pool) ||
+    (target ? `Write the word: ${target}` : 'Write the missing word.')
   if (!target) return match
   return match.replace(new RegExp(`\\b${escapeRegExp(target)}\\b`, 'i'), '______')
-}
-
-function scoreSentence(sentence: string, word: string) {
-  let score = 0
-  const lower = sentence.toLowerCase()
-  if (/ate .+ for lunch/i.test(sentence) && !isLikelyFoodWord(word)) score += 50
-  if (/put on .+ this morning/i.test(sentence) && !isLikelyClothesWord(word)) score += 50
-  if (/is soft and warm/i.test(sentence) && !isLikelyClothesWord(word)) score += 40
-  if (/drank .+ at breakfast/i.test(sentence)) score -= 5
-  if (/learned about|talked about|in the picture|in class|pointed to/i.test(lower)) score -= 10
-  if (sentence.length > 90) score += 5
-  return score
-}
-
-function isLikelyFoodWord(word: string) {
-  return /^(apple|banana|bread|burger|cake|candy|carrot|cheese|chicken|chips|chocolate|egg|fish|food|fruit|grape|honey|jam|juice|lemon|milk|mushroom|olive|olives|orange|pasta|peanut|pizza|rice|salad|salt|sandwich|sauce|soup|strawberry|sugar|toast|tomato|water|yoghurt|yogurt|coffee|tea|dessert|supper|lettuce|cabbage|spinach|herb|chilli|chili|vanilla)$/i.test(word.trim())
-}
-
-function isLikelyClothesWord(word: string) {
-  return /^(shirt|dress|hat|shoe|shoes|jacket|jeans|boot|boots|sock|socks|coat|scarf|gloves|trousers|skirt|sweater|jumper|tie|belt|cap|sandal|sandals|shorts|t-shirt)$/i.test(word.trim())
 }
 
 export function FillBlankPage({ learner, navigate }: { learner: Learner; navigate: (path: string) => void }) {
@@ -157,7 +138,17 @@ export function FillBlankPage({ learner, navigate }: { learner: Learner; navigat
       ) : (
         <section className="card fill-blank">
           <p className="eyebrow">{question.category} · {question.partOfSpeech}</p>
-          <p className="fill-blank-sentence" aria-label="Sentence with missing word">{cloze}</p>
+          <div className="fill-blank-prompt">
+            {question.image ? (
+              <img
+                className="fill-blank-image"
+                src={question.image}
+                alt=""
+                loading="lazy"
+              />
+            ) : null}
+            <p className="fill-blank-sentence" aria-label="Sentence with missing word">{cloze}</p>
+          </div>
           {status === 'idle' ? (
             <form className="fill-blank-form" onSubmit={(event) => void submit(event)}>
               <aside className="fill-blank-hint">

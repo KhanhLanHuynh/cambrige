@@ -3,15 +3,9 @@ import {
 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Badge, Button, Progress } from '../../components/ui'
-import { api, ApiError, speakAnswerFeedback } from '../../lib'
+import { api, ApiError, pickRandomSentence, speakAnswerFeedback } from '../../lib'
 import { useQuestStore } from '../../stores'
 import type { Learner, QuizAnswerResult, QuizQuestion, QuizSession } from '../../types'
-
-function pickExampleSentence(word: QuizQuestion) {
-  const pool = word.sentences
-  if (!pool.length) return ''
-  return pool[Math.floor(Math.random() * pool.length)] ?? ''
-}
 
 type CreatedSession = QuizSession & {
   settings?: { hintsEnabled: boolean; soundEnabled: boolean }
@@ -61,7 +55,7 @@ export function QuizPage({ learner, navigate }: { learner: Learner; navigate: (p
       setExampleSentence('')
       return
     }
-    setExampleSentence(pickExampleSentence(word))
+    setExampleSentence(pickRandomSentence(word.sentences))
   }, [word?.id])
 
   const speak = () => {
@@ -150,7 +144,7 @@ export function QuizPage({ learner, navigate }: { learner: Learner; navigate: (p
               </span>
             </div>
             {revealed ? (
-              <div className="sentence"><small>EXAMPLE SENTENCE</small><p>{exampleSentence || word.sentences[0] || ''}</p></div>
+              <div className="sentence"><small>EXAMPLE SENTENCE</small><p>{exampleSentence}</p></div>
             ) : null}
           </section>
           <div className="answers" aria-label="Answer choices">

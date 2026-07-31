@@ -51,6 +51,7 @@ const DEFAULT_SETTINGS: LearnerSettings = {
   focusMode: false,
   soundEnabled: true,
   hintsEnabled: true,
+  speedMatchSeconds: 60,
 }
 
 export function SettingsModal({
@@ -95,6 +96,7 @@ export function SettingsModal({
           timedModesEnabled: data.get('timedModesEnabled') === 'on',
           soundEnabled: data.get('soundEnabled') === 'on',
           hintsEnabled: data.get('hintsEnabled') === 'on',
+          speedMatchSeconds: Number(data.get('speedMatchSeconds')),
         },
       })
       setSettings(response.settings)
@@ -141,6 +143,16 @@ export function SettingsModal({
           <label className="toggle-row">
             <span><strong>Timed modes</strong><small>Allow speed-based games</small></span>
             <input name="timedModesEnabled" type="checkbox" defaultChecked={settings.timedModesEnabled} />
+          </label>
+          <label>
+            Speed Match timer
+            <select name="speedMatchSeconds" defaultValue={String(settings.speedMatchSeconds)}>
+              <option value="45">45 seconds</option>
+              <option value="60">60 seconds</option>
+              <option value="90">90 seconds</option>
+              <option value="120">120 seconds</option>
+              <option value="150">150 seconds</option>
+            </select>
           </label>
           <label className="toggle-row">
             <span><strong>Sound</strong><small>Pronunciation and effects</small></span>

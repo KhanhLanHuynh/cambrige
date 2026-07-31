@@ -1,15 +1,11 @@
 import { BookOpen, Search, X } from 'lucide-react'
-import { useEffect, useId, useRef, useState } from 'react'
-import { api } from '../../lib'
+import { useEffect, useId, useMemo, useRef, useState } from 'react'
+import { api, pickRandomSentence } from '../../lib'
 import type { VocabularySearchResult } from '../../types'
 
 type VocabularySearchProps = {
   navigate: (path: string) => void
   className?: string
-}
-
-function primarySentence(word: VocabularySearchResult) {
-  return word.sentences[0] ?? ''
 }
 
 export function VocabularySearch({ navigate, className = '' }: VocabularySearchProps) {
@@ -21,6 +17,10 @@ export function VocabularySearch({ navigate, className = '' }: VocabularySearchP
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [selectedWord, setSelectedWord] = useState<VocabularySearchResult | null>(null)
+  const exampleSentence = useMemo(
+    () => (selectedWord ? pickRandomSentence(selectedWord.sentences) : ''),
+    [selectedWord],
+  )
 
   useEffect(() => {
     const trimmed = query.trim()
@@ -155,8 +155,8 @@ export function VocabularySearch({ navigate, className = '' }: VocabularySearchP
             <h2 id="search-word-title">{selectedWord.word}</h2>
             <p className="search-phonetic">{selectedWord.phonetic}</p>
             <p>{selectedWord.definition}</p>
-            {primarySentence(selectedWord) && (
-              <p className="search-sentence">“{primarySentence(selectedWord)}”</p>
+            {exampleSentence && (
+              <p className="search-sentence">“{exampleSentence}”</p>
             )}
             {selectedWord.hint && <p className="search-hint">Hint: {selectedWord.hint}</p>}
             <div className="search-modal-actions">

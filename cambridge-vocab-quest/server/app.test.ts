@@ -290,6 +290,7 @@ describe('Cambridge Vocab Quest API', () => {
         dailyLimitMinutes: 15,
         focusMode: true,
         hintsEnabled: false,
+        speedMatchSeconds: 45,
       },
     })
     expect(patch.statusCode).toBe(200)
@@ -297,6 +298,7 @@ describe('Cambridge Vocab Quest API', () => {
       dailyLimitMinutes: 15,
       focusMode: true,
       hintsEnabled: false,
+      speedMatchSeconds: 45,
     })
 
     const getBen = await app.inject({
@@ -309,6 +311,7 @@ describe('Cambridge Vocab Quest API', () => {
       dailyLimitMinutes: 15,
       focusMode: true,
       hintsEnabled: false,
+      speedMatchSeconds: 45,
     })
 
     const getAda = await app.inject({
@@ -321,6 +324,7 @@ describe('Cambridge Vocab Quest API', () => {
       dailyLimitMinutes: 15,
       focusMode: true,
       hintsEnabled: false,
+      speedMatchSeconds: 45,
     })
 
     const emptyParent = await signInAsParent(app, store, { name: 'Empty', email: 'settings-empty@example.com' })

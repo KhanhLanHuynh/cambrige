@@ -799,6 +799,7 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
       settings: {
         hintsEnabled: learner.settings.hintsEnabled,
         soundEnabled: learner.settings.soundEnabled,
+        speedMatchSeconds: learner.settings.speedMatchSeconds,
       },
       questions: selected.map(({ answer: _answer, fact: _fact, ...question }) => question),
     })

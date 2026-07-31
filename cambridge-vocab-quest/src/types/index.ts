@@ -96,6 +96,7 @@ export interface LearnerSettings {
   focusMode: boolean
   soundEnabled: boolean
   hintsEnabled: boolean
+  speedMatchSeconds: 45 | 60 | 90 | 120 | 150
 }
 
 export interface HubQuest {

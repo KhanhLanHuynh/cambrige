@@ -6,8 +6,12 @@ import type { Learner, QuizAnswerResult, QuizSession } from '../../types'
 
 type Pair = { wordId: string; word: string; definition: string }
 
+type CreatedSession = QuizSession & {
+  settings?: { hintsEnabled?: boolean; soundEnabled?: boolean; speedMatchSeconds?: number }
+}
+
 export function SpeedMatchPage({ learner, navigate }: { learner: Learner; navigate: (path: string) => void }) {
-  const [session, setSession] = useState<QuizSession | null>(null)
+  const [session, setSession] = useState<CreatedSession | null>(null)
   const [pairs, setPairs] = useState<Pair[]>([])
   const [definitions, setDefinitions] = useState<string[]>([])
   const [selectedWord, setSelectedWord] = useState<string | null>(null)
@@ -19,9 +23,10 @@ export function SpeedMatchPage({ learner, navigate }: { learner: Learner; naviga
 
   useEffect(() => {
     let active = true
-    api<QuizSession>('/quiz/sessions', { method: 'POST', body: { count: 6, mode: 'speed-match', level: learner.level } })
+    api<CreatedSession>('/quiz/sessions', { method: 'POST', body: { count: 6, mode: 'speed-match', level: learner.level } })
       .then((created) => {
         if (!active) return
+        setSeconds(created.settings?.speedMatchSeconds ?? 60)
         setSession(created)
         const nextPairs = created.questions.map((question) => ({
           wordId: question.id,

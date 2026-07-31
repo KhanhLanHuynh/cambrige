@@ -90,6 +90,13 @@ export const settingsSchema = z.object({
   focusMode: z.boolean().optional(),
   soundEnabled: z.boolean().optional(),
   hintsEnabled: z.boolean().optional(),
+  speedMatchSeconds: z.union([
+    z.literal(45),
+    z.literal(60),
+    z.literal(90),
+    z.literal(120),
+    z.literal(150),
+  ]).optional(),
 })
 
 export const settingsQuerySchema = z.object({

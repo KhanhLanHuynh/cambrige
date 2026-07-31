@@ -40,6 +40,7 @@ export interface LearnerSettings {
   focusMode: boolean
   soundEnabled: boolean
   hintsEnabled: boolean
+  speedMatchSeconds: 45 | 60 | 90 | 120 | 150
 }
 
 export interface LearnerRecord {
@@ -126,6 +127,7 @@ export const defaultSettings = (): LearnerSettings => ({
   focusMode: false,
   soundEnabled: true,
   hintsEnabled: true,
+  speedMatchSeconds: 60,
 })
 
 export const emptyDatabase = (): Database => ({

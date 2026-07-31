@@ -22,7 +22,6 @@
       "phonetic": "/ˈɑː(ɹ)mtʃɛə(ɹ)/",
       "definition": "a comfortable chair with rests for your arms",
       "definitionVi": "ghế bành có chỗ kê tay",
-      "sentence": "There is an armchair in my house.",
       "category": "home",
       "partOfSpeech": "noun",
       "choices": [
@@ -56,7 +55,6 @@
       "phonetic": "/ˈask/",
       "definition": "to say a question because you want to know something",
       "definitionVi": "hỏi, đặt câu hỏi",
-      "sentence": "Can I ask a question, please?",
       "category": "school",
       "partOfSpeech": "verb",
       "choices": [
@@ -88,7 +86,6 @@
       "phonetic": "/æd/",
       "definition": "to put one thing with another to make more",
       "definitionVi": "cộng thêm, ghép thêm vào",
-      "sentence": "Please add the numbers on the board.",
       "category": "school",
       "partOfSpeech": "verb",
       "choices": [
@@ -122,7 +119,6 @@
       "phonetic": "/af.təɾˈnʉːn/",
       "definition": "the time after lunch until the evening",
       "definitionVi": "buổi chiều, sau giờ ăn trưa",
-      "sentence": "I play in the afternoon.",
       "category": "time",
       "partOfSpeech": "noun",
       "choices": [
@@ -156,7 +152,6 @@
       "phonetic": "/əˈɡeɪn/",
       "definition": "one more time, like doing something twice",
       "definitionVi": "lại, một lần nữa",
-      "sentence": "Please say that again.",
       "category": "general",
       "partOfSpeech": "adverb",
       "choices": [
@@ -188,7 +183,6 @@
       "phonetic": "/ˈeɪ.li.ən/",
       "definition": "a creature from another planet in space stories",
       "definitionVi": "người ngoài hành tinh trong truyện vũ trụ",
-      "sentence": "I can see an alien in the picture.",
       "category": "general",
       "partOfSpeech": "noun",
       "choices": [
@@ -222,7 +216,6 @@
       "phonetic": "/ˈæl.fə.bɛt/",
       "definition": "all the letters from A to Z that we write with",
       "definitionVi": "bảng chữ cái từ A đến Z",
-      "sentence": "I use an alphabet at school.",
       "category": "school",
       "partOfSpeech": "noun",
       "choices": [
@@ -256,7 +249,6 @@
       "phonetic": "/ˈæŋ.ɡɹi/",
       "definition": "when someone feels very cross and upset",
       "definitionVi": "tức giận, đang nổi nóng",
-      "sentence": "I feel angry today.",
       "category": "feelings",
       "partOfSpeech": "adjective",
       "choices": [
@@ -290,7 +282,6 @@
       "phonetic": "/ˈænɪməl/",
       "definition": "a living thing that moves and is not a plant",
       "definitionVi": "động vật, con vật sống",
-      "sentence": "I can see an animal at the zoo.",
       "category": "animals",
       "partOfSpeech": "noun",
       "choices": [
@@ -324,7 +315,6 @@
       "phonetic": "/ˈan.sə/",
       "definition": "what you say or write when a question is asked",
       "definitionVi": "câu trả lời khi thầy cô hỏi",
-      "sentence": "I use an answer at school.",
       "category": "school",
       "partOfSpeech": "noun",
       "choices": [
@@ -358,7 +348,6 @@
       "phonetic": "/əˈpɑːt.mənt/",
       "definition": "a home in a tall building with many other homes",
       "definitionVi": "căn hộ trong chung cư",
-      "sentence": "There is an apartment in my house.",
       "category": "home",
       "partOfSpeech": "noun",
       "choices": [
@@ -392,7 +381,6 @@
       "phonetic": "/ˈæp.əl/",
       "definition": "a round crunchy fruit that is often red or green",
       "definitionVi": "quả táo, ăn giòn và ngọt",
-      "sentence": "I like an apple for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -426,7 +414,6 @@
       "phonetic": "/ɑːm/",
       "definition": "the part of your body from your shoulder to your hand",
       "definitionVi": "cánh tay, từ vai đến bàn tay",
-      "sentence": "Touch your arm, please.",
       "category": "body",
       "partOfSpeech": "noun",
       "choices": [
@@ -460,7 +447,6 @@
       "phonetic": "/bɒks/",
       "definition": "a container with sides and often a lid inside",
       "definitionVi": "cái hộp đựng đồ",
-      "sentence": "There is a box in my house.",
       "category": "home",
       "partOfSpeech": "noun",
       "choices": [
@@ -494,7 +480,6 @@
       "phonetic": "/bɔːə/",
       "definition": "a male child who is not yet a grown-up man",
       "definitionVi": "cậu bé, con trai nhỏ",
-      "sentence": "This is my boy.",
       "category": "people",
       "partOfSpeech": "noun",
       "choices": [
@@ -528,7 +513,6 @@
       "phonetic": "/bɹeːd/",
       "definition": "soft baked food made from flour, often sliced for sandwiches",
       "definitionVi": "bánh mì, ăn sáng rất quen",
-      "sentence": "I like bread for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -562,7 +546,6 @@
       "phonetic": "/ˈbɹɛkfəst/",
       "definition": "the first meal you eat when you wake up in the morning",
       "definitionVi": "bữa sáng, ăn sau khi thức dậy",
-      "sentence": "I like breakfast for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -596,7 +579,6 @@
       "phonetic": "/ˈbɹɐðɘ(ɹ)/",
       "definition": "a boy who has the same mum and dad as you",
       "definitionVi": "anh em trai trong gia đình",
-      "sentence": "This is my brother.",
       "category": "people",
       "partOfSpeech": "noun",
       "choices": [
@@ -630,7 +612,6 @@
       "phonetic": "/bɹaʊn/",
       "definition": "the colour of chocolate, tree bark or a teddy bear",
       "definitionVi": "màu nâu",
-      "sentence": "I have a brown bag.",
       "category": "general",
       "partOfSpeech": "adjective",
       "choices": [
@@ -664,7 +645,6 @@
       "phonetic": "/ˈbɜː(ɹ)ɡə(ɹ)/",
       "definition": "minced meat in a round bread roll, often with salad",
       "definitionVi": "bánh mì kẹp thịt bò",
-      "sentence": "I like a burger for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -698,7 +678,6 @@
       "phonetic": "/bɐs/",
       "definition": "a big road vehicle that carries lots of people",
       "definitionVi": "xe buýt, xe bus chở nhiều người",
-      "sentence": "I go to school by bus.",
       "category": "travel",
       "partOfSpeech": "noun",
       "choices": [
@@ -732,7 +711,6 @@
       "phonetic": "/ˈbeɪbi/",
       "definition": "a very young child who cannot walk or talk yet",
       "definitionVi": "em bé, con nhỏ mới sinh",
-      "sentence": "This is my baby.",
       "category": "people",
       "partOfSpeech": "noun",
       "choices": [
@@ -766,7 +744,6 @@
       "phonetic": "/ˈbæd.mɪn.tən/",
       "definition": "a game where you hit a shuttlecock over a net",
       "definitionVi": "cầu lông, đánh cầu qua lưới",
-      "sentence": "I play with a badminton in the park.",
       "category": "sports",
       "partOfSpeech": "noun",
       "choices": [
@@ -800,7 +777,6 @@
       "phonetic": "/ˈbæːɡ/",
       "definition": "something you carry books and things in",
       "definitionVi": "cái túi, cặp đựng đồ",
-      "sentence": "I use a bag at school.",
       "category": "school",
       "partOfSpeech": "noun",
       "choices": [
@@ -834,7 +810,6 @@
       "phonetic": "/bɔːl/",
       "definition": "a round object that you throw, kick or catch in games",
       "definitionVi": "quả bóng tròn để chơi",
-      "sentence": "I play with a ball in the park.",
       "category": "sports",
       "partOfSpeech": "noun",
       "choices": [
@@ -868,7 +843,6 @@
       "phonetic": "/bəˈluːn/",
       "definition": "a thin rubber bag filled with air that floats up",
       "definitionVi": "bong bóng bay, thổi phồng bằng không khí",
-      "sentence": "I play with a balloon in the park.",
       "category": "sports",
       "partOfSpeech": "noun",
       "choices": [
@@ -902,7 +876,6 @@
       "phonetic": "/bəˈnɑːnə/",
       "definition": "a long yellow fruit with soft sweet inside",
       "definitionVi": "quả chuối vàng, ăn mềm ngọt",
-      "sentence": "I like a banana for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -936,7 +909,6 @@
       "phonetic": "/ˈbeɪs.bɔːl/",
       "definition": "a bat-and-ball game where you run around four bases",
       "definitionVi": "bóng chày, đánh bóng và chạy vòng",
-      "sentence": "I play with a baseball in the park.",
       "category": "sports",
       "partOfSpeech": "noun",
       "choices": [
@@ -970,7 +942,6 @@
       "phonetic": "",
       "definition": "a cloth hat with a stiff front peak on top",
       "definitionVi": "mũ lưỡi trai che nắng",
-      "sentence": "I wear the baseball cap to school.",
       "category": "clothes",
       "partOfSpeech": "noun",
       "choices": [
@@ -1004,7 +975,6 @@
       "phonetic": "/ˈbɑːs.kɪt.bɔːl/",
       "definition": "a game where you throw a ball through a high hoop",
       "definitionVi": "bóng rổ, ném bóng vào rổ cao",
-      "sentence": "I play with a basketball in the park.",
       "category": "sports",
       "partOfSpeech": "noun",
       "choices": [
@@ -1038,7 +1008,6 @@
       "phonetic": "",
       "definition": "a stick used to hit a ball in games like baseball",
       "definitionVi": "gậy đánh bóng trong bóng chày",
-      "sentence": "I play with a bat in the park.",
       "category": "sports",
       "partOfSpeech": "noun",
       "choices": [
@@ -1072,7 +1041,6 @@
       "phonetic": "/bɐːθ/",
       "definition": "washing your body in a tub full of warm water",
       "definitionVi": "tắm bồn, ngâm mình trong nước ấm",
-      "sentence": "There is a bath in my house.",
       "category": "home",
       "partOfSpeech": "noun",
       "choices": [
@@ -1106,7 +1074,6 @@
       "phonetic": "/ˈbæθ.ɹuːm/",
       "definition": "the room where you wash and use the toilet",
       "definitionVi": "phòng tắm và nhà vệ sinh",
-      "sentence": "There is a bathroom in my house.",
       "category": "home",
       "partOfSpeech": "noun",
       "choices": [
@@ -1140,7 +1107,6 @@
       "phonetic": "/biːt͡ʃ/",
       "definition": "sandy ground beside the sea where people play",
       "definitionVi": "bãi biển cát bên bờ biển",
-      "sentence": "We go to the beach on Saturday.",
       "category": "places",
       "partOfSpeech": "noun",
       "choices": [
@@ -1174,7 +1140,6 @@
       "phonetic": "/biːn/",
       "definition": "a small seed that you cook and eat in meals",
       "definitionVi": "hạt đậu, nấu ăn rất bổ",
-      "sentence": "I like a bean for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -1208,7 +1173,6 @@
       "phonetic": "/bɛə(ɹ)/",
       "definition": "a big furry wild animal that eats fish and berries",
       "definitionVi": "con gấu to, lông xù",
-      "sentence": "I can see a bear at the zoo.",
       "category": "animals",
       "partOfSpeech": "noun",
       "choices": [
@@ -1242,7 +1206,6 @@
       "phonetic": "/ˈbjuːtɪfəl/",
       "definition": "when something looks very pretty and nice to see",
       "definitionVi": "đẹp, xinh xắn",
-      "sentence": "What a beautiful day!",
       "category": "feelings",
       "partOfSpeech": "adjective",
       "choices": [
@@ -1276,7 +1239,6 @@
       "phonetic": "/bed/",
       "definition": "the furniture you sleep on at night",
       "definitionVi": "cái giường để ngủ",
-      "sentence": "There is a bed in my house.",
       "category": "home",
       "partOfSpeech": "noun",
       "choices": [
@@ -1310,7 +1272,6 @@
       "phonetic": "/ˈbɛdɹʊm/",
       "definition": "the room in your home where you sleep",
       "definitionVi": "phòng ngủ trong nhà",
-      "sentence": "There is a bedroom in my house.",
       "category": "home",
       "partOfSpeech": "noun",
       "choices": [
@@ -1344,7 +1305,6 @@
       "phonetic": "/ˈbiː/",
       "definition": "a small flying insect that makes sweet honey",
       "definitionVi": "con ong bay, làm mật ngọt",
-      "sentence": "I can see a bee at the zoo.",
       "category": "animals",
       "partOfSpeech": "noun",
       "choices": [
@@ -1378,7 +1338,6 @@
       "phonetic": "/bɪɡ/",
       "definition": "when something is large and takes up lots of space",
       "definitionVi": "to, lớn",
-      "sentence": "This bag is too big.",
       "category": "general",
       "partOfSpeech": "adjective",
       "choices": [
@@ -1412,7 +1371,6 @@
       "phonetic": "[bɐɪk]",
       "definition": "a vehicle with two wheels that you pedal to move",
       "definitionVi": "xe đạp, đạp bằng chân",
-      "sentence": "I go to school by bike.",
       "category": "travel",
       "partOfSpeech": "noun",
       "choices": [
@@ -1446,7 +1404,6 @@
       "phonetic": "/bɜd/",
       "definition": "an animal with feathers that can usually fly",
       "definitionVi": "con chim, có lông và cánh",
-      "sentence": "I can see a bird at the zoo.",
       "category": "animals",
       "partOfSpeech": "noun",
       "choices": [
@@ -1480,7 +1437,6 @@
       "phonetic": "/ˈbɜːθ.deɪ/",
       "definition": "the special day each year when you were born",
       "definitionVi": "sinh nhật, ngày mình chào đời",
-      "sentence": "I play in the birthday.",
       "category": "time",
       "partOfSpeech": "noun",
       "choices": [
@@ -1514,7 +1470,6 @@
       "phonetic": "/blak/",
       "definition": "the darkest colour, like the sky at night",
       "definitionVi": "màu đen",
-      "sentence": "I have a black bag.",
       "category": "general",
       "partOfSpeech": "adjective",
       "choices": [
@@ -1548,7 +1503,6 @@
       "phonetic": "/bluː/",
       "definition": "the colour of a clear sky on a sunny day",
       "definitionVi": "màu xanh da trời",
-      "sentence": "I have a blue bag.",
       "category": "general",
       "partOfSpeech": "adjective",
       "choices": [
@@ -1582,7 +1536,6 @@
       "phonetic": "/bɔːd/",
       "definition": "a flat surface for writing on, like a whiteboard",
       "definitionVi": "bảng viết ở lớp học",
-      "sentence": "I use a board at school.",
       "category": "school",
       "partOfSpeech": "noun",
       "choices": [
@@ -1616,7 +1569,6 @@
       "phonetic": "",
       "definition": "a game you play on a flat board with pieces and dice",
       "definitionVi": "trò chơi trên bàn cờ",
-      "sentence": "I play with the board game in the park.",
       "category": "sports",
       "partOfSpeech": "noun",
       "choices": [
@@ -1650,7 +1602,6 @@
       "phonetic": "/bəʊt/",
       "definition": "a vehicle that travels on water across rivers or seas",
       "definitionVi": "thuyền, tàu đi trên nước",
-      "sentence": "I go to school by boat.",
       "category": "travel",
       "partOfSpeech": "noun",
       "choices": [
@@ -1684,7 +1635,6 @@
       "phonetic": "/ˈbɒdi/",
       "definition": "all the parts of a person or animal together",
       "definitionVi": "cơ thể, toàn bộ phần thân",
-      "sentence": "Touch your body, please.",
       "category": "body",
       "partOfSpeech": "noun",
       "choices": [
@@ -1718,7 +1668,6 @@
       "phonetic": "/buːk/",
       "definition": "pages with words and pictures that you read",
       "definitionVi": "cuốn sách để đọc",
-      "sentence": "I use a book at school.",
       "category": "school",
       "partOfSpeech": "noun",
       "choices": [
@@ -1752,7 +1701,6 @@
       "phonetic": "[ˈbʊkːeɪs]",
       "definition": "shelves in your home for keeping books on",
       "definitionVi": "kệ sách để trong nhà",
-      "sentence": "There is a bookcase in my house.",
       "category": "home",
       "partOfSpeech": "noun",
       "choices": [
@@ -1786,7 +1734,6 @@
       "phonetic": "",
       "definition": "a shop where you can buy books and comics",
       "definitionVi": "hiệu sách, nơi bán sách",
-      "sentence": "We go to the bookshop on Saturday.",
       "category": "places",
       "partOfSpeech": "noun",
       "choices": [
@@ -1820,7 +1767,6 @@
       "phonetic": "/buːts/",
       "definition": "strong shoes that cover your foot and ankle",
       "definitionVi": "ủng, giày cao che mắt cá chân",
-      "sentence": "I wear the boots to school.",
       "category": "clothes",
       "partOfSpeech": "noun",
       "choices": [
@@ -1854,7 +1800,6 @@
       "phonetic": "/baʊns/",
       "definition": "to spring up after a ball hits the ground",
       "definitionVi": "nảy lên, bóng bật lại",
-      "sentence": "I can bounce in the park.",
       "category": "sports",
       "partOfSpeech": "verb",
       "choices": [
@@ -1888,7 +1833,6 @@
       "phonetic": "/kaʊnt/",
       "definition": "to say numbers in order: one, two, three, four",
       "definitionVi": "đếm số một, hai, ba...",
-      "sentence": "Please count the numbers on the board.",
       "category": "school",
       "partOfSpeech": "verb",
       "choices": [
@@ -1922,7 +1866,6 @@
       "phonetic": "/ˈkʌz.n̩/",
       "definition": "the child of your aunt or uncle in your family",
       "definitionVi": "anh chị em họ",
-      "sentence": "This is my cousin.",
       "category": "people",
       "partOfSpeech": "noun",
       "choices": [
@@ -1956,7 +1899,6 @@
       "phonetic": "/kaʊ/",
       "definition": "a big farm animal that gives us milk to drink",
       "definitionVi": "con bò, cho sữa",
-      "sentence": "I can see a cow at the zoo.",
       "category": "animals",
       "partOfSpeech": "noun",
       "choices": [
@@ -1990,7 +1932,6 @@
       "phonetic": "/ˈkɹeɪ.ɒ̃/",
       "definition": "a coloured stick of wax used for drawing pictures",
       "definitionVi": "bút sáp màu để tô tranh",
-      "sentence": "I use a crayon at school.",
       "category": "school",
       "partOfSpeech": "noun",
       "choices": [
@@ -2024,7 +1965,6 @@
       "phonetic": "/ˈkɹɒkədaɪl/",
       "definition": "a big reptile with a long mouth and sharp teeth",
       "definitionVi": "cá sấu, miệng dài và răng nhọn",
-      "sentence": "I can see a crocodile at the zoo.",
       "category": "animals",
       "partOfSpeech": "noun",
       "choices": [
@@ -2058,7 +1998,6 @@
       "phonetic": "/kɹɑs/",
       "definition": "a mark shaped like an X or a plus sign",
       "definitionVi": "dấu cộng hoặc dấu X",
-      "sentence": "I use a cross at school.",
       "category": "school",
       "partOfSpeech": "noun",
       "choices": [
@@ -2092,7 +2031,6 @@
       "phonetic": "/ˈkʌbəd/",
       "definition": "a cabinet with doors where you store cups and food",
       "definitionVi": "tủ bếp, tủ đựng đồ",
-      "sentence": "There is a cupboard in my house.",
       "category": "home",
       "partOfSpeech": "noun",
       "choices": [
@@ -2126,7 +2064,6 @@
       "phonetic": "/keɪk/",
       "definition": "a sweet baked food eaten at birthdays and parties",
       "definitionVi": "bánh ngọt, thường ăn sinh nhật",
-      "sentence": "I like a cake for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -2160,7 +2097,6 @@
       "phonetic": "/ˈkæməɹə/",
       "definition": "a machine that takes photos of people and places",
       "definitionVi": "máy chụp ảnh",
-      "sentence": "I use a camera at home.",
       "category": "technology",
       "partOfSpeech": "noun",
       "choices": [
@@ -2194,7 +2130,6 @@
       "phonetic": "/ˈkæn/",
       "definition": "to be able to do something if you try",
       "definitionVi": "có thể, làm được",
-      "sentence": "I can ride my bike.",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -2226,7 +2161,6 @@
       "phonetic": "",
       "definition": "sweet food like lollipops, gummies and hard sweets",
       "definitionVi": "kẹo ngọt các loại",
-      "sentence": "I like a candy for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -2260,7 +2194,6 @@
       "phonetic": "/kɑː/",
       "definition": "a road vehicle with four wheels for a small group",
       "definitionVi": "xe ô tô, xe hơi",
-      "sentence": "I go to school by car.",
       "category": "travel",
       "partOfSpeech": "noun",
       "choices": [
@@ -2294,7 +2227,6 @@
       "phonetic": "/ˈkæɹ.ət/",
       "definition": "a long orange vegetable that is crunchy and healthy",
       "definitionVi": "củ cà rốt màu cam",
-      "sentence": "I like a carrot for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -2328,7 +2260,6 @@
       "phonetic": "/kat/",
       "definition": "a small furry pet that purrs and says meow",
       "definitionVi": "con mèo, thú cưng hay kêu meo meo",
-      "sentence": "I can see a cat at the zoo.",
       "category": "animals",
       "partOfSpeech": "noun",
       "choices": [
@@ -2362,7 +2293,6 @@
       "phonetic": "/kæt͡ʃ/",
       "definition": "to grab something that is thrown or falling through the air",
       "definitionVi": "bắt, hứng đồ văng tới",
-      "sentence": "I like to catch in the park.",
       "category": "sports",
       "partOfSpeech": "verb",
       "choices": [
@@ -2396,7 +2326,6 @@
       "phonetic": "/t͡ʃɛə(ɹ)/",
       "definition": "a piece of furniture that you sit on at a table",
       "definitionVi": "cái ghế để ngồi",
-      "sentence": "There is a chair in my house.",
       "category": "home",
       "partOfSpeech": "noun",
       "choices": [
@@ -2430,7 +2359,6 @@
       "phonetic": "/ˈt͡ʃɪkɪn/",
       "definition": "a farm bird kept for eggs and meat; it says cluck",
       "definitionVi": "con gà, hay ở trên nông trại",
-      "sentence": "I can see chicken at the zoo.",
       "category": "animals",
       "partOfSpeech": "noun",
       "choices": [
@@ -2464,7 +2392,6 @@
       "phonetic": "/t͡ʃaɪld/",
       "definition": "a young boy or girl who is not yet an adult",
       "definitionVi": "trẻ em, bạn nhỏ",
-      "sentence": "This is my child.",
       "category": "people",
       "partOfSpeech": "noun",
       "choices": [
@@ -2498,7 +2425,6 @@
       "phonetic": "/tʃɪps/",
       "definition": "thin fried potato sticks that are salty and crispy",
       "definitionVi": "khoai tây chiên giòn",
-      "sentence": "I like the chips for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -2532,7 +2458,6 @@
       "phonetic": "/ˈt͡ʃɔk(ə)lət/",
       "definition": "a sweet brown food made from cocoa beans",
       "definitionVi": "sô-cô-la ngọt, màu nâu",
-      "sentence": "I like chocolate for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -2566,7 +2491,6 @@
       "phonetic": "/t͡ʃuːz/",
       "definition": "to pick the one you want from two or more options",
       "definitionVi": "chọn, lựa cái mình thích",
-      "sentence": "Please choose a colour.",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -2600,7 +2524,6 @@
       "phonetic": "/klæp/",
       "definition": "to hit your open hands together to make a loud sound",
       "definitionVi": "vỗ tay, hoan hô",
-      "sentence": "I can clap at school.",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -2634,7 +2557,6 @@
       "phonetic": "/klas/",
       "definition": "a group of pupils who learn together with one teacher",
       "definitionVi": "lớp học, các bạn học chung",
-      "sentence": "I use a class at school.",
       "category": "school",
       "partOfSpeech": "noun",
       "choices": [
@@ -2668,7 +2590,6 @@
       "phonetic": "/ˈklɑːs.meɪt/",
       "definition": "another child who is in the same class as you",
       "definitionVi": "bạn cùng lớp",
-      "sentence": "I use a classmate at school.",
       "category": "school",
       "partOfSpeech": "noun",
       "choices": [
@@ -2702,7 +2623,6 @@
       "phonetic": "/ˈklɑːsɹʊm/",
       "definition": "the room at school where your lessons take place",
       "definitionVi": "phòng học ở trường",
-      "sentence": "I use a classroom at school.",
       "category": "school",
       "partOfSpeech": "noun",
       "choices": [
@@ -2736,7 +2656,6 @@
       "phonetic": "/kleːn/",
       "definition": "when something has no dirt or mess on it",
       "definitionVi": "sạch sẽ, không bẩn",
-      "sentence": "This bag is too clean.",
       "category": "home",
       "partOfSpeech": "adjective",
       "choices": [
@@ -2770,7 +2689,6 @@
       "phonetic": "/klɒk/",
       "definition": "something on the wall or wrist that shows the time",
       "definitionVi": "đồng hồ cho biết mấy giờ",
-      "sentence": "I play in the clock.",
       "category": "time",
       "partOfSpeech": "noun",
       "choices": [
@@ -2804,7 +2722,6 @@
       "phonetic": "/kləʊz/",
       "definition": "to shut something like a door, window or book",
       "definitionVi": "đóng lại, khép lại",
-      "sentence": "I close every morning.",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -2838,7 +2755,6 @@
       "phonetic": "/kləʊzd/",
       "definition": "when a shop or door is not open for people",
       "definitionVi": "đóng cửa, chưa mở",
-      "sentence": "This bag is too closed.",
       "category": "places",
       "partOfSpeech": "adjective",
       "choices": [
@@ -2872,7 +2788,6 @@
       "phonetic": "/kləʊ(ð)z/",
       "definition": "things like shirts, trousers and dresses that you wear",
       "definitionVi": "quần áo mặc trên người",
-      "sentence": "I wear the clothes to school.",
       "category": "clothes",
       "partOfSpeech": "noun",
       "choices": [
@@ -2906,7 +2821,6 @@
       "phonetic": "/ˈkəʊ.kə.nʌt/",
       "definition": "a big brown fruit with white flesh and sweet water inside",
       "definitionVi": "quả dừa, có nước ngọt bên trong",
-      "sentence": "I like a coconut for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -2940,7 +2854,6 @@
       "phonetic": "",
       "definition": "a shade like red, blue or green that things can be",
       "definitionVi": "màu sắc như đỏ, xanh, vàng",
-      "sentence": "I use a colour at school.",
       "category": "school",
       "partOfSpeech": "noun",
       "choices": [
@@ -2974,7 +2887,6 @@
       "phonetic": "/kʌm/",
       "definition": "to move toward the person who is speaking",
       "definitionVi": "đến đây, tới chỗ mình",
-      "sentence": "I can come in the park.",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -3008,7 +2920,6 @@
       "phonetic": "/kəmˈpliːt/",
       "definition": "to finish all parts of your work or homework",
       "definitionVi": "làm xong, hoàn thành bài",
-      "sentence": "Please complete the numbers on the board.",
       "category": "school",
       "partOfSpeech": "verb",
       "choices": [
@@ -3042,7 +2953,6 @@
       "phonetic": "/kəmˈpjuːtə/",
       "definition": "a machine for typing, games and learning at school",
       "definitionVi": "máy tính để học và chơi",
-      "sentence": "I use a computer at home.",
       "category": "technology",
       "partOfSpeech": "noun",
       "choices": [
@@ -3076,7 +2986,6 @@
       "phonetic": "/kuːl/",
       "definition": "when the weather feels a little cold but not freezing",
       "definitionVi": "mát, hơi lạnh nhẹ",
-      "sentence": "I feel cool today.",
       "category": "weather",
       "partOfSpeech": "adjective",
       "choices": [
@@ -3110,7 +3019,6 @@
       "phonetic": "/kəˈɹɛkt/",
       "definition": "when an answer or spelling has no mistakes",
       "definitionVi": "đúng, không sai",
-      "sentence": "This bag is too correct.",
       "category": "school",
       "partOfSpeech": "adjective",
       "choices": [
@@ -3144,7 +3052,6 @@
       "phonetic": "/dæd/",
       "definition": "another friendly word for your father at home",
       "definitionVi": "bố, ba",
-      "sentence": "This is my dad.",
       "category": "people",
       "partOfSpeech": "noun",
       "choices": [
@@ -3178,7 +3085,6 @@
       "phonetic": "/deɪ/",
       "definition": "twenty-four hours from morning through to night",
       "definitionVi": "một ngày, từ sáng đến tối",
-      "sentence": "I play in the day.",
       "category": "time",
       "partOfSpeech": "noun",
       "choices": [
@@ -3212,7 +3118,6 @@
       "phonetic": "/dɛsk/",
       "definition": "a table at school where you sit and write",
       "definitionVi": "bàn học ở lớp",
-      "sentence": "I use a desk at school.",
       "category": "school",
       "partOfSpeech": "noun",
       "choices": [
@@ -3246,7 +3151,6 @@
       "phonetic": "",
       "definition": "the room at home where the family eats meals together",
       "definitionVi": "phòng ăn trong nhà",
-      "sentence": "There is the dining room in my house.",
       "category": "home",
       "partOfSpeech": "noun",
       "choices": [
@@ -3280,7 +3184,6 @@
       "phonetic": "/ˈdɪnə/",
       "definition": "the main meal that most people eat in the evening",
       "definitionVi": "bữa tối, ăn buổi chiều tối",
-      "sentence": "I like dinner for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -3314,7 +3217,6 @@
       "phonetic": "/ˈdɜːti/",
       "definition": "when something has mud, dust or marks on it",
       "definitionVi": "bẩn, dính bùn hoặc bụi",
-      "sentence": "This bag is too dirty.",
       "category": "home",
       "partOfSpeech": "adjective",
       "choices": [
@@ -3348,7 +3250,6 @@
       "phonetic": "/dɑɡ/",
       "definition": "a friendly pet that barks and wags its tail",
       "definitionVi": "con chó, thú cưng trung thành",
-      "sentence": "I can see a dog at the zoo.",
       "category": "animals",
       "partOfSpeech": "noun",
       "choices": [
@@ -3382,7 +3283,6 @@
       "phonetic": "/dɒl/",
       "definition": "a toy shaped like a baby or person to play with",
       "definitionVi": "búp bê để chơi",
-      "sentence": "I can see a doll in the picture.",
       "category": "general",
       "partOfSpeech": "noun",
       "choices": [
@@ -3416,7 +3316,6 @@
       "phonetic": "/ˈdɒŋki/",
       "definition": "a grey farm animal a bit like a small horse",
       "definitionVi": "con lừa, hay ở nông trại",
-      "sentence": "I can see a donkey at the zoo.",
       "category": "animals",
       "partOfSpeech": "noun",
       "choices": [
@@ -3450,7 +3349,6 @@
       "phonetic": "/dɔː/",
       "definition": "what you open and close to go in or out of a room",
       "definitionVi": "cánh cửa ra vào",
-      "sentence": "There is a door in my house.",
       "category": "home",
       "partOfSpeech": "noun",
       "choices": [
@@ -3484,7 +3382,6 @@
       "phonetic": "/ˈdʌb.əl/",
       "definition": "twice as much or two of exactly the same thing",
       "definitionVi": "gấp đôi, hai lần",
-      "sentence": "This bag is too double.",
       "category": "general",
       "partOfSpeech": "adjective",
       "choices": [
@@ -3518,7 +3415,6 @@
       "phonetic": "",
       "definition": "to make a picture using a pencil, pen or crayon",
       "definitionVi": "vẽ tranh bằng bút chì",
-      "sentence": "I draw at school every day.",
       "category": "school",
       "partOfSpeech": "verb",
       "choices": [
@@ -3552,7 +3448,6 @@
       "phonetic": "/ˈdɹɔ.(w)ɪŋ(ɡ)/",
       "definition": "a picture that someone made with pencil or crayon",
       "definitionVi": "bức tranh đã vẽ xong",
-      "sentence": "I use a drawing at school.",
       "category": "school",
       "partOfSpeech": "noun",
       "choices": [
@@ -3586,7 +3481,6 @@
       "phonetic": "/dɹɛs/",
       "definition": "a piece of clothing that covers the body in one piece",
       "definitionVi": "váy, đầm mặc một mảnh",
-      "sentence": "I wear a dress to school.",
       "category": "clothes",
       "partOfSpeech": "noun",
       "choices": [
@@ -3620,7 +3514,6 @@
       "phonetic": "/dɹɪŋk/",
       "definition": "a liquid like water, juice or milk that you swallow",
       "definitionVi": "đồ uống như nước, sữa, nước cam",
-      "sentence": "I like a drink for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -3654,7 +3547,6 @@
       "phonetic": "/dɹaɪv/",
       "definition": "to control a car and make it move along the road",
       "definitionVi": "lái xe ô tô",
-      "sentence": "I can drive at school.",
       "category": "travel",
       "partOfSpeech": "verb",
       "choices": [
@@ -3688,7 +3580,6 @@
       "phonetic": "/dʌk/",
       "definition": "a bird that swims on ponds and says quack",
       "definitionVi": "con vịt, bơi trên ao và kêu cạc cạc",
-      "sentence": "I can see a duck at the zoo.",
       "category": "animals",
       "partOfSpeech": "noun",
       "choices": [
@@ -3722,7 +3613,6 @@
       "phonetic": "/ɪə̯/",
       "definition": "the part on the side of your head that you hear with",
       "definitionVi": "tai, dùng để nghe",
-      "sentence": "Touch your ear, please.",
       "category": "body",
       "partOfSpeech": "noun",
       "choices": [
@@ -3756,7 +3646,6 @@
       "phonetic": "/iːt/",
       "definition": "to put food in your mouth, chew it and swallow",
       "definitionVi": "ăn, nhai và nuốt thức ăn",
-      "sentence": "I eat breakfast in the morning.",
       "category": "food",
       "partOfSpeech": "verb",
       "choices": [
@@ -3790,7 +3679,6 @@
       "phonetic": "/eɪɡ/",
       "definition": "a round food from chickens used in cooking and baking",
       "definitionVi": "quả trứng gà, dùng nấu ăn",
-      "sentence": "I like an egg for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -3824,7 +3712,6 @@
       "phonetic": "/ˈɛləfənt/",
       "definition": "the biggest land animal with a long trunk and big ears",
       "definitionVi": "con voi to, vòi dài",
-      "sentence": "I can see an elephant at the zoo.",
       "category": "animals",
       "partOfSpeech": "noun",
       "choices": [
@@ -3858,7 +3745,6 @@
       "phonetic": "/ɛnd/",
       "definition": "the last part of a story, game or school day",
       "definitionVi": "phần cuối, kết thúc",
-      "sentence": "I play in the end.",
       "category": "time",
       "partOfSpeech": "noun",
       "choices": [
@@ -3892,7 +3778,6 @@
       "phonetic": "/ənˈd͡ʒɔɪ/",
       "definition": "to have fun and feel happy while doing something",
       "definitionVi": "thích, vui vẻ khi làm gì đó",
-      "sentence": "I can enjoy at school.",
       "category": "feelings",
       "partOfSpeech": "verb",
       "choices": [
@@ -3926,7 +3811,6 @@
       "phonetic": "/ɪˈɹeɪzə/",
       "definition": "a small rubber that rubs out pencil mistakes on paper",
       "definitionVi": "cục tẩy, xóa chì trên giấy",
-      "sentence": "I use an eraser at school.",
       "category": "school",
       "partOfSpeech": "noun",
       "choices": [
@@ -3960,7 +3844,6 @@
       "phonetic": "/ˈivnɪŋ/",
       "definition": "the time after afternoon when the sky gets darker",
       "definitionVi": "buổi tối, trời bắt đầu tối",
-      "sentence": "I play in the evening.",
       "category": "time",
       "partOfSpeech": "noun",
       "choices": [
@@ -3994,7 +3877,6 @@
       "phonetic": "/əɡˈzæmpl̩/",
       "definition": "one thing that shows what you mean in a lesson",
       "definitionVi": "ví dụ, minh họa trong bài học",
-      "sentence": "I use an example at school.",
       "category": "school",
       "partOfSpeech": "noun",
       "choices": [
@@ -4028,7 +3910,6 @@
       "phonetic": "/aɪ/",
       "definition": "the part of your face that you use to see with",
       "definitionVi": "mắt, dùng để nhìn",
-      "sentence": "Touch your eye, please.",
       "category": "body",
       "partOfSpeech": "noun",
       "choices": [
@@ -4062,7 +3943,6 @@
       "phonetic": "/feɪs/",
       "definition": "the front part of your head with eyes, nose and mouth",
       "definitionVi": "khuôn mặt, có mắt mũi miệng",
-      "sentence": "Touch your face, please.",
       "category": "body",
       "partOfSpeech": "noun",
       "choices": [
@@ -4096,7 +3976,6 @@
       "phonetic": "/ˈfɛm(ɘ)li/",
       "definition": "mum, dad, brothers, sisters and other people who love you",
       "definitionVi": "gia đình, người thân yêu mình",
-      "sentence": "This is my family.",
       "category": "people",
       "partOfSpeech": "noun",
       "choices": [
@@ -4130,7 +4009,6 @@
       "phonetic": "/fænˈtæstɪk/",
       "definition": "when something is really great and makes you excited",
       "definitionVi": "tuyệt vời, quá hay",
-      "sentence": "What a fantastic day!",
       "category": "feelings",
       "partOfSpeech": "adjective",
       "choices": [
@@ -4164,7 +4042,6 @@
       "phonetic": "/ˈfaːðə/",
       "definition": "a male parent who takes care of his children",
       "definitionVi": "bố, cha",
-      "sentence": "This is my father.",
       "category": "people",
       "partOfSpeech": "noun",
       "choices": [
@@ -4198,7 +4075,6 @@
       "phonetic": "/ˈfeɪv.ɹɪt/",
       "definition": "the one you like more than anything else",
       "definitionVi": "yêu thích nhất, thích nhất",
-      "sentence": "What a favourite day!",
       "category": "feelings",
       "partOfSpeech": "adjective",
       "choices": [
@@ -4232,7 +4108,6 @@
       "phonetic": "/faɪnd/",
       "definition": "to discover something you lost or were looking for",
       "definitionVi": "tìm thấy, tìm ra",
-      "sentence": "Can you find your pencil?",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -4266,7 +4141,6 @@
       "phonetic": "",
       "definition": "A polite word when you ask for something.",
       "definitionVi": "Xin vui lòng — nói lịch sự khi nhờ.",
-      "sentence": "I can see a please in the picture.",
       "category": "general",
       "partOfSpeech": "noun",
       "choices": [
@@ -4300,7 +4174,6 @@
       "phonetic": "/ˈfɪʃɪŋ/",
       "definition": "catching fish with a rod, line and hook near water",
       "definitionVi": "câu cá bằng cần câu",
-      "sentence": "I play with a fishing in the park.",
       "category": "sports",
       "partOfSpeech": "noun",
       "choices": [
@@ -4334,7 +4207,6 @@
       "phonetic": "/flæt/",
       "definition": "a home inside one building that has many other homes",
       "definitionVi": "căn hộ, nhà trong chung cư",
-      "sentence": "There is a flat in my house.",
       "category": "home",
       "partOfSpeech": "noun",
       "choices": [
@@ -4368,7 +4240,6 @@
       "phonetic": "/flɔː/",
       "definition": "the flat surface inside a room that you walk on",
       "definitionVi": "sàn nhà, mặt sàn trong phòng",
-      "sentence": "There is a floor in my house.",
       "category": "home",
       "partOfSpeech": "noun",
       "choices": [
@@ -4402,7 +4273,6 @@
       "phonetic": "/ˈflaʊ.ə/",
       "definition": "the colourful part of a plant that often smells nice",
       "definitionVi": "bông hoa, nhiều màu đẹp",
-      "sentence": "I can see a flower outside.",
       "category": "nature",
       "partOfSpeech": "noun",
       "choices": [
@@ -4436,7 +4306,6 @@
       "phonetic": "/flaɪ/",
       "definition": "to move through the air like a bird or aeroplane",
       "definitionVi": "bay trên không",
-      "sentence": "I can fly in the park.",
       "category": "travel",
       "partOfSpeech": "verb",
       "choices": [
@@ -4470,7 +4339,6 @@
       "phonetic": "/fuːd/",
       "definition": "anything you eat or drink to stay strong and healthy",
       "definitionVi": "thức ăn, đồ ăn",
-      "sentence": "I like food for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -4504,7 +4372,6 @@
       "phonetic": "[fʊt̚]",
       "definition": "the part at the end of your leg that you stand on",
       "definitionVi": "bàn chân, cuối cẳng chân",
-      "sentence": "Touch your foot, please.",
       "category": "body",
       "partOfSpeech": "noun",
       "choices": [
@@ -4538,7 +4405,6 @@
       "phonetic": "[fʷʊʔt̚bɑɫ]",
       "definition": "a game where teams kick a ball to score goals",
       "definitionVi": "bóng đá, đá bóng vào khung thành",
-      "sentence": "I play with a football in the park.",
       "category": "sports",
       "partOfSpeech": "noun",
       "choices": [
@@ -4572,7 +4438,6 @@
       "phonetic": "/fɹɛnd/",
       "definition": "someone you like, trust and enjoy playing with",
       "definitionVi": "bạn bè, người bạn thân",
-      "sentence": "This is my friend.",
       "category": "people",
       "partOfSpeech": "noun",
       "choices": [
@@ -4606,7 +4471,6 @@
       "phonetic": "/fɹaɪz/",
       "definition": "thin hot strips of fried potato served with salt",
       "definitionVi": "khoai tây chiên que",
-      "sentence": "I like the fries for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -4640,7 +4504,6 @@
       "phonetic": "/fɹɒɡ/",
       "definition": "a small green animal that jumps and lives near water",
       "definitionVi": "con ếch xanh, nhảy và sống gần nước",
-      "sentence": "I can see a frog at the zoo.",
       "category": "animals",
       "partOfSpeech": "noun",
       "choices": [
@@ -4674,7 +4537,6 @@
       "phonetic": "/fɹuːt/",
       "definition": "sweet food that grows on trees and plants, like apples",
       "definitionVi": "trái cây ngọt từ cây",
-      "sentence": "I like fruit for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -4708,7 +4570,6 @@
       "phonetic": "/fʊn/",
       "definition": "when something makes you laugh and feel very happy",
       "definitionVi": "vui, thú vị",
-      "sentence": "What a fun day!",
       "category": "feelings",
       "partOfSpeech": "adjective",
       "choices": [
@@ -4742,7 +4603,6 @@
       "phonetic": "/ˈfʊnɪ/",
       "definition": "when something makes you laugh or giggle a lot",
       "definitionVi": "buồn cười, hài hước",
-      "sentence": "What a funny day!",
       "category": "feelings",
       "partOfSpeech": "adjective",
       "choices": [
@@ -4776,7 +4636,6 @@
       "phonetic": "/ɡeɪm/",
       "definition": "Something fun you play with rules.",
       "definitionVi": "Trò chơi vui có luật chơi.",
-      "sentence": "I play with a game in the park.",
       "category": "sports",
       "partOfSpeech": "noun",
       "choices": [
@@ -4810,7 +4669,6 @@
       "phonetic": "/ˈɡɑːdn̩/",
       "definition": "An outdoor place where plants grow.",
       "definitionVi": "Khu vực ngoài trời để trồng cây.",
-      "sentence": "I can see a garden outside.",
       "category": "nature",
       "partOfSpeech": "noun",
       "choices": [
@@ -4844,7 +4702,6 @@
       "phonetic": "/ɡɛt/",
       "definition": "to receive or obtain something.",
       "definitionVi": "Nhận hoặc lấy được cái gì đó.",
-      "sentence": "Please get your book.",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -4878,7 +4735,6 @@
       "phonetic": "/dʒɪˈɹɑːf/",
       "definition": "A tall African animal with a long neck.",
       "definitionVi": "Loài thú cao, cổ dài ở châu Phi.",
-      "sentence": "I can see a giraffe at the zoo.",
       "category": "animals",
       "partOfSpeech": "noun",
       "choices": [
@@ -4912,7 +4768,6 @@
       "phonetic": "",
       "definition": "A young female child.",
       "definitionVi": "Bé gái.",
-      "sentence": "This is my girl.",
       "category": "people",
       "partOfSpeech": "noun",
       "choices": [
@@ -4946,7 +4801,6 @@
       "phonetic": "/ɡɪv/",
       "definition": "to hand something to someone.",
       "definitionVi": "Đưa hoặc tặng cái gì cho ai.",
-      "sentence": "Please give me a pencil.",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -4980,7 +4834,6 @@
       "phonetic": "/ˈɡlasɪz/",
       "definition": "Clear lenses you wear to see better.",
       "definitionVi": "Kính đeo để nhìn rõ hơn.",
-      "sentence": "I wear the glasses to school.",
       "category": "clothes",
       "partOfSpeech": "noun",
       "choices": [
@@ -5014,7 +4867,6 @@
       "phonetic": "/ɡəʉ/",
       "definition": "to move from one place to another.",
       "definitionVi": "Đi từ nơi này đến nơi khác.",
-      "sentence": "I can go in the park.",
       "category": "travel",
       "partOfSpeech": "verb",
       "choices": [
@@ -5048,7 +4900,6 @@
       "phonetic": "",
       "definition": "to lie down in bed to rest.",
       "definitionVi": "Lên giường nằm nghỉ.",
-      "sentence": "I go to bed at eight o’clock.",
       "category": "home",
       "partOfSpeech": "verb",
       "choices": [
@@ -5082,7 +4933,6 @@
       "phonetic": "",
       "definition": "to close your eyes and fall asleep.",
       "definitionVi": "Nhắm mắt và chìm vào giấc ngủ.",
-      "sentence": "I go to sleep quickly at night.",
       "category": "home",
       "partOfSpeech": "verb",
       "choices": [
@@ -5116,7 +4966,6 @@
       "phonetic": "/ɡɐ̟ʉt/",
       "definition": "A farm animal with horns and a beard.",
       "definitionVi": "Con dê nuôi ở trang trại.",
-      "sentence": "I can see a goat at the zoo.",
       "category": "animals",
       "partOfSpeech": "noun",
       "choices": [
@@ -5150,7 +4999,6 @@
       "phonetic": "/ɡʊ(d)/",
       "definition": "Nice, kind, or of high quality.",
       "definitionVi": "Tốt, hay, hoặc đẹp.",
-      "sentence": "What a good day!",
       "category": "feelings",
       "partOfSpeech": "adjective",
       "choices": [
@@ -5184,7 +5032,6 @@
       "phonetic": "/ˈɡɹæn(d)ˌfɑːðə(r)/",
       "definition": "Your father's or mother's father.",
       "definitionVi": "Ông nội hoặc ông ngoại.",
-      "sentence": "This is my grandfather.",
       "category": "people",
       "partOfSpeech": "noun",
       "choices": [
@@ -5218,7 +5065,6 @@
       "phonetic": "/ˈɡɹænmɑː/",
       "definition": "A friendly word for grandmother.",
       "definitionVi": "Cách gọi thân mật cho bà.",
-      "sentence": "This is my grandma.",
       "category": "people",
       "partOfSpeech": "noun",
       "choices": [
@@ -5252,7 +5098,6 @@
       "phonetic": "/ˈɡɹæn(d)ˌmʌðə(r)/",
       "definition": "Your father's or mother's mother.",
       "definitionVi": "Bà nội hoặc bà ngoại.",
-      "sentence": "This is my grandmother.",
       "category": "people",
       "partOfSpeech": "noun",
       "choices": [
@@ -5286,7 +5131,6 @@
       "phonetic": "/ˈɡɹæmpɑː/",
       "definition": "A friendly word for grandfather.",
       "definitionVi": "Cách gọi thân mật cho ông.",
-      "sentence": "This is my grandpa.",
       "category": "people",
       "partOfSpeech": "noun",
       "choices": [
@@ -5320,7 +5164,6 @@
       "phonetic": "/ɡɹeɪp/",
       "definition": "A small round sweet or sour fruit.",
       "definitionVi": "Quả nho nhỏ, ngọt hoặc chua.",
-      "sentence": "I like a grape for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -5354,7 +5197,6 @@
       "phonetic": "/ɡɹeɪ/",
       "definition": "The colour between black and white.",
       "definitionVi": "Màu xám, giữa đen và trắng.",
-      "sentence": "I have a gray bag.",
       "category": "general",
       "partOfSpeech": "adjective",
       "choices": [
@@ -5388,7 +5230,6 @@
       "phonetic": "/ɡɹeɪt/",
       "definition": "Very good or very big.",
       "definitionVi": "Rất tốt hoặc rất lớn.",
-      "sentence": "What a great day!",
       "category": "feelings",
       "partOfSpeech": "adjective",
       "choices": [
@@ -5422,7 +5263,6 @@
       "phonetic": "/ɡɹiːn/",
       "definition": "The colour of grass and leaves.",
       "definitionVi": "Màu xanh lá cây.",
-      "sentence": "I have a green bag.",
       "category": "general",
       "partOfSpeech": "adjective",
       "choices": [
@@ -5456,7 +5296,6 @@
       "phonetic": "/ɡɹeɪ/",
       "definition": "The colour between black and white.",
       "definitionVi": "Màu xám.",
-      "sentence": "I have a grey bag.",
       "category": "general",
       "partOfSpeech": "adjective",
       "choices": [
@@ -5490,7 +5329,6 @@
       "phonetic": "/ɡɪˈtɑː(ɹ)/",
       "definition": "A string instrument you strum or pluck.",
       "definitionVi": "Nhạc cụ dây, gảy hoặc gõ.",
-      "sentence": "I can see a guitar in the picture.",
       "category": "general",
       "partOfSpeech": "noun",
       "choices": [
@@ -5524,7 +5362,6 @@
       "phonetic": "/heː/",
       "definition": "The soft strands on your head.",
       "definitionVi": "Tóc trên đầu.",
-      "sentence": "Touch your hair, please.",
       "category": "body",
       "partOfSpeech": "noun",
       "choices": [
@@ -5558,7 +5395,6 @@
       "phonetic": "/hɔːl/",
       "definition": "A long room or passage in a building.",
       "definitionVi": "Hành lang hoặc phòng dài trong nhà.",
-      "sentence": "There is a hall in my house.",
       "category": "home",
       "partOfSpeech": "noun",
       "choices": [
@@ -5592,7 +5428,6 @@
       "phonetic": "/hænd/",
       "definition": "The part at the end of your arm.",
       "definitionVi": "Bàn tay ở cuối cánh tay.",
-      "sentence": "Touch your hand, please.",
       "category": "body",
       "partOfSpeech": "noun",
       "choices": [
@@ -5626,7 +5461,6 @@
       "phonetic": "/ˈhæm.bəɡ/",
       "definition": "A small bag a woman carries.",
       "definitionVi": "Túi xách nhỏ phụ nữ hay mang.",
-      "sentence": "I wear a handbag to school.",
       "category": "clothes",
       "partOfSpeech": "noun",
       "choices": [
@@ -5660,7 +5494,6 @@
       "phonetic": "/ˈhæpiː/",
       "definition": "Feeling glad and smiling inside.",
       "definitionVi": "Cảm thấy vui và hạnh phúc.",
-      "sentence": "I feel happy today.",
       "category": "feelings",
       "partOfSpeech": "adjective",
       "choices": [
@@ -5694,7 +5527,6 @@
       "phonetic": "[hat]",
       "definition": "Something you wear on your head.",
       "definitionVi": "Mũ đội trên đầu.",
-      "sentence": "I wear a hat to school.",
       "category": "clothes",
       "partOfSpeech": "noun",
       "choices": [
@@ -5728,7 +5560,6 @@
       "phonetic": "",
       "definition": "to own or possess something.",
       "definitionVi": "Có, sở hữu cái gì đó.",
-      "sentence": "I have a blue bag.",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -5760,7 +5591,6 @@
       "phonetic": "",
       "definition": "to own or possess something.",
       "definitionVi": "Có cái gì (cách nói thông dụng).",
-      "sentence": "I have got a red school bag.",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -5792,7 +5622,6 @@
       "phonetic": "/hɛd/",
       "definition": "The top part of your body.",
       "definitionVi": "Phần trên cơ thể — cái đầu.",
-      "sentence": "Touch your head, please.",
       "category": "body",
       "partOfSpeech": "noun",
       "choices": [
@@ -5826,7 +5655,6 @@
       "phonetic": "/ˈheliˌkɔptə(ɹ)/",
       "definition": "A flying machine with spinning blades on top.",
       "definitionVi": "Máy bay có cánh quạt trên đầu.",
-      "sentence": "I go to school by helicopter.",
       "category": "travel",
       "partOfSpeech": "noun",
       "choices": [
@@ -5860,7 +5688,6 @@
       "phonetic": "",
       "definition": "In this place, where you are now.",
       "definitionVi": "Ở đây, tại chỗ này.",
-      "sentence": "Please come here.",
       "category": "general",
       "partOfSpeech": "adverb",
       "choices": [
@@ -5892,7 +5719,6 @@
       "phonetic": "/ˈhɪpəʊ/",
       "definition": "A huge African animal that loves water.",
       "definitionVi": "Hà mã — thú lớn sống ở châu Phi.",
-      "sentence": "I can see a hippo at the zoo.",
       "category": "animals",
       "partOfSpeech": "noun",
       "choices": [
@@ -5926,7 +5752,6 @@
       "phonetic": "",
       "definition": "to strike something with force.",
       "definitionVi": "Đánh trúng, va vào cái gì.",
-      "sentence": "I like to hit in the park.",
       "category": "sports",
       "partOfSpeech": "verb",
       "choices": [
@@ -5958,7 +5783,6 @@
       "phonetic": "/ˈhɒ.bi/",
       "definition": "Something fun you do in free time.",
       "definitionVi": "Sở thích làm lúc rảnh.",
-      "sentence": "I play with a hobby in the park.",
       "category": "sports",
       "partOfSpeech": "noun",
       "choices": [
@@ -5992,7 +5816,6 @@
       "phonetic": "/ˈhɒki/",
       "definition": "A team sport played with sticks and a puck.",
       "definitionVi": "Môn thể thao chơi bằng gậy và đĩa.",
-      "sentence": "I play with a hockey in the park.",
       "category": "sports",
       "partOfSpeech": "noun",
       "choices": [
@@ -6026,7 +5849,6 @@
       "phonetic": "/həʊld/",
       "definition": "to keep something in your hands.",
       "definitionVi": "Cầm hoặc giữ cái gì trong tay.",
-      "sentence": "I can hold at school.",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -6060,7 +5882,6 @@
       "phonetic": "/(h)əʊm/",
       "definition": "The place where you live.",
       "definitionVi": "Nơi em sống cùng gia đình.",
-      "sentence": "There is a home in my house.",
       "category": "home",
       "partOfSpeech": "noun",
       "choices": [
@@ -6094,7 +5915,6 @@
       "phonetic": "/hɔːs/",
       "definition": "A large animal people ride or use on farms.",
       "definitionVi": "Con ngựa — thú lớn, người ta cưỡi.",
-      "sentence": "I can see a horse at the zoo.",
       "category": "animals",
       "partOfSpeech": "noun",
       "choices": [
@@ -6128,7 +5948,6 @@
       "phonetic": "/hʌʊs/",
       "definition": "A building where people live.",
       "definitionVi": "Ngôi nhà — nơi mọi người ở.",
-      "sentence": "There is a house in my house.",
       "category": "home",
       "partOfSpeech": "noun",
       "choices": [
@@ -6162,7 +5981,6 @@
       "phonetic": "",
       "definition": "A cold sweet treat made from milk.",
       "definitionVi": "Kem — món ngọt lạnh từ sữa.",
-      "sentence": "I like the ice cream for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -6196,7 +6014,6 @@
       "phonetic": "/ˈd͡ʒæk.ɪt/",
       "definition": "A short coat you wear outside.",
       "definitionVi": "Áo khoác ngắn mặc khi ra ngoài.",
-      "sentence": "I wear a jacket to school.",
       "category": "clothes",
       "partOfSpeech": "noun",
       "choices": [
@@ -6230,7 +6047,6 @@
       "phonetic": "/d͡ʒiːnz/",
       "definition": "Trousers made from strong blue cloth.",
       "definitionVi": "Quần jean xanh, vải bền.",
-      "sentence": "I wear the jeans to school.",
       "category": "clothes",
       "partOfSpeech": "noun",
       "choices": [
@@ -6264,7 +6080,6 @@
       "phonetic": "/ˈdʒɛliˌfɪʃ/",
       "definition": "A soft sea animal that can sting.",
       "definitionVi": "Sứa — động vật biển mềm, có thể chích.",
-      "sentence": "I can see a jellyfish at the zoo.",
       "category": "animals",
       "partOfSpeech": "noun",
       "choices": [
@@ -6298,7 +6113,6 @@
       "phonetic": "/d͡ʒuːs/",
       "definition": "A drink made from fruit.",
       "definitionVi": "Nước ép trái cây.",
-      "sentence": "I like juice for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -6332,7 +6146,6 @@
       "phonetic": "/dʒʌmp/",
       "definition": "to push off the ground into the air.",
       "definitionVi": "Nhảy lên khỏi mặt đất.",
-      "sentence": "I can jump in the park.",
       "category": "sports",
       "partOfSpeech": "verb",
       "choices": [
@@ -6366,7 +6179,6 @@
       "phonetic": "/ˈkiːbɔːd/",
       "definition": "Keys you press to type on a computer.",
       "definitionVi": "Bàn phím gõ chữ trên máy tính.",
-      "sentence": "I use a keyboard at home.",
       "category": "technology",
       "partOfSpeech": "noun",
       "choices": [
@@ -6400,7 +6212,6 @@
       "phonetic": "/kɪk/",
       "definition": "to hit something with your foot.",
       "definitionVi": "Đá bằng chân.",
-      "sentence": "I like to kick in the park.",
       "category": "sports",
       "partOfSpeech": "verb",
       "choices": [
@@ -6434,7 +6245,6 @@
       "phonetic": "/kɪd/",
       "definition": "A child or young person.",
       "definitionVi": "Em bé hoặc trẻ em.",
-      "sentence": "This is my kid.",
       "category": "people",
       "partOfSpeech": "noun",
       "choices": [
@@ -6468,7 +6278,6 @@
       "phonetic": "/ˈkɪt͡ʃən/",
       "definition": "The room where food is cooked.",
       "definitionVi": "Phòng bếp — nơi nấu ăn.",
-      "sentence": "There is a kitchen in my house.",
       "category": "home",
       "partOfSpeech": "noun",
       "choices": [
@@ -6502,7 +6311,6 @@
       "phonetic": "",
       "definition": "A light toy that flies in the wind.",
       "definitionVi": "Diều — đồ chơi bay theo gió.",
-      "sentence": "I play with a kite in the park.",
       "category": "sports",
       "partOfSpeech": "noun",
       "choices": [
@@ -6536,7 +6344,6 @@
       "phonetic": "/ˈkiːwi/",
       "definition": "A small brown fruit with green inside.",
       "definitionVi": "Quả kiwi — vỏ nâu, ruột xanh.",
-      "sentence": "I like a kiwi for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -6570,7 +6377,6 @@
       "phonetic": "/nəʊ/",
       "definition": "to understand or have learned something.",
       "definitionVi": "Biết, hiểu điều gì đó.",
-      "sentence": "I know the answer!",
       "category": "school",
       "partOfSpeech": "verb",
       "choices": [
@@ -6602,7 +6408,6 @@
       "phonetic": "/læmp/",
       "definition": "A light you switch on in a room.",
       "definitionVi": "Đèn chiếu sáng trong phòng.",
-      "sentence": "There is a lamp in my house.",
       "category": "home",
       "partOfSpeech": "noun",
       "choices": [
@@ -6636,7 +6441,6 @@
       "phonetic": "/lɜːn/",
       "definition": "to get new knowledge or skills.",
       "definitionVi": "Học hỏi kiến thức hoặc kỹ năng mới.",
-      "sentence": "I learn at school every day.",
       "category": "school",
       "partOfSpeech": "verb",
       "choices": [
@@ -6670,7 +6474,6 @@
       "phonetic": "/leɪɡ/",
       "definition": "The part you use for walking and running.",
       "definitionVi": "Chân — dùng để đi và chạy.",
-      "sentence": "Touch your leg, please.",
       "category": "body",
       "partOfSpeech": "noun",
       "choices": [
@@ -6704,7 +6507,6 @@
       "phonetic": "/ˈlɛmən/",
       "definition": "A yellow sour citrus fruit.",
       "definitionVi": "Quả chanh vàng, vị chua.",
-      "sentence": "I like a lemon for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -6738,7 +6540,6 @@
       "phonetic": "/ˌlɛmənˈeɪd/",
       "definition": "A sweet cold drink from lemons.",
       "definitionVi": "Nước chanh ngọt, uống lạnh.",
-      "sentence": "I like lemonade for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -6772,7 +6573,6 @@
       "phonetic": "/ˈlɛsn̩/",
       "definition": "A time at school when you learn something.",
       "definitionVi": "Tiết học ở trường.",
-      "sentence": "I use a lesson at school.",
       "category": "school",
       "partOfSpeech": "noun",
       "choices": [
@@ -6806,7 +6606,6 @@
       "phonetic": "",
       "definition": "Short for \"let us\" — suggesting doing something together.",
       "definitionVi": "Viết tắt của \"let us\" — rủ nhau làm gì.",
-      "sentence": "Let’s play outside after school.",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -6838,7 +6637,6 @@
       "phonetic": "/-ɾə(ɹ)/",
       "definition": "A symbol like A, B, or C.",
       "definitionVi": "Chữ cái như A, B, C.",
-      "sentence": "I use a letter at school.",
       "category": "school",
       "partOfSpeech": "noun",
       "choices": [
@@ -6872,7 +6670,6 @@
       "phonetic": "/laɪm/",
       "definition": "A small green sour citrus fruit.",
       "definitionVi": "Quả chanh xanh nhỏ, vị chua.",
-      "sentence": "I like a lime for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -6906,7 +6703,6 @@
       "phonetic": "/laɪn/",
       "definition": "A long thin mark or a row of people.",
       "definitionVi": "Đường kẻ hoặc hàng người xếp thành hàng.",
-      "sentence": "I use a line at school.",
       "category": "school",
       "partOfSpeech": "noun",
       "choices": [
@@ -6940,7 +6736,6 @@
       "phonetic": "/ˈlɪs.ən/",
       "definition": "to pay attention to sounds or speech.",
       "definitionVi": "Lắng nghe âm thanh hoặc lời nói.",
-      "sentence": "I listen at school every day.",
       "category": "school",
       "partOfSpeech": "verb",
       "choices": [
@@ -6974,7 +6769,6 @@
       "phonetic": "/lɪv/",
       "definition": "to have your home in a place.",
       "definitionVi": "Sống, ở tại một nơi.",
-      "sentence": "I can live at school.",
       "category": "home",
       "partOfSpeech": "verb",
       "choices": [
@@ -7008,7 +6802,6 @@
       "phonetic": "",
       "definition": "The main room where a family relaxes.",
       "definitionVi": "Phòng khách — nơi cả nhà nghỉ ngơi.",
-      "sentence": "There is the living room in my house.",
       "category": "home",
       "partOfSpeech": "noun",
       "choices": [
@@ -7042,7 +6835,6 @@
       "phonetic": "/ˈlɪz.əd/",
       "definition": "A small reptile with four legs and a tail.",
       "definitionVi": "Thằn lằn — bò sát nhỏ, có đuôi.",
-      "sentence": "I can see a lizard at the zoo.",
       "category": "animals",
       "partOfSpeech": "noun",
       "choices": [
@@ -7076,7 +6868,6 @@
       "phonetic": "/ˈlɔːŋ/",
       "definition": "Measuring a great distance or time.",
       "definitionVi": "Dài — về khoảng cách hoặc thời gian.",
-      "sentence": "This bag is too long.",
       "category": "general",
       "partOfSpeech": "adjective",
       "choices": [
@@ -7110,7 +6901,6 @@
       "phonetic": "",
       "definition": "to turn your eyes toward something.",
       "definitionVi": "Nhìn về phía cái gì.",
-      "sentence": "Please look at the board.",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -7144,7 +6934,6 @@
       "phonetic": "",
       "definition": "to turn your eyes toward something.",
       "definitionVi": "Nhìn vào cái gì cụ thể.",
-      "sentence": "Please look at the board.",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -7178,7 +6967,6 @@
       "phonetic": "/ˈlɒɹi/",
       "definition": "A large vehicle for carrying heavy goods.",
       "definitionVi": "Xe tải lớn chở hàng.",
-      "sentence": "I go to school by lorry.",
       "category": "travel",
       "partOfSpeech": "noun",
       "choices": [
@@ -7212,7 +7000,6 @@
       "phonetic": "/lɒt/",
       "definition": "A large amount of something.",
       "definitionVi": "Rất nhiều, một lượng lớn.",
-      "sentence": "Please do it lot.",
       "category": "general",
       "partOfSpeech": "adverb",
       "choices": [
@@ -7246,7 +7033,6 @@
       "phonetic": "/lɒts/",
       "definition": "Many or a large amount.",
       "definitionVi": "Rất nhiều (số nhiều).",
-      "sentence": "Please do it lots.",
       "category": "general",
       "partOfSpeech": "adverb",
       "choices": [
@@ -7280,7 +7066,6 @@
       "phonetic": "/lʊv/",
       "definition": "to care for someone very much.",
       "definitionVi": "Yêu thương ai rất nhiều.",
-      "sentence": "I love my family.",
       "category": "feelings",
       "partOfSpeech": "verb",
       "choices": [
@@ -7314,7 +7099,6 @@
       "phonetic": "/lʌnt͡ʃ/",
       "definition": "The meal you eat in the middle of the day.",
       "definitionVi": "Bữa trưa — ăn giữa ngày.",
-      "sentence": "I like lunch for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -7348,7 +7132,6 @@
       "phonetic": "/meɪk/",
       "definition": "to create or build something.",
       "definitionVi": "Làm, tạo ra cái gì.",
-      "sentence": "I make a cake with Mum.",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -7382,7 +7165,6 @@
       "phonetic": "[mɛn]",
       "definition": "An adult male person.",
       "definitionVi": "Người đàn ông trưởng thành.",
-      "sentence": "This is my man.",
       "category": "people",
       "partOfSpeech": "noun",
       "choices": [
@@ -7416,7 +7198,6 @@
       "phonetic": "/ˈmæŋɡəʊ/",
       "definition": "A sweet tropical fruit with orange flesh.",
       "definitionVi": "Quả xoài ngọt, ruột màu cam.",
-      "sentence": "I like a mango for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -7450,7 +7231,6 @@
       "phonetic": "/mæt/",
       "definition": "A flat piece on the floor by a door.",
       "definitionVi": "Thảm nhỏ đặt trước cửa hoặc sàn.",
-      "sentence": "There is a mat in my house.",
       "category": "home",
       "partOfSpeech": "noun",
       "choices": [
@@ -7484,7 +7264,6 @@
       "phonetic": "",
       "definition": "The fifth month of the year.",
       "definitionVi": "Tháng Năm — tháng thứ năm trong năm.",
-      "sentence": "I play in the May (as in girl’s.",
       "category": "time",
       "partOfSpeech": "noun",
       "choices": [
@@ -7516,7 +7295,6 @@
       "phonetic": "",
       "definition": "the word people call you, like Tom or Linh",
       "definitionVi": "tên, tên gọi của bạn",
-      "sentence": "I use a name at school.",
       "category": "school",
       "partOfSpeech": "noun",
       "choices": [
@@ -7550,7 +7328,6 @@
       "phonetic": "/miːt/",
       "definition": "Food that comes from animals.",
       "definitionVi": "Thịt — thức ăn từ động vật.",
-      "sentence": "I like meat for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -7584,7 +7361,6 @@
       "phonetic": "",
       "definition": "Small balls of minced meat, often in sauce.",
       "definitionVi": "Thịt viên tròn, thường có sốt.",
-      "sentence": "I like the meatballs for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -7618,7 +7394,6 @@
       "phonetic": "[mɛlk]",
       "definition": "A white drink from cows.",
       "definitionVi": "Sữa bò — đồ uống màu trắng.",
-      "sentence": "I like milk for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -7652,7 +7427,6 @@
       "phonetic": "/ˈmɘ.ɹɘ/",
       "definition": "Glass that shows your reflection.",
       "definitionVi": "Gương — nhìn thấy hình mình.",
-      "sentence": "There is a mirror in my house.",
       "category": "home",
       "partOfSpeech": "noun",
       "choices": [
@@ -7686,7 +7460,6 @@
       "phonetic": "/ˈmʌŋki/",
       "definition": "A clever animal that climbs trees.",
       "definitionVi": "Khỉ — thú thông minh, leo cây giỏi.",
-      "sentence": "I can see a monkey at the zoo.",
       "category": "animals",
       "partOfSpeech": "noun",
       "choices": [
@@ -7720,7 +7493,6 @@
       "phonetic": "/ˈmɒnstə(ɹ)/",
       "definition": "A scary creature in stories.",
       "definitionVi": "Quái vật — nhân vật đáng sợ trong truyện.",
-      "sentence": "I can see a monster at the zoo.",
       "category": "animals",
       "partOfSpeech": "noun",
       "choices": [
@@ -7754,7 +7526,6 @@
       "phonetic": "/ˈmɔːnɪŋ/",
       "definition": "The early part of the day before noon.",
       "definitionVi": "Buổi sáng — trước trưa.",
-      "sentence": "I play in the morning.",
       "category": "time",
       "partOfSpeech": "noun",
       "choices": [
@@ -7788,7 +7559,6 @@
       "phonetic": "/ˈmʌðə(ɹ)/",
       "definition": "A woman who is your parent.",
       "definitionVi": "Mẹ — người sinh ra và nuôi em.",
-      "sentence": "This is my mother.",
       "category": "people",
       "partOfSpeech": "noun",
       "choices": [
@@ -7822,7 +7592,6 @@
       "phonetic": "",
       "definition": "A two-wheeled vehicle with an engine.",
       "definitionVi": "Xe máy — phương tiện hai bánh có động cơ.",
-      "sentence": "I go to school by motorbike.",
       "category": "travel",
       "partOfSpeech": "noun",
       "choices": [
@@ -7856,7 +7625,6 @@
       "phonetic": "",
       "definition": "A tiny animal with a long tail.",
       "definitionVi": "Con chuột nhỏ, đuôi dài.",
-      "sentence": "I can see a mouse at the zoo.",
       "category": "animals",
       "partOfSpeech": "noun",
       "choices": [
@@ -7890,7 +7658,6 @@
       "phonetic": "/mʌʊθ/",
       "definition": "The part of your face for eating and talking.",
       "definitionVi": "Miệng — dùng để ăn và nói.",
-      "sentence": "Touch your mouth, please.",
       "category": "body",
       "partOfSpeech": "noun",
       "choices": [
@@ -7924,7 +7691,6 @@
       "phonetic": "/mʌm/",
       "definition": "A friendly word for mother.",
       "definitionVi": "Mẹ — cách gọi thân mật.",
-      "sentence": "This is my mum.",
       "category": "people",
       "partOfSpeech": "noun",
       "choices": [
@@ -7958,7 +7724,6 @@
       "phonetic": "/ˈmjuːzɪk/",
       "definition": "Sounds made with voices or instruments.",
       "definitionVi": "Âm nhạc — tiếng hát hoặc nhạc cụ.",
-      "sentence": "I can see music in the picture.",
       "category": "general",
       "partOfSpeech": "noun",
       "choices": [
@@ -7992,7 +7757,6 @@
       "phonetic": "",
       "definition": "a small word that joins two things, like cats and dogs",
       "definitionVi": "và — nối hai thứ với nhau",
-      "sentence": "I can see an and in the picture.",
       "category": "general",
       "partOfSpeech": "noun",
       "choices": [
@@ -8026,7 +7790,6 @@
       "phonetic": "",
       "definition": "the word people call you, like Tom or Linh",
       "definitionVi": "tên, tên gọi của bạn",
-      "sentence": "I use a name at school.",
       "category": "school",
       "partOfSpeech": "noun",
       "choices": [
@@ -8060,7 +7823,6 @@
       "phonetic": "/njʉː/",
       "definition": "Not old; made or bought recently.",
       "definitionVi": "Mới, chưa cũ.",
-      "sentence": "This bag is too new.",
       "category": "general",
       "partOfSpeech": "adjective",
       "choices": [
@@ -8094,7 +7856,6 @@
       "phonetic": "/naɪs/",
       "definition": "Kind, pleasant, or enjoyable.",
       "definitionVi": "Tốt, dễ thương, vui vẻ.",
-      "sentence": "What a nice day!",
       "category": "feelings",
       "partOfSpeech": "adjective",
       "choices": [
@@ -8128,7 +7889,6 @@
       "phonetic": "/naɪt/",
       "definition": "The dark time when you sleep.",
       "definitionVi": "Ban đêm, khi trời tối.",
-      "sentence": "I play in the night.",
       "category": "time",
       "partOfSpeech": "noun",
       "choices": [
@@ -8162,7 +7922,6 @@
       "phonetic": "/nəʊ/",
       "definition": "A word that means not yes.",
       "definitionVi": "Không — phủ nhận, không đồng ý.",
-      "sentence": "Please do it no.",
       "category": "general",
       "partOfSpeech": "adverb",
       "choices": [
@@ -8194,7 +7953,6 @@
       "phonetic": "/nəʊz/",
       "definition": "The part of your face you smell with.",
       "definitionVi": "Mũi — dùng để ngửi mùi.",
-      "sentence": "Touch your nose, please.",
       "category": "body",
       "partOfSpeech": "noun",
       "choices": [
@@ -8228,7 +7986,6 @@
       "phonetic": "/nɒt/",
       "definition": "Shows something is untrue or wrong.",
       "definitionVi": "Không phải, không làm.",
-      "sentence": "Please do it not.",
       "category": "general",
       "partOfSpeech": "adverb",
       "choices": [
@@ -8260,7 +8017,6 @@
       "phonetic": "/naʊ/",
       "definition": "At this moment, right here.",
       "definitionVi": "Bây giờ, lúc này.",
-      "sentence": "Please sit down now.",
       "category": "time",
       "partOfSpeech": "adverb",
       "choices": [
@@ -8292,7 +8048,6 @@
       "phonetic": "",
       "definition": "A sign like 1, 2, or 3 for counting.",
       "definitionVi": "Con số dùng để đếm.",
-      "sentence": "I use a number at school.",
       "category": "school",
       "partOfSpeech": "noun",
       "choices": [
@@ -8326,7 +8081,6 @@
       "phonetic": "",
       "definition": "Fine, good, or all right.",
       "definitionVi": "Được rồi, ổn, không sao.",
-      "sentence": "I feel OK today.",
       "category": "general",
       "partOfSpeech": "adjective",
       "choices": [
@@ -8358,7 +8112,6 @@
       "phonetic": "/ˈɒʊld/",
       "definition": "Having lived for many years.",
       "definitionVi": "Già, nhiều tuổi.",
-      "sentence": "This bag is too old.",
       "category": "people",
       "partOfSpeech": "adjective",
       "choices": [
@@ -8392,7 +8145,6 @@
       "phonetic": "/ˈʌŋjɪn/",
       "definition": "A round vegetable that makes you cry.",
       "definitionVi": "Củ hành — ăn trong món ăn.",
-      "sentence": "I like an onion for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -8426,7 +8178,6 @@
       "phonetic": "/ˈəʊ.pən/",
       "definition": "Not closed; allowing people to enter.",
       "definitionVi": "Mở, không đóng cửa.",
-      "sentence": "I feel open today.",
       "category": "general",
       "partOfSpeech": "adjective",
       "choices": [
@@ -8460,7 +8211,6 @@
       "phonetic": "/ˈɔɹɪ̈nd͡ʒ/",
       "definition": "A colour between red and yellow.",
       "definitionVi": "Màu cam.",
-      "sentence": "I have a orange bag.",
       "category": "general",
       "partOfSpeech": "adjective",
       "choices": [
@@ -8494,7 +8244,6 @@
       "phonetic": "/peɪd͡ʒ/",
       "definition": "One side of paper in a book.",
       "definitionVi": "Trang sách, một mặt giấy.",
-      "sentence": "I use a page at school.",
       "category": "school",
       "partOfSpeech": "noun",
       "choices": [
@@ -8528,7 +8277,6 @@
       "phonetic": "/peɪnt/",
       "definition": "Coloured liquid used for art.",
       "definitionVi": "Sơn hoặc màu vẽ.",
-      "sentence": "I use a paint at school.",
       "category": "school",
       "partOfSpeech": "noun",
       "choices": [
@@ -8562,7 +8310,6 @@
       "phonetic": "/ˈpeɪn.tɪŋ/",
       "definition": "A picture made with paint.",
       "definitionVi": "Bức tranh vẽ bằng màu.",
-      "sentence": "I use a painting at school.",
       "category": "school",
       "partOfSpeech": "noun",
       "choices": [
@@ -8596,7 +8343,6 @@
       "phonetic": "/ˈpeɪpə/",
       "definition": "Thin sheets you write or draw on.",
       "definitionVi": "Giấy để viết hoặc vẽ.",
-      "sentence": "I feel paper today.",
       "category": "school",
       "partOfSpeech": "adjective",
       "choices": [
@@ -8630,7 +8376,6 @@
       "phonetic": "[paːk]",
       "definition": "A green outdoor place to play.",
       "definitionVi": "Công viên — nơi chơi ngoài trời.",
-      "sentence": "We go to the park on Saturday.",
       "category": "places",
       "partOfSpeech": "noun",
       "choices": [
@@ -8664,7 +8409,6 @@
       "phonetic": "/pɐːt/",
       "definition": "A piece of something bigger.",
       "definitionVi": "Một phần của cái gì đó.",
-      "sentence": "I can see a part in the picture.",
       "category": "general",
       "partOfSpeech": "noun",
       "choices": [
@@ -8698,7 +8442,6 @@
       "phonetic": "/piː/",
       "definition": "A small round green vegetable.",
       "definitionVi": "Hạt đậu xanh nhỏ, tròn.",
-      "sentence": "I like a pea for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -8732,7 +8475,6 @@
       "phonetic": "",
       "definition": "A sweet fruit that is narrow at the top.",
       "definitionVi": "Quả lê — ngọt, hình thon.",
-      "sentence": "I like a pear for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -8766,7 +8508,6 @@
       "phonetic": "/pɛn/",
       "definition": "A tool that writes with ink.",
       "definitionVi": "Bút mực để viết.",
-      "sentence": "I use a pen at school.",
       "category": "school",
       "partOfSpeech": "noun",
       "choices": [
@@ -8800,7 +8541,6 @@
       "phonetic": "/ˈpɛnsɪl/",
       "definition": "A writing tool with lead inside.",
       "definitionVi": "Bút chì để viết và vẽ.",
-      "sentence": "I use a pencil at school.",
       "category": "school",
       "partOfSpeech": "noun",
       "choices": [
@@ -8834,7 +8574,6 @@
       "phonetic": "/ˈpɜːsən/",
       "definition": "A human being — a man, woman, or child.",
       "definitionVi": "Con người — ai cũng là một person.",
-      "sentence": "This is my person.",
       "category": "people",
       "partOfSpeech": "noun",
       "choices": [
@@ -8868,7 +8607,6 @@
       "phonetic": "/pɛt/",
       "definition": "An animal you keep at home.",
       "definitionVi": "Thú cưng nuôi trong nhà.",
-      "sentence": "I can see a pet at the zoo.",
       "category": "animals",
       "partOfSpeech": "noun",
       "choices": [
@@ -8902,7 +8640,6 @@
       "phonetic": "/fəʊ̯n/",
       "definition": "A device for talking to people far away.",
       "definitionVi": "Điện thoại để gọi và nhắn tin.",
-      "sentence": "I use a phone at home.",
       "category": "technology",
       "partOfSpeech": "noun",
       "choices": [
@@ -8936,7 +8673,6 @@
       "phonetic": "/ˈfəʊ.təʊ/",
       "definition": "A picture taken with a camera.",
       "definitionVi": "Ảnh chụp bằng máy ảnh.",
-      "sentence": "I use a photo at home.",
       "category": "technology",
       "partOfSpeech": "noun",
       "choices": [
@@ -8970,7 +8706,6 @@
       "phonetic": "/piˈænoʊ/",
       "definition": "A large musical instrument with black and white keys.",
       "definitionVi": "Đàn piano — nhạc cụ có phím.",
-      "sentence": "I can see a piano in the picture.",
       "category": "general",
       "partOfSpeech": "noun",
       "choices": [
@@ -9004,7 +8739,6 @@
       "phonetic": "",
       "definition": "to lift something from the ground.",
       "definitionVi": "Nhặt lên hoặc bế lên.",
-      "sentence": "Please pick up your bag.",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -9038,7 +8772,6 @@
       "phonetic": "/ˈpɪktʃə/",
       "definition": "A drawing or photo you can look at.",
       "definitionVi": "Hình ảnh hoặc bức tranh.",
-      "sentence": "I use a picture at school.",
       "category": "school",
       "partOfSpeech": "noun",
       "choices": [
@@ -9072,7 +8805,6 @@
       "phonetic": "",
       "definition": "Food baked in a round pastry crust.",
       "definitionVi": "Bánh pie — nhân bọc trong vỏ bánh.",
-      "sentence": "I like a pie for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -9106,7 +8838,6 @@
       "phonetic": "/ˈpaɪnəpəl/",
       "definition": "A big tropical fruit with spiky skin.",
       "definitionVi": "Quả dứa — to, vỏ gai, vị ngọt.",
-      "sentence": "I like a pineapple for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -9140,7 +8871,6 @@
       "phonetic": "/pɪŋk/",
       "definition": "A light colour like a flower.",
       "definitionVi": "Màu hồng.",
-      "sentence": "I have a pink bag.",
       "category": "general",
       "partOfSpeech": "adjective",
       "choices": [
@@ -9174,7 +8904,6 @@
       "phonetic": "/pleɪn/",
       "definition": "A flying vehicle with wings.",
       "definitionVi": "Máy bay — phương tiện bay trên trời.",
-      "sentence": "I go to school by plane.",
       "category": "travel",
       "partOfSpeech": "noun",
       "choices": [
@@ -9208,7 +8937,6 @@
       "phonetic": "/pleɪ/",
       "definition": "to have fun with games or toys.",
       "definitionVi": "Chơi, vui chơi.",
-      "sentence": "I like to play in the park.",
       "category": "sports",
       "partOfSpeech": "verb",
       "choices": [
@@ -9242,7 +8970,6 @@
       "phonetic": "/ˈpleɪɡɹaʊnd/",
       "definition": "An outdoor area with swings and slides.",
       "definitionVi": "Sân chơi ở trường hoặc công viên.",
-      "sentence": "We go to the playground on Saturday.",
       "category": "places",
       "partOfSpeech": "noun",
       "choices": [
@@ -9276,7 +9003,6 @@
       "phonetic": "/pɔɪnt/",
       "definition": "to show something with your finger.",
       "definitionVi": "Chỉ tay vào cái gì đó.",
-      "sentence": "I can point at school.",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -9310,7 +9036,6 @@
       "phonetic": "",
       "definition": "A big white bear that lives on ice.",
       "definitionVi": "Gấu Bắc Cực — gấu trắng sống ở Bắc Cực.",
-      "sentence": "I can see the polar bear at the zoo.",
       "category": "animals",
       "partOfSpeech": "noun",
       "choices": [
@@ -9344,7 +9069,6 @@
       "phonetic": "/ˈpoʊstɚ/",
       "definition": "A big picture put up on a wall.",
       "definitionVi": "Áp phích treo trên tường.",
-      "sentence": "I use a poster at school.",
       "category": "school",
       "partOfSpeech": "noun",
       "choices": [
@@ -9378,7 +9102,6 @@
       "phonetic": "/pəˈteɪ.təʊ/",
       "definition": "A brown vegetable that grows underground.",
       "definitionVi": "Củ khoai tây.",
-      "sentence": "I like a potato for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -9412,7 +9135,6 @@
       "phonetic": "/ˈpɜː(ɹ).pəl/",
       "definition": "A colour made from red and blue.",
       "definitionVi": "Màu tím.",
-      "sentence": "I have a purple bag.",
       "category": "general",
       "partOfSpeech": "adjective",
       "choices": [
@@ -9446,7 +9168,6 @@
       "phonetic": "/pʊt/",
       "definition": "to place something somewhere.",
       "definitionVi": "Đặt, để cái gì ở đâu.",
-      "sentence": "Please put your bag under the desk.",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -9480,7 +9201,6 @@
       "phonetic": "/ˈkwɛstjən/",
       "definition": "Words you ask when you want an answer.",
       "definitionVi": "Câu hỏi khi muốn biết đáp án.",
-      "sentence": "I use a question at school.",
       "category": "school",
       "partOfSpeech": "noun",
       "choices": [
@@ -9514,7 +9234,6 @@
       "phonetic": "/ˈɹeɪdiˌəʊ/",
       "definition": "A device that plays music and news.",
       "definitionVi": "Đài radio phát nhạc và tin tức.",
-      "sentence": "I use a radio at home.",
       "category": "technology",
       "partOfSpeech": "noun",
       "choices": [
@@ -9548,7 +9267,6 @@
       "phonetic": "/ɹiːd/",
       "definition": "to look at words and understand them.",
       "definitionVi": "Đọc sách hoặc chữ.",
-      "sentence": "I read at school every day.",
       "category": "school",
       "partOfSpeech": "verb",
       "choices": [
@@ -9582,7 +9300,6 @@
       "phonetic": "/ˈɹɪəli/",
       "definition": "Very much or truly.",
       "definitionVi": "Thật sự, rất.",
-      "sentence": "I really like this book.",
       "category": "general",
       "partOfSpeech": "adverb",
       "choices": [
@@ -9614,7 +9331,6 @@
       "phonetic": "/ɹɛd/",
       "definition": "The colour of apples and fire trucks.",
       "definitionVi": "Màu đỏ.",
-      "sentence": "I have a red bag.",
       "category": "general",
       "partOfSpeech": "adjective",
       "choices": [
@@ -9648,7 +9364,6 @@
       "phonetic": "/ɹaɪs/",
       "definition": "Small white grains eaten with meals.",
       "definitionVi": "Cơm, gạo — thức ăn chính.",
-      "sentence": "I like rice for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -9682,7 +9397,6 @@
       "phonetic": "/ɹaɪd/",
       "definition": "to sit on and travel by bike or horse.",
       "definitionVi": "Cưỡi hoặc đi bằng xe đạp, ngựa.",
-      "sentence": "I like to ride in the park.",
       "category": "travel",
       "partOfSpeech": "verb",
       "choices": [
@@ -9716,7 +9430,6 @@
       "phonetic": "/ˈɹaɪt/",
       "definition": "Correct, or the opposite of left.",
       "definitionVi": "Đúng, hoặc bên phải.",
-      "sentence": "This bag is too right.",
       "category": "general",
       "partOfSpeech": "adjective",
       "choices": [
@@ -9750,7 +9463,6 @@
       "phonetic": "/ˈɹoʊbət/",
       "definition": "A machine that can move and do jobs.",
       "definitionVi": "Robot — máy móc biết làm việc.",
-      "sentence": "I use a robot at home.",
       "category": "technology",
       "partOfSpeech": "noun",
       "choices": [
@@ -9784,7 +9496,6 @@
       "phonetic": "/ɹuːm/",
       "definition": "A space inside a house with walls.",
       "definitionVi": "Căn phòng trong nhà.",
-      "sentence": "There is a room in my house.",
       "category": "home",
       "partOfSpeech": "noun",
       "choices": [
@@ -9818,7 +9529,6 @@
       "phonetic": "/ˈɹʌbə(ɹ)/",
       "definition": "A small tool that removes pencil marks.",
       "definitionVi": "Cục tẩy xóa chì.",
-      "sentence": "I use a rubber at school.",
       "category": "school",
       "partOfSpeech": "noun",
       "choices": [
@@ -9852,7 +9562,6 @@
       "phonetic": "/ɹʌɡ/",
       "definition": "A soft carpet on the floor.",
       "definitionVi": "Tấm thảm mềm trên sàn.",
-      "sentence": "There is a rug in my house.",
       "category": "home",
       "partOfSpeech": "noun",
       "choices": [
@@ -9886,7 +9595,6 @@
       "phonetic": "/ˈɹuːlə(ɹ)/",
       "definition": "A straight tool for measuring lines.",
       "definitionVi": "Thước kẻ đo độ dài.",
-      "sentence": "I use a ruler at school.",
       "category": "school",
       "partOfSpeech": "noun",
       "choices": [
@@ -9920,7 +9628,6 @@
       "phonetic": "/ɹʊn/",
       "definition": "to move fast on your feet.",
       "definitionVi": "Chạy nhanh bằng chân.",
-      "sentence": "I can run in the park.",
       "category": "sports",
       "partOfSpeech": "verb",
       "choices": [
@@ -9954,7 +9661,6 @@
       "phonetic": "/sæd/",
       "definition": "Unhappy, wanting to cry.",
       "definitionVi": "Buồn, muốn khóc.",
-      "sentence": "I feel sad today.",
       "category": "feelings",
       "partOfSpeech": "adjective",
       "choices": [
@@ -9988,7 +9694,6 @@
       "phonetic": "/sænd/",
       "definition": "Tiny grains on a beach or desert.",
       "definitionVi": "Cát — hạt nhỏ ở bãi biển.",
-      "sentence": "I can see sand outside.",
       "category": "nature",
       "partOfSpeech": "noun",
       "choices": [
@@ -10022,7 +9727,6 @@
       "phonetic": "/ˈsɑsɪd͡ʒ/",
       "definition": "Meat shaped like a long tube.",
       "definitionVi": "Xúc xích — thịt nghiền bọc vỏ.",
-      "sentence": "I like a sausage for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -10056,7 +9760,6 @@
       "phonetic": "/seɪ/",
       "definition": "to speak words out loud.",
       "definitionVi": "Nói, phát biểu.",
-      "sentence": "Please say your name clearly.",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -10088,7 +9791,6 @@
       "phonetic": "/ˈskɛəɹi/",
       "definition": "Making you feel afraid.",
       "definitionVi": "Đáng sợ, làm em sợ.",
-      "sentence": "What a scary day!",
       "category": "feelings",
       "partOfSpeech": "adjective",
       "choices": [
@@ -10122,7 +9824,6 @@
       "phonetic": "/skuːl/",
       "definition": "A place where children learn and study.",
       "definitionVi": "Trường học — nơi em đi học.",
-      "sentence": "I use a school at school.",
       "category": "school",
       "partOfSpeech": "noun",
       "choices": [
@@ -10156,7 +9857,6 @@
       "phonetic": "/siː/",
       "definition": "A very large area of salty water.",
       "definitionVi": "Biển — nước mặn rộng lớn.",
-      "sentence": "I can see a sea outside.",
       "category": "nature",
       "partOfSpeech": "noun",
       "choices": [
@@ -10190,7 +9890,6 @@
       "phonetic": "/siː/",
       "definition": "to look at something with your eyes.",
       "definitionVi": "Nhìn thấy bằng mắt.",
-      "sentence": "I can see a bird in the tree.",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -10224,7 +9923,6 @@
       "phonetic": "[ˈsɛntn̩t͡s]",
       "definition": "A group of words that makes sense.",
       "definitionVi": "Câu văn — nhóm từ có nghĩa.",
-      "sentence": "I use a sentence at school.",
       "category": "school",
       "partOfSpeech": "noun",
       "choices": [
@@ -10258,7 +9956,6 @@
       "phonetic": "/ʃɛl/",
       "definition": "A hard cover protecting some sea animals.",
       "definitionVi": "Vỏ cứng bọc động vật biển.",
-      "sentence": "I can see a shell outside.",
       "category": "nature",
       "partOfSpeech": "noun",
       "choices": [
@@ -10292,7 +9989,6 @@
       "phonetic": "",
       "definition": "A large boat that crosses the sea.",
       "definitionVi": "Tàu thủy lớn đi trên biển.",
-      "sentence": "I go to school by ship.",
       "category": "travel",
       "partOfSpeech": "noun",
       "choices": [
@@ -10326,7 +10022,6 @@
       "phonetic": "/ʃɜːt/",
       "definition": "Clothing you wear on your upper body.",
       "definitionVi": "Áo sơ mi hoặc áo phông.",
-      "sentence": "I wear a shirt to school.",
       "category": "clothes",
       "partOfSpeech": "noun",
       "choices": [
@@ -10360,7 +10055,6 @@
       "phonetic": "/ʃuː/",
       "definition": "Something you wear on your foot.",
       "definitionVi": "Giày đi trên chân.",
-      "sentence": "I wear a shoe to school.",
       "category": "clothes",
       "partOfSpeech": "noun",
       "choices": [
@@ -10394,7 +10088,6 @@
       "phonetic": "/ʃɒp/",
       "definition": "A place where you buy things.",
       "definitionVi": "Cửa hàng — nơi mua đồ.",
-      "sentence": "We go to the shop on Saturday.",
       "category": "places",
       "partOfSpeech": "noun",
       "choices": [
@@ -10428,7 +10121,6 @@
       "phonetic": "/ʃoːt/",
       "definition": "Not long; small in height or length.",
       "definitionVi": "Ngắn, thấp.",
-      "sentence": "This bag is too short.",
       "category": "general",
       "partOfSpeech": "adjective",
       "choices": [
@@ -10462,7 +10154,6 @@
       "phonetic": "/ʃɔː(ɹ)ts/",
       "definition": "Trousers that stop above your knees.",
       "definitionVi": "Quần đùi — quần ngắn.",
-      "sentence": "I wear the shorts to school.",
       "category": "clothes",
       "partOfSpeech": "noun",
       "choices": [
@@ -10496,7 +10187,6 @@
       "phonetic": "/ʃəʊ/",
       "definition": "to let someone see something.",
       "definitionVi": "Cho xem, trình bày.",
-      "sentence": "I can show at school.",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -10530,7 +10220,6 @@
       "phonetic": "/ˈsɪli/",
       "definition": "Funny in a playful, not serious way.",
       "definitionVi": "Ngớ ngẩn, buồn cười.",
-      "sentence": "What a silly day!",
       "category": "feelings",
       "partOfSpeech": "adjective",
       "choices": [
@@ -10564,7 +10253,6 @@
       "phonetic": "/sɪŋ/",
       "definition": "to make music with your voice.",
       "definitionVi": "Hát bằng giọng.",
-      "sentence": "I can sing at school.",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -10598,7 +10286,6 @@
       "phonetic": "/ˈsɪs.tə/",
       "definition": "A girl who has the same parents as you.",
       "definitionVi": "Chị hoặc em gái trong gia đình.",
-      "sentence": "This is my sister.",
       "category": "people",
       "partOfSpeech": "noun",
       "choices": [
@@ -10632,7 +10319,6 @@
       "phonetic": "/sɪt/",
       "definition": "to rest on a chair with your bottom.",
       "definitionVi": "Ngồi xuống ghế.",
-      "sentence": "I sit every morning.",
       "category": "home",
       "partOfSpeech": "verb",
       "choices": [
@@ -10666,7 +10352,6 @@
       "phonetic": "",
       "definition": "A board with wheels you ride on.",
       "definitionVi": "Ván trượt có bánh xe.",
-      "sentence": "I play with a skateboard in the park.",
       "category": "sports",
       "partOfSpeech": "noun",
       "choices": [
@@ -10700,7 +10385,6 @@
       "phonetic": "",
       "definition": "Riding and doing tricks on a skateboard.",
       "definitionVi": "Môn trượt ván.",
-      "sentence": "I play with a skateboarding in the park.",
       "category": "sports",
       "partOfSpeech": "noun",
       "choices": [
@@ -10734,7 +10418,6 @@
       "phonetic": "/skɜːt/",
       "definition": "Clothing that hangs from the waist down.",
       "definitionVi": "Váy — mặc từ eo trở xuống.",
-      "sentence": "I wear a skirt to school.",
       "category": "clothes",
       "partOfSpeech": "noun",
       "choices": [
@@ -10768,7 +10451,6 @@
       "phonetic": "/sliːp/",
       "definition": "to rest with your eyes closed at night.",
       "definitionVi": "Ngủ, nghỉ ban đêm.",
-      "sentence": "I sleep every morning.",
       "category": "home",
       "partOfSpeech": "verb",
       "choices": [
@@ -10802,7 +10484,6 @@
       "phonetic": "/smoːl/",
       "definition": "Little, not big.",
       "definitionVi": "Nhỏ, bé.",
-      "sentence": "This bag is too small.",
       "category": "general",
       "partOfSpeech": "adjective",
       "choices": [
@@ -10836,7 +10517,6 @@
       "phonetic": "/ˈsmaɪ.əl/",
       "definition": "A happy look on your face.",
       "definitionVi": "Nụ cười khi vui.",
-      "sentence": "I feel smile today.",
       "category": "feelings",
       "partOfSpeech": "noun",
       "choices": [
@@ -10870,7 +10550,6 @@
       "phonetic": "/ˈsneɪk/",
       "definition": "A long thin animal with no legs.",
       "definitionVi": "Con rắn — dài, không chân.",
-      "sentence": "I can see a snake at the zoo.",
       "category": "animals",
       "partOfSpeech": "noun",
       "choices": [
@@ -10904,7 +10583,6 @@
       "phonetic": "/ˈsɒk.ə/",
       "definition": "A team game kicking a ball into a goal.",
       "definitionVi": "Bóng đá — đá bóng vào khung thành.",
-      "sentence": "I play with a soccer in the park.",
       "category": "sports",
       "partOfSpeech": "noun",
       "choices": [
@@ -10938,7 +10616,6 @@
       "phonetic": "/sɒk/",
       "definition": "Soft clothing that covers your foot.",
       "definitionVi": "Tất, vớ đi trong giày.",
-      "sentence": "I wear a sock to school.",
       "category": "clothes",
       "partOfSpeech": "noun",
       "choices": [
@@ -10972,7 +10649,6 @@
       "phonetic": "/ˈsəʊfə/",
       "definition": "A long soft seat in the living room.",
       "definitionVi": "Ghế sofa trong phòng khách.",
-      "sentence": "There is a sofa in my house.",
       "category": "home",
       "partOfSpeech": "noun",
       "choices": [
@@ -11006,7 +10682,6 @@
       "phonetic": "/sɒŋ/",
       "definition": "Music with words you can sing.",
       "definitionVi": "Bài hát có lời.",
-      "sentence": "I can see a song in the picture.",
       "category": "general",
       "partOfSpeech": "noun",
       "choices": [
@@ -11040,7 +10715,6 @@
       "phonetic": "/ˈsɔɹi/",
       "definition": "A word you say when you did something wrong.",
       "definitionVi": "Xin lỗi khi mắc lỗi.",
-      "sentence": "I feel sorry today.",
       "category": "feelings",
       "partOfSpeech": "adjective",
       "choices": [
@@ -11072,7 +10746,6 @@
       "phonetic": "/spɛl/",
       "definition": "to write a word letter by letter.",
       "definitionVi": "Đánh vần từng chữ cái.",
-      "sentence": "Please spell the answer clearly.",
       "category": "school",
       "partOfSpeech": "verb",
       "choices": [
@@ -11106,7 +10779,6 @@
       "phonetic": "[ˈspʌɪ̯ɾə(ɹ)]",
       "definition": "A small creature with eight legs.",
       "definitionVi": "Con nhện — có tám chân.",
-      "sentence": "I can see a spider at the zoo.",
       "category": "animals",
       "partOfSpeech": "noun",
       "choices": [
@@ -11140,7 +10812,6 @@
       "phonetic": "/spɔːt/",
       "definition": "A game or activity with physical exercise.",
       "definitionVi": "Môn thể thao.",
-      "sentence": "I play with a sport in the park.",
       "category": "sports",
       "partOfSpeech": "noun",
       "choices": [
@@ -11174,7 +10845,6 @@
       "phonetic": "/stænd/",
       "definition": "to be on your feet, not sitting.",
       "definitionVi": "Đứng trên chân.",
-      "sentence": "I stand every morning.",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -11208,7 +10878,6 @@
       "phonetic": "/stɑːt/",
       "definition": "to begin doing something.",
       "definitionVi": "Bắt đầu làm gì.",
-      "sentence": "I can start at school.",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -11242,7 +10911,6 @@
       "phonetic": "/stɒp/",
       "definition": "to finish or not continue.",
       "definitionVi": "Dừng lại, ngừng.",
-      "sentence": "I can stop at school.",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -11276,7 +10944,6 @@
       "phonetic": "/stɔː/",
       "definition": "A shop where you buy things.",
       "definitionVi": "Cửa hàng — nơi mua sắm.",
-      "sentence": "We go to the store on Saturday.",
       "category": "places",
       "partOfSpeech": "noun",
       "choices": [
@@ -11310,7 +10977,6 @@
       "phonetic": "/ˈstɔː.ɹi/",
       "definition": "A tale about people, animals, or events.",
       "definitionVi": "Câu chuyện, truyện kể.",
-      "sentence": "I use a story at school.",
       "category": "school",
       "partOfSpeech": "noun",
       "choices": [
@@ -11344,7 +11010,6 @@
       "phonetic": "/stɹiːt/",
       "definition": "A road in a town with houses.",
       "definitionVi": "Con phố, đường phố.",
-      "sentence": "We go to the street on Saturday.",
       "category": "places",
       "partOfSpeech": "noun",
       "choices": [
@@ -11378,7 +11043,6 @@
       "phonetic": "/sʌn/",
       "definition": "The bright star that gives us light.",
       "definitionVi": "Mặt trời — chiếu sáng ban ngày.",
-      "sentence": "I like the sun.",
       "category": "weather",
       "partOfSpeech": "noun",
       "choices": [
@@ -11412,7 +11076,6 @@
       "phonetic": "",
       "definition": "Candy or sugary treats.",
       "definitionVi": "Kẹo ngọt, đồ ngọt.",
-      "sentence": "I like a sweet for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -11446,7 +11109,6 @@
       "phonetic": "/swɪm/",
       "definition": "to move through water using your arms.",
       "definitionVi": "Bơi trong nước.",
-      "sentence": "I can swim in the park.",
       "category": "sports",
       "partOfSpeech": "verb",
       "choices": [
@@ -11480,7 +11142,6 @@
       "phonetic": "/ˈteɪbəl/",
       "definition": "Furniture with a flat top and legs.",
       "definitionVi": "Cái bàn — ăn hoặc học trên bàn.",
-      "sentence": "There is a table in my house.",
       "category": "home",
       "partOfSpeech": "noun",
       "choices": [
@@ -11514,7 +11175,6 @@
       "phonetic": "",
       "definition": "A fast game hitting a ball over a net.",
       "definitionVi": "Bóng bàn — đánh bóng qua lưới.",
-      "sentence": "I play with the table tennis in the park.",
       "category": "sports",
       "partOfSpeech": "noun",
       "choices": [
@@ -11548,7 +11208,6 @@
       "phonetic": "/ˈtæblət/",
       "definition": "A flat screen computer you touch.",
       "definitionVi": "Máy tính bảng cảm ứng.",
-      "sentence": "I use a tablet at home.",
       "category": "technology",
       "partOfSpeech": "noun",
       "choices": [
@@ -11582,7 +11241,6 @@
       "phonetic": "/teɪl/",
       "definition": "The long part at the back of an animal.",
       "definitionVi": "Đuôi — phía sau cơ thể con vật.",
-      "sentence": "I can see a tail at the zoo.",
       "category": "animals",
       "partOfSpeech": "noun",
       "choices": [
@@ -11616,7 +11274,6 @@
       "phonetic": "",
       "definition": "to use a camera to make a picture.",
       "definitionVi": "Chụp ảnh bằng máy ảnh.",
-      "sentence": "Can you take a photo, please?",
       "category": "technology",
       "partOfSpeech": "verb",
       "choices": [
@@ -11650,7 +11307,6 @@
       "phonetic": "/toːk/",
       "definition": "to speak with someone.",
       "definitionVi": "Nói chuyện với ai.",
-      "sentence": "Please talk quietly in the library.",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -11684,7 +11340,6 @@
       "phonetic": "/ˈtiːt͡ʃə/",
       "definition": "A person who helps children learn.",
       "definitionVi": "Thầy cô giáo dạy em học.",
-      "sentence": "Tom wants to be a teacher one day.",
       "category": "jobs",
       "partOfSpeech": "noun",
       "choices": [
@@ -11718,7 +11373,6 @@
       "phonetic": "",
       "definition": "A soft toy bear for cuddling.",
       "definitionVi": "Gấu bông — thú nhồi bông.",
-      "sentence": "I can see a teddy in the picture.",
       "category": "general",
       "partOfSpeech": "noun",
       "choices": [
@@ -11752,7 +11406,6 @@
       "phonetic": "/ˈtɛləˌvɪʒən/",
       "definition": "A screen that shows programmes and films.",
       "definitionVi": "Ti-vi — xem chương trình và phim.",
-      "sentence": "I use a television at home.",
       "category": "technology",
       "partOfSpeech": "noun",
       "choices": [
@@ -11786,7 +11439,6 @@
       "phonetic": "/tɛl/",
       "definition": "to say something to someone.",
       "definitionVi": "Kể, nói cho ai biết.",
-      "sentence": "Please tell me a story.",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -11818,7 +11470,6 @@
       "phonetic": "/ˈtɛn.ɪs/",
       "definition": "A game hitting a ball over a net.",
       "definitionVi": "Quần vợt — đánh bóng qua lưới.",
-      "sentence": "I play with a tennis in the park.",
       "category": "sports",
       "partOfSpeech": "noun",
       "choices": [
@@ -11852,7 +11503,6 @@
       "phonetic": "",
       "definition": "The bat used to hit a tennis ball.",
       "definitionVi": "Vợt tennis.",
-      "sentence": "I play with the tennis racket in the park.",
       "category": "sports",
       "partOfSpeech": "noun",
       "choices": [
@@ -11886,7 +11536,6 @@
       "phonetic": "/ðeː(ɹ)/",
       "definition": "In or at that place, not here.",
       "definitionVi": "Ở đó, tại chỗ kia.",
-      "sentence": "Please do it there.",
       "category": "general",
       "partOfSpeech": "adverb",
       "choices": [
@@ -11918,7 +11567,6 @@
       "phonetic": "/θɪŋ/",
       "definition": "An object you can see or touch.",
       "definitionVi": "Vật, đồ vật.",
-      "sentence": "I can see a thing in the picture.",
       "category": "general",
       "partOfSpeech": "noun",
       "choices": [
@@ -11952,7 +11600,6 @@
       "phonetic": "/θɹəʊ/",
       "definition": "to send something through the air.",
       "definitionVi": "Ném, quăng cái gì đi.",
-      "sentence": "I like to throw in the park.",
       "category": "sports",
       "partOfSpeech": "verb",
       "choices": [
@@ -11986,7 +11633,6 @@
       "phonetic": "/tɪk/",
       "definition": "A tiny insect that bites animals.",
       "definitionVi": "Con ve — côn trùng nhỏ bám da.",
-      "sentence": "I can see a tick at the zoo.",
       "category": "animals",
       "partOfSpeech": "noun",
       "choices": [
@@ -12020,7 +11666,6 @@
       "phonetic": "/ˈtaɪɡə/",
       "definition": "A big wild cat with orange stripes.",
       "definitionVi": "Con hổ — mèo lớn sọc cam đen.",
-      "sentence": "I can see a tiger at the zoo.",
       "category": "animals",
       "partOfSpeech": "noun",
       "choices": [
@@ -12054,7 +11699,6 @@
       "phonetic": "/təˈdeɪ/",
       "definition": "This day, not yesterday or tomorrow.",
       "definitionVi": "Hôm nay.",
-      "sentence": "Please do it today.",
       "category": "time",
       "partOfSpeech": "adverb",
       "choices": [
@@ -12088,7 +11732,6 @@
       "phonetic": "[tʰə̥ˈmɐːtʰɐʉ]",
       "definition": "A round red fruit used in salads.",
       "definitionVi": "Quả cà chua — đỏ, ăn trong salad.",
-      "sentence": "I like a tomato for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -12122,7 +11765,6 @@
       "phonetic": "/tuː/",
       "definition": "Also, or more than enough.",
       "definitionVi": "Cũng vậy, hoặc quá mức.",
-      "sentence": "I am too tired to play.",
       "category": "general",
       "partOfSpeech": "adverb",
       "choices": [
@@ -12154,7 +11796,6 @@
       "phonetic": "/tɔɪ/",
       "definition": "Something children play with.",
       "definitionVi": "Đồ chơi.",
-      "sentence": "I can see a toy in the picture.",
       "category": "general",
       "partOfSpeech": "noun",
       "choices": [
@@ -12188,7 +11829,6 @@
       "phonetic": "/tɹeɪn/",
       "definition": "A long vehicle that runs on rails.",
       "definitionVi": "Tàu hỏa chạy trên đường ray.",
-      "sentence": "I go to school by train.",
       "category": "travel",
       "partOfSpeech": "noun",
       "choices": [
@@ -12222,7 +11862,6 @@
       "phonetic": "/tɹiː/",
       "definition": "A tall plant with a trunk and branches.",
       "definitionVi": "Cây — thân to, nhiều cành.",
-      "sentence": "I can see a tree outside.",
       "category": "nature",
       "partOfSpeech": "noun",
       "choices": [
@@ -12256,7 +11895,6 @@
       "phonetic": "/ˈtɹaʊzəz/",
       "definition": "Clothing that covers both legs.",
       "definitionVi": "Quần dài che hai chân.",
-      "sentence": "I wear the trousers to school.",
       "category": "clothes",
       "partOfSpeech": "noun",
       "choices": [
@@ -12290,7 +11928,6 @@
       "phonetic": "/tɹʌk/",
       "definition": "A large vehicle for carrying goods.",
       "definitionVi": "Xe tải chở hàng.",
-      "sentence": "I go to school by truck.",
       "category": "travel",
       "partOfSpeech": "noun",
       "choices": [
@@ -12324,7 +11961,6 @@
       "phonetic": "/tɹaɪ/",
       "definition": "to attempt to do something.",
       "definitionVi": "Thử, cố gắng làm.",
-      "sentence": "I can see a try in the picture.",
       "category": "general",
       "partOfSpeech": "noun",
       "choices": [
@@ -12358,7 +11994,6 @@
       "phonetic": "",
       "definition": "A casual shirt with short sleeves.",
       "definitionVi": "Áo phông ngắn tay.",
-      "sentence": "I wear a T-shirt to school.",
       "category": "clothes",
       "partOfSpeech": "noun",
       "choices": [
@@ -12392,7 +12027,6 @@
       "phonetic": "",
       "definition": "A screen for watching shows at home.",
       "definitionVi": "Ti-vi viết tắt của television.",
-      "sentence": "I use a TV at home.",
       "category": "technology",
       "partOfSpeech": "noun",
       "choices": [
@@ -12426,7 +12060,6 @@
       "phonetic": "/ˈʌɡli/",
       "definition": "Not nice to look at.",
       "definitionVi": "Xấu, không đẹp.",
-      "sentence": "What a ugly day!",
       "category": "feelings",
       "partOfSpeech": "adjective",
       "choices": [
@@ -12460,7 +12093,6 @@
       "phonetic": "/ˌɞndəɹˈstand/",
       "definition": "to know the meaning of something.",
       "definitionVi": "Hiểu, nắm được ý.",
-      "sentence": "I understand the question.",
       "category": "school",
       "partOfSpeech": "verb",
       "choices": [
@@ -12494,7 +12126,6 @@
       "phonetic": "/ˈvɛɹi/",
       "definition": "A lot; to a high degree.",
       "definitionVi": "Rất, lắm.",
-      "sentence": "I am very happy today.",
       "category": "general",
       "partOfSpeech": "adverb",
       "choices": [
@@ -12526,7 +12157,6 @@
       "phonetic": "/wɔːk/",
       "definition": "to move on foot at a normal speed.",
       "definitionVi": "Đi bộ.",
-      "sentence": "I can walk in the park.",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -12560,7 +12190,6 @@
       "phonetic": "/wɔːl/",
       "definition": "The side of a room or building.",
       "definitionVi": "Bức tường của phòng hoặc nhà.",
-      "sentence": "There is a wall in my house.",
       "category": "home",
       "partOfSpeech": "noun",
       "choices": [
@@ -12594,7 +12223,6 @@
       "phonetic": "/wɔnt/",
       "definition": "to wish for or would like something.",
       "definitionVi": "Muốn có cái gì.",
-      "sentence": "I want an apple, please.",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -12626,7 +12254,6 @@
       "phonetic": "/wɒt͡ʃ/",
       "definition": "A small clock you wear on your wrist.",
       "definitionVi": "Đồng hồ đeo tay.",
-      "sentence": "I use a watch at home.",
       "category": "technology",
       "partOfSpeech": "noun",
       "choices": [
@@ -12660,7 +12287,6 @@
       "phonetic": "/ˈwoːtə/",
       "definition": "A clear drink that all life needs.",
       "definitionVi": "Nước uống — cần mỗi ngày.",
-      "sentence": "I like water for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -12694,7 +12320,6 @@
       "phonetic": "/ˈwɔːtəˌmɛlən/",
       "definition": "A big green fruit with red juicy inside.",
       "definitionVi": "Quả dưa hấu — to, ruột đỏ ngọt.",
-      "sentence": "I like a watermelon for lunch.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -12728,7 +12353,6 @@
       "phonetic": "/weɪv/",
       "definition": "to move your hand to say hello.",
       "definitionVi": "Vẫy tay chào.",
-      "sentence": "I can wave at school.",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -12762,7 +12386,6 @@
       "phonetic": "/wɛə/",
       "definition": "to have clothes on your body.",
       "definitionVi": "Mặc quần áo.",
-      "sentence": "I wear a blue T-shirt today.",
       "category": "clothes",
       "partOfSpeech": "verb",
       "choices": [
@@ -12796,7 +12419,6 @@
       "phonetic": "/waɪt/",
       "definition": "The colour of snow and clouds.",
       "definitionVi": "Màu trắng.",
-      "sentence": "I have a white bag.",
       "category": "general",
       "partOfSpeech": "adjective",
       "choices": [
@@ -12830,7 +12452,6 @@
       "phonetic": "/ˈwɪndəʊ/",
       "definition": "An opening in a wall with glass.",
       "definitionVi": "Cửa sổ — nhìn ra ngoài.",
-      "sentence": "There is a window in my house.",
       "category": "home",
       "partOfSpeech": "noun",
       "choices": [
@@ -12864,7 +12485,6 @@
       "phonetic": "/ˈwʊmɘn/",
       "definition": "An adult female person.",
       "definitionVi": "Người phụ nữ trưởng thành.",
-      "sentence": "This is my woman.",
       "category": "people",
       "partOfSpeech": "noun",
       "choices": [
@@ -12898,7 +12518,6 @@
       "phonetic": "/wɜːd/",
       "definition": "A single unit of language with meaning.",
       "definitionVi": "Từ vựng — một từ có nghĩa.",
-      "sentence": "I use a word at school.",
       "category": "school",
       "partOfSpeech": "noun",
       "choices": [
@@ -12932,7 +12551,6 @@
       "phonetic": "",
       "definition": "to want something in a polite way.",
       "definitionVi": "Muốn — nói lịch sự hơn want.",
-      "sentence": "I would like some juice, please.",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -12964,7 +12582,6 @@
       "phonetic": "",
       "definition": "to make letters and words on paper.",
       "definitionVi": "Viết chữ lên giấy.",
-      "sentence": "I write at school every day.",
       "category": "school",
       "partOfSpeech": "verb",
       "choices": [
@@ -12998,7 +12615,6 @@
       "phonetic": "/jɪə/",
       "definition": "Twelve months, like January to December.",
       "definitionVi": "Một năm có mười hai tháng.",
-      "sentence": "I play in the year.",
       "category": "time",
       "partOfSpeech": "noun",
       "choices": [
@@ -13032,7 +12648,6 @@
       "phonetic": "/jɛlə/",
       "definition": "The colour of the sun and bananas.",
       "definitionVi": "Màu vàng.",
-      "sentence": "I have a yellow bag.",
       "category": "general",
       "partOfSpeech": "adjective",
       "choices": [
@@ -13066,7 +12681,6 @@
       "phonetic": "/jɛs/",
       "definition": "A word that means you agree.",
       "definitionVi": "Vâng, có — đồng ý.",
-      "sentence": "Please do it yes.",
       "category": "general",
       "partOfSpeech": "adverb",
       "choices": [
@@ -13098,7 +12712,6 @@
       "phonetic": "/jʌŋ/",
       "definition": "Not old; still a child or teenager.",
       "definitionVi": "Còn trẻ, còn nhỏ.",
-      "sentence": "This bag is too young.",
       "category": "people",
       "partOfSpeech": "adjective",
       "choices": [
@@ -13132,7 +12745,6 @@
       "phonetic": "/ˈziːbɹə/",
       "definition": "An African horse with black stripes.",
       "definitionVi": "Ngựa vằn — sọc đen trắng.",
-      "sentence": "I can see a zebra at the zoo.",
       "category": "animals",
       "partOfSpeech": "noun",
       "choices": [
@@ -13166,7 +12778,6 @@
       "phonetic": "/zuː/",
       "definition": "A place where wild animals are kept.",
       "definitionVi": "Sở thú — xem động vật hoang dã.",
-      "sentence": "We go to the zoo on Saturday.",
       "category": "places",
       "partOfSpeech": "noun",
       "choices": [

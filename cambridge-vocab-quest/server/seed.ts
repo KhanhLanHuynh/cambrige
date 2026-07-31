@@ -62,6 +62,7 @@ export async function seedStore(store: DataStore, reset = false): Promise<void> 
         focusMode: false,
         soundEnabled: true,
         hintsEnabled: true,
+        speedMatchSeconds: 60,
       },
       createdAt: now,
     })
