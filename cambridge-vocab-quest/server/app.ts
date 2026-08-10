@@ -19,6 +19,8 @@ import {
   quizCreateSchema,
   settingsQuerySchema,
   settingsSchema,
+  vocabularyIdParams,
+  vocabularySentencesSchema,
 } from '../shared/schemas.js'
 import type { CambridgeLevel, SafeLearner } from '../shared/types.js'
 import { ACHIEVEMENTS, evaluateAchievements } from './achievements.js'
@@ -34,7 +36,14 @@ import {
   type LearnerRecord,
   type SessionRecord,
 } from './store.js'
-import { listCategories, searchVocabulary, selectVocabulary, vocabulary } from './vocabulary.js'
+import {
+  getWordById,
+  listCategories,
+  searchVocabulary,
+  selectVocabulary,
+  updateWordSentences,
+  vocabulary,
+} from './vocabulary.js'
 
 const SESSION_COOKIE = 'cvq_session'
 const SESSION_AGE_SECONDS = 60 * 60 * 24 * 14
@@ -536,6 +545,59 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
     requireParent(request)
     const query = parse(vocabularyCategoriesQuery, request.query ?? {})
     return { categories: listCategories(query.level) }
+  })
+
+  app.get('/api/parent/vocabulary/search', async (request) => {
+    requireParent(request)
+    const query = parse(vocabularySearchQuery, request.query ?? {})
+    const results = searchVocabulary(query.q, { level: query.level, limit: query.limit }).map((word) => ({
+      id: word.id,
+      word: word.word,
+      definition: word.definition,
+      partOfSpeech: word.partOfSpeech,
+      level: word.level,
+      sentenceCount: word.sentences.length,
+    }))
+    return { results }
+  })
+
+  app.get('/api/parent/vocabulary/:id', async (request) => {
+    requireParent(request)
+    const { id } = parse(vocabularyIdParams, request.params)
+    const word = getWordById(id)
+    if (!word) throw new HttpError(404, 'Word not found')
+    return {
+      word: {
+        id: word.id,
+        word: word.word,
+        definition: word.definition,
+        partOfSpeech: word.partOfSpeech,
+        level: word.level,
+        sentences: word.sentences,
+      },
+    }
+  })
+
+  app.put('/api/parent/vocabulary/:id/sentences', async (request) => {
+    requireParent(request)
+    const { id } = parse(vocabularyIdParams, request.params)
+    const body = parse(vocabularySentencesSchema, request.body)
+    if (!getWordById(id)) throw new HttpError(404, 'Word not found')
+    try {
+      const word = updateWordSentences(id, body.sentences)
+      return {
+        word: {
+          id: word.id,
+          word: word.word,
+          definition: word.definition,
+          partOfSpeech: word.partOfSpeech,
+          level: word.level,
+          sentences: word.sentences,
+        },
+      }
+    } catch (error) {
+      throw new HttpError(500, error instanceof Error ? error.message : 'Could not save sentences')
+    }
   })
 
   app.get('/api/learner/hub', async (request) => {

@@ -124,6 +124,14 @@ export const giftRequestSchema = z.object({
   giftId: z.string().uuid(),
 })
 
+export const vocabularyIdParams = z.object({
+  id: z.string().trim().min(1).max(80),
+})
+
+export const vocabularySentencesSchema = z.object({
+  sentences: z.array(z.string().trim().min(1).max(200)).max(20),
+})
+
 export type RegisterInput = z.infer<typeof registerSchema>
 export type LoginInput = z.infer<typeof loginSchema>
 export type LearnerCreateInput = z.infer<typeof learnerCreateSchema>

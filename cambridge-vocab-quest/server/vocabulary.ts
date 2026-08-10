@@ -1,9 +1,10 @@
-import { readFileSync } from 'node:fs'
+import { readFileSync, writeFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import type { CambridgeLevel, VocabularySearchResult, VocabularyWord, WordHealth } from '../shared/types.js'
 
 type VocabularyFile = {
+  source?: Record<string, unknown>
   level: CambridgeLevel
   count: number
   words: VocabularyWord[]
@@ -11,14 +12,53 @@ type VocabularyFile = {
 
 const LEVEL_FILES = ['starters.json', 'movers.json', 'flyers.json', 'preliminary.json'] as const
 
+const FILE_BY_LEVEL: Record<CambridgeLevel, (typeof LEVEL_FILES)[number]> = {
+  Starters: 'starters.json',
+  Movers: 'movers.json',
+  Flyers: 'flyers.json',
+  Preliminary: 'preliminary.json',
+}
+
 const dataDir = resolve(dirname(fileURLToPath(import.meta.url)), 'data')
+
+function levelFilePath(level: CambridgeLevel): string {
+  return resolve(dataDir, FILE_BY_LEVEL[level])
+}
 
 function loadLevelFile(filename: string): VocabularyWord[] {
   const file = JSON.parse(readFileSync(resolve(dataDir, filename), 'utf8')) as VocabularyFile
   return file.words
 }
 
+function readLevelFile(level: CambridgeLevel): VocabularyFile {
+  return JSON.parse(readFileSync(levelFilePath(level), 'utf8')) as VocabularyFile
+}
+
+function writeLevelFile(level: CambridgeLevel, file: VocabularyFile): void {
+  writeFileSync(levelFilePath(level), `${JSON.stringify(file, null, 2)}\n`)
+}
+
 export const vocabulary: VocabularyWord[] = LEVEL_FILES.flatMap(loadLevelFile)
+
+export function getWordById(id: string): VocabularyWord | undefined {
+  return vocabulary.find((word) => word.id === id)
+}
+
+export function updateWordSentences(id: string, sentences: string[]): VocabularyWord {
+  const word = getWordById(id)
+  if (!word) throw new Error(`Word not found: ${id}`)
+
+  const cleaned = sentences.map((sentence) => sentence.trim()).filter(Boolean)
+  word.sentences = cleaned
+
+  const file = readLevelFile(word.level)
+  const index = file.words.findIndex((entry) => entry.id === id)
+  if (index < 0) throw new Error(`Word missing from level file: ${id}`)
+  file.words[index] = { ...file.words[index]!, sentences: cleaned }
+  writeLevelFile(word.level, file)
+
+  return word
+}
 
 export function listCategories(level?: CambridgeLevel): string[] {
   const pool = level ? vocabulary.filter((word) => word.level === level) : vocabulary

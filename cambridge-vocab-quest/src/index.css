@@ -386,6 +386,28 @@ svg { flex: 0 0 auto; }
 .redeem-actions{display:flex;flex-wrap:wrap;gap:.45rem}
 .redeem-actions .button{width:auto;margin-top:0}
 
+.sentence-editor-modal{width:min(640px,100%)}
+.sentence-search-label{display:grid;gap:.35rem;font-size:.7rem;font-weight:700;color:#1d1137;margin-top:1rem;text-align:left}
+.sentence-search-field{display:flex;align-items:center;gap:.45rem;border:1px solid #d9d1e4;border-radius:10px;padding:.45rem .65rem;background:white}
+.sentence-search-field svg{width:16px;height:16px;color:#746a83;flex:none}
+.sentence-search-field input{border:0;padding:.25rem;background:transparent;width:100%;color:#1d1137}
+.sentence-search-hint{color:#746a83;font-size:.68rem;margin:.45rem 0 0}
+.sentence-search-results{list-style:none;margin:.55rem 0 0;padding:0;display:grid;gap:.35rem;max-height:180px;overflow:auto}
+.sentence-search-results button{width:100%;text-align:left;border:1px solid #e4dceb;border-radius:10px;padding:.55rem .7rem;background:white;cursor:pointer;display:grid;gap:.15rem}
+.sentence-search-results strong{font-size:.78rem;color:#1d1137}
+.sentence-search-results small{font-size:.55rem;color:#746a83}
+.sentence-search-results span{font-size:.62rem;color:#4c3d5f}
+.sentence-editor-body{margin-top:1rem;display:grid;gap:.8rem}
+.sentence-word-header{border:1px solid #e4dceb;border-radius:12px;padding:.8rem;background:#f3eff8;display:grid;gap:.45rem}
+.sentence-word-header h3{margin:0;font-size:1rem;color:#1d1137}
+.sentence-word-header small{font-size:.58rem;color:#746a83}
+.sentence-word-header p{margin:0;font-size:.72rem;color:#4c3d5f}
+.sentence-editor-list{list-style:none;margin:0;padding:0;display:grid;gap:.55rem}
+.sentence-editor-list li{display:grid;grid-template-columns:1fr auto;gap:.45rem;align-items:start}
+.sentence-editor-list textarea{width:100%;border:1px solid #d9d1e4;border-radius:8px;padding:.55rem;background:white;color:#1d1137;resize:vertical;min-height:56px;font:inherit}
+.sentence-editor-actions{display:flex;flex-wrap:wrap;gap:.5rem}
+.sentence-editor-actions .button{width:auto;margin-top:0}
+
 .assign-review-modal .category-picker{border:1px solid #ddd3e8;border-radius:12px;padding:.8rem;margin:0}
 .assign-review-modal .category-picker legend{padding:0 .25rem;font-weight:700;font-size:.72rem}
 .assign-review-modal .category-picker-grid{display:grid;grid-template-columns:1fr 1fr;gap:.45rem}
@@ -396,6 +418,7 @@ svg { flex: 0 0 auto; }
   .speed-match{grid-template-columns:1fr}
   .home-actions{grid-template-columns:1fr}
   .gift-editor-list li{grid-template-columns:1fr;gap:.35rem}
+  .sentence-editor-list li{grid-template-columns:1fr;gap:.35rem}
   .assign-review-modal .category-picker-grid{grid-template-columns:1fr}
 }
 

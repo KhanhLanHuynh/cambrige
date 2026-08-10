@@ -926,6 +926,97 @@ describe('Cambridge Vocab Quest API', () => {
     await app.close()
   }, 20_000)
 
+  it('lets a parent-verified adult search, read, and update vocabulary sentences', async () => {
+    const { app, store } = await testApp()
+    const cookie = await signInAsParent(app, store, { name: 'Parent', email: 'sentences@example.com' })
+    const creation = await app.inject({
+      method: 'POST',
+      url: '/api/learners',
+      headers: { cookie },
+      payload: { name: 'Explorer', level: 'Starters' },
+    })
+    await app.inject({
+      method: 'POST',
+      url: '/api/learners/select',
+      headers: { cookie },
+      payload: { learnerId: creation.json().learner.id },
+    })
+
+    const blocked = await app.inject({
+      method: 'GET',
+      url: '/api/parent/vocabulary/starters-armchair',
+      headers: { cookie },
+    })
+    expect(blocked.statusCode).toBe(403)
+
+    await app.inject({
+      method: 'POST',
+      url: '/api/auth/parent-gate',
+      headers: { cookie },
+      payload: { password: DEFAULT_PASSWORD },
+    })
+
+    const search = await app.inject({
+      method: 'GET',
+      url: '/api/parent/vocabulary/search?q=armchair&limit=5',
+      headers: { cookie },
+    })
+    expect(search.statusCode).toBe(200)
+    const { results } = search.json() as {
+      results: Array<{ id: string; word: string; sentenceCount: number }>
+    }
+    expect(results.length).toBeGreaterThan(0)
+    expect(results[0]).toMatchObject({
+      id: 'starters-armchair',
+      word: expect.stringMatching(/armchair/i),
+      sentenceCount: expect.any(Number),
+    })
+    expect(results[0]).not.toHaveProperty('sentences')
+
+    const wordId = 'starters-armchair'
+    const original = await app.inject({
+      method: 'GET',
+      url: `/api/parent/vocabulary/${wordId}`,
+      headers: { cookie },
+    })
+    expect(original.statusCode).toBe(200)
+    const originalSentences = original.json().word.sentences as string[]
+    expect(originalSentences.length).toBeGreaterThan(0)
+
+    const nextSentences = [
+      'There is a soft armchair by the window.',
+      'Sam sits in the armchair and reads.',
+    ]
+
+    try {
+      const updated = await app.inject({
+        method: 'PUT',
+        url: `/api/parent/vocabulary/${wordId}/sentences`,
+        headers: { cookie },
+        payload: { sentences: nextSentences },
+      })
+      expect(updated.statusCode).toBe(200)
+      expect(updated.json().word.sentences).toEqual(nextSentences)
+
+      const reloaded = await app.inject({
+        method: 'GET',
+        url: `/api/parent/vocabulary/${wordId}`,
+        headers: { cookie },
+      })
+      expect(reloaded.statusCode).toBe(200)
+      expect(reloaded.json().word.sentences).toEqual(nextSentences)
+    } finally {
+      await app.inject({
+        method: 'PUT',
+        url: `/api/parent/vocabulary/${wordId}/sentences`,
+        headers: { cookie },
+        payload: { sentences: originalSentences },
+      })
+    }
+
+    await app.close()
+  }, 20_000)
+
   it('creates and deletes a curriculum assignment when parent-verified', async () => {
     const { app, store } = await testApp()
     const cookie = await signInAsParent(app, store, { name: 'Parent', email: 'assign-delete@example.com' })
