@@ -303,3 +303,16 @@ export function ensureDailyPractice(learner: LearnerRecord, now = new Date()): v
     learner.claimedQuestIds = []
   }
 }
+
+/** Drop expired quiz sessions, keeping completed speed-match rows for achievement counts. */
+export function pruneExpiredQuizzes(database: Database, now = new Date()): void {
+  const nowMs = now.getTime()
+  database.quizzes = database.quizzes.filter((quiz) => {
+    if (Date.parse(quiz.expiresAt) > nowMs) return true
+    return (
+      quiz.mode === 'speed-match' &&
+      quiz.wordIds.length > 0 &&
+      quiz.answeredWordIds.length === quiz.wordIds.length
+    )
+  })
+}

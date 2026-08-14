@@ -30,6 +30,7 @@ import {
   ensureDailyPractice,
   healthForAttempts,
   JsonStore,
+  pruneExpiredQuizzes,
   todayKey,
   type AttemptRecord,
   type DataStore,
@@ -859,7 +860,10 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
       createdAt: new Date().toISOString(),
       expiresAt: new Date(Date.now() + 60 * 60 * 1000).toISOString(),
     }
-    await store.update((database) => database.quizzes.push(quiz))
+    await store.update((database) => {
+      pruneExpiredQuizzes(database)
+      database.quizzes.push(quiz)
+    })
     return reply.code(201).send({
       id: quiz.id,
       mode: quiz.mode,
