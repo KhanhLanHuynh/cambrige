@@ -24,7 +24,7 @@ import {
 } from '../shared/schemas.js'
 import type { CambridgeLevel, SafeLearner } from '../shared/types.js'
 import { ACHIEVEMENTS, evaluateAchievements } from './achievements.js'
-import { createSessionToken, digestToken, hashSecret, verifySecret } from './security.js'
+import { createSessionToken, digestToken, hashSecret, isAllowedCorsOrigin, verifySecret } from './security.js'
 import {
   defaultSettings,
   ensureDailyPractice,
@@ -266,17 +266,18 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
   const store = options.store ?? new JsonStore()
   await store.init()
 
-  const configuredOrigins = (process.env.CORS_ORIGINS ?? 'http://localhost:5173')
+  const configuredOrigins = (process.env.CORS_ORIGINS ?? 'http://localhost:5173,http://127.0.0.1:5173')
     .split(',')
     .map((origin) => origin.trim())
     .filter(Boolean)
+  const allowDevLan = !process.env.CORS_ORIGINS
 
   await app.register(cookie)
   await app.register(cors, {
     credentials: true,
     origin: (origin, callback) => {
-      if (!origin || configuredOrigins.includes(origin)) callback(null, true)
-      else callback(new Error('Origin is not allowed'), false)
+      if (isAllowedCorsOrigin(origin, configuredOrigins, allowDevLan)) callback(null, true)
+      else callback(null, false)
     },
   })
   await app.register(rateLimit, {
@@ -371,6 +372,11 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
       maxAge: SESSION_AGE_SECONDS,
     })
   }
+
+  app.get('/', async (_request, reply) => {
+    const frontend = process.env.PUBLIC_APP_URL ?? 'http://localhost:5173/'
+    return reply.redirect(frontend)
+  })
 
   app.get('/api/health', async () => ({ ok: true }))
 
@@ -808,7 +814,7 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
     if (learner.minutesPractisedToday >= learner.settings.dailyLimitMinutes) {
       throw new HttpError(429, 'Daily learning limit reached. Come back tomorrow!')
     }
-    if (body.mode === 'speed-match' || body.mode === 'fill-blank') {
+    if (body.mode === 'speed-match' || body.mode === 'fill-blank' || body.mode === 'swap-words') {
       if (!learner.settings.timedModesEnabled) throw new HttpError(403, 'Timed modes are disabled')
       if (learner.settings.focusMode && !learner.completedQuizToday) {
         throw new HttpError(403, 'Finish today’s quiz before playing mini-games')
@@ -906,7 +912,7 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
         }
         if (correct) {
           const belowLevel = levelRank(word.level) < levelRank(currentLearner.level)
-          const reward = currentQuiz.mode === 'fill-blank' || belowLevel ? 5 : 10
+          const reward = currentQuiz.mode === 'fill-blank' || currentQuiz.mode === 'swap-words' || belowLevel ? 5 : 10
           currentLearner.gems += reward
           gemsAwarded = reward
         }

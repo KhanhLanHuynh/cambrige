@@ -70,7 +70,7 @@ export const quizCreateSchema = z.object({
   count: z.number().int().min(1).max(20).default(10),
   level: cambridgeLevelSchema.optional(),
   category: z.string().trim().max(40).optional(),
-  mode: z.enum(['explorer', 'speed-match', 'fill-blank']).default('explorer'),
+  mode: z.enum(['explorer', 'speed-match', 'fill-blank', 'swap-words']).default('explorer'),
   mapStop: z.enum(['space-station', 'nature-valley', 'crystal-caves', 'dragon-ridge']).optional(),
   focusWordIds: z.array(z.string().min(1).max(80)).max(5).optional(),
   reviewOnly: z.boolean().optional(),

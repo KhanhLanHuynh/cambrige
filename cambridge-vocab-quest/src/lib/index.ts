@@ -1,6 +1,6 @@
 import { getCached, queueMutation, setCached } from '../db'
 
-export { pickRandomSentence } from './sentences'
+export { pickRandomSentence, shuffleTokens, tokenizeSentence } from './sentences'
 export { speakAnswerFeedback } from './sounds'
 
 type ApiOptions = Omit<RequestInit, 'body'> & { body?: unknown }

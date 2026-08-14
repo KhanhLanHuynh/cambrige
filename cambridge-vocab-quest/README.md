@@ -18,7 +18,9 @@ npm run dev
 ```
 
 The web app runs at `http://localhost:5173` and proxies `/api` requests to the
-file-backed API at `http://localhost:3001`.
+file-backed API at `http://localhost:3001`. Vite also listens on the LAN; other
+devices on the same Wi-Fi should open `http://<this-pc-ip>:5173` (not port
+3001). Allow Node.js / TCP 5173 in Windows Firewall if the page does not load.
 
 The seed command creates a demo adult account and learner profile. See the
 terminal output from `npm run seed` for the current demo credentials.
@@ -60,7 +62,7 @@ multi-instance deployment or high write concurrency.
 
 ## Environment
 
-- `CORS_ORIGINS` — comma-separated allowed origins (default `http://localhost:5173`)
+- `CORS_ORIGINS` — comma-separated allowed origins (default `http://localhost:5173,http://127.0.0.1:5173`). When unset, private LAN origins on ports 5173 and 4173 are also allowed.
 - `COOKIE_SECURE=true` — force Secure cookies (also on when `NODE_ENV=production`)
 - `DATA_BACKEND=json|sqlite` — persistence backend
 - `DATA_FILE` — path to JSON or SQLite file

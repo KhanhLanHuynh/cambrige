@@ -72,6 +72,26 @@ describe('Cambridge Vocab Quest API', () => {
     await app.close()
   }, 20_000)
 
+  it('allows private LAN Vite origins when CORS_ORIGINS is unset', async () => {
+    const { app } = await testApp()
+    const lan = await app.inject({
+      method: 'GET',
+      url: '/api/health',
+      headers: { origin: 'http://192.168.1.23:5173' },
+    })
+    expect(lan.statusCode).toBe(200)
+    expect(lan.headers['access-control-allow-origin']).toBe('http://192.168.1.23:5173')
+
+    const blocked = await app.inject({
+      method: 'GET',
+      url: '/api/health',
+      headers: { origin: 'http://example.com:5173' },
+    })
+    expect(blocked.statusCode).toBe(200)
+    expect(blocked.headers['access-control-allow-origin']).toBeUndefined()
+    await app.close()
+  })
+
   it('rejects creating more than 5 learners for one parent', async () => {
     const { app, store } = await testApp()
     const cookie = await signInAsParent(app, store, { name: 'Parent', email: 'max-learners@example.com' })

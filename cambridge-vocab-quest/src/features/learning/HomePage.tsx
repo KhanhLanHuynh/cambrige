@@ -77,7 +77,7 @@ export function HomePage({ learner, navigate }: { learner: Learner; navigate: (p
     navigate(`/explore?stop=${stop}`)
   }
 
-  const openMiniGame = (path: '/games/fill-blank' | '/games/speed-match') => {
+  const openMiniGame = (path: '/games/fill-blank' | '/games/speed-match' | '/games/swap-words') => {
     if (gamesLocked) return setMessage('Focus mode: finish today’s quiz first.')
     if (timedLocked) return setMessage('Timed modes are turned off in parent settings.')
     if (limitReached) return setMessage('Daily learning limit reached.')
@@ -113,6 +113,9 @@ export function HomePage({ learner, navigate }: { learner: Learner; navigate: (p
             </Button>
             <Button variant="secondary" disabled={gamesLocked || timedLocked || limitReached} onClick={() => openMiniGame('/games/speed-match')}>
               <Gamepad2 /> {gamesLocked ? 'MINI-GAMES (LOCKED)' : 'SPEED MATCH'}
+            </Button>
+            <Button variant="secondary" disabled={gamesLocked || timedLocked || limitReached} onClick={() => openMiniGame('/games/swap-words')}>
+              <Gamepad2 /> {gamesLocked ? 'MINI-GAMES (LOCKED)' : 'SWAP WORDS'}
             </Button>
           </div>
           <section className="quest-map card">

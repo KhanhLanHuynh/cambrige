@@ -4,6 +4,7 @@ import { AuthPage } from './features/auth/AuthPage'
 import { DashboardPage } from './features/dashboard/DashboardPage'
 import { SpeedMatchPage } from './features/games/SpeedMatchPage'
 import { FillBlankPage } from './features/games/FillBlankPage'
+import { SwapWordsPage } from './features/games/SwapWordsPage'
 import { HomePage } from './features/learning/HomePage'
 import { QuizPage } from './features/learning/QuizPage'
 import { ProfilesPage } from './features/learner-profiles/ProfilesPage'
@@ -71,6 +72,7 @@ function App() {
   if (path === '/explore') page = <QuizPage learner={learner} navigate={navigate} />
   else if (path === '/games/fill-blank') page = <FillBlankPage learner={learner} navigate={navigate} />
   else if (path === '/games/speed-match') page = <SpeedMatchPage learner={learner} navigate={navigate} />
+  else if (path === '/games/swap-words') page = <SwapWordsPage learner={learner} navigate={navigate} />
   else if (path === '/dashboard' || path === '/settings') {
     page = <DashboardPage navigate={navigate} openSettings={path === '/settings'} />
   } else page = <HomePage learner={learner} navigate={navigate} />

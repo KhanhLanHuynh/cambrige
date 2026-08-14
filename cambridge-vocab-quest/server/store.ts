@@ -76,7 +76,7 @@ export interface QuizRecord {
   id: string
   userId: string
   learnerId: string
-  mode: 'explorer' | 'speed-match' | 'fill-blank'
+  mode: 'explorer' | 'speed-match' | 'fill-blank' | 'swap-words'
   wordIds: string[]
   answeredWordIds: string[]
   createdAt: string
