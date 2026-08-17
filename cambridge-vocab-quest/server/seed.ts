@@ -54,6 +54,7 @@ export async function seedStore(store: DataStore, reset = false): Promise<void> 
       perfectQuizCount: 0,
       minutesPractisedToday: 0,
       completedQuizToday: false,
+      miniGameModesCompletedToday: [],
       settings: {
         dailyGoal: 10,
         dailyLimitMinutes: 45,

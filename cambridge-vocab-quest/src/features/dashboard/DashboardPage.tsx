@@ -1,8 +1,9 @@
 import {
   Download, Gift, LockKeyhole, Plus, Search,
-  ShieldCheck, X, Check, BookOpen,
+  ShieldCheck, Sparkles, X, Check, BookOpen,
 } from 'lucide-react'
 import { useEffect, useMemo, useState, type FormEvent } from 'react'
+import { MAX_LEARNERS_PER_PARENT } from '../../../shared/schemas'
 import { Badge, Button, Progress } from '../../components/ui'
 import { api, ApiError, downloadFromApi } from '../../lib'
 import { useSessionStore } from '../../stores'
@@ -520,6 +521,124 @@ function SentenceEditorModal({
   )
 }
 
+const LEARNER_AVATARS = ['🚀', '🦊', '🐼', '🦄', '🤖'] as const
+
+function AddLearnerModal({
+  onClose,
+  onCreated,
+  onParentLocked,
+}: {
+  onClose: () => void
+  onCreated: (learner: Learner) => void
+  onParentLocked: () => void
+}) {
+  const [name, setName] = useState('')
+  const [avatar, setAvatar] = useState<(typeof LEARNER_AVATARS)[number]>('🚀')
+  const [level, setLevel] = useState<CambridgeLevel>('Starters')
+  const [pin, setPin] = useState('')
+  const [error, setError] = useState('')
+  const [busy, setBusy] = useState(false)
+
+  const submit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const displayName = name.trim()
+    if (displayName.length < 1) {
+      setError('Enter a display name')
+      return
+    }
+    if (pin && !/^\d{4,6}$/.test(pin)) {
+      setError('PIN must be 4–6 digits')
+      return
+    }
+    setBusy(true)
+    setError('')
+    try {
+      const response = await api<{ learner: Learner }>('/learners', {
+        method: 'POST',
+        body: {
+          name: displayName,
+          avatar,
+          level,
+          pin: pin || undefined,
+        },
+      })
+      onCreated(response.learner)
+      onClose()
+    } catch (requestError) {
+      if (requestError instanceof ApiError && requestError.status === 403) {
+        onParentLocked()
+        return
+      }
+      setError(requestError instanceof ApiError ? requestError.message : 'Could not create learner')
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  return (
+    <div className="modal-backdrop">
+      <section className="modal settings-modal" role="dialog" aria-modal="true" aria-labelledby="add-learner-title">
+        <button className="modal-close" onClick={onClose} aria-label="Close add learner"><X /></button>
+        <h2 id="add-learner-title">Add new learner</h2>
+        <p>Create a profile with its own quests, rewards, and progress.</p>
+        <form onSubmit={submit}>
+          <label>
+            Display name
+            <input
+              aria-label="New learner display name"
+              value={name}
+              maxLength={40}
+              placeholder="Learner name"
+              autoFocus
+              onChange={(event) => setName(event.target.value)}
+            />
+          </label>
+          <label>
+            Avatar
+            <select
+              aria-label="New learner avatar"
+              value={avatar}
+              onChange={(event) => setAvatar(event.target.value as (typeof LEARNER_AVATARS)[number])}
+            >
+              {LEARNER_AVATARS.map((option) => (
+                <option key={option}>{option}</option>
+              ))}
+            </select>
+          </label>
+          <label>
+            Cambridge level
+            <select
+              aria-label="New learner Cambridge level"
+              value={level}
+              onChange={(event) => setLevel(event.target.value as CambridgeLevel)}
+            >
+              <option>Starters</option>
+              <option>Movers</option>
+              <option>Flyers</option>
+              <option>Preliminary</option>
+            </select>
+          </label>
+          <label>
+            Optional PIN
+            <input
+              aria-label="New learner PIN"
+              inputMode="numeric"
+              maxLength={6}
+              value={pin}
+              placeholder="Optional 4–6 digits"
+              onChange={(event) => setPin(event.target.value.replace(/\D/g, '').slice(0, 6))}
+            />
+          </label>
+          {error && <div className="form-error">{error}</div>}
+          <Button type="submit" disabled={busy}>
+            {busy ? 'Creating…' : <>Create learner <Sparkles size={18} /></>}
+          </Button>
+        </form>
+      </section>
+    </div>
+  )
+}
+
 type AssignmentRecord = { id: string; learnerId: string; level: CambridgeLevel; categories: string[] }
 
 function AssignReviewModal({
@@ -707,8 +826,10 @@ export function DashboardPage({
   const adultUnlocked = useSessionStore((state) => state.adultUnlocked)
   const unlockAdult = useSessionStore((state) => state.unlockAdult)
   const lockAdult = useSessionStore((state) => state.lockAdult)
+  const addLearner = useSessionStore((state) => state.addLearner)
   const removeLearner = useSessionStore((state) => state.removeLearner)
   const updateLearner = useSessionStore((state) => state.updateLearner)
+  const sessionLearnerCount = useSessionStore((state) => state.learners.length)
   const [gateError, setGateError] = useState('')
   const [query, setQuery] = useState('')
   const [health, setHealth] = useState<'All' | WordHealth>('All')
@@ -716,6 +837,7 @@ export function DashboardPage({
   const [settingsOpen, setSettingsOpen] = useState(openSettings)
   const [giftsOpen, setGiftsOpen] = useState(false)
   const [assignOpen, setAssignOpen] = useState(false)
+  const [addOpen, setAddOpen] = useState(false)
   const [sentencesOpen, setSentencesOpen] = useState(false)
   const [sentenceWordId, setSentenceWordId] = useState<string | null>(null)
   const [assignStatus, setAssignStatus] = useState('')
@@ -747,6 +869,7 @@ export function DashboardPage({
   const pagedWords = visibleWords.slice(page * 5, page * 5 + 5)
   const activitySeries = summary?.activity ?? []
   const householdLearners = summary?.learners ?? []
+  const atLearnerLimit = Math.max(householdLearners.length, sessionLearnerCount) >= MAX_LEARNERS_PER_PARENT
   const sharedSettings = useMemo(
     () => householdLearners.find((learner) => learner.settings)?.settings ?? null,
     [householdLearners],
@@ -788,6 +911,19 @@ export function DashboardPage({
       .catch(() => undefined)
   }
 
+  const openAddLearner = () => {
+    if (atLearnerLimit) return
+    setAddOpen(true)
+    setEditing(null)
+    setEditError('')
+    setEditSaved(false)
+    setPendingDelete(null)
+    setConfirmName('')
+    setDeleteError('')
+    setRedeeming(null)
+    setRedeemError('')
+  }
+
   const openEdit = (entry: Learner) => {
     setEditing(entry)
     setEditName(entry.name)
@@ -797,6 +933,7 @@ export function DashboardPage({
     setClearPin(false)
     setEditError('')
     setEditSaved(false)
+    setAddOpen(false)
     setPendingDelete(null)
     setConfirmName('')
     setDeleteError('')
@@ -807,6 +944,7 @@ export function DashboardPage({
   const openRedeem = (item: GiftRedemption) => {
     setRedeeming(item)
     setRedeemError('')
+    setAddOpen(false)
     setEditing(null)
     setEditError('')
     setEditSaved(false)
@@ -981,6 +1119,20 @@ export function DashboardPage({
         </div>
         <div className="hero-visual">📚<span>📈</span></div>
       </section>
+      <section className="learner-metrics-section">
+        <div className="section-heading">
+          <div>
+            <h2>Learners</h2>
+            <p>
+              {atLearnerLimit
+                ? `You can have up to ${MAX_LEARNERS_PER_PARENT} learners on this account.`
+                : 'Create and manage learner profiles on this account.'}
+            </p>
+          </div>
+          <Button variant="secondary" onClick={openAddLearner} disabled={atLearnerLimit}>
+            <Plus /> Add New Learner
+          </Button>
+        </div>
       <div className="learner-metrics-grid">
         {householdLearners.length
           ? (
@@ -1033,6 +1185,7 @@ export function DashboardPage({
                                 setEditing(null)
                                 setEditError('')
                                 setEditSaved(false)
+                                setAddOpen(false)
                                 setRedeeming(null)
                                 setRedeemError('')
                               }}
@@ -1235,8 +1388,17 @@ export function DashboardPage({
               )}
             </>
           )
-          : <p className="no-results">No learners yet. Add profiles to see practise metrics.</p>}
+          : (
+            <p className="no-results">
+              No learners yet.{' '}
+              <button type="button" className="text-link" onClick={openAddLearner} disabled={atLearnerLimit}>
+                Add a new learner
+              </button>
+              {' '}to see practise metrics.
+            </p>
+          )}
       </div>
+      </section>
       <div className="charts">
         <section className="card activity-chart">
           <div className="section-heading">
@@ -1392,6 +1554,16 @@ export function DashboardPage({
       )}
       {giftsOpen && (
         <GiftCatalogModal onClose={() => setGiftsOpen(false)} />
+      )}
+      {addOpen && (
+        <AddLearnerModal
+          onClose={() => setAddOpen(false)}
+          onParentLocked={lockAdult}
+          onCreated={(learner) => {
+            addLearner(learner)
+            refreshDashboard()
+          }}
+        />
       )}
       {sentencesOpen && (
         <SentenceEditorModal

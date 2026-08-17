@@ -29,12 +29,15 @@ import {
   defaultSettings,
   ensureDailyPractice,
   healthForAttempts,
+  isMiniGameMode,
+  MINI_GAME_MODES,
   JsonStore,
   pruneExpiredQuizzes,
   todayKey,
   type AttemptRecord,
   type DataStore,
   type LearnerRecord,
+  type MiniGameMode,
   type SessionRecord,
 } from './store.js'
 import {
@@ -175,12 +178,41 @@ function promoteLearnerLevel(learner: LearnerRecord, correctCount: number): bool
   return true
 }
 
+const DAILY_QUESTS = [
+  {
+    id: 'focus' as const,
+    target: 1,
+    reward: 30,
+    label: (level: CambridgeLevel) => `Finish 1 ${level} quiz or mini-game`,
+  },
+  {
+    id: 'play' as const,
+    target: 1,
+    reward: 50,
+    label: (_level: CambridgeLevel) => 'Play 1 mini-game',
+  },
+  {
+    id: 'streak' as const,
+    target: 5,
+    reward: 70,
+    label: (level: CambridgeLevel) => `Maintain a 5-answer ${level} streak`,
+  },
+  {
+    id: 'play-all' as const,
+    target: MINI_GAME_MODES.length,
+    reward: 100,
+    label: (_level: CambridgeLevel) => 'Play all 3 mini-games',
+  },
+]
+
 function buildDailyQuestProgress(
   todayAttempts: AttemptRecord[],
   words: typeof vocabulary,
   correctCount: number,
   claimedQuestIds: string[],
   learnerLevel: CambridgeLevel,
+  completedQuizToday: boolean,
+  miniGameModesCompletedToday: MiniGameMode[],
 ) {
   const questLevel = highestUnlockedLevel(correctCount, learnerLevel)
   const levelOf = (wordId: string) => words.find((word) => word.id === wordId)?.level
@@ -192,49 +224,28 @@ function buildDailyQuestProgress(
     answerStreak += 1
   }
 
-  const focusCorrect = todayAttempts.filter(
-    (attempt) => attempt.correct && counts(attempt.wordId),
-  ).length
-  const reviewCount = todayAttempts.filter((attempt) => counts(attempt.wordId)).length
-
-  const focusProgress = Math.min(focusCorrect, 1)
-  const reviewProgress = Math.min(reviewCount, 5)
+  const uniqueModes = miniGameModesCompletedToday.length
+  const focusProgress = completedQuizToday || uniqueModes > 0 ? 1 : 0
+  const playProgress = Math.min(uniqueModes, 1)
   const streakProgress = Math.min(answerStreak, 5)
-
-  const quests = [
-    {
-      id: 'focus',
-      label: `Complete 1 ${questLevel} word`,
-      progress: focusProgress,
-      target: 1,
-      reward: 30,
-      claimed: claimedQuestIds.includes('focus'),
-    },
-    {
-      id: 'review',
-      label: `Practice 5 ${questLevel} words`,
-      progress: reviewProgress,
-      target: 5,
-      reward: 50,
-      claimed: claimedQuestIds.includes('review'),
-    },
-    {
-      id: 'streak',
-      label: `Maintain a 5-answer ${questLevel} streak`,
-      progress: streakProgress,
-      target: 5,
-      reward: 70,
-      claimed: claimedQuestIds.includes('streak'),
-    },
-  ]
-
-  const progress = {
+  const playAllProgress = uniqueModes
+  const progressById = {
     focus: focusProgress,
-    review: reviewProgress,
+    play: playProgress,
     streak: streakProgress,
+    'play-all': playAllProgress,
   }
 
-  return { quests, progress }
+  const quests = DAILY_QUESTS.map((quest) => ({
+    id: quest.id,
+    label: quest.label(questLevel),
+    progress: progressById[quest.id],
+    target: quest.target,
+    reward: quest.reward,
+    claimed: claimedQuestIds.includes(quest.id),
+  }))
+
+  return { quests, progress: progressById }
 }
 
 function relativeTime(iso: string | null): string {
@@ -464,6 +475,7 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
       perfectQuizCount: 0,
       minutesPractisedToday: 0,
       completedQuizToday: false,
+      miniGameModesCompletedToday: [],
       settings: siblingSettings ? { ...siblingSettings } : defaultSettings(),
       createdAt: new Date().toISOString(),
     }
@@ -626,6 +638,8 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
       correctCount,
       fresh.claimedQuestIds,
       fresh.level,
+      fresh.completedQuizToday,
+      fresh.miniGameModesCompletedToday,
     )
     const unlocked = mapUnlocks(correctCount, fresh.level)
     const achievementIds = syncAchievements(store, fresh.id)
@@ -700,24 +714,20 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
   app.post('/api/learner/quests/claim', async (request) => {
     const { learner } = requireLearner(request)
     const body = parse(questClaimSchema, request.body)
-    const hubQuests = [
-      { id: 'focus', target: 1, reward: 30 },
-      { id: 'review', target: 5, reward: 50 },
-      { id: 'streak', target: 5, reward: 70 },
-    ]
-    const quest = hubQuests.find((item) => item.id === body.questId)
+    const quest = DAILY_QUESTS.find((item) => item.id === body.questId)
     if (!quest) throw new HttpError(404, 'Quest not found')
-    if (learner.claimedQuestIds.includes(quest.id)) throw new HttpError(409, 'Reward already claimed')
 
     const attempts = attemptsForLearner(store, learner.id)
     const correctCount = attempts.filter((attempt) => attempt.correct).length
     await store.update((database) => {
       const current = database.learners.find((item) => item.id === learner.id)
       if (!current) return
+      ensureDailyPractice(current)
       promoteLearnerLevel(current, correctCount)
     })
     const freshLearner = store.read((database) => database.learners.find((item) => item.id === learner.id))
     if (!freshLearner) throw new HttpError(404, 'Learner not found')
+    if (freshLearner.claimedQuestIds.includes(quest.id)) throw new HttpError(409, 'Reward already claimed')
     const today = todayKey()
     const todayAttempts = attempts.filter((attempt) => attempt.answeredAt.slice(0, 10) === today)
     const { progress: questProgress } = buildDailyQuestProgress(
@@ -726,8 +736,10 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
       correctCount,
       freshLearner.claimedQuestIds,
       freshLearner.level,
+      freshLearner.completedQuizToday,
+      freshLearner.miniGameModesCompletedToday,
     )
-    const progress = questProgress[quest.id as keyof typeof questProgress] ?? 0
+    const progress = questProgress[quest.id] ?? 0
     if (progress < quest.target) throw new HttpError(400, 'Quest is not complete yet')
 
     const updated = await store.update((database) => {
@@ -750,17 +762,13 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
 
   app.post('/api/learner/quests/claim-all', async (request) => {
     const { learner } = requireLearner(request)
-    const hubQuests = [
-      { id: 'focus', target: 1, reward: 30 },
-      { id: 'review', target: 5, reward: 50 },
-      { id: 'streak', target: 5, reward: 70 },
-    ] as const
 
     const attempts = attemptsForLearner(store, learner.id)
     const correctCount = attempts.filter((attempt) => attempt.correct).length
     await store.update((database) => {
       const current = database.learners.find((item) => item.id === learner.id)
       if (!current) return
+      ensureDailyPractice(current)
       promoteLearnerLevel(current, correctCount)
     })
     const freshLearner = store.read((database) => database.learners.find((item) => item.id === learner.id))
@@ -773,9 +781,11 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
       correctCount,
       freshLearner.claimedQuestIds,
       freshLearner.level,
+      freshLearner.completedQuizToday,
+      freshLearner.miniGameModesCompletedToday,
     )
 
-    const claimable = hubQuests.filter((quest) => {
+    const claimable = DAILY_QUESTS.filter((quest) => {
       if (freshLearner.claimedQuestIds.includes(quest.id)) return false
       const progress = questProgress[quest.id] ?? 0
       return progress >= quest.target
@@ -815,7 +825,7 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
     if (learner.minutesPractisedToday >= learner.settings.dailyLimitMinutes) {
       throw new HttpError(429, 'Daily learning limit reached. Come back tomorrow!')
     }
-    if (body.mode === 'speed-match' || body.mode === 'fill-blank' || body.mode === 'swap-words') {
+    if (isMiniGameMode(body.mode)) {
       if (!learner.settings.timedModesEnabled) throw new HttpError(403, 'Timed modes are disabled')
       if (learner.settings.focusMode && !learner.completedQuizToday) {
         throw new HttpError(403, 'Finish today’s quiz before playing mini-games')
@@ -941,6 +951,9 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
             if (perfect) {
               currentLearner.perfectQuizCount = (currentLearner.perfectQuizCount ?? 0) + 1
             }
+          }
+          if (isMiniGameMode(currentQuiz.mode) && !currentLearner.miniGameModesCompletedToday.includes(currentQuiz.mode)) {
+            currentLearner.miniGameModesCompletedToday.push(currentQuiz.mode)
           }
           if (currentQuiz.mode === 'speed-match') {
             if (!currentLearner.achievementIds.includes('speed_runner')) {

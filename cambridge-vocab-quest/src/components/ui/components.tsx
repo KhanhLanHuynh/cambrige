@@ -120,7 +120,8 @@ function DailyQuestsMenu({
   }
 
   const doneCount = quests.filter((quest) => quest.progress >= quest.target).length
-  const allDone = quests.length === 3 && doneCount === 3
+  const questTotal = quests.length
+  const allDone = questTotal > 0 && doneCount === questTotal
   const hasUnclaimed = quests.some((quest) => quest.progress >= quest.target && !quest.claimed)
   const claimAllEnabled = allDone && hasUnclaimed && !busy
 
@@ -180,7 +181,7 @@ function DailyQuestsMenu({
       >
         <Target size={compact ? 16 : 15} />
         {!compact && <strong>Daily Quests</strong>}
-        <span className="quests-menu-count">{doneCount}/3</span>
+        <span className="quests-menu-count">{doneCount}/{questTotal}</span>
         {!compact && <ChevronDown size={14} />}
       </button>
       {open && (
@@ -188,7 +189,7 @@ function DailyQuestsMenu({
           <header className="quests-dropdown-head">
             <Target size={14} />
             <strong>DAILY QUESTS</strong>
-            <span>{doneCount}/3 Done</span>
+            <span>{doneCount}/{questTotal} Done</span>
           </header>
           {quests.map((quest) => (
             <div className="quests-dropdown-row" key={quest.id}>

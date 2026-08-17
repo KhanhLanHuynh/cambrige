@@ -43,6 +43,14 @@ export interface LearnerSettings {
   speedMatchSeconds: 45 | 60 | 90 | 120 | 150
 }
 
+export type QuizMode = 'explorer' | 'speed-match' | 'fill-blank' | 'swap-words'
+export const MINI_GAME_MODES = ['speed-match', 'fill-blank', 'swap-words'] as const
+export type MiniGameMode = typeof MINI_GAME_MODES[number]
+
+export function isMiniGameMode(mode: string): mode is MiniGameMode {
+  return (MINI_GAME_MODES as readonly string[]).includes(mode)
+}
+
 export interface LearnerRecord {
   id: string
   userId: string
@@ -60,6 +68,7 @@ export interface LearnerRecord {
   minutesPractisedToday: number
   minutesPractisedDate?: string
   completedQuizToday: boolean
+  miniGameModesCompletedToday: MiniGameMode[]
   settings: LearnerSettings
   createdAt: string
 }
@@ -76,7 +85,7 @@ export interface QuizRecord {
   id: string
   userId: string
   learnerId: string
-  mode: 'explorer' | 'speed-match' | 'fill-blank' | 'swap-words'
+  mode: QuizMode
   wordIds: string[]
   answeredWordIds: string[]
   createdAt: string
@@ -192,6 +201,9 @@ function normalizeLearner(raw: Partial<LearnerRecord> & Pick<LearnerRecord, 'id'
     minutesPractisedToday: raw.minutesPractisedToday ?? 0,
     minutesPractisedDate: raw.minutesPractisedDate,
     completedQuizToday: raw.completedQuizToday ?? false,
+    miniGameModesCompletedToday: Array.isArray(raw.miniGameModesCompletedToday)
+      ? raw.miniGameModesCompletedToday.filter(isMiniGameMode)
+      : [],
     settings: { ...defaultSettings(), ...raw.settings },
     createdAt: raw.createdAt,
   }
@@ -300,6 +312,7 @@ export function ensureDailyPractice(learner: LearnerRecord, now = new Date()): v
     learner.minutesPractisedDate = today
     learner.minutesPractisedToday = 0
     learner.completedQuizToday = false
+    learner.miniGameModesCompletedToday = []
     learner.claimedQuestIds = []
   }
 }

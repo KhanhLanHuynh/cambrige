@@ -43,6 +43,34 @@ async function signInAsParent(
   return `${login.cookies[0]?.name}=${login.cookies[0]?.value}`
 }
 
+async function finishSession(
+  app: FastifyInstance,
+  cookie: string,
+  vocabulary: Array<{ id: string; answer: string }>,
+  payload: Record<string, unknown>,
+) {
+  const quizResponse = await app.inject({
+    method: 'POST',
+    url: '/api/quiz/sessions',
+    headers: { cookie },
+    payload,
+  })
+  expect(quizResponse.statusCode).toBe(201)
+  const quiz = quizResponse.json() as { id: string; questions: Array<{ id: string }> }
+  for (const word of quiz.questions) {
+    const answer = vocabulary.find((item) => item.id === word.id)?.answer
+    expect(answer).toBeTruthy()
+    const answered = await app.inject({
+      method: 'POST',
+      url: `/api/quiz/sessions/${quiz.id}/answers`,
+      headers: { cookie },
+      payload: { wordId: word.id, answer },
+    })
+    expect(answered.statusCode).toBe(200)
+  }
+  return quiz
+}
+
 afterEach(async () => {
   await Promise.all(directories.splice(0).map((directory) => rm(directory, { recursive: true, force: true })))
 })
@@ -384,29 +412,29 @@ describe('Cambridge Vocab Quest API', () => {
 
     const hubBefore = await app.inject({ method: 'GET', url: '/api/learner/hub', headers: { cookie } })
     expect(hubBefore.json().quests.find((quest: { id: string }) => quest.id === 'focus')).toMatchObject({
-      label: 'Complete 1 Starters word',
+      label: 'Finish 1 Starters quiz or mini-game',
       progress: 0,
     })
-    expect(hubBefore.json().quests.find((quest: { id: string }) => quest.id === 'review')).toMatchObject({
-      label: 'Practice 5 Starters words',
+    expect(hubBefore.json().quests.find((quest: { id: string }) => quest.id === 'play')).toMatchObject({
+      label: 'Play 1 mini-game',
+      progress: 0,
+    })
+    expect(hubBefore.json().quests.find((quest: { id: string }) => quest.id === 'play-all')).toMatchObject({
+      label: 'Play all 3 mini-games',
+      progress: 0,
     })
 
-    const quizResponse = await app.inject({
-      method: 'POST',
-      url: '/api/quiz/sessions',
-      headers: { cookie },
-      payload: { count: 1, level: 'Starters' },
-    })
-    const quiz = quizResponse.json()
-    const word = quiz.questions[0]
-    const answer = vocabulary.find((item) => item.id === word.id)?.answer
-    expect(answer).toBeTruthy()
+    await finishSession(app, cookie, vocabulary, { count: 1, level: 'Starters' })
 
-    await app.inject({
-      method: 'POST',
-      url: `/api/quiz/sessions/${quiz.id}/answers`,
-      headers: { cookie },
-      payload: { wordId: word.id, answer },
+    const hubAfter = await app.inject({ method: 'GET', url: '/api/learner/hub', headers: { cookie } })
+    expect(hubAfter.json().quests.find((quest: { id: string }) => quest.id === 'focus')).toMatchObject({
+      progress: 1,
+    })
+    expect(hubAfter.json().quests.find((quest: { id: string }) => quest.id === 'play')).toMatchObject({
+      progress: 0,
+    })
+    expect(hubAfter.json().quests.find((quest: { id: string }) => quest.id === 'play-all')).toMatchObject({
+      progress: 0,
     })
 
     const claim = await app.inject({
@@ -469,11 +497,11 @@ describe('Cambridge Vocab Quest API', () => {
     expect(hub.statusCode).toBe(200)
     expect(hub.json().map.unlocks['space-station']).toBe(true)
     expect(hub.json().quests.find((quest: { id: string }) => quest.id === 'focus')).toMatchObject({
-      label: 'Complete 1 Movers word',
+      label: 'Finish 1 Movers quiz or mini-game',
       progress: 0,
     })
-    expect(hub.json().quests.find((quest: { id: string }) => quest.id === 'review')).toMatchObject({
-      label: 'Practice 5 Movers words',
+    expect(hub.json().quests.find((quest: { id: string }) => quest.id === 'play')).toMatchObject({
+      label: 'Play 1 mini-game',
       progress: 0,
     })
     expect(hub.json().quests.find((quest: { id: string }) => quest.id === 'streak')).toMatchObject({
@@ -481,51 +509,28 @@ describe('Cambridge Vocab Quest API', () => {
       progress: 0,
     })
 
-    const startersQuiz = await app.inject({
-      method: 'POST',
-      url: '/api/quiz/sessions',
-      headers: { cookie },
-      payload: { count: 1, level: 'Starters' },
-    })
-    const startersQuestion = startersQuiz.json().questions[0]
-    const startersAnswer = vocabulary.find((item) => item.id === startersQuestion.id)?.answer
-    await app.inject({
-      method: 'POST',
-      url: `/api/quiz/sessions/${startersQuiz.json().id}/answers`,
-      headers: { cookie },
-      payload: { wordId: startersQuestion.id, answer: startersAnswer },
-    })
-    const startersFocusClaim = await app.inject({
-      method: 'POST',
-      url: '/api/learner/quests/claim',
-      headers: { cookie },
-      payload: { questId: 'focus' },
-    })
-    expect(startersFocusClaim.statusCode).toBe(400)
+    await finishSession(app, cookie, vocabulary, { count: 1, level: 'Starters' })
 
     const hubAfterStarters = await app.inject({ method: 'GET', url: '/api/learner/hub', headers: { cookie } })
-    expect(hubAfterStarters.json().quests.find((quest: { id: string }) => quest.id === 'review')).toMatchObject({
+    expect(hubAfterStarters.json().quests.find((quest: { id: string }) => quest.id === 'focus')).toMatchObject({
+      progress: 1,
+    })
+    expect(hubAfterStarters.json().quests.find((quest: { id: string }) => quest.id === 'play')).toMatchObject({
       progress: 0,
     })
     expect(hubAfterStarters.json().quests.find((quest: { id: string }) => quest.id === 'streak')).toMatchObject({
       progress: 0,
     })
 
-    const moversQuiz = await app.inject({
+    const startersFocusClaim = await app.inject({
       method: 'POST',
-      url: '/api/quiz/sessions',
+      url: '/api/learner/quests/claim',
       headers: { cookie },
-      payload: { count: 1, level: 'Movers' },
+      payload: { questId: 'focus' },
     })
-    const moversQuestion = moversQuiz.json().questions[0]
-    const moversAnswer = vocabulary.find((item) => item.id === moversQuestion.id)?.answer
-    expect(moversAnswer).toBeTruthy()
-    await app.inject({
-      method: 'POST',
-      url: `/api/quiz/sessions/${moversQuiz.json().id}/answers`,
-      headers: { cookie },
-      payload: { wordId: moversQuestion.id, answer: moversAnswer },
-    })
+    expect(startersFocusClaim.statusCode).toBe(200)
+
+    await finishSession(app, cookie, vocabulary, { count: 1, level: 'Movers' })
 
     const claim = await app.inject({
       method: 'POST',
@@ -533,8 +538,7 @@ describe('Cambridge Vocab Quest API', () => {
       headers: { cookie },
       payload: { questId: 'focus' },
     })
-    expect(claim.statusCode).toBe(200)
-    expect(claim.json().reward).toBe(30)
+    expect(claim.statusCode).toBe(409)
     await app.close()
   }, 20_000)
 
@@ -557,7 +561,7 @@ describe('Cambridge Vocab Quest API', () => {
 
     const hubBefore = await app.inject({ method: 'GET', url: '/api/learner/hub', headers: { cookie } })
     expect(hubBefore.json().quests.find((quest: { id: string }) => quest.id === 'focus')).toMatchObject({
-      label: 'Complete 1 Flyers word',
+      label: 'Finish 1 Flyers quiz or mini-game',
       progress: 0,
     })
 
@@ -611,23 +615,11 @@ describe('Cambridge Vocab Quest API', () => {
     })
 
     for (let index = 0; index < 5; index += 1) {
-      const quizResponse = await app.inject({
-        method: 'POST',
-        url: '/api/quiz/sessions',
-        headers: { cookie },
-        payload: { count: 1, level: 'Starters' },
-      })
-      const quiz = quizResponse.json()
-      const word = quiz.questions[0]
-      const answer = vocabulary.find((item) => item.id === word.id)?.answer
-      expect(answer).toBeTruthy()
-      await app.inject({
-        method: 'POST',
-        url: `/api/quiz/sessions/${quiz.id}/answers`,
-        headers: { cookie },
-        payload: { wordId: word.id, answer },
-      })
+      await finishSession(app, cookie, vocabulary, { count: 1, level: 'Starters' })
     }
+    await finishSession(app, cookie, vocabulary, { count: 1, mode: 'fill-blank', level: 'Starters' })
+    await finishSession(app, cookie, vocabulary, { count: 1, mode: 'speed-match', level: 'Starters' })
+    await finishSession(app, cookie, vocabulary, { count: 1, mode: 'swap-words', level: 'Starters' })
 
     const hub = await app.inject({ method: 'GET', url: '/api/learner/hub', headers: { cookie } })
     expect(hub.json().quests.every((quest: { progress: number; target: number }) => quest.progress >= quest.target)).toBe(true)
@@ -638,8 +630,8 @@ describe('Cambridge Vocab Quest API', () => {
       headers: { cookie },
     })
     expect(claimAll.statusCode).toBe(200)
-    expect(claimAll.json().reward).toBe(150)
-    expect(claimAll.json().claimedQuestIds).toEqual(['focus', 'review', 'streak'])
+    expect(claimAll.json().reward).toBe(250)
+    expect(claimAll.json().claimedQuestIds).toEqual(['focus', 'play', 'streak', 'play-all'])
 
     const again = await app.inject({
       method: 'POST',
@@ -649,6 +641,120 @@ describe('Cambridge Vocab Quest API', () => {
     expect(again.statusCode).toBe(200)
     expect(again.json().reward).toBe(0)
     expect(again.json().claimedQuestIds).toEqual([])
+    await app.close()
+  }, 20_000)
+
+  it.each(['fill-blank', 'speed-match', 'swap-words'] as const)(
+    'completes focus and play after finishing a %s mini-game',
+    async (mode) => {
+      const { vocabulary } = await import('./vocabulary.js')
+      const { app, store } = await testApp()
+      const cookie = await signInAsParent(app, store, { name: 'Parent', email: `quest-${mode}@example.com` })
+      const creation = await app.inject({
+        method: 'POST',
+        url: '/api/learners',
+        headers: { cookie },
+        payload: { name: 'Explorer', level: 'Starters' },
+      })
+      await app.inject({
+        method: 'POST',
+        url: '/api/learners/select',
+        headers: { cookie },
+        payload: { learnerId: creation.json().learner.id },
+      })
+
+      await finishSession(app, cookie, vocabulary, { count: 1, mode, level: 'Starters' })
+
+      const hub = await app.inject({ method: 'GET', url: '/api/learner/hub', headers: { cookie } })
+      expect(hub.json().quests.find((quest: { id: string }) => quest.id === 'focus')).toMatchObject({
+        progress: 1,
+      })
+      expect(hub.json().quests.find((quest: { id: string }) => quest.id === 'play')).toMatchObject({
+        progress: 1,
+      })
+      expect(hub.json().quests.find((quest: { id: string }) => quest.id === 'play-all')).toMatchObject({
+        progress: 1,
+      })
+
+      const claimPlay = await app.inject({
+        method: 'POST',
+        url: '/api/learner/quests/claim',
+        headers: { cookie },
+        payload: { questId: 'play' },
+      })
+      expect(claimPlay.statusCode).toBe(200)
+      expect(claimPlay.json().reward).toBe(50)
+      await app.close()
+    },
+    20_000,
+  )
+
+  it('completes play-all after finishing all three mini-games', async () => {
+    const { vocabulary } = await import('./vocabulary.js')
+    const { app, store } = await testApp()
+    const cookie = await signInAsParent(app, store, { name: 'Parent', email: 'quest-play-all@example.com' })
+    const creation = await app.inject({
+      method: 'POST',
+      url: '/api/learners',
+      headers: { cookie },
+      payload: { name: 'Explorer', level: 'Starters' },
+    })
+    await app.inject({
+      method: 'POST',
+      url: '/api/learners/select',
+      headers: { cookie },
+      payload: { learnerId: creation.json().learner.id },
+    })
+
+    await finishSession(app, cookie, vocabulary, { count: 1, mode: 'fill-blank', level: 'Starters' })
+    await finishSession(app, cookie, vocabulary, { count: 1, mode: 'speed-match', level: 'Starters' })
+    await finishSession(app, cookie, vocabulary, { count: 1, mode: 'swap-words', level: 'Starters' })
+
+    const hub = await app.inject({ method: 'GET', url: '/api/learner/hub', headers: { cookie } })
+    expect(hub.json().quests.find((quest: { id: string }) => quest.id === 'play-all')).toMatchObject({
+      progress: 3,
+      target: 3,
+    })
+
+    const claim = await app.inject({
+      method: 'POST',
+      url: '/api/learner/quests/claim',
+      headers: { cookie },
+      payload: { questId: 'play-all' },
+    })
+    expect(claim.statusCode).toBe(200)
+    expect(claim.json().reward).toBe(100)
+    await app.close()
+  }, 20_000)
+
+  it('does not raise play-all when repeating the same mini-game', async () => {
+    const { vocabulary } = await import('./vocabulary.js')
+    const { app, store } = await testApp()
+    const cookie = await signInAsParent(app, store, { name: 'Parent', email: 'quest-repeat-game@example.com' })
+    const creation = await app.inject({
+      method: 'POST',
+      url: '/api/learners',
+      headers: { cookie },
+      payload: { name: 'Explorer', level: 'Starters' },
+    })
+    await app.inject({
+      method: 'POST',
+      url: '/api/learners/select',
+      headers: { cookie },
+      payload: { learnerId: creation.json().learner.id },
+    })
+
+    await finishSession(app, cookie, vocabulary, { count: 1, mode: 'fill-blank', level: 'Starters' })
+    await finishSession(app, cookie, vocabulary, { count: 1, mode: 'fill-blank', level: 'Starters' })
+    await finishSession(app, cookie, vocabulary, { count: 1, mode: 'fill-blank', level: 'Starters' })
+
+    const hub = await app.inject({ method: 'GET', url: '/api/learner/hub', headers: { cookie } })
+    expect(hub.json().quests.find((quest: { id: string }) => quest.id === 'play')).toMatchObject({
+      progress: 1,
+    })
+    expect(hub.json().quests.find((quest: { id: string }) => quest.id === 'play-all')).toMatchObject({
+      progress: 1,
+    })
     await app.close()
   }, 20_000)
 
@@ -695,10 +801,13 @@ describe('Cambridge Vocab Quest API', () => {
     expect(hub.statusCode).toBe(200)
     expect(hub.json().map.unlocks[mapStop]).toBe(true)
     expect(hub.json().quests.find((quest: { id: string }) => quest.id === 'focus')).toMatchObject({
-      label: `Complete 1 ${level} word`,
+      label: `Finish 1 ${level} quiz or mini-game`,
     })
-    expect(hub.json().quests.find((quest: { id: string }) => quest.id === 'review')).toMatchObject({
-      label: `Practice 5 ${level} words`,
+    expect(hub.json().quests.find((quest: { id: string }) => quest.id === 'play')).toMatchObject({
+      label: 'Play 1 mini-game',
+    })
+    expect(hub.json().quests.find((quest: { id: string }) => quest.id === 'play-all')).toMatchObject({
+      label: 'Play all 3 mini-games',
     })
     expect(hub.json().quests.find((quest: { id: string }) => quest.id === 'streak')).toMatchObject({
       label: `Maintain a 5-answer ${level} streak`,
