@@ -44,17 +44,25 @@ export function getWordById(id: string): VocabularyWord | undefined {
   return vocabulary.find((word) => word.id === id)
 }
 
-export function updateWordSentences(id: string, sentences: string[]): VocabularyWord {
+export function updateWordContent(id: string, content: {
+  definition: string
+  definitionVi: string
+  sentences: string[]
+}): VocabularyWord {
   const word = getWordById(id)
   if (!word) throw new Error(`Word not found: ${id}`)
 
-  const cleaned = sentences.map((sentence) => sentence.trim()).filter(Boolean)
-  word.sentences = cleaned
+  const definition = content.definition.trim()
+  const definitionVi = content.definitionVi.trim()
+  const sentences = content.sentences.map((sentence) => sentence.trim()).filter(Boolean)
+  word.definition = definition
+  word.definitionVi = definitionVi
+  word.sentences = sentences
 
   const file = readLevelFile(word.level)
   const index = file.words.findIndex((entry) => entry.id === id)
   if (index < 0) throw new Error(`Word missing from level file: ${id}`)
-  file.words[index] = { ...file.words[index]!, sentences: cleaned }
+  file.words[index] = { ...file.words[index]!, definition, definitionVi, sentences }
   writeLevelFile(word.level, file)
 
   return word

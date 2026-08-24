@@ -232,11 +232,10 @@ function GiftCatalogModal({ onClose }: { onClose: () => void }) {
                       <input
                         aria-label={`Gift ${index + 1} cost`}
                         type="number"
-                        min={10}
-                        max={5000}
+                        min={1}
                         value={gift.costGems}
                         onChange={(event) => {
-                          const costGems = Number(event.target.value) || 10
+                          const costGems = Number(event.target.value) || 1
                           setCatalog((current) => current.map((item) => (item.id === gift.id ? { ...item, costGems } : item)))
                           setCatalogSaved(false)
                         }}
@@ -292,6 +291,7 @@ type ParentVocabWord = {
   id: string
   word: string
   definition: string
+  definitionVi: string
   partOfSpeech: string
   level: CambridgeLevel
   sentences: string[]
@@ -310,6 +310,8 @@ function SentenceEditorModal({
   const [searchError, setSearchError] = useState('')
   const [selected, setSelected] = useState<ParentVocabWord | null>(null)
   const [drafts, setDrafts] = useState<string[]>([])
+  const [definitionDraft, setDefinitionDraft] = useState('')
+  const [definitionViDraft, setDefinitionViDraft] = useState('')
   const [wordLoading, setWordLoading] = useState(Boolean(initialWordId))
   const [saved, setSaved] = useState(false)
   const [error, setError] = useState('')
@@ -323,11 +325,15 @@ function SentenceEditorModal({
       const response = await api<{ word: ParentVocabWord }>(`/parent/vocabulary/${encodeURIComponent(wordId)}`)
       setSelected(response.word)
       setDrafts(response.word.sentences.length ? [...response.word.sentences] : [''])
+      setDefinitionDraft(response.word.definition)
+      setDefinitionViDraft(response.word.definitionVi ?? '')
       setSearchQuery(response.word.word)
       setSearchResults([])
     } catch (requestError) {
       setSelected(null)
       setDrafts([])
+      setDefinitionDraft('')
+      setDefinitionViDraft('')
       setError(requestError instanceof ApiError ? requestError.message : 'Could not load word')
     } finally {
       setWordLoading(false)
@@ -379,7 +385,21 @@ function SentenceEditorModal({
       setError('Search and select a vocabulary word first')
       return
     }
+    const definition = definitionDraft.trim()
+    const definitionVi = definitionViDraft.trim()
     const sentences = drafts.map((sentence) => sentence.trim()).filter(Boolean)
+    if (!definition) {
+      setError('Add an English definition')
+      return
+    }
+    if (definition.length > 300) {
+      setError('English definition must be 300 characters or fewer')
+      return
+    }
+    if (definitionVi.length > 300) {
+      setError('Vietnamese definition must be 300 characters or fewer')
+      return
+    }
     if (!sentences.length) {
       setError('Add at least one example sentence')
       return
@@ -397,13 +417,15 @@ function SentenceEditorModal({
     try {
       const response = await api<{ word: ParentVocabWord }>(
         `/parent/vocabulary/${encodeURIComponent(selected.id)}/sentences`,
-        { method: 'PUT', body: { sentences } },
+        { method: 'PUT', body: { definition, definitionVi, sentences } },
       )
       setSelected(response.word)
       setDrafts(response.word.sentences.length ? [...response.word.sentences] : [''])
+      setDefinitionDraft(response.word.definition)
+      setDefinitionViDraft(response.word.definitionVi ?? '')
       setSaved(true)
     } catch (requestError) {
-      setError(requestError instanceof ApiError ? requestError.message : 'Could not save sentences')
+      setError(requestError instanceof ApiError ? requestError.message : 'Could not save word')
     } finally {
       setBusy(false)
     }
@@ -412,9 +434,9 @@ function SentenceEditorModal({
   return (
     <div className="modal-backdrop">
       <section className="modal settings-modal sentence-editor-modal" role="dialog" aria-modal="true" aria-labelledby="sentence-editor-title">
-        <button className="modal-close" onClick={onClose} aria-label="Close sentence editor"><X /></button>
-        <h2 id="sentence-editor-title">Example sentences</h2>
-        <p>Search any Cambridge word, then check, edit, or add example sentences used in quizzes and games.</p>
+        <button className="modal-close" onClick={onClose} aria-label="Close word editor"><X /></button>
+        <h2 id="sentence-editor-title">Edit word</h2>
+        <p>Search any Cambridge word, then edit its English and Vietnamese definitions and example sentences used in quizzes and games.</p>
 
         <label className="sentence-search-label">
           <span>Find a word</span>
@@ -459,7 +481,32 @@ function SentenceEditorModal({
                 <h3>{selected.word}</h3>
                 <small>{selected.level} · {selected.partOfSpeech}</small>
               </div>
-              <p>{selected.definition}</p>
+              <label className="sentence-definition-label">
+                <span>English definition</span>
+                <textarea
+                  aria-label="English definition"
+                  value={definitionDraft}
+                  maxLength={300}
+                  rows={2}
+                  onChange={(event) => {
+                    setDefinitionDraft(event.target.value)
+                    setSaved(false)
+                  }}
+                />
+              </label>
+              <label className="sentence-definition-label">
+                <span>Vietnamese definition</span>
+                <textarea
+                  aria-label="Vietnamese definition"
+                  value={definitionViDraft}
+                  maxLength={300}
+                  rows={2}
+                  onChange={(event) => {
+                    setDefinitionViDraft(event.target.value)
+                    setSaved(false)
+                  }}
+                />
+              </label>
             </header>
 
             <ul className="sentence-editor-list">
@@ -504,7 +551,7 @@ function SentenceEditorModal({
                 <Plus /> Add sentence
               </Button>
               <Button type="button" disabled={busy} onClick={() => void save()}>
-                {busy ? 'Saving…' : 'Save sentences'}
+                {busy ? 'Saving…' : 'Save word'}
               </Button>
             </div>
           </div>
@@ -515,7 +562,7 @@ function SentenceEditorModal({
         ) : null}
 
         {error && <div className="form-error">{error}</div>}
-        {saved && <div className="save-success"><Check /> Sentences saved</div>}
+        {saved && <div className="save-success"><Check /> Word saved</div>}
       </section>
     </div>
   )
@@ -1463,7 +1510,7 @@ export function DashboardPage({
                 setSentencesOpen(true)
               }}
             >
-              <BookOpen /> Edit sentences
+              <BookOpen /> Edit word
             </Button>
             <Button variant="secondary" onClick={() => void downloadFromApi('/parent/word-health.csv', 'word-health.csv')}><Download /> Export CSV</Button>
           </div>
@@ -1493,7 +1540,7 @@ export function DashboardPage({
                         setSentencesOpen(true)
                       }}
                     >
-                      Sentences
+                      Edit
                     </button>
                   </td>
                 </tr>

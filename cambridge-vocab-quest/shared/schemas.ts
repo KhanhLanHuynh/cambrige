@@ -113,7 +113,7 @@ export const assignmentSchema = z.object({
 export const giftDefinitionSchema = z.object({
   id: z.string().uuid().optional(),
   name: z.string().trim().min(1).max(60),
-  costGems: z.number().int().min(10).max(5000),
+  costGems: z.number().int().min(1),
 })
 
 export const giftCatalogSchema = z.object({
@@ -129,6 +129,8 @@ export const vocabularyIdParams = z.object({
 })
 
 export const vocabularySentencesSchema = z.object({
+  definition: z.string().trim().min(1).max(300),
+  definitionVi: z.string().trim().max(300),
   sentences: z.array(z.string().trim().min(1).max(200)).max(20),
 })
 

@@ -1055,7 +1055,7 @@ describe('Cambridge Vocab Quest API', () => {
     await app.close()
   }, 20_000)
 
-  it('lets a parent-verified adult search, read, and update vocabulary sentences', async () => {
+  it('lets a parent-verified adult search, read, and update vocabulary definitions and sentences', async () => {
     const { app, store } = await testApp()
     const cookie = await signInAsParent(app, store, { name: 'Parent', email: 'sentences@example.com' })
     const creation = await app.inject({
@@ -1109,23 +1109,67 @@ describe('Cambridge Vocab Quest API', () => {
       headers: { cookie },
     })
     expect(original.statusCode).toBe(200)
-    const originalSentences = original.json().word.sentences as string[]
+    const originalWord = original.json().word as {
+      definition: string
+      definitionVi: string
+      sentences: string[]
+    }
+    const originalSentences = originalWord.sentences
+    const originalDefinition = originalWord.definition
+    const originalDefinitionVi = originalWord.definitionVi
     expect(originalSentences.length).toBeGreaterThan(0)
+    expect(originalDefinition.length).toBeGreaterThan(0)
+    expect(originalDefinitionVi).toEqual(expect.any(String))
 
     const nextSentences = [
       'There is a soft armchair by the window.',
       'Sam sits in the armchair and reads.',
     ]
+    const nextDefinition = 'a soft chair with rests for your arms'
+    const nextDefinitionVi = 'ghế bành mềm có chỗ kê tay'
 
     try {
+      const emptyEnglish = await app.inject({
+        method: 'PUT',
+        url: `/api/parent/vocabulary/${wordId}/sentences`,
+        headers: { cookie },
+        payload: {
+          definition: '   ',
+          definitionVi: originalDefinitionVi,
+          sentences: originalSentences,
+        },
+      })
+      expect(emptyEnglish.statusCode).toBe(400)
+
+      const clearedVietnamese = await app.inject({
+        method: 'PUT',
+        url: `/api/parent/vocabulary/${wordId}/sentences`,
+        headers: { cookie },
+        payload: {
+          definition: originalDefinition,
+          definitionVi: '',
+          sentences: originalSentences,
+        },
+      })
+      expect(clearedVietnamese.statusCode).toBe(200)
+      expect(clearedVietnamese.json().word.definitionVi).toBe('')
+
       const updated = await app.inject({
         method: 'PUT',
         url: `/api/parent/vocabulary/${wordId}/sentences`,
         headers: { cookie },
-        payload: { sentences: nextSentences },
+        payload: {
+          definition: nextDefinition,
+          definitionVi: nextDefinitionVi,
+          sentences: nextSentences,
+        },
       })
       expect(updated.statusCode).toBe(200)
-      expect(updated.json().word.sentences).toEqual(nextSentences)
+      expect(updated.json().word).toMatchObject({
+        definition: nextDefinition,
+        definitionVi: nextDefinitionVi,
+        sentences: nextSentences,
+      })
 
       const reloaded = await app.inject({
         method: 'GET',
@@ -1133,13 +1177,21 @@ describe('Cambridge Vocab Quest API', () => {
         headers: { cookie },
       })
       expect(reloaded.statusCode).toBe(200)
-      expect(reloaded.json().word.sentences).toEqual(nextSentences)
+      expect(reloaded.json().word).toMatchObject({
+        definition: nextDefinition,
+        definitionVi: nextDefinitionVi,
+        sentences: nextSentences,
+      })
     } finally {
       await app.inject({
         method: 'PUT',
         url: `/api/parent/vocabulary/${wordId}/sentences`,
         headers: { cookie },
-        payload: { sentences: originalSentences },
+        payload: {
+          definition: originalDefinition,
+          definitionVi: originalDefinitionVi,
+          sentences: originalSentences,
+        },
       })
     }
 

@@ -414,10 +414,11 @@ svg { flex: 0 0 auto; }
 .sentence-word-header{border:1px solid #e4dceb;border-radius:12px;padding:.8rem;background:#f3eff8;display:grid;gap:.45rem}
 .sentence-word-header h3{margin:0;font-size:1rem;color:#1d1137}
 .sentence-word-header small{font-size:.58rem;color:#746a83}
-.sentence-word-header p{margin:0;font-size:.72rem;color:#4c3d5f}
+.sentence-definition-label{display:grid;gap:.35rem;text-align:left}
+.sentence-definition-label span{font-size:.62rem;font-weight:700;color:#746a83}
+.sentence-definition-label textarea,.sentence-editor-list textarea{width:100%;border:1px solid #d9d1e4;border-radius:8px;padding:.55rem;background:white;color:#1d1137;resize:vertical;min-height:56px;font:inherit}
 .sentence-editor-list{list-style:none;margin:0;padding:0;display:grid;gap:.55rem}
 .sentence-editor-list li{display:grid;grid-template-columns:1fr auto;gap:.45rem;align-items:start}
-.sentence-editor-list textarea{width:100%;border:1px solid #d9d1e4;border-radius:8px;padding:.55rem;background:white;color:#1d1137;resize:vertical;min-height:56px;font:inherit}
 .sentence-editor-actions{display:flex;flex-wrap:wrap;gap:.5rem}
 .sentence-editor-actions .button{width:auto;margin-top:0}
 

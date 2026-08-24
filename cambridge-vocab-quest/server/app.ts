@@ -22,7 +22,7 @@ import {
   vocabularyIdParams,
   vocabularySentencesSchema,
 } from '../shared/schemas.js'
-import type { CambridgeLevel, SafeLearner } from '../shared/types.js'
+import type { CambridgeLevel, SafeLearner, VocabularyWord } from '../shared/types.js'
 import { ACHIEVEMENTS, evaluateAchievements } from './achievements.js'
 import { createSessionToken, digestToken, hashSecret, isAllowedCorsOrigin, verifySecret } from './security.js'
 import {
@@ -45,7 +45,7 @@ import {
   listCategories,
   searchVocabulary,
   selectVocabulary,
-  updateWordSentences,
+  updateWordContent,
   vocabulary,
 } from './vocabulary.js'
 
@@ -97,6 +97,18 @@ function safeLearner(learner: LearnerRecord): SafeLearner {
     hasPin: Boolean(learner.pinHash),
     streak: learner.streak,
     gems: learner.gems,
+  }
+}
+
+function toParentWord(word: VocabularyWord) {
+  return {
+    id: word.id,
+    word: word.word,
+    definition: word.definition,
+    definitionVi: word.definitionVi,
+    partOfSpeech: word.partOfSpeech,
+    level: word.level,
+    sentences: word.sentences,
   }
 }
 
@@ -585,16 +597,7 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
     const { id } = parse(vocabularyIdParams, request.params)
     const word = getWordById(id)
     if (!word) throw new HttpError(404, 'Word not found')
-    return {
-      word: {
-        id: word.id,
-        word: word.word,
-        definition: word.definition,
-        partOfSpeech: word.partOfSpeech,
-        level: word.level,
-        sentences: word.sentences,
-      },
-    }
+    return { word: toParentWord(word) }
   })
 
   app.put('/api/parent/vocabulary/:id/sentences', async (request) => {
@@ -603,19 +606,14 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
     const body = parse(vocabularySentencesSchema, request.body)
     if (!getWordById(id)) throw new HttpError(404, 'Word not found')
     try {
-      const word = updateWordSentences(id, body.sentences)
-      return {
-        word: {
-          id: word.id,
-          word: word.word,
-          definition: word.definition,
-          partOfSpeech: word.partOfSpeech,
-          level: word.level,
-          sentences: word.sentences,
-        },
-      }
+      const word = updateWordContent(id, {
+        definition: body.definition,
+        definitionVi: body.definitionVi,
+        sentences: body.sentences,
+      })
+      return { word: toParentWord(word) }
     } catch (error) {
-      throw new HttpError(500, error instanceof Error ? error.message : 'Could not save sentences')
+      throw new HttpError(500, error instanceof Error ? error.message : 'Could not save word')
     }
   })
 
