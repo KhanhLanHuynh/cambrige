@@ -25,8 +25,8 @@ devices on the same Wi-Fi should open `http://<this-pc-ip>:5173` (not port
 The seed command creates a demo adult account and learner profile. See the
 terminal output from `npm run seed` for the current demo credentials.
 
-Parent accounts are host-provisioned only. The auth UI is sign-in only; use the
-CLI scripts below to create parents or reset passwords on the host.
+Create a parent account from the login page (name, email, and password), or use
+the CLI scripts below to provision parents or reset passwords on the host.
 
 ```bash
 npm run parent:create -- --name "Jamie" --email parent@example.com --password "A-secure-password1"

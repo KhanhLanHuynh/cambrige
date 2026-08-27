@@ -1,4 +1,4 @@
-import { Plus, Rocket, Sparkles, X } from 'lucide-react'
+import { LogOut, Plus, Rocket, Sparkles, X } from 'lucide-react'
 import { useState, type FormEvent } from 'react'
 import { MAX_LEARNERS_PER_PARENT } from '../../../shared/schemas'
 import { Badge, Button, Logo } from '../../components/ui'
@@ -6,7 +6,7 @@ import { api, ApiError } from '../../lib'
 import { useSessionStore } from '../../stores'
 import type { CambridgeLevel, Learner } from '../../types'
 
-export function ProfilesPage({ navigate }: { navigate: (path: string) => void }) {
+export function ProfilesPage({ navigate, onSignOut }: { navigate: (path: string) => void; onSignOut: () => void }) {
   const { learners, addLearner, selectLearner } = useSessionStore()
   const [creating, setCreating] = useState(false)
   const [selected, setSelected] = useState<Learner | null>(null)
@@ -73,6 +73,9 @@ export function ProfilesPage({ navigate }: { navigate: (path: string) => void })
         {learners.length >= MAX_LEARNERS_PER_PARENT && (
           <p className="profile-limit-note">You can have up to {MAX_LEARNERS_PER_PARENT} learners.</p>
         )}
+        <button type="button" className="profile-sign-out" onClick={onSignOut}>
+          <LogOut size={16} /> Sign out
+        </button>
       </main>
       {(creating || selected) && (
         <div className="modal-backdrop" role="presentation">

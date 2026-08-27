@@ -9,13 +9,20 @@ export interface GiftDefinition {
   costGems: number
 }
 
+export type UserRole = 'parent' | 'superadmin'
+
 export interface UserRecord {
   id: string
   name: string
   email: string
   passwordHash: string
+  role: UserRole
   createdAt: string
   giftCatalog: GiftDefinition[]
+}
+
+export function isSuperAdmin(user: Pick<UserRecord, 'role'>): boolean {
+  return user.role === 'superadmin'
 }
 
 export type RedemptionStatus = 'pending' | 'approved' | 'rejected' | 'cancelled'
@@ -165,6 +172,7 @@ function normalizeUser(raw: Partial<UserRecord> & Pick<UserRecord, 'id' | 'name'
     name: raw.name,
     email: raw.email,
     passwordHash: raw.passwordHash,
+    role: raw.role === 'superadmin' ? 'superadmin' : 'parent',
     createdAt: raw.createdAt,
     giftCatalog: (raw.giftCatalog ?? []).map((gift) => normalizeGift(gift as GiftDefinition)),
   }

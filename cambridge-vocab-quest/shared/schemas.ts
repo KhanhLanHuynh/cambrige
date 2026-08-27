@@ -18,6 +18,19 @@ export const parentGateSchema = z.object({
   password: z.string().min(1).max(128),
 })
 
+export const parentUpdateSchema = z.object({
+  name: z.string().trim().min(1).max(80).optional(),
+  email: z.string().trim().toLowerCase().email().max(254).optional(),
+}).superRefine((value, context) => {
+  if (value.name === undefined && value.email === undefined) {
+    context.addIssue({
+      code: 'custom',
+      message: 'Provide at least one field to update',
+      path: ['name'],
+    })
+  }
+})
+
 export const questClaimSchema = z.object({
   questId: z.string().trim().min(1).max(40),
 })
@@ -136,6 +149,7 @@ export const vocabularySentencesSchema = z.object({
 
 export type RegisterInput = z.infer<typeof registerSchema>
 export type LoginInput = z.infer<typeof loginSchema>
+export type ParentUpdateInput = z.infer<typeof parentUpdateSchema>
 export type LearnerCreateInput = z.infer<typeof learnerCreateSchema>
 export type LearnerUpdateInput = z.infer<typeof learnerUpdateSchema>
 export type QuizCreateInput = z.infer<typeof quizCreateSchema>

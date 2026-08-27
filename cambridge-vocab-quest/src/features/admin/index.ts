@@ -1,0 +1,1 @@
+export { AdminParentsPage } from './AdminParentsPage'

@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { afterEach, describe, expect, it } from 'vitest'
 import type { FastifyInstance } from 'fastify'
-import { createParent } from './admin-parent.js'
+import { createParent, promoteParent } from './admin-parent.js'
 import { buildApp } from './app.js'
 import { JsonStore, type DataStore } from './store.js'
 
@@ -43,6 +43,16 @@ async function signInAsParent(
   return `${login.cookies[0]?.name}=${login.cookies[0]?.value}`
 }
 
+async function signInAsSuperAdmin(
+  app: FastifyInstance,
+  store: DataStore,
+  options: { name?: string; email: string; password?: string },
+) {
+  const cookie = await signInAsParent(app, store, options)
+  await promoteParent(store, { email: options.email })
+  return cookie
+}
+
 async function finishSession(
   app: FastifyInstance,
   cookie: string,
@@ -76,16 +86,25 @@ afterEach(async () => {
 })
 
 describe('Cambridge Vocab Quest API', () => {
-  it('rejects public registration and signs in a host-created parent', async () => {
-    const { app, store } = await testApp()
-    const blocked = await app.inject({
+  it('registers a parent account, rejects duplicates, and signs them in', async () => {
+    const { app } = await testApp()
+    const created = await app.inject({
       method: 'POST',
       url: '/api/auth/register',
       payload: { name: 'Parent', email: 'parent@example.com', password: 'A-secure-password1' },
     })
-    expect(blocked.statusCode).toBe(404)
+    expect(created.statusCode).toBe(201)
+    expect(created.json().user).toMatchObject({ name: 'Parent', email: 'parent@example.com', role: 'parent' })
+    expect(created.json().user).not.toHaveProperty('passwordHash')
+    const cookie = `${created.cookies[0]?.name}=${created.cookies[0]?.value}`
+    expect(created.cookies[0]?.name).toBe('cvq_session')
 
-    const cookie = await signInAsParent(app, store, { name: 'Parent', email: 'parent@example.com' })
+    const duplicate = await app.inject({
+      method: 'POST',
+      url: '/api/auth/register',
+      payload: { name: 'Other', email: 'parent@example.com', password: 'A-secure-password1' },
+    })
+    expect(duplicate.statusCode).toBe(409)
 
     const creation = await app.inject({
       method: 'POST',
@@ -1546,6 +1565,220 @@ describe('Cambridge Vocab Quest API', () => {
     const reviewIds = review.json().questions.map((question: { id: string }) => question.id) as string[]
     expect(reviewIds).toContain(atRiskWord!.id)
     expect(reviewIds).toContain(warmingWord!.id)
+
+    await app.close()
+  }, 20_000)
+
+  it('rejects parent sessions from super-admin parent routes', async () => {
+    const { app, store } = await testApp()
+    const cookie = await signInAsParent(app, store, { email: 'household@example.com' })
+    const parentId = store.read((database) => database.users.find((item) => item.email === 'household@example.com')?.id)
+
+    expect((await app.inject({ method: 'GET', url: '/api/admin/parents' })).statusCode).toBe(401)
+    expect((await app.inject({
+      method: 'GET',
+      url: '/api/admin/parents',
+      headers: { cookie },
+    })).statusCode).toBe(403)
+    expect((await app.inject({
+      method: 'PATCH',
+      url: `/api/admin/parents/${parentId}`,
+      headers: { cookie },
+      payload: { name: 'Hacked' },
+    })).statusCode).toBe(403)
+    expect((await app.inject({
+      method: 'DELETE',
+      url: `/api/admin/parents/${parentId}`,
+      headers: { cookie },
+    })).statusCode).toBe(403)
+
+    await app.close()
+  }, 20_000)
+
+  it('lets a super-admin list and edit household parents', async () => {
+    const { app, store } = await testApp()
+    await signInAsParent(app, store, { name: 'Jamie', email: 'jamie@example.com' })
+    await signInAsParent(app, store, { name: 'Taylor', email: 'taylor@example.com' })
+    const adminCookie = await signInAsSuperAdmin(app, store, { name: 'Operator', email: 'ops@example.com' })
+
+    const listed = await app.inject({
+      method: 'GET',
+      url: '/api/admin/parents',
+      headers: { cookie: adminCookie },
+    })
+    expect(listed.statusCode).toBe(200)
+    const parents = listed.json().parents as Array<{ email: string; name: string; learnerCount: number }>
+    expect(parents.map((item) => item.email)).toEqual(['jamie@example.com', 'taylor@example.com'])
+    expect(parents.some((item) => item.email === 'ops@example.com')).toBe(false)
+    expect(listed.body).not.toContain('passwordHash')
+
+    const jamieId = store.read((database) => database.users.find((item) => item.email === 'jamie@example.com')!.id)
+    const renamed = await app.inject({
+      method: 'PATCH',
+      url: `/api/admin/parents/${jamieId}`,
+      headers: { cookie: adminCookie },
+      payload: { name: 'Jamie Updated', email: 'jamie.new@example.com' },
+    })
+    expect(renamed.statusCode).toBe(200)
+    expect(renamed.json().parent).toMatchObject({
+      id: jamieId,
+      name: 'Jamie Updated',
+      email: 'jamie.new@example.com',
+    })
+
+    const duplicate = await app.inject({
+      method: 'PATCH',
+      url: `/api/admin/parents/${jamieId}`,
+      headers: { cookie: adminCookie },
+      payload: { email: 'taylor@example.com' },
+    })
+    expect(duplicate.statusCode).toBe(409)
+
+    const empty = await app.inject({
+      method: 'PATCH',
+      url: `/api/admin/parents/${jamieId}`,
+      headers: { cookie: adminCookie },
+      payload: {},
+    })
+    expect(empty.statusCode).toBe(400)
+
+    await app.close()
+  }, 20_000)
+
+  it('prevents deleting the signed-in super-admin or another super-admin', async () => {
+    const { app, store } = await testApp()
+    const adminCookie = await signInAsSuperAdmin(app, store, { email: 'ops@example.com' })
+    await signInAsSuperAdmin(app, store, { email: 'other-ops@example.com' })
+    const selfId = store.read((database) => database.users.find((item) => item.email === 'ops@example.com')!.id)
+    const otherId = store.read((database) => database.users.find((item) => item.email === 'other-ops@example.com')!.id)
+
+    expect((await app.inject({
+      method: 'DELETE',
+      url: `/api/admin/parents/${selfId}`,
+      headers: { cookie: adminCookie },
+    })).statusCode).toBe(403)
+    expect((await app.inject({
+      method: 'DELETE',
+      url: `/api/admin/parents/${otherId}`,
+      headers: { cookie: adminCookie },
+    })).statusCode).toBe(403)
+    expect((await app.inject({
+      method: 'PATCH',
+      url: `/api/admin/parents/${otherId}`,
+      headers: { cookie: adminCookie },
+      payload: { name: 'Nope' },
+    })).statusCode).toBe(404)
+
+    await app.close()
+  }, 20_000)
+
+  it('cascade-deletes a parent household and related data', async () => {
+    const { app, store } = await testApp()
+    const parentCookie = await signInAsParent(app, store, { name: 'Jamie', email: 'house@example.com' })
+    const otherCookie = await signInAsParent(app, store, { name: 'Keep', email: 'keep@example.com' })
+    const adminCookie = await signInAsSuperAdmin(app, store, { email: 'ops@example.com' })
+
+    const houseLearner = await app.inject({
+      method: 'POST',
+      url: '/api/learners',
+      headers: { cookie: parentCookie },
+      payload: { name: 'Explorer', level: 'Movers' },
+    })
+    expect(houseLearner.statusCode).toBe(201)
+    const keepLearner = await app.inject({
+      method: 'POST',
+      url: '/api/learners',
+      headers: { cookie: otherCookie },
+      payload: { name: 'Sibling', level: 'Starters' },
+    })
+    const learnerId = houseLearner.json().learner.id as string
+    const keepLearnerId = keepLearner.json().learner.id as string
+    const parentId = store.read((database) => database.users.find((item) => item.email === 'house@example.com')!.id)
+    const keepId = store.read((database) => database.users.find((item) => item.email === 'keep@example.com')!.id)
+    const now = new Date().toISOString()
+
+    await store.update((database) => {
+      database.quizzes.push({
+        id: randomUUID(),
+        userId: parentId,
+        learnerId,
+        mode: 'explorer',
+        wordIds: ['alpha'],
+        answeredWordIds: [],
+        createdAt: now,
+        expiresAt: new Date(Date.now() + 60_000).toISOString(),
+      })
+      database.attempts.push({
+        id: randomUUID(),
+        learnerId,
+        wordId: 'alpha',
+        correct: true,
+        answeredAt: now,
+      })
+      database.assignments.push({
+        id: randomUUID(),
+        userId: parentId,
+        learnerId,
+        level: 'Movers',
+        categories: ['animals'],
+        createdAt: now,
+      })
+      database.redemptions.push({
+        id: randomUUID(),
+        userId: parentId,
+        learnerId,
+        giftId: randomUUID(),
+        giftName: 'Sticker pack',
+        costGems: 100,
+        status: 'pending',
+        createdAt: now,
+      })
+      database.passwordResets.push({
+        email: 'house@example.com',
+        tokenHash: 'reset-token',
+        expiresAt: now,
+      })
+      database.attempts.push({
+        id: randomUUID(),
+        learnerId: keepLearnerId,
+        wordId: 'beta',
+        correct: false,
+        answeredAt: now,
+      })
+    })
+
+    const deleted = await app.inject({
+      method: 'DELETE',
+      url: `/api/admin/parents/${parentId}`,
+      headers: { cookie: adminCookie },
+    })
+    expect(deleted.statusCode).toBe(204)
+
+    const snapshot = store.read((database) => ({
+      users: database.users.map((item) => item.email).sort(),
+      learners: database.learners.map((item) => item.id),
+      quizzes: database.quizzes.map((item) => item.userId),
+      attempts: database.attempts.map((item) => item.learnerId),
+      assignments: database.assignments.map((item) => item.userId),
+      redemptions: database.redemptions.map((item) => item.userId),
+      sessions: database.sessions.map((item) => item.userId),
+      passwordResets: database.passwordResets.map((item) => item.email),
+    }))
+    expect(snapshot.users).toEqual(['keep@example.com', 'ops@example.com'])
+    expect(snapshot.learners).toEqual([keepLearnerId])
+    expect(snapshot.quizzes).toEqual([])
+    expect(snapshot.attempts).toEqual([keepLearnerId])
+    expect(snapshot.assignments).toEqual([])
+    expect(snapshot.redemptions).toEqual([])
+    expect(snapshot.sessions).not.toContain(parentId)
+    expect(snapshot.sessions).toContain(keepId)
+    expect(snapshot.passwordResets).toEqual([])
+
+    expect((await app.inject({
+      method: 'DELETE',
+      url: `/api/admin/parents/${parentId}`,
+      headers: { cookie: adminCookie },
+    })).statusCode).toBe(404)
 
     await app.close()
   }, 20_000)

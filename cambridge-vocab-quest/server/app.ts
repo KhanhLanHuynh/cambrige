@@ -14,7 +14,9 @@ import {
   loginSchema,
   MAX_LEARNERS_PER_PARENT,
   parentGateSchema,
+  parentUpdateSchema,
   questClaimSchema,
+  registerSchema,
   quizAnswerSchema,
   quizCreateSchema,
   settingsQuerySchema,
@@ -24,6 +26,7 @@ import {
 } from '../shared/schemas.js'
 import type { CambridgeLevel, SafeLearner, VocabularyWord } from '../shared/types.js'
 import { ACHIEVEMENTS, evaluateAchievements } from './achievements.js'
+import { AdminError, createParent, deleteParent, listParents, updateParent } from './admin-parent.js'
 import { createSessionToken, digestToken, hashSecret, isAllowedCorsOrigin, verifySecret } from './security.js'
 import {
   defaultSettings,
@@ -31,6 +34,7 @@ import {
   healthForAttempts,
   isMiniGameMode,
   MINI_GAME_MODES,
+  isSuperAdmin,
   JsonStore,
   pruneExpiredQuizzes,
   todayKey,
@@ -39,6 +43,7 @@ import {
   type LearnerRecord,
   type MiniGameMode,
   type SessionRecord,
+  type UserRecord,
 } from './store.js'
 import {
   getWordById,
@@ -98,6 +103,15 @@ function safeLearner(learner: LearnerRecord): SafeLearner {
     streak: learner.streak,
     gems: learner.gems,
   }
+}
+
+function safeUser(user: UserRecord) {
+  return { id: user.id, name: user.name, email: user.email, role: user.role ?? 'parent' }
+}
+
+function fromAdminError(error: unknown): never {
+  if (error instanceof AdminError) throw new HttpError(error.statusCode, error.message)
+  throw error
 }
 
 function toParentWord(word: VocabularyWord) {
@@ -353,6 +367,13 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
     return session
   }
 
+  function requireSuperAdmin(request: FastifyRequest): SessionRecord {
+    const session = requireSession(request)
+    const user = store.read((database) => database.users.find((item) => item.id === session.userId))
+    if (!user || !isSuperAdmin(user)) throw new HttpError(403, 'Super-admin access required')
+    return session
+  }
+
   function requireLearner(request: FastifyRequest): { session: SessionRecord; learner: LearnerRecord } {
     const session = requireSession(request)
     if (!session.selectedLearnerId) throw new HttpError(409, 'Select a learner first')
@@ -423,7 +444,20 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
       throw new HttpError(401, 'Invalid email or password')
     }
     await issueSession(user.id, reply)
-    return { user: { id: user.id, name: user.name, email: user.email } }
+    return { user: safeUser(user) }
+  })
+
+  app.post('/api/auth/register', {
+    config: { rateLimit: { max: 10, timeWindow: '15 minutes' } },
+  }, async (request, reply) => {
+    const body = parse(registerSchema, request.body)
+    try {
+      const user = await createParent(store, body)
+      await issueSession(user.id, reply)
+      return reply.code(201).send({ user })
+    } catch (error) {
+      fromAdminError(error)
+    }
   })
 
   app.post('/api/auth/logout', async (request, reply) => {
@@ -444,7 +478,7 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
     if (!user) return { authenticated: false }
     return {
       authenticated: true,
-      user: { id: user.id, name: user.name, email: user.email },
+      user: safeUser(user),
       selectedLearnerId: session.selectedLearnerId ?? null,
       parentVerified: Boolean(session.parentVerifiedUntil && Date.parse(session.parentVerifiedUntil) > Date.now()),
     }
@@ -465,6 +499,33 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
       if (current) current.parentVerifiedUntil = parentVerifiedUntil
     })
     return { verified: true, expiresAt: parentVerifiedUntil }
+  })
+
+  app.get('/api/admin/parents', async (request) => {
+    requireSuperAdmin(request)
+    return { parents: listParents(store) }
+  })
+
+  app.patch('/api/admin/parents/:id', async (request) => {
+    requireSuperAdmin(request)
+    const { id } = parse(idParams, request.params)
+    const body = parse(parentUpdateSchema, request.body ?? {})
+    try {
+      return { parent: await updateParent(store, id, body) }
+    } catch (error) {
+      fromAdminError(error)
+    }
+  })
+
+  app.delete('/api/admin/parents/:id', async (request, reply) => {
+    const session = requireSuperAdmin(request)
+    const { id } = parse(idParams, request.params)
+    try {
+      await deleteParent(store, id, session.userId)
+      return reply.code(204).send()
+    } catch (error) {
+      fromAdminError(error)
+    }
   })
 
   app.get('/api/learners', async (request) => {

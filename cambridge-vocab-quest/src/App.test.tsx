@@ -30,4 +30,31 @@ describe('App', () => {
       expect(new Set(word.choices).size).toBe(4)
     }
   })
+
+  it('routes a super-admin to the parent management page', async () => {
+    vi.stubGlobal('fetch', vi.fn(async (input: RequestInfo | URL) => {
+      const url = String(input)
+      if (url.includes('/auth/session')) {
+        return new Response(JSON.stringify({
+          authenticated: true,
+          user: { id: 'admin-1', name: 'Operator', email: 'admin@example.com', role: 'superadmin' },
+        }), { status: 200, headers: { 'Content-Type': 'application/json' } })
+      }
+      if (url.includes('/admin/parents')) {
+        return new Response(JSON.stringify({ parents: [] }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' },
+        })
+      }
+      return new Response(JSON.stringify({ error: 'unmocked' }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' },
+      })
+    }))
+
+    render(<App />)
+
+    expect(await screen.findByRole('heading', { name: /parent accounts/i })).toBeInTheDocument()
+    expect(screen.getByText(/signed in as/i)).toHaveTextContent('admin@example.com')
+  })
 })

@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { AppShell, Badge } from './components/ui'
+import { AdminParentsPage } from './features/admin/AdminParentsPage'
 import { AuthPage } from './features/auth/AuthPage'
 import { DashboardPage } from './features/dashboard/DashboardPage'
 import { SpeedMatchPage } from './features/games/SpeedMatchPage'
@@ -21,6 +22,7 @@ function App() {
     signIn, signOut, setLearners, setHydrated, clearLearner,
   } = useSessionStore()
   const learner = learners.find((item) => item.id === activeLearnerId)
+  const isAdmin = user?.role === 'superadmin'
 
   useEffect(() => {
     let active = true
@@ -32,6 +34,10 @@ function App() {
           return
         }
         signIn(session.user)
+        if (session.user.role === 'superadmin') {
+          if (active) setLearners([], null)
+          return
+        }
         const profiles = await api<{ learners: Learner[]; selectedLearnerId: string | null }>('/learners')
         if (active) setLearners(profiles.learners, profiles.selectedLearnerId)
       })
@@ -54,9 +60,18 @@ function App() {
   useEffect(() => {
     if (!hydrated) return
     if (!user && path !== '/auth') navigate('/auth', true)
-    else if (user && !learner && path !== '/profiles') navigate('/profiles', true)
-    else if (user && learner && ['/', '/auth', '/profiles'].includes(path)) navigate('/home', true)
-  }, [hydrated, user, learner, path, navigate])
+    else if (isAdmin && path !== '/admin') navigate('/admin', true)
+    else if (user && !isAdmin && path === '/admin') navigate(learner ? '/home' : '/profiles', true)
+    else if (user && !isAdmin && !learner && path !== '/profiles') navigate('/profiles', true)
+    else if (user && !isAdmin && learner && ['/', '/auth', '/profiles'].includes(path)) navigate('/home', true)
+  }, [hydrated, user, isAdmin, learner, path, navigate])
+
+  const handleSignOut = () => {
+    void api('/auth/logout', { method: 'POST' }).finally(() => {
+      signOut()
+      navigate('/auth')
+    })
+  }
 
   if (!hydrated) {
     return (
@@ -66,7 +81,8 @@ function App() {
     )
   }
   if (!user) return <AuthPage navigate={navigate} />
-  if (!learner) return <ProfilesPage navigate={navigate} />
+  if (isAdmin) return <AdminParentsPage onSignOut={handleSignOut} />
+  if (!learner) return <ProfilesPage navigate={navigate} onSignOut={handleSignOut} />
 
   let page
   if (path === '/explore') page = <QuizPage learner={learner} navigate={navigate} />
@@ -87,12 +103,7 @@ function App() {
         useQuestStore.getState().reset()
         navigate('/profiles')
       }}
-      onSignOut={() => {
-        void api('/auth/logout', { method: 'POST' }).finally(() => {
-          signOut()
-          navigate('/auth')
-        })
-      }}
+      onSignOut={handleSignOut}
     >
       {page}
     </AppShell>

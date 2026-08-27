@@ -1,10 +1,13 @@
 export type CambridgeLevel = 'Starters' | 'Movers' | 'Flyers' | 'Preliminary'
 export type WordHealth = 'Healthy' | 'At risk' | 'Warming' | 'New'
 
+export type UserRole = 'parent' | 'superadmin'
+
 export interface User {
   id: string
   name: string
   email: string
+  role: UserRole
 }
 
 export interface Learner {
