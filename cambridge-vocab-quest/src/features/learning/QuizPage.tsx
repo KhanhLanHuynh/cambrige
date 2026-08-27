@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { Badge, Button, Progress } from '../../components/ui'
 import { api, ApiError, pickRandomSentence, speakAnswerFeedback } from '../../lib'
 import { useQuestStore } from '../../stores'
-import type { Learner, QuizAnswerResult, QuizQuestion, QuizSession } from '../../types'
+import type { Learner, QuizAnswerResult, QuizSession } from '../../types'
 
 type CreatedSession = QuizSession & {
   settings?: { hintsEnabled: boolean; soundEnabled: boolean }
