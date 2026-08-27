@@ -398,8 +398,13 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
   }
 
   app.get('/', async (_request, reply) => {
-    const frontend = process.env.PUBLIC_APP_URL ?? 'http://localhost:5173/'
-    return reply.redirect(frontend)
+    if (process.env.PUBLIC_APP_URL) {
+      return reply.redirect(process.env.PUBLIC_APP_URL)
+    }
+    if (process.env.NODE_ENV === 'production') {
+      return { ok: true }
+    }
+    return reply.redirect('http://localhost:5173/')
   })
 
   app.get('/api/health', async () => ({ ok: true }))
@@ -1004,7 +1009,7 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
       ),
     }))
     const peakDailyCount = Math.max(1, ...activityCounts.flatMap((series) => series.counts))
-    const weekStart = dates[0]
+    const weekStart = dates[0]!
     const masteredThisWeek = new Set(
       allAttempts
         .filter((attempt) => attempt.correct && attempt.answeredAt.slice(0, 10) >= weekStart)
@@ -1319,7 +1324,7 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
       for (const current of owned) {
         current.settings = { ...current.settings, ...patch }
       }
-      return owned[0].settings
+      return owned[0]!.settings
     })
     return { settings }
   })

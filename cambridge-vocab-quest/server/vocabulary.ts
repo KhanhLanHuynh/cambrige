@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from 'node:fs'
+import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import type { CambridgeLevel, VocabularySearchResult, VocabularyWord, WordHealth } from '../shared/types.js'
@@ -19,7 +19,9 @@ const FILE_BY_LEVEL: Record<CambridgeLevel, (typeof LEVEL_FILES)[number]> = {
   Preliminary: 'preliminary.json',
 }
 
-const dataDir = resolve(dirname(fileURLToPath(import.meta.url)), 'data')
+const moduleDataDir = resolve(dirname(fileURLToPath(import.meta.url)), 'data')
+const cwdDataDir = resolve(process.cwd(), 'server', 'data')
+const dataDir = existsSync(resolve(moduleDataDir, 'starters.json')) ? moduleDataDir : cwdDataDir
 
 function levelFilePath(level: CambridgeLevel): string {
   return resolve(dataDir, FILE_BY_LEVEL[level])
