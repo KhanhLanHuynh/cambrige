@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto'
-import Fastify, { type FastifyInstance, type FastifyReply, type FastifyRequest } from 'fastify'
+import Fastify, { type FastifyInstance, type FastifyReply, type FastifyRequest, type FastifyServerOptions } from 'fastify'
 import cookie from '@fastify/cookie'
 import cors from '@fastify/cors'
 import rateLimit from '@fastify/rate-limit'
@@ -283,10 +283,15 @@ function syncAchievements(store: DataStore, learnerId: string): string[] {
 export interface BuildAppOptions {
   store?: DataStore
   logger?: boolean
+  serverFactory?: FastifyServerOptions['serverFactory']
 }
 
 export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyInstance> {
-  const app = Fastify({ logger: options.logger ?? false, trustProxy: true })
+  const app = Fastify({
+    logger: options.logger ?? false,
+    trustProxy: true,
+    serverFactory: options.serverFactory,
+  })
   const store = options.store ?? new JsonStore()
   await store.init()
 
@@ -407,7 +412,7 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
     return reply.redirect('http://localhost:5173/')
   })
 
-  app.get('/api/health', async () => ({ ok: true }))
+  app.get('/api/health', { config: { rateLimit: false } }, async () => ({ ok: true }))
 
   app.post('/api/auth/login', {
     config: { rateLimit: { max: 10, timeWindow: '15 minutes' } },
