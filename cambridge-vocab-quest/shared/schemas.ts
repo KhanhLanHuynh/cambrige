@@ -49,22 +49,15 @@ export const learnerUpdateSchema = z.object({
   name: z.string().trim().min(1).max(40).optional(),
   avatar: z.string().trim().min(1).max(40).optional(),
   level: cambridgeLevelSchema.optional(),
+  gems: z.number().int().min(0).max(999999).optional(),
   pin: z.string().regex(/^\d{4,6}$/).optional(),
-  clearPin: z.boolean().optional(),
 }).superRefine((value, context) => {
-  if (value.pin !== undefined && value.clearPin) {
-    context.addIssue({
-      code: 'custom',
-      message: 'Provide a new PIN or clear the PIN, not both',
-      path: ['pin'],
-    })
-  }
   if (
     value.name === undefined
     && value.avatar === undefined
     && value.level === undefined
+    && value.gems === undefined
     && value.pin === undefined
-    && !value.clearPin
   ) {
     context.addIssue({
       code: 'custom',

@@ -686,6 +686,162 @@ function AddLearnerModal({
   )
 }
 
+function EditLearnerModal({
+  learner,
+  onClose,
+  onSaved,
+  onParentLocked,
+}: {
+  learner: Learner
+  onClose: () => void
+  onSaved: (learner: Learner) => void
+  onParentLocked: () => void
+}) {
+  const [name, setName] = useState(learner.name)
+  const [avatar, setAvatar] = useState(learner.avatar || '🚀')
+  const [level, setLevel] = useState<CambridgeLevel>(learner.level)
+  const [gems, setGems] = useState(String(learner.gems ?? 0))
+  const [pin, setPin] = useState('')
+  const [error, setError] = useState('')
+  const [busy, setBusy] = useState(false)
+
+  const submit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const displayName = name.trim()
+    if (displayName.length < 1) {
+      setError('Enter a display name')
+      return
+    }
+    const gemsValue = Number(gems)
+    if (!Number.isInteger(gemsValue) || gemsValue < 0 || gemsValue > 999999) {
+      setError('Gems must be a whole number from 0 to 999999')
+      return
+    }
+    if (pin && !/^\d{4,6}$/.test(pin)) {
+      setError('PIN must be 4–6 digits')
+      return
+    }
+
+    const body: {
+      name: string
+      avatar: string
+      level: CambridgeLevel
+      gems: number
+      pin?: string
+    } = {
+      name: displayName,
+      avatar,
+      level,
+      gems: gemsValue,
+    }
+    if (pin) body.pin = pin
+
+    setBusy(true)
+    setError('')
+    try {
+      const response = await api<{ learner: Learner }>(`/learners/${learner.id}`, {
+        method: 'PATCH',
+        body,
+      })
+      onSaved(response.learner)
+      onClose()
+    } catch (requestError) {
+      if (requestError instanceof ApiError && requestError.status === 403) {
+        onParentLocked()
+        return
+      }
+      setError(requestError instanceof ApiError ? requestError.message : 'Could not update learner')
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  return (
+    <div className="modal-backdrop" role="presentation" onClick={onClose}>
+      <section
+        className="modal settings-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="edit-learner-title"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <button className="modal-close" onClick={onClose} aria-label="Close edit learner"><X /></button>
+        <h2 id="edit-learner-title">Edit {learner.name}</h2>
+        <p>Update profile details and gem balance.</p>
+        <form onSubmit={submit}>
+          <label>
+            Display name
+            <input
+              aria-label="Learner display name"
+              value={name}
+              maxLength={40}
+              autoFocus
+              onChange={(event) => setName(event.target.value)}
+            />
+          </label>
+          <label>
+            Avatar
+            <select
+              aria-label="Learner avatar"
+              value={avatar}
+              onChange={(event) => setAvatar(event.target.value)}
+            >
+              {!LEARNER_AVATARS.includes(avatar as (typeof LEARNER_AVATARS)[number]) && (
+                <option value={avatar}>{avatar}</option>
+              )}
+              {LEARNER_AVATARS.map((option) => (
+                <option key={option}>{option}</option>
+              ))}
+            </select>
+          </label>
+          <label>
+            Cambridge level
+            <select
+              aria-label="Learner Cambridge level"
+              value={level}
+              onChange={(event) => setLevel(event.target.value as CambridgeLevel)}
+            >
+              <option>Starters</option>
+              <option>Movers</option>
+              <option>Flyers</option>
+              <option>Preliminary</option>
+            </select>
+          </label>
+          <label>
+            Gems
+            <input
+              aria-label="Learner gems"
+              inputMode="numeric"
+              value={gems}
+              onChange={(event) => setGems(event.target.value.replace(/\D/g, '').slice(0, 6))}
+            />
+          </label>
+          <label>
+            New PIN (optional)
+            <input
+              aria-label="New learner PIN"
+              inputMode="numeric"
+              maxLength={6}
+              value={pin}
+              placeholder={learner.hasPin ? 'Leave blank to keep current PIN' : 'Optional 4–6 digits'}
+              onChange={(event) => setPin(event.target.value.replace(/\D/g, '').slice(0, 6))}
+            />
+          </label>
+          {error && <div className="form-error">{error}</div>}
+          <div className="gift-editor-actions">
+            <Button type="button" variant="secondary" disabled={busy} onClick={onClose}>
+              Cancel
+            </Button>
+            <Button type="submit" disabled={busy}>
+              {busy ? 'Saving…' : 'Save learner'}
+            </Button>
+          </div>
+        </form>
+      </section>
+    </div>
+  )
+}
+
 type AssignmentRecord = { id: string; learnerId: string; level: CambridgeLevel; categories: string[] }
 
 function AssignReviewModal({
@@ -899,14 +1055,6 @@ export function DashboardPage({
   const [deleteError, setDeleteError] = useState('')
   const [deleteBusy, setDeleteBusy] = useState(false)
   const [editing, setEditing] = useState<Learner | null>(null)
-  const [editName, setEditName] = useState('')
-  const [editAvatar, setEditAvatar] = useState('🚀')
-  const [editLevel, setEditLevel] = useState<CambridgeLevel>('Starters')
-  const [editPin, setEditPin] = useState('')
-  const [clearPin, setClearPin] = useState(false)
-  const [editError, setEditError] = useState('')
-  const [editBusy, setEditBusy] = useState(false)
-  const [editSaved, setEditSaved] = useState(false)
   const healthRows = summary?.wordHealth ?? []
   const visibleWords = useMemo(
     () => healthRows.filter((word) => word.word.toLowerCase().includes(query.toLowerCase()) && (health === 'All' || word.health === health)),
@@ -962,8 +1110,6 @@ export function DashboardPage({
     if (atLearnerLimit) return
     setAddOpen(true)
     setEditing(null)
-    setEditError('')
-    setEditSaved(false)
     setPendingDelete(null)
     setConfirmName('')
     setDeleteError('')
@@ -973,13 +1119,6 @@ export function DashboardPage({
 
   const openEdit = (entry: Learner) => {
     setEditing(entry)
-    setEditName(entry.name)
-    setEditAvatar(entry.avatar || '🚀')
-    setEditLevel(entry.level)
-    setEditPin('')
-    setClearPin(false)
-    setEditError('')
-    setEditSaved(false)
     setAddOpen(false)
     setPendingDelete(null)
     setConfirmName('')
@@ -993,8 +1132,6 @@ export function DashboardPage({
     setRedeemError('')
     setAddOpen(false)
     setEditing(null)
-    setEditError('')
-    setEditSaved(false)
     setPendingDelete(null)
     setConfirmName('')
     setDeleteError('')
@@ -1013,56 +1150,6 @@ export function DashboardPage({
       setRedeemError(requestError instanceof ApiError ? requestError.message : `Could not ${action} request`)
     } finally {
       setRedeemBusy(false)
-    }
-  }
-
-  const saveEdit = async () => {
-    if (!editing) return
-    const name = editName.trim()
-    if (name.length < 1) {
-      setEditError('Enter a display name')
-      return
-    }
-    if (editPin && !/^\d{4,6}$/.test(editPin)) {
-      setEditError('PIN must be 4–6 digits')
-      return
-    }
-    if (clearPin && editPin) {
-      setEditError('Provide a new PIN or clear the PIN, not both')
-      return
-    }
-
-    const body: {
-      name: string
-      avatar: string
-      level: CambridgeLevel
-      pin?: string
-      clearPin?: boolean
-    } = {
-      name,
-      avatar: editAvatar,
-      level: editLevel,
-    }
-    if (clearPin) body.clearPin = true
-    else if (editPin) body.pin = editPin
-
-    setEditBusy(true)
-    setEditError('')
-    try {
-      const response = await api<{ learner: Learner }>(`/learners/${editing.id}`, {
-        method: 'PATCH',
-        body,
-      })
-      updateLearner(response.learner)
-      setEditing(response.learner)
-      setEditPin('')
-      setClearPin(false)
-      setEditSaved(true)
-      refreshDashboard()
-    } catch (requestError) {
-      setEditError(requestError instanceof ApiError ? requestError.message : 'Could not update learner')
-    } finally {
-      setEditBusy(false)
     }
   }
 
@@ -1230,8 +1317,6 @@ export function DashboardPage({
                                 setConfirmName('')
                                 setDeleteError('')
                                 setEditing(null)
-                                setEditError('')
-                                setEditSaved(false)
                                 setAddOpen(false)
                                 setRedeeming(null)
                                 setRedeemError('')
@@ -1257,108 +1342,6 @@ export function DashboardPage({
                   </tbody>
                 </table>
               </div>
-              {editing && (
-                <div className="edit-learner-form">
-                  <strong>Edit {editing.name}</strong>
-                  <label>
-                    Display name
-                    <input
-                      aria-label="Learner display name"
-                      value={editName}
-                      maxLength={40}
-                      autoFocus
-                      onChange={(event) => {
-                        setEditName(event.target.value)
-                        setEditSaved(false)
-                      }}
-                    />
-                  </label>
-                  <label>
-                    Avatar
-                    <select
-                      aria-label="Learner avatar"
-                      value={editAvatar}
-                      onChange={(event) => {
-                        setEditAvatar(event.target.value)
-                        setEditSaved(false)
-                      }}
-                    >
-                      {!['🚀', '🦊', '🐼', '🦄', '🤖'].includes(editAvatar) && (
-                        <option value={editAvatar}>{editAvatar}</option>
-                      )}
-                      <option>🚀</option>
-                      <option>🦊</option>
-                      <option>🐼</option>
-                      <option>🦄</option>
-                      <option>🤖</option>
-                    </select>
-                  </label>
-                  <label>
-                    Cambridge level
-                    <select
-                      aria-label="Learner Cambridge level"
-                      value={editLevel}
-                      onChange={(event) => {
-                        setEditLevel(event.target.value as CambridgeLevel)
-                        setEditSaved(false)
-                      }}
-                    >
-                      <option>Starters</option>
-                      <option>Movers</option>
-                      <option>Flyers</option>
-                      <option>Preliminary</option>
-                    </select>
-                  </label>
-                  <label>
-                    New PIN (optional)
-                    <input
-                      aria-label="New learner PIN"
-                      inputMode="numeric"
-                      maxLength={6}
-                      value={editPin}
-                      placeholder={editing.hasPin ? 'Leave blank to keep current PIN' : 'Optional 4–6 digits'}
-                      disabled={clearPin}
-                      onChange={(event) => {
-                        setEditPin(event.target.value.replace(/\D/g, '').slice(0, 6))
-                        setEditSaved(false)
-                      }}
-                    />
-                  </label>
-                  {editing.hasPin && (
-                    <label className="toggle-row">
-                      <span><strong>Remove PIN</strong><small>Allow open access without a PIN</small></span>
-                      <input
-                        type="checkbox"
-                        checked={clearPin}
-                        onChange={(event) => {
-                          setClearPin(event.target.checked)
-                          if (event.target.checked) setEditPin('')
-                          setEditSaved(false)
-                        }}
-                      />
-                    </label>
-                  )}
-                  {editError && <div className="form-error">{editError}</div>}
-                  {editSaved && <div className="save-success"><Check /> Learner updated</div>}
-                  <div className="gift-editor-actions">
-                    <Button
-                      type="button"
-                      variant="secondary"
-                      disabled={editBusy}
-                      onClick={() => {
-                        setEditing(null)
-                        setEditError('')
-                        setEditSaved(false)
-                      }}
-                    >
-                      Cancel
-                    </Button>
-                    <Button type="button" disabled={editBusy} onClick={() => void saveEdit()}>
-                      Save learner
-                    </Button>
-                  </div>
-                </div>
-              )}
               {pendingDelete && (
                 <div className="delete-learner-confirm">
                   <strong>Delete {pendingDelete.name}?</strong>
@@ -1608,6 +1591,17 @@ export function DashboardPage({
           onParentLocked={lockAdult}
           onCreated={(learner) => {
             addLearner(learner)
+            refreshDashboard()
+          }}
+        />
+      )}
+      {editing && (
+        <EditLearnerModal
+          learner={editing}
+          onClose={() => setEditing(null)}
+          onParentLocked={lockAdult}
+          onSaved={(learner) => {
+            updateLearner(learner)
             refreshDashboard()
           }}
         />

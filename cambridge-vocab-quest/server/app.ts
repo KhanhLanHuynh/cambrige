@@ -630,8 +630,8 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
       if (body.name !== undefined) current.nickname = body.name
       if (body.avatar !== undefined) current.avatar = body.avatar
       if (body.level !== undefined) current.level = body.level
-      if (body.clearPin) delete current.pinHash
-      else if (pinHash) current.pinHash = pinHash
+      if (body.gems !== undefined) current.gems = body.gems
+      if (pinHash) current.pinHash = pinHash
       return safeLearner(current)
     })
     return { learner: updated }

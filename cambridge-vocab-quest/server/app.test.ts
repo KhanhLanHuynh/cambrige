@@ -1421,13 +1421,6 @@ describe('Cambridge Vocab Quest API', () => {
       payload: {},
     })).statusCode).toBe(400)
 
-    expect((await app.inject({
-      method: 'PATCH',
-      url: `/api/learners/${learnerId}`,
-      headers: { cookie },
-      payload: { pin: '1234', clearPin: true },
-    })).statusCode).toBe(400)
-
     const updated = await app.inject({
       method: 'PATCH',
       url: `/api/learners/${learnerId}`,
@@ -1441,15 +1434,6 @@ describe('Cambridge Vocab Quest API', () => {
       level: 'Movers',
       hasPin: true,
     })
-
-    const cleared = await app.inject({
-      method: 'PATCH',
-      url: `/api/learners/${learnerId}`,
-      headers: { cookie },
-      payload: { clearPin: true },
-    })
-    expect(cleared.statusCode).toBe(200)
-    expect(cleared.json().learner.hasPin).toBe(false)
 
     expect((await app.inject({
       method: 'PATCH',
