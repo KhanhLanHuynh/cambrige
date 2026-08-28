@@ -3,7 +3,7 @@ import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import type { CambridgeLevel, VocabularySearchResult, VocabularyWord, WordHealth } from '../shared/types.js'
 
-type VocabularyFile = {
+export type VocabularyFile = {
   source?: Record<string, unknown>
   level: CambridgeLevel
   count: number
@@ -11,6 +11,7 @@ type VocabularyFile = {
 }
 
 const LEVEL_FILES = ['starters.json', 'movers.json', 'flyers.json', 'preliminary.json'] as const
+export const VOCABULARY_LEVELS = ['Starters', 'Movers', 'Flyers', 'Preliminary'] as const
 
 const FILE_BY_LEVEL: Record<CambridgeLevel, (typeof LEVEL_FILES)[number]> = {
   Starters: 'starters.json',
@@ -44,6 +45,30 @@ export const vocabulary: VocabularyWord[] = LEVEL_FILES.flatMap(loadLevelFile)
 
 export function getWordById(id: string): VocabularyWord | undefined {
   return vocabulary.find((word) => word.id === id)
+}
+
+export function snapshotVocabularyFiles(): Record<CambridgeLevel, VocabularyFile> {
+  return {
+    Starters: readLevelFile('Starters'),
+    Movers: readLevelFile('Movers'),
+    Flyers: readLevelFile('Flyers'),
+    Preliminary: readLevelFile('Preliminary'),
+  }
+}
+
+export function restoreVocabularyFiles(files: Partial<Record<CambridgeLevel, VocabularyFile>>): number {
+  let words = 0
+  for (const level of VOCABULARY_LEVELS) {
+    const file = files[level]
+    if (!file || !Array.isArray(file.words)) {
+      throw new Error(`This backup does not include ${level} vocabulary`)
+    }
+    writeLevelFile(level, { ...file, level, count: file.words.length })
+    words += file.words.length
+  }
+  const next = LEVEL_FILES.flatMap(loadLevelFile)
+  vocabulary.splice(0, vocabulary.length, ...next)
+  return words
 }
 
 export function updateWordContent(id: string, content: {

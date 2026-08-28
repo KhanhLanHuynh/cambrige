@@ -30,9 +30,29 @@ describe('AdminParentsPage', () => {
       hydrated: true,
     })
 
+    URL.createObjectURL = vi.fn(() => 'blob:backup')
+    URL.revokeObjectURL = vi.fn()
+
     vi.stubGlobal('fetch', vi.fn(async (input: RequestInfo | URL, init?: RequestInit) => {
       const url = String(input)
       const method = init?.method?.toUpperCase() ?? 'GET'
+      if (url.includes('/api/admin/backup') && method === 'GET') {
+        return new Response(JSON.stringify({ format: 'cvq-backup', version: 1, includes: ['database'] }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' },
+        })
+      }
+      if (url.includes('/api/admin/backup') && method === 'PUT') {
+        return new Response(JSON.stringify({
+          ok: true,
+          restored: ['database'],
+          users: 2,
+          learners: 2,
+        }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' },
+        })
+      }
       if (url.endsWith('/api/admin/parents') && method === 'GET') {
         return new Response(JSON.stringify({ parents: [jamie, taylor] }), {
           status: 200,
@@ -101,5 +121,60 @@ describe('AdminParentsPage', () => {
       expect(screen.queryByText('jamie@example.com')).not.toBeInTheDocument()
     })
     expect(screen.getByText('taylor@example.com')).toBeInTheDocument()
+  })
+
+  it('downloads a store-only backup when vocabulary is unchecked', async () => {
+    const user = userEvent.setup()
+    render(<AdminParentsPage onSignOut={() => undefined} />)
+    await screen.findByRole('heading', { name: /parent accounts/i })
+
+    await user.click(screen.getByRole('checkbox', { name: 'Include vocabulary edits' }))
+    await user.click(screen.getByRole('button', { name: /download backup/i }))
+
+    await waitFor(() => {
+      const calls = vi.mocked(fetch).mock.calls.map(([input, init]) => ({
+        url: String(input),
+        method: init?.method?.toUpperCase() ?? 'GET',
+      }))
+      expect(calls.some((call) => call.method === 'GET' && call.url.includes('/api/admin/backup?database=1') && !call.url.includes('vocabulary='))).toBe(true)
+    })
+  })
+
+  it('restores a store-only file after typing RESTORE', async () => {
+    const user = userEvent.setup()
+    render(<AdminParentsPage onSignOut={() => undefined} />)
+    await screen.findByRole('heading', { name: /parent accounts/i })
+
+    const file = new File([JSON.stringify({
+      format: 'cvq-backup',
+      version: 1,
+      exportedAt: '2026-08-28T00:00:00.000Z',
+      includes: ['database'],
+      database: { version: 2, users: [] },
+    })], 'cvq-backup-database.json', { type: 'application/json' })
+    await user.upload(screen.getByLabelText('Choose backup file'), file)
+
+    await waitFor(() => {
+      expect(screen.getByRole('checkbox', { name: 'Restore runtime data' })).toBeChecked()
+      expect(screen.getByRole('checkbox', { name: 'Restore vocabulary edits' })).toBeDisabled()
+    })
+
+    await user.click(screen.getByRole('button', { name: /restore from file/i }))
+    const dialog = await screen.findByRole('dialog', { name: /restore this backup/i })
+    const confirm = within(dialog).getByRole('button', { name: /restore now/i })
+    expect(confirm).toBeDisabled()
+    expect(within(dialog).getByText(/vocabulary files stay as they are/i)).toBeInTheDocument()
+
+    await user.type(within(dialog).getByLabelText(/type restore to confirm/i), 'RESTORE')
+    expect(confirm).toBeEnabled()
+    await user.click(confirm)
+
+    await waitFor(() => {
+      expect(screen.getByRole('status')).toHaveTextContent(/restored runtime data/i)
+    })
+    const put = vi.mocked(fetch).mock.calls.find(([input, init]) => (
+      String(input).includes('/api/admin/backup?database=1') && init?.method?.toUpperCase() === 'PUT'
+    ))
+    expect(put).toBeTruthy()
   })
 })

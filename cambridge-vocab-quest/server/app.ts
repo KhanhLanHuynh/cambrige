@@ -21,12 +21,14 @@ import {
   quizCreateSchema,
   settingsQuerySchema,
   settingsSchema,
+  backupScopeQuerySchema,
   vocabularyIdParams,
   vocabularySentencesSchema,
 } from '../shared/schemas.js'
 import type { CambridgeLevel, SafeLearner, VocabularyWord } from '../shared/types.js'
 import { ACHIEVEMENTS, evaluateAchievements } from './achievements.js'
 import { AdminError, createParent, deleteParent, listParents, updateParent } from './admin-parent.js'
+import { applyBackup, backupFilename, BackupError, buildBackup } from './backup.js'
 import { createSessionToken, digestToken, hashSecret, isAllowedCorsOrigin, verifySecret } from './security.js'
 import {
   defaultSettings,
@@ -111,6 +113,11 @@ function safeUser(user: UserRecord) {
 
 function fromAdminError(error: unknown): never {
   if (error instanceof AdminError) throw new HttpError(error.statusCode, error.message)
+  throw error
+}
+
+function fromBackupError(error: unknown): never {
+  if (error instanceof BackupError) throw new HttpError(error.statusCode, error.message)
   throw error
 }
 
@@ -525,6 +532,39 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
       return reply.code(204).send()
     } catch (error) {
       fromAdminError(error)
+    }
+  })
+
+  app.get('/api/admin/backup', async (request, reply) => {
+    requireSuperAdmin(request)
+    const scopes = parse(backupScopeQuerySchema, request.query ?? {})
+    try {
+      const backup = buildBackup(store, scopes)
+      return reply
+        .header('content-type', 'application/json; charset=utf-8')
+        .header('content-disposition', `attachment; filename="${backupFilename(scopes)}"`)
+        .send(backup)
+    } catch (error) {
+      fromBackupError(error)
+    }
+  })
+
+  app.put('/api/admin/backup', {
+    bodyLimit: 25 * 1024 * 1024,
+    config: { rateLimit: { max: 6, timeWindow: '15 minutes' } },
+  }, async (request) => {
+    const session = requireSuperAdmin(request)
+    const scopes = parse(backupScopeQuerySchema, request.query ?? {})
+    const user = store.read((database) => database.users.find((item) => item.id === session.userId))
+    if (!user || !isSuperAdmin(user)) throw new HttpError(403, 'Super-admin access required')
+    try {
+      const result = await applyBackup(store, request.body, scopes, {
+        currentUser: user,
+        currentSession: session,
+      })
+      return { ok: true, ...result }
+    } catch (error) {
+      fromBackupError(error)
     }
   })
 

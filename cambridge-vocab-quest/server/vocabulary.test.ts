@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { searchVocabulary, selectVocabulary, vocabulary } from './vocabulary.js'
+import { getWordById, restoreVocabularyFiles, searchVocabulary, selectVocabulary, snapshotVocabularyFiles, vocabulary } from './vocabulary.js'
 
 describe('vocabulary quiz shape', () => {
   it('uses the word as the answer with word choices, not the definition', () => {
@@ -71,5 +71,22 @@ describe('searchVocabulary', () => {
     const results = searchVocabulary('a', { level: 'Starters', limit: 10 })
     expect(results.length).toBeGreaterThan(0)
     expect(results.every((word) => word.level === 'Starters')).toBe(true)
+  })
+})
+
+describe('vocabulary backup snapshot', () => {
+  it('restores level files into memory', () => {
+    const snapshot = snapshotVocabularyFiles()
+    const sample = snapshot.Starters.words[0]
+    expect(sample).toBeTruthy()
+    const mutated = structuredClone(snapshot)
+    mutated.Starters.words[0] = { ...sample!, definition: 'BACKUP-RESTORE-TEST-DEFINITION' }
+    try {
+      restoreVocabularyFiles(mutated)
+      expect(getWordById(sample!.id)?.definition).toBe('BACKUP-RESTORE-TEST-DEFINITION')
+    } finally {
+      restoreVocabularyFiles(snapshot)
+    }
+    expect(getWordById(sample!.id)?.definition).toBe(sample!.definition)
   })
 })

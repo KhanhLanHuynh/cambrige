@@ -130,6 +130,19 @@ export const giftRequestSchema = z.object({
   giftId: z.string().uuid(),
 })
 
+export const backupScopeQuerySchema = z.object({
+  database: z.string().optional().transform((value) => value === '1' || value === 'true'),
+  vocabulary: z.string().optional().transform((value) => value === '1' || value === 'true'),
+}).superRefine((value, context) => {
+  if (!value.database && !value.vocabulary) {
+    context.addIssue({
+      code: 'custom',
+      message: 'Select runtime data, vocabulary, or both',
+      path: ['database'],
+    })
+  }
+})
+
 export const vocabularyIdParams = z.object({
   id: z.string().trim().min(1).max(80),
 })
@@ -149,3 +162,4 @@ export type QuizCreateInput = z.infer<typeof quizCreateSchema>
 export type SettingsInput = z.infer<typeof settingsSchema>
 export type GiftCatalogInput = z.infer<typeof giftCatalogSchema>
 export type GiftRequestInput = z.infer<typeof giftRequestSchema>
+export type BackupScopeQuery = z.infer<typeof backupScopeQuerySchema>

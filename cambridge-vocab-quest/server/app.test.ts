@@ -1766,4 +1766,180 @@ describe('Cambridge Vocab Quest API', () => {
 
     await app.close()
   }, 20_000)
+
+  it('rejects parent sessions from super-admin backup routes', async () => {
+    const { app, store } = await testApp()
+    const cookie = await signInAsParent(app, store, { email: 'household@example.com' })
+
+    expect((await app.inject({
+      method: 'GET',
+      url: '/api/admin/backup?database=1',
+    })).statusCode).toBe(401)
+    expect((await app.inject({
+      method: 'GET',
+      url: '/api/admin/backup?database=1',
+      headers: { cookie },
+    })).statusCode).toBe(403)
+    expect((await app.inject({
+      method: 'PUT',
+      url: '/api/admin/backup?database=1',
+      headers: { cookie },
+      payload: { format: 'cvq-backup', version: 1, includes: ['database'] },
+    })).statusCode).toBe(403)
+
+    await app.close()
+  }, 20_000)
+
+  it('exports runtime data without vocabulary or live sessions', async () => {
+    const { app, store } = await testApp()
+    await signInAsParent(app, store, { name: 'Jamie', email: 'jamie@example.com' })
+    const adminCookie = await signInAsSuperAdmin(app, store, { email: 'ops@example.com' })
+
+    const missing = await app.inject({
+      method: 'GET',
+      url: '/api/admin/backup',
+      headers: { cookie: adminCookie },
+    })
+    expect(missing.statusCode).toBe(400)
+
+    const exported = await app.inject({
+      method: 'GET',
+      url: '/api/admin/backup?database=1',
+      headers: { cookie: adminCookie },
+    })
+    expect(exported.statusCode).toBe(200)
+    expect(exported.headers['content-disposition']).toMatch(/cvq-backup-database-.*\.json/)
+    const body = exported.json() as {
+      format: string
+      includes: string[]
+      database?: { users: Array<{ email: string }>; sessions: unknown[]; learners: unknown[] }
+      vocabulary?: unknown
+    }
+    expect(body.format).toBe('cvq-backup')
+    expect(body.includes).toEqual(['database'])
+    expect(body.vocabulary).toBeUndefined()
+    expect(body.database?.users.map((user) => user.email).sort()).toEqual(['jamie@example.com', 'ops@example.com'])
+    expect(body.database?.learners).toEqual([])
+    expect(body.database?.sessions).toEqual([])
+
+    await app.close()
+  }, 20_000)
+
+  it('exports vocabulary without the runtime store', async () => {
+    const { app, store } = await testApp()
+    const adminCookie = await signInAsSuperAdmin(app, store, { email: 'ops@example.com' })
+
+    const exported = await app.inject({
+      method: 'GET',
+      url: '/api/admin/backup?vocabulary=1',
+      headers: { cookie: adminCookie },
+    })
+    expect(exported.statusCode).toBe(200)
+    const body = exported.json() as { includes: string[]; database?: unknown; vocabulary?: { Starters?: { words: unknown[] } } }
+    expect(body.includes).toEqual(['vocabulary'])
+    expect(body.database).toBeUndefined()
+    expect((body.vocabulary?.Starters?.words.length ?? 0)).toBeGreaterThan(0)
+
+    await app.close()
+  }, 30_000)
+
+  it('restores runtime data and keeps the signed-in super-admin session', async () => {
+    const { app, store } = await testApp()
+    await signInAsParent(app, store, { name: 'Jamie', email: 'jamie@example.com' })
+    const adminCookie = await signInAsSuperAdmin(app, store, { email: 'ops@example.com' })
+    const { getWordById } = await import('./vocabulary.js')
+    const originalDefinition = getWordById('starters-armchair')?.definition
+
+    const backup = await app.inject({
+      method: 'GET',
+      url: '/api/admin/backup?database=1',
+      headers: { cookie: adminCookie },
+    })
+    expect(backup.statusCode).toBe(200)
+
+    await signInAsParent(app, store, { name: 'Later', email: 'later@example.com' })
+    expect(store.read((database) => database.users.some((user) => user.email === 'later@example.com'))).toBe(true)
+
+    const restored = await app.inject({
+      method: 'PUT',
+      url: '/api/admin/backup?database=1',
+      headers: { cookie: adminCookie },
+      payload: backup.json(),
+    })
+    expect(restored.statusCode).toBe(200)
+    expect(restored.json()).toMatchObject({ ok: true, restored: ['database'] })
+    expect(store.read((database) => database.users.map((user) => user.email).sort())).toEqual([
+      'jamie@example.com',
+      'ops@example.com',
+    ])
+    expect(store.read((database) => database.users.some((user) => user.email === 'later@example.com'))).toBe(false)
+    if (originalDefinition) expect(getWordById('starters-armchair')?.definition).toBe(originalDefinition)
+
+    const listed = await app.inject({
+      method: 'GET',
+      url: '/api/admin/parents',
+      headers: { cookie: adminCookie },
+    })
+    expect(listed.statusCode).toBe(200)
+    expect((listed.json().parents as Array<{ email: string }>).map((item) => item.email)).toEqual(['jamie@example.com'])
+
+    await app.close()
+  }, 20_000)
+
+  it('rejects restoring a scope that the backup file does not include', async () => {
+    const { app, store } = await testApp()
+    const adminCookie = await signInAsSuperAdmin(app, store, { email: 'ops@example.com' })
+    const backup = await app.inject({
+      method: 'GET',
+      url: '/api/admin/backup?database=1',
+      headers: { cookie: adminCookie },
+    })
+
+    const missingVocab = await app.inject({
+      method: 'PUT',
+      url: '/api/admin/backup?vocabulary=1',
+      headers: { cookie: adminCookie },
+      payload: backup.json(),
+    })
+    expect(missingVocab.statusCode).toBe(400)
+    expect(missingVocab.json().error).toMatch(/does not include vocabulary/i)
+
+    const invalid = await app.inject({
+      method: 'PUT',
+      url: '/api/admin/backup?database=1',
+      headers: { cookie: adminCookie },
+      payload: { hello: 'nope' },
+    })
+    expect(invalid.statusCode).toBe(400)
+
+    await app.close()
+  }, 20_000)
+
+  it('restores vocabulary without replacing parent accounts', async () => {
+    const { app, store } = await testApp()
+    await signInAsParent(app, store, { name: 'Jamie', email: 'jamie@example.com' })
+    const adminCookie = await signInAsSuperAdmin(app, store, { email: 'ops@example.com' })
+
+    const backup = await app.inject({
+      method: 'GET',
+      url: '/api/admin/backup?vocabulary=1',
+      headers: { cookie: adminCookie },
+    })
+    expect(backup.statusCode).toBe(200)
+
+    const restored = await app.inject({
+      method: 'PUT',
+      url: '/api/admin/backup?vocabulary=1',
+      headers: { cookie: adminCookie },
+      payload: backup.json(),
+    })
+    expect(restored.statusCode).toBe(200)
+    expect(restored.json().restored).toEqual(['vocabulary'])
+    expect(store.read((database) => database.users.map((user) => user.email).sort())).toEqual([
+      'jamie@example.com',
+      'ops@example.com',
+    ])
+
+    await app.close()
+  }, 60_000)
 })

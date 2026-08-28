@@ -53,8 +53,14 @@ Writes are serialized and replace files atomically. Set `DATA_BACKEND=sqlite`
 (or point `DATA_FILE` at a `.sqlite` / `.db` path) to use the SQLite-backed
 store, which keeps the same document model with WAL locking.
 
-To back up the MVP, stop the API and copy that directory. Running
-`npm run seed` resets the local data.
+On Render Free the API disk is ephemeral, so accounts and live vocabulary
+edits disappear on redeploy. Sign in as Super Admin and use **Export and
+restore** on `/admin` to download a JSON backup (runtime data, vocabulary,
+or both) and upload it after the new deploy. Store runtime backups privately
+— they include password hashes.
+
+To back up a local MVP, you can also stop the API and copy `server/data`.
+Running `npm run seed` resets the local data.
 
 JSON / SQLite document persistence is intentionally limited to a single API
 process. It is useful for local pilots and demos, but it is not suitable for

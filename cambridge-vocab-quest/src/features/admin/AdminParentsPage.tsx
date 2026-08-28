@@ -1,7 +1,7 @@
-import { LogOut, Search, X } from 'lucide-react'
-import { useEffect, useMemo, useState, type FormEvent } from 'react'
+import { Download, LogOut, Search, Upload, X } from 'lucide-react'
+import { useEffect, useMemo, useRef, useState, type ChangeEvent, type FormEvent } from 'react'
 import { Badge, Button, Logo } from '../../components/ui'
-import { api, ApiError } from '../../lib'
+import { api, ApiError, downloadFromApi } from '../../lib'
 import { useSessionStore } from '../../stores'
 
 export interface AdminParent {
@@ -12,10 +12,64 @@ export interface AdminParent {
   learnerCount: number
 }
 
+type BackupScopes = { database: boolean; vocabulary: boolean }
+
 function formatDate(value: string) {
   const parsed = Date.parse(value)
   if (Number.isNaN(parsed)) return value
   return new Date(parsed).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })
+}
+
+function backupQuery(scopes: BackupScopes) {
+  const params = new URLSearchParams()
+  if (scopes.database) params.set('database', '1')
+  if (scopes.vocabulary) params.set('vocabulary', '1')
+  return `/admin/backup?${params.toString()}`
+}
+
+function backupDownloadName(scopes: BackupScopes) {
+  const day = new Date().toISOString().slice(0, 10)
+  if (scopes.database && scopes.vocabulary) return `cvq-backup-${day}.json`
+  if (scopes.database) return `cvq-backup-database-${day}.json`
+  return `cvq-backup-vocabulary-${day}.json`
+}
+
+function inspectBackup(value: unknown): BackupScopes | null {
+  if (!value || typeof value !== 'object') return null
+  const record = value as { format?: unknown; includes?: unknown; database?: unknown; vocabulary?: unknown }
+  if (record.format !== 'cvq-backup') return null
+  const includes = Array.isArray(record.includes)
+    ? record.includes.filter((item): item is string => typeof item === 'string')
+    : []
+  const database = includes.includes('database') || record.database != null
+  const vocabulary = includes.includes('vocabulary') || record.vocabulary != null
+  if (!database && !vocabulary) return null
+  return { database, vocabulary }
+}
+
+function restoreWarning(scopes: BackupScopes) {
+  if (scopes.database && scopes.vocabulary) {
+    return 'This replaces all accounts, progress, and vocabulary files.'
+  }
+  if (scopes.database) {
+    return 'This replaces all accounts and progress. Vocabulary files stay as they are.'
+  }
+  return 'This replaces vocabulary files. Accounts and progress stay as they are.'
+}
+
+function formatRestoreResult(result: { restored: string[]; users?: number; learners?: number; words?: number }) {
+  const parts: string[] = []
+  if (result.restored.includes('database')) {
+    const users = result.users ?? 0
+    const learners = result.learners ?? 0
+    parts.push(`runtime data (${users} account${users === 1 ? '' : 's'}, ${learners} learner${learners === 1 ? '' : 's'})`)
+  }
+  if (result.restored.includes('vocabulary')) {
+    const words = result.words
+    parts.push(words == null ? 'vocabulary' : `vocabulary (${words} words)`)
+  }
+  if (parts.length === 0) return 'Restore complete.'
+  return `Restored ${parts.join(' and ')}.`
 }
 
 export function AdminParentsPage({ onSignOut }: { onSignOut: () => void }) {
@@ -33,6 +87,17 @@ export function AdminParentsPage({ onSignOut }: { onSignOut: () => void }) {
   const [confirmEmail, setConfirmEmail] = useState('')
   const [deleteError, setDeleteError] = useState('')
   const [deleteBusy, setDeleteBusy] = useState(false)
+  const [exportScopes, setExportScopes] = useState<BackupScopes>({ database: true, vocabulary: true })
+  const [exportError, setExportError] = useState('')
+  const [exportBusy, setExportBusy] = useState(false)
+  const fileInput = useRef<HTMLInputElement>(null)
+  const [restoreFile, setRestoreFile] = useState<{ name: string; payload: unknown; available: BackupScopes } | null>(null)
+  const [restoreScopes, setRestoreScopes] = useState<BackupScopes>({ database: false, vocabulary: false })
+  const [restoreError, setRestoreError] = useState('')
+  const [restoreSuccess, setRestoreSuccess] = useState('')
+  const [restoreBusy, setRestoreBusy] = useState(false)
+  const [confirmRestore, setConfirmRestore] = useState(false)
+  const [confirmRestoreText, setConfirmRestoreText] = useState('')
 
   const loadParents = async () => {
     setLoadError('')
@@ -114,6 +179,72 @@ export function AdminParentsPage({ onSignOut }: { onSignOut: () => void }) {
     }
   }
 
+  const downloadBackup = async () => {
+    if (!exportScopes.database && !exportScopes.vocabulary) return
+    setExportBusy(true)
+    setExportError('')
+    try {
+      await downloadFromApi(backupQuery(exportScopes), backupDownloadName(exportScopes))
+    } catch (error) {
+      setExportError(error instanceof ApiError ? error.message : 'Could not download backup')
+    } finally {
+      setExportBusy(false)
+    }
+  }
+
+  const onPickFile = async (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    event.target.value = ''
+    if (!file) return
+    setRestoreError('')
+    setRestoreSuccess('')
+    try {
+      const parsed = JSON.parse(await file.text()) as unknown
+      const available = inspectBackup(parsed)
+      if (!available) {
+        setRestoreFile(null)
+        setRestoreError('Not a valid Cambridge Vocab Quest backup')
+        return
+      }
+      setRestoreFile({ name: file.name, payload: parsed, available })
+      setRestoreScopes({ ...available })
+    } catch {
+      setRestoreFile(null)
+      setRestoreError('Could not read that backup file')
+    }
+  }
+
+  const openRestoreConfirm = () => {
+    if (!restoreFile || (!restoreScopes.database && !restoreScopes.vocabulary)) return
+    setConfirmRestoreText('')
+    setRestoreError('')
+    setConfirmRestore(true)
+  }
+
+  const runRestore = async () => {
+    if (!restoreFile || (!restoreScopes.database && !restoreScopes.vocabulary)) return
+    if (confirmRestoreText.trim().toUpperCase() !== 'RESTORE') {
+      setRestoreError('Type RESTORE to confirm')
+      return
+    }
+    setRestoreBusy(true)
+    setRestoreError('')
+    try {
+      const result = await api<{ ok: true; restored: string[]; users?: number; learners?: number; words?: number }>(
+        backupQuery(restoreScopes),
+        { method: 'PUT', body: restoreFile.payload },
+      )
+      setConfirmRestore(false)
+      setConfirmRestoreText('')
+      setRestoreSuccess(formatRestoreResult(result))
+      if (restoreScopes.database) await loadParents()
+    } catch (error) {
+      setRestoreError(error instanceof ApiError ? error.message : 'Could not restore backup')
+    } finally {
+      setRestoreBusy(false)
+    }
+  }
+
   return (
     <div className="admin-page">
       <header className="admin-topbar">
@@ -129,6 +260,99 @@ export function AdminParentsPage({ onSignOut }: { onSignOut: () => void }) {
         <Badge tone="lime">SUPER ADMIN</Badge>
         <h1>Parent accounts</h1>
         <p>Edit a household adult’s name or email, or remove the whole household.</p>
+
+        <section className="admin-backup card">
+          <Badge>BACKUP</Badge>
+          <h2>Export and restore</h2>
+          <p>
+            Download a backup before each Render deploy. Free instances wipe data on redeploy and idle spin-down
+            unless a paid disk is attached.
+          </p>
+          <div className="admin-backup-grid">
+            <div className="admin-backup-panel">
+              <h3>Download backup</h3>
+              <div className="admin-backup-scopes">
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={exportScopes.database}
+                    aria-label="Include runtime data"
+                    onChange={(event) => setExportScopes((current) => ({ ...current, database: event.target.checked }))}
+                  />
+                  <span>Runtime data (accounts, learners, progress)</span>
+                </label>
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={exportScopes.vocabulary}
+                    aria-label="Include vocabulary edits"
+                    onChange={(event) => setExportScopes((current) => ({ ...current, vocabulary: event.target.checked }))}
+                  />
+                  <span>Vocabulary edits</span>
+                </label>
+              </div>
+              {exportScopes.database && (
+                <p className="admin-backup-note">Runtime backups contain password hashes. Store the file privately.</p>
+              )}
+              {exportError && <div className="form-error" role="alert">{exportError}</div>}
+              <Button
+                type="button"
+                variant="secondary"
+                disabled={exportBusy || (!exportScopes.database && !exportScopes.vocabulary)}
+                onClick={() => void downloadBackup()}
+              >
+                <Download /> {exportBusy ? 'Downloading…' : 'Download backup'}
+              </Button>
+            </div>
+            <div className="admin-backup-panel">
+              <h3>Restore from file</h3>
+              <input
+                ref={fileInput}
+                className="admin-backup-file"
+                type="file"
+                accept="application/json,.json"
+                aria-label="Choose backup file"
+                onChange={(event) => void onPickFile(event)}
+              />
+              <Button type="button" variant="secondary" onClick={() => fileInput.current?.click()}>
+                <Upload /> Choose backup file
+              </Button>
+              {restoreFile && <p className="admin-backup-note">Selected: {restoreFile.name}</p>}
+              <div className="admin-backup-scopes">
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={restoreScopes.database}
+                    disabled={!restoreFile?.available.database}
+                    aria-label="Restore runtime data"
+                    onChange={(event) => setRestoreScopes((current) => ({ ...current, database: event.target.checked }))}
+                  />
+                  <span>Runtime data (accounts, learners, progress)</span>
+                </label>
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={restoreScopes.vocabulary}
+                    disabled={!restoreFile?.available.vocabulary}
+                    aria-label="Restore vocabulary edits"
+                    onChange={(event) => setRestoreScopes((current) => ({ ...current, vocabulary: event.target.checked }))}
+                  />
+                  <span>Vocabulary edits</span>
+                </label>
+              </div>
+              {restoreError && !confirmRestore && <div className="form-error" role="alert">{restoreError}</div>}
+              {restoreSuccess && <p className="admin-backup-success" role="status">{restoreSuccess}</p>}
+              <Button
+                type="button"
+                disabled={!restoreFile || restoreBusy || (!restoreScopes.database && !restoreScopes.vocabulary)}
+                onClick={openRestoreConfirm}
+              >
+                Restore from file
+              </Button>
+            </div>
+          </div>
+        </section>
+
         <div className="section-heading admin-heading">
           <div>
             <h2>All parents</h2>
@@ -278,6 +502,58 @@ export function AdminParentsPage({ onSignOut }: { onSignOut: () => void }) {
                   onClick={() => void confirmDelete()}
                 >
                   Delete forever
+                </Button>
+              </div>
+            </div>
+          </section>
+        </div>
+      )}
+
+      {confirmRestore && (
+        <div className="modal-backdrop" role="presentation" onClick={() => !restoreBusy && setConfirmRestore(false)}>
+          <section
+            className="modal settings-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="restore-backup-title"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button type="button" className="modal-close" aria-label="Close" onClick={() => setConfirmRestore(false)}>
+              <X />
+            </button>
+            <Badge tone="rose">RESTORE BACKUP</Badge>
+            <h2 id="restore-backup-title">Restore this backup?</h2>
+            <p>
+              {restoreWarning(restoreScopes)} This cannot be undone. Type <b>RESTORE</b> to confirm.
+            </p>
+            <div className="delete-learner-confirm">
+              <input
+                aria-label="Type RESTORE to confirm"
+                value={confirmRestoreText}
+                placeholder="RESTORE"
+                autoFocus
+                onChange={(event) => setConfirmRestoreText(event.target.value)}
+              />
+              {restoreError && <div className="form-error" role="alert">{restoreError}</div>}
+              <div className="gift-editor-actions">
+                <Button
+                  type="button"
+                  variant="secondary"
+                  disabled={restoreBusy}
+                  onClick={() => {
+                    setConfirmRestore(false)
+                    setConfirmRestoreText('')
+                    setRestoreError('')
+                  }}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  type="button"
+                  disabled={restoreBusy || confirmRestoreText.trim().toUpperCase() !== 'RESTORE'}
+                  onClick={() => void runRestore()}
+                >
+                  {restoreBusy ? 'Restoring…' : 'Restore now'}
                 </Button>
               </div>
             </div>
