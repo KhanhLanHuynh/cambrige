@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto'
-import { mkdtemp, rm } from 'node:fs/promises'
+import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { afterEach, describe, expect, it } from 'vitest'
@@ -137,6 +137,40 @@ describe('Cambridge Vocab Quest API', () => {
     expect(blocked.statusCode).toBe(200)
     expect(blocked.headers['access-control-allow-origin']).toBeUndefined()
     await app.close()
+  })
+
+  it('serves the built SPA when SERVE_STATIC is enabled', async () => {
+    const directory = await mkdtemp(join(tmpdir(), 'cvq-static-'))
+    directories.push(directory)
+    const dist = join(directory, 'dist')
+    await mkdir(dist)
+    await writeFile(join(dist, 'index.html'), '<html>spa-shell</html>')
+
+    const previousServe = process.env.SERVE_STATIC
+    const previousDir = process.env.STATIC_DIR
+    process.env.SERVE_STATIC = 'true'
+    process.env.STATIC_DIR = dist
+    try {
+      const store = new JsonStore(join(directory, 'database.json'))
+      const app = await buildApp({ store })
+      const home = await app.inject({ method: 'GET', url: '/' })
+      expect(home.statusCode).toBe(200)
+      expect(home.body).toContain('spa-shell')
+
+      const clientRoute = await app.inject({ method: 'GET', url: '/admin' })
+      expect(clientRoute.statusCode).toBe(200)
+      expect(clientRoute.body).toContain('spa-shell')
+
+      const health = await app.inject({ method: 'GET', url: '/api/health' })
+      expect(health.statusCode).toBe(200)
+      expect(health.json()).toEqual({ ok: true })
+      await app.close()
+    } finally {
+      if (previousServe === undefined) delete process.env.SERVE_STATIC
+      else process.env.SERVE_STATIC = previousServe
+      if (previousDir === undefined) delete process.env.STATIC_DIR
+      else process.env.STATIC_DIR = previousDir
+    }
   })
 
   it('rejects creating more than 5 learners for one parent', async () => {

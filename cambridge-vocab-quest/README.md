@@ -59,6 +59,9 @@ restore** on `/admin` to download a JSON backup (runtime data, vocabulary,
 or both) and upload it after the new deploy. Store runtime backups privately
 — they include password hashes.
 
+To keep the SQLite file across idle sleep and redeploys without a paid Render
+disk, deploy to Railway with a volume (see [DEPLOY-RAILWAY.md](./DEPLOY-RAILWAY.md)).
+
 To back up a local MVP, you can also stop the API and copy `server/data`.
 Running `npm run seed` resets the local data.
 
@@ -73,6 +76,7 @@ multi-instance deployment or high write concurrency.
 - `DATA_BACKEND=json|sqlite` — persistence backend
 - `DATA_FILE` — path to JSON or SQLite file
 - `SEED_ON_START=true` — seed demo account when the API boots
+- `SERVE_STATIC=true` — serve the Vite `dist/` SPA from the API (used on Railway)
 
 ## Privacy and security assumptions
 

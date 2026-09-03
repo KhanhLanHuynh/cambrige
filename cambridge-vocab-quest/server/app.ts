@@ -1,8 +1,11 @@
 import { randomUUID } from 'node:crypto'
+import { existsSync } from 'node:fs'
+import { resolve } from 'node:path'
 import Fastify, { type FastifyInstance, type FastifyReply, type FastifyRequest, type FastifyServerOptions } from 'fastify'
 import cookie from '@fastify/cookie'
 import cors from '@fastify/cors'
 import rateLimit from '@fastify/rate-limit'
+import fastifyStatic from '@fastify/static'
 import { z, type ZodType } from 'zod'
 import {
   assignmentSchema,
@@ -307,6 +310,14 @@ export interface BuildAppOptions {
   serverFactory?: FastifyServerOptions['serverFactory']
 }
 
+function resolveStaticDir(): string {
+  return resolve(process.cwd(), process.env.STATIC_DIR ?? 'dist')
+}
+
+function shouldServeStatic(): boolean {
+  return process.env.SERVE_STATIC === 'true'
+}
+
 export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyInstance> {
   const app = Fastify({
     logger: options.logger ?? false,
@@ -315,6 +326,8 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
   })
   const store = options.store ?? new JsonStore()
   await store.init()
+  const serveStatic = shouldServeStatic()
+  const staticDir = resolveStaticDir()
 
   const configuredOrigins = (process.env.CORS_ORIGINS ?? 'http://localhost:5173,http://127.0.0.1:5173')
     .split(',')
@@ -333,6 +346,7 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
   await app.register(rateLimit, {
     max: Number(process.env.RATE_LIMIT_MAX ?? 120),
     timeWindow: '1 minute',
+    allowList: (request) => serveStatic && !request.url.startsWith('/api'),
   })
 
   app.setErrorHandler((error, _request, reply) => {
@@ -430,15 +444,17 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
     })
   }
 
-  app.get('/', async (_request, reply) => {
-    if (process.env.PUBLIC_APP_URL) {
-      return reply.redirect(process.env.PUBLIC_APP_URL)
-    }
-    if (process.env.NODE_ENV === 'production') {
-      return { ok: true }
-    }
-    return reply.redirect('http://localhost:5173/')
-  })
+  if (!serveStatic) {
+    app.get('/', async (_request, reply) => {
+      if (process.env.PUBLIC_APP_URL) {
+        return reply.redirect(process.env.PUBLIC_APP_URL)
+      }
+      if (process.env.NODE_ENV === 'production') {
+        return { ok: true }
+      }
+      return reply.redirect('http://localhost:5173/')
+    })
+  }
 
   app.get('/api/health', { config: { rateLimit: false } }, async () => ({ ok: true }))
 
@@ -1567,6 +1583,23 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
       .header('content-disposition', 'attachment; filename="weekly-report.csv"')
       .send(csv)
   })
+
+  if (serveStatic) {
+    if (!existsSync(resolve(staticDir, 'index.html'))) {
+      throw new Error(`SERVE_STATIC is true but ${staticDir}/index.html is missing. Run npm run build.`)
+    }
+    await app.register(fastifyStatic, {
+      root: staticDir,
+      wildcard: false,
+    })
+    app.setNotFoundHandler((request, reply) => {
+      if (request.method !== 'GET' || request.url.startsWith('/api')) {
+        reply.code(404).send({ error: 'Not found' })
+        return
+      }
+      return reply.sendFile('index.html')
+    })
+  }
 
   return app
 }
