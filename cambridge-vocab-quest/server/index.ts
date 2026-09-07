@@ -1,22 +1,10 @@
 import { createServer, type IncomingMessage, type ServerResponse } from 'node:http'
-
-function resolvePort(): number {
-  const parsed = Number(process.env.PORT)
-  if (Number.isInteger(parsed) && parsed > 0) return parsed
-  // Render's internal health check targets :10000 unless PORT is set.
-  return process.env.NODE_ENV === 'production' ? 10000 : 3001
-}
-
-function resolveHost(): string {
-  const host = process.env.HOST
-  if (host && host !== '127.0.0.1' && host !== 'localhost') return host
-  return '0.0.0.0'
-}
+import { resolveListenHost, resolvePort } from './listen-config.js'
 
 async function start() {
   const startedAt = Date.now()
   const port = resolvePort()
-  const host = resolveHost()
+  const host = resolveListenHost()
 
   let requestHandler = (_req: IncomingMessage, res: ServerResponse) => {
     res.writeHead(200, { 'content-type': 'application/json', 'cache-control': 'no-store' })
@@ -28,8 +16,11 @@ async function start() {
   })
 
   await new Promise<void>((resolve, reject) => {
-    httpServer.once('error', reject)
-    httpServer.listen(port, host, () => {
+    httpServer.once('error', (error) => {
+      console.error(`Failed to bind ${host}:${port} (HOST=${JSON.stringify(process.env.HOST)})`)
+      reject(error)
+    })
+    httpServer.listen({ port, host, ipv6Only: false }, () => {
       console.log(`API bound ${host}:${port} after ${Date.now() - startedAt}ms`)
       resolve()
     })

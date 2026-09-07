@@ -1,5 +1,5 @@
 import {
-  Download, Gift, LockKeyhole, Plus, Search,
+  ChevronDown, ChevronUp, Download, Gift, LockKeyhole, Plus, Search,
   ShieldCheck, Sparkles, X, Check, BookOpen,
 } from 'lucide-react'
 import { useEffect, useMemo, useState, type FormEvent } from 'react'
@@ -10,6 +10,7 @@ import { useSessionStore } from '../../stores'
 import type {
   CambridgeLevel, GiftDefinition, GiftRedemption, Learner, LearnerSettings, WordHealth,
 } from '../../types'
+import { compareWordHealthByAccuracy, type AccuracySortDirection } from './word-health-sort'
 
 interface DashboardSummary {
   activity: Array<{ learnerId: string; name: string; values: number[] }>
@@ -1036,6 +1037,7 @@ export function DashboardPage({
   const [gateError, setGateError] = useState('')
   const [query, setQuery] = useState('')
   const [health, setHealth] = useState<'All' | WordHealth>('All')
+  const [accuracySort, setAccuracySort] = useState<AccuracySortDirection>('asc')
   const [page, setPage] = useState(0)
   const [settingsOpen, setSettingsOpen] = useState(openSettings)
   const [giftsOpen, setGiftsOpen] = useState(false)
@@ -1057,8 +1059,10 @@ export function DashboardPage({
   const [editing, setEditing] = useState<Learner | null>(null)
   const healthRows = summary?.wordHealth ?? []
   const visibleWords = useMemo(
-    () => healthRows.filter((word) => word.word.toLowerCase().includes(query.toLowerCase()) && (health === 'All' || word.health === health)),
-    [healthRows, query, health],
+    () => healthRows
+      .filter((word) => word.word.toLowerCase().includes(query.toLowerCase()) && (health === 'All' || word.health === health))
+      .toSorted((a, b) => compareWordHealthByAccuracy(a, b, accuracySort)),
+    [healthRows, query, health, accuracySort],
   )
   const pageCount = Math.max(1, Math.ceil(visibleWords.length / 5))
   const pagedWords = visibleWords.slice(page * 5, page * 5 + 5)
@@ -1095,7 +1099,7 @@ export function DashboardPage({
       })
   }, [adultUnlocked, lockAdult])
 
-  useEffect(() => setPage(0), [query, health])
+  useEffect(() => setPage(0), [query, health, accuracySort])
 
   const refreshDashboard = () => {
     void api<DashboardSummary>('/parent/dashboard')
@@ -1502,7 +1506,23 @@ export function DashboardPage({
           <table>
             <thead>
               <tr>
-                <th>Vocabulary Word</th><th>Category</th><th>Health Status</th><th>Accuracy</th><th>Total Quizzes</th><th>Last Activity</th><th>Actions</th>
+                <th>Vocabulary Word</th>
+                <th>Category</th>
+                <th>Health Status</th>
+                <th aria-sort={accuracySort === 'asc' ? 'ascending' : 'descending'}>
+                  <button
+                    type="button"
+                    className="sort-button"
+                    aria-label={accuracySort === 'asc' ? 'Sort accuracy from highest to lowest' : 'Sort accuracy from lowest to highest'}
+                    onClick={() => setAccuracySort((current) => (current === 'asc' ? 'desc' : 'asc'))}
+                  >
+                    Accuracy
+                    {accuracySort === 'asc' ? <ChevronUp /> : <ChevronDown />}
+                  </button>
+                </th>
+                <th>Total Quizzes</th>
+                <th>Last Activity</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
