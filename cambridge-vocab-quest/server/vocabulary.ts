@@ -164,6 +164,18 @@ export interface WordAttemptSummary {
   accuracy: number
 }
 
+function oneWordFromEachLowerLevel(level: CambridgeLevel, maxCount: number): VocabularyWord[] {
+  const currentRank = VOCABULARY_LEVELS.indexOf(level)
+  if (currentRank <= 0 || maxCount <= 0) return []
+  const selected: VocabularyWord[] = []
+  for (const lower of VOCABULARY_LEVELS.slice(0, currentRank)) {
+    if (selected.length >= maxCount) break
+    const [word] = shuffled(vocabulary.filter((item) => item.level === lower))
+    if (word) selected.push(word)
+  }
+  return selected
+}
+
 export function selectVocabulary(options: {
   count: number
   level?: CambridgeLevel
@@ -173,7 +185,22 @@ export function selectVocabulary(options: {
   reviewOnly?: boolean
   focusWordIds?: string[]
   wordHealth?: WordAttemptSummary[]
+  includeOneFromEachLowerLevel?: boolean
 }): VocabularyWord[] {
+  if (
+    options.includeOneFromEachLowerLevel
+    && options.level
+    && !options.focusWordIds?.length
+    && !options.reviewOnly
+  ) {
+    const lowerLevelWords = oneWordFromEachLowerLevel(options.level, options.count)
+    const remaining = Math.max(0, options.count - lowerLevelWords.length)
+    const currentLevelWords = remaining > 0
+      ? selectVocabulary({ ...options, count: remaining, includeOneFromEachLowerLevel: false })
+      : []
+    return shuffled([...lowerLevelWords, ...currentLevelWords])
+  }
+
   const categorySet = options.categories?.length
     ? new Set(options.categories.map((item) => item.toLowerCase()))
     : null

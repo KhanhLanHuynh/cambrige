@@ -31,6 +31,30 @@ describe('selectVocabulary', () => {
     expect(words.every((word) => word.level === 'Movers')).toBe(true)
   })
 
+  it('includes one word from each lower level when requested', () => {
+    const words = selectVocabulary({
+      count: 8,
+      level: 'Flyers',
+      includeOneFromEachLowerLevel: true,
+    })
+
+    expect(words).toHaveLength(8)
+    expect(words.filter((word) => word.level === 'Starters')).toHaveLength(1)
+    expect(words.filter((word) => word.level === 'Movers')).toHaveLength(1)
+    expect(words.filter((word) => word.level === 'Flyers')).toHaveLength(6)
+  })
+
+  it('keeps Starters-only when there is no lower level', () => {
+    const words = selectVocabulary({
+      count: 6,
+      level: 'Starters',
+      includeOneFromEachLowerLevel: true,
+    })
+
+    expect(words).toHaveLength(6)
+    expect(words.every((word) => word.level === 'Starters')).toBe(true)
+  })
+
   it('prefers at-risk words when reviewMix is set', () => {
     const words = selectVocabulary({
       count: 4,

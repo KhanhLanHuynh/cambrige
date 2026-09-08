@@ -983,6 +983,7 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
       reviewOnly: body.reviewOnly,
       focusWordIds: body.focusWordIds,
       wordHealth: wordHealthSummaries(attempts),
+      includeOneFromEachLowerLevel: isMiniGameMode(body.mode),
     })
     if (!selected.length) throw new HttpError(404, 'No vocabulary matches this quiz')
     const quiz = {

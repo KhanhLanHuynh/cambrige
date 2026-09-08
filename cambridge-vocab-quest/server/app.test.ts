@@ -742,6 +742,41 @@ describe('Cambridge Vocab Quest API', () => {
     20_000,
   )
 
+  it.each(['fill-blank', 'speed-match', 'swap-words'] as const)(
+    'mixes one word from each lower level into a Flyers %s session',
+    async (mode) => {
+      const { app, store } = await testApp()
+      const cookie = await signInAsParent(app, store, { name: 'Parent', email: `mix-${mode}@example.com` })
+      const creation = await app.inject({
+        method: 'POST',
+        url: '/api/learners',
+        headers: { cookie },
+        payload: { name: 'Flyer', level: 'Flyers' },
+      })
+      await app.inject({
+        method: 'POST',
+        url: '/api/learners/select',
+        headers: { cookie },
+        payload: { learnerId: creation.json().learner.id },
+      })
+
+      const quiz = await app.inject({
+        method: 'POST',
+        url: '/api/quiz/sessions',
+        headers: { cookie },
+        payload: { count: 8, mode, level: 'Flyers' },
+      })
+      expect(quiz.statusCode).toBe(201)
+      const questions = quiz.json().questions as Array<{ level: string }>
+      expect(questions).toHaveLength(8)
+      expect(questions.filter((question) => question.level === 'Starters')).toHaveLength(1)
+      expect(questions.filter((question) => question.level === 'Movers')).toHaveLength(1)
+      expect(questions.filter((question) => question.level === 'Flyers')).toHaveLength(6)
+      await app.close()
+    },
+    20_000,
+  )
+
   it('completes play-all after finishing all three mini-games', async () => {
     const { vocabulary } = await import('./vocabulary.js')
     const { app, store } = await testApp()
