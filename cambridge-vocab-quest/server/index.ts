@@ -1,5 +1,7 @@
 import { createServer, type IncomingMessage, type ServerResponse } from 'node:http'
+import type { FastifyInstance } from 'fastify'
 import { resolveListenHost, resolvePort } from './listen-config.js'
+import { installShutdownHandlers } from './shutdown.js'
 
 async function start() {
   const startedAt = Date.now()
@@ -13,6 +15,17 @@ async function start() {
 
   const httpServer = createServer((req, res) => {
     requestHandler(req, res)
+  })
+
+  let app: FastifyInstance | undefined
+  installShutdownHandlers(async () => {
+    if (app) {
+      await app.close()
+      return
+    }
+    await new Promise<void>((resolve, reject) => {
+      httpServer.close((error) => error ? reject(error) : resolve())
+    })
   })
 
   await new Promise<void>((resolve, reject) => {
@@ -34,7 +47,7 @@ async function start() {
   await store.init()
 
   let fastifyHandler: ((req: IncomingMessage, res: ServerResponse) => void) | undefined
-  const app = await buildApp({
+  app = await buildApp({
     store,
     logger: true,
     serverFactory: (handler) => {
@@ -56,5 +69,5 @@ async function start() {
 
 start().catch((error) => {
   console.error(error)
-  process.exitCode = 1
+  process.exit(1)
 })
