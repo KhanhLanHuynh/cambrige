@@ -1252,7 +1252,7 @@ export function DashboardPage({
                 <ul className="hero-learner-summary">
                   {summary.learners.map((learner) => (
                     <li key={learner.id}>
-                      {learner.name} has practised {learner.masteredThisWeek} Cambridge English words this week.
+                      {learner.name} has answered {learner.masteredThisWeek} Cambridge English words correctly this week.
                     </li>
                   ))}
                 </ul>
@@ -1294,7 +1294,7 @@ export function DashboardPage({
                     <tr>
                       <th>Learner</th>
                       <th>Level</th>
-                      <th>Words Practised</th>
+                      <th>Total Answers</th>
                       <th>Learning Streak</th>
                       <th>Quiz Accuracy</th>
                       <th>Words At Risk</th>
