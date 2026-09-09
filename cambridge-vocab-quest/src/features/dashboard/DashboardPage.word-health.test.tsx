@@ -43,6 +43,7 @@ describe('DashboardPage Word Health Matrix accuracy sort', () => {
       const url = String(input)
       if (url.includes('/api/parent/dashboard')) {
         return jsonResponse({
+          activityDates: [],
           activity: [],
           masteredThisWeek: 0,
           masteryByLevel: [],

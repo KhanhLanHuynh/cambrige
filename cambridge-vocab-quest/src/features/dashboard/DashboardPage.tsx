@@ -13,6 +13,7 @@ import type {
 import { compareWordHealthByAccuracy, type AccuracySortDirection } from './word-health-sort'
 
 interface DashboardSummary {
+  activityDates: string[]
   activity: Array<{ learnerId: string; name: string; values: number[] }>
   masteredThisWeek: number
   masteryByLevel: Array<{ label: string; value: number; count: number }>
@@ -35,6 +36,18 @@ interface DashboardSummary {
 }
 
 const ACTIVITY_COLORS = ['#00dcff', '#8b50e6', '#86ff3a', '#ff477e', '#ffb020', '#5eead4']
+
+function rollingActivityDates(now = Date.now()) {
+  return Array.from({ length: 7 }, (_, offset) =>
+    new Date(now - (6 - offset) * 86_400_000).toISOString().slice(0, 10),
+  )
+}
+
+function activityDayLabel(isoDate: string) {
+  return new Date(`${isoDate}T00:00:00Z`)
+    .toLocaleDateString('en-US', { weekday: 'short', timeZone: 'UTC' })
+    .toUpperCase()
+}
 
 function activityPoints(values: number[]) {
   const last = Math.max(1, values.length - 1)
@@ -1448,21 +1461,35 @@ export function DashboardPage({
                 : 'No learners yet'}
             </span>
           </div>
-          <div className="activity-plot">
-            <svg viewBox="0 0 100 100" preserveAspectRatio="none" role="img" aria-label="Learning activity by learner over the last 7 days">
-              {activitySeries.map((series, index) => (
-                <polyline
-                  key={series.learnerId}
-                  points={activityPoints(series.values.length ? series.values : [0, 0, 0, 0, 0, 0, 0])}
-                  fill="none"
-                  stroke={ACTIVITY_COLORS[index % ACTIVITY_COLORS.length]}
-                  strokeWidth="2"
-                  vectorEffect="non-scaling-stroke"
-                />
-              ))}
-            </svg>
+          <div className="activity-plot-wrap">
+            <div className="activity-y-axis" aria-hidden="true">
+              <span>100</span>
+              <span>50</span>
+              <span>0</span>
+            </div>
+            <div className="activity-plot">
+              <svg viewBox="0 0 100 100" preserveAspectRatio="none" role="img" aria-label="Learning activity by learner over the last 7 days, relative scale from 0 to 100">
+                <line x1="0" y1="0" x2="100" y2="0" className="activity-gridline" vectorEffect="non-scaling-stroke" />
+                <line x1="0" y1="50" x2="100" y2="50" className="activity-gridline" vectorEffect="non-scaling-stroke" />
+                <line x1="0" y1="100" x2="100" y2="100" className="activity-gridline" vectorEffect="non-scaling-stroke" />
+                {activitySeries.map((series, index) => (
+                  <polyline
+                    key={series.learnerId}
+                    points={activityPoints(series.values.length ? series.values : [0, 0, 0, 0, 0, 0, 0])}
+                    fill="none"
+                    stroke={ACTIVITY_COLORS[index % ACTIVITY_COLORS.length]}
+                    strokeWidth="2"
+                    vectorEffect="non-scaling-stroke"
+                  />
+                ))}
+              </svg>
+            </div>
           </div>
-          <div className="chart-labels"><span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span><span>SAT</span><span>SUN</span></div>
+          <div className="chart-labels">
+            {(summary?.activityDates?.length ? summary.activityDates : rollingActivityDates()).map((date) => (
+              <span key={date}>{activityDayLabel(date)}</span>
+            ))}
+          </div>
         </section>
         <section className="card mastery-chart">
           <h2>Vocabulary Mastery</h2>

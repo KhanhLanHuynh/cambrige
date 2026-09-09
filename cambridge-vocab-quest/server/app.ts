@@ -1149,6 +1149,7 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
     const levelPeak = Math.max(1, ...Object.values(levelCounts))
 
     return {
+      activityDates: dates,
       activity: activityCounts.map((series) => ({
         learnerId: series.learnerId,
         name: series.name,
