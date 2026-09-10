@@ -14,7 +14,10 @@
     "contentPack": "starters-content-pack",
     "vocabReviewAppliedAt": "2026-08-03T04:02:02.878Z",
     "vocabLabelsFixedAt": "2026-08-03T04:13:45.516Z",
-    "definitionViResyncedAfterReviewAt": "2026-08-03T04:18:37.752Z"
+    "definitionViResyncedAfterReviewAt": "2026-08-03T04:18:37.752Z",
+    "kidSuitabilityUpdatedAt": "2026-09-10",
+    "definitionViReviewedAt": "2026-09-10",
+    "metadataFixedAt": "2026-09-10"
   },
   "level": "Starters",
   "count": 388,
@@ -251,7 +254,7 @@
       "word": "angry",
       "phonetic": "/ˈæŋ.ɡɹi/",
       "definition": "when you feel cross and not happy",
-      "definitionVi": "khi bạn cảm thấy khó chịu và không hạnh phúc",
+      "definitionVi": "giận dữ, tức giận",
       "category": "feelings",
       "partOfSpeech": "adjective",
       "choices": [
@@ -431,10 +434,10 @@
       "level": "Starters",
       "sentences": [
         "Touch your arm, please.",
-        "Tom washes her arm.",
-        "I hurt my arm in the park.",
+        "Tom washes his arm.",
+        "I wave my arm to say hello.",
         "Point to your arm.",
-        "Lily has a small arm.",
+        "Lily raises her arm.",
         "We learn body words: arm.",
         "Don’t put your arm in the water.",
         "My arm feels cold.",
@@ -647,7 +650,7 @@
       "word": "burger",
       "phonetic": "/ˈbɜː(ɹ)ɡə(ɹ)/",
       "definition": "meat in a round bread roll, often with salad",
-      "definitionVi": "thịt cuộn trong bánh mì tròn, thường kèm với salad",
+      "definitionVi": "bánh burger — thịt trong bánh mì tròn, thường kèm salad",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -727,16 +730,16 @@
       "fact": "Babies learn to smile before they learn to talk.",
       "level": "Starters",
       "sentences": [
-        "This is my baby.",
+        "This is my baby brother.",
         "Zoe has a little baby sister.",
-        "I love my baby.",
-        "Where is your baby?",
+        "I love my baby sister.",
+        "Where is the baby?",
         "Noah plays next to the baby.",
         "The baby is sleeping.",
         "Can you see the baby?",
-        "We live with the baby.",
-        "Say hello to my baby.",
-        "My baby is at home."
+        "The baby lives with our family.",
+        "Say hello to the baby.",
+        "The baby is at home."
       ],
       "image": "/assets/images/words/starters-baby.webp",
       "imageCredit": "Unknown · CC CC0 1.0 · rawpixel · https://www.rawpixel.com/image/7714882/baby-illustration-free-public-domain-cc0-image"
@@ -745,8 +748,8 @@
       "id": "starters-badminton",
       "word": "badminton",
       "phonetic": "/ˈbæd.mɪn.tən/",
-      "definition": "a game where you hit a small birdie over a net",
-      "definitionVi": "một trò chơi trong đó bạn đánh một con chim nhỏ qua lưới",
+      "definition": "a game where you hit a shuttlecock over a net",
+      "definitionVi": "môn cầu lông — đánh quả cầu qua lưới",
       "category": "sports",
       "partOfSpeech": "noun",
       "choices": [
@@ -1191,7 +1194,7 @@
       "sentences": [
         "I can see a bear at the zoo.",
         "Lily likes a bear.",
-        "The bear is in the garden.",
+        "The bear is at the zoo.",
         "Can you draw a bear, please?",
         "Ben has a book about a bear.",
         "Look at a bear!",
@@ -1651,11 +1654,11 @@
       "fact": "Exercise keeps your body strong and healthy.",
       "level": "Starters",
       "sentences": [
-        "Touch your body, please.",
+        "Point to your body, please.",
         "Mia washes her body.",
         "I wash my body in the bath.",
         "Point to your body.",
-        "Ana has a small body.",
+        "Ana moves her body to the music.",
         "We learn body words at school.",
         "Move your body to the music!",
         "My body feels cold.",
@@ -1802,7 +1805,7 @@
       "word": "bounce",
       "phonetic": "/baʊns/",
       "definition": "to make a ball go up and down again and again",
-      "definitionVi": "để làm cho một quả bóng đi lên đi xuống nhiều lần",
+      "definitionVi": "làm bóng nảy lên xuống nhiều lần",
       "category": "sports",
       "partOfSpeech": "verb",
       "choices": [
@@ -2361,7 +2364,7 @@
       "word": "chicken",
       "phonetic": "/ˈt͡ʃɪkɪn/",
       "definition": "a farm bird that gives us eggs; it says cluck",
-      "definitionVi": "một con chim trang trại cho chúng ta trứng; nó nói cục cục",
+      "definitionVi": "con gà ở nông trại, đẻ trứng; kêu cục cục",
       "category": "animals",
       "partOfSpeech": "noun",
       "choices": [
@@ -2856,7 +2859,7 @@
       "word": "colour",
       "phonetic": "",
       "definition": "red, blue, green and other ways things can look",
-      "definitionVi": "đỏ, xanh dương, xanh lá cây và những cách khác mà mọi thứ có thể nhìn thấy",
+      "definitionVi": "màu sắc như đỏ, xanh dương, xanh lá…",
       "category": "school",
       "partOfSpeech": "noun",
       "choices": [
@@ -2889,7 +2892,7 @@
       "word": "come",
       "phonetic": "/kʌm/",
       "definition": "to move here, to where I am",
-      "definitionVi": "chuyển đến đây, đến nơi tôi đang ở",
+      "definitionVi": "đến đây, đến chỗ mình đang ở",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -3631,9 +3634,9 @@
       "sentences": [
         "Touch your ear, please.",
         "Sam washes her ear.",
-        "I hurt my ear in the park.",
+        "I listen with my ear.",
         "Point to your ear.",
-        "Lily has a small ear.",
+        "Lily touches her ear.",
         "We learn body words: ear.",
         "Don’t put your ear in the water.",
         "My ear feels cold.",
@@ -3681,7 +3684,7 @@
       "word": "egg",
       "phonetic": "/eɪɡ/",
       "definition": "a round food from a chicken",
-      "definitionVi": "một món ăn tròn từ một con gà",
+      "definitionVi": "quả trứng gà",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -3927,15 +3930,15 @@
       "level": "Starters",
       "sentences": [
         "Touch your eye, please.",
-        "Lily washes her eye.",
-        "I hurt my eye in the park.",
+        "Lily blinks her eyes.",
+        "I see with my eye.",
         "Point to your eye.",
-        "Noah has a small eye.",
+        "Noah has brown eyes.",
         "We learn body words: eye.",
-        "Don’t put your eye in the water.",
+        "Don’t rub your eyes with dirty hands.",
         "My eye feels cold.",
         "Can you move your eye?",
-        "Wash your eye before lunch."
+        "Close your eyes and count to three."
       ],
       "image": "/assets/images/words/starters-eye.webp",
       "imageCredit": "Unknown · CC CC0 1.0 · rawpixel · https://www.rawpixel.com/image/6333276/image-public-domain-eye-illustrations"
@@ -3961,9 +3964,9 @@
       "sentences": [
         "Touch your face, please.",
         "Zoe washes her face.",
-        "I hurt my face in the park.",
+        "I wash my face in the morning.",
         "Point to your face.",
-        "Mia has a small face.",
+        "Mia has a happy face.",
         "We learn body words: face.",
         "Don’t put your face in the water.",
         "My face feels cold.",
@@ -4145,7 +4148,7 @@
       "definition": "a polite word you say when you ask for something",
       "definitionVi": "một từ lịch sự bạn nói khi bạn yêu cầu một cái gì đó",
       "category": "general",
-      "partOfSpeech": "noun",
+      "partOfSpeech": "exclamation",
       "choices": [
         "please",
         "alien",
@@ -4390,9 +4393,9 @@
       "sentences": [
         "Touch your foot, please.",
         "Mia washes her foot.",
-        "I hurt my foot in the park.",
+        "I kick the ball with my foot.",
         "Point to your foot.",
-        "Leo has a small foot.",
+        "Leo puts a sock on his foot.",
         "We learn body words: foot.",
         "Don’t put your foot in the water.",
         "My foot feels cold.",
@@ -4638,7 +4641,7 @@
       "word": "game",
       "phonetic": "/ɡeɪm/",
       "definition": "something fun you play, often with rules",
-      "definitionVi": "bạn chơi thứ gì đó thú vị, thường có luật",
+      "definitionVi": "trò chơi vui, thường có luật",
       "category": "sports",
       "partOfSpeech": "noun",
       "choices": [
@@ -5330,8 +5333,8 @@
       "id": "starters-guitar",
       "word": "guitar",
       "phonetic": "/ɡɪˈtɑː(ɹ)/",
-      "definition": "A music toy with strings. You play it with your hands.",
-      "definitionVi": "Đồ chơi âm nhạc có dây. Bạn chơi nó bằng tay của bạn.",
+      "definition": "A musical instrument with strings. You play it with your hands.",
+      "definitionVi": "Nhạc cụ có dây. Bạn chơi bằng tay.",
       "category": "general",
       "partOfSpeech": "noun",
       "choices": [
@@ -5363,8 +5366,8 @@
       "id": "starters-hair",
       "word": "hair",
       "phonetic": "/heː/",
-      "definition": "The soft thing on your head.",
-      "definitionVi": "Thứ mềm mại trên đầu bạn.",
+      "definition": "The soft hair that grows on your head.",
+      "definitionVi": "Tóc trên đầu.",
       "category": "body",
       "partOfSpeech": "noun",
       "choices": [
@@ -5446,9 +5449,9 @@
       "sentences": [
         "Touch your hand, please.",
         "Leo washes his hands.",
-        "I hurt my hand in the park.",
+        "I hold my pencil in my hand.",
         "Point to your hand.",
-        "Tom has a small hand.",
+        "Tom holds an apple in his hand.",
         "We learn body words: hand.",
         "Don’t put your hand in the water.",
         "My hand feels cold.",
@@ -5562,7 +5565,7 @@
       "word": "have",
       "phonetic": "",
       "definition": "To own something. It is yours.",
-      "definitionVi": "Để sở hữu một cái gì đó. Nó là của bạn.",
+      "definitionVi": "Có, sở hữu cái gì đó. Nó là của bạn.",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -5593,7 +5596,7 @@
       "word": "have got",
       "phonetic": "",
       "definition": "To own something. Same idea as “have”.",
-      "definitionVi": "Để sở hữu một cái gì đó. Ý tưởng tương tự như “có”.",
+      "definitionVi": "Có cái gì đó. Cùng nghĩa với “have”.",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -5640,7 +5643,7 @@
       "sentences": [
         "Touch your head, please.",
         "Noah touches his head.",
-        "I hurt my head in the park.",
+        "I put a hat on my head.",
         "Point to your head.",
         "Put the hat on your head.",
         "We learn body words: head.",
@@ -5754,7 +5757,7 @@
       "word": "hit",
       "phonetic": "",
       "definition": "To touch something hard with your hand or a bat.",
-      "definitionVi": "Chạm vào vật cứng bằng tay hoặc bằng gậy.",
+      "definitionVi": "Đánh mạnh bằng tay hoặc gậy.",
       "category": "sports",
       "partOfSpeech": "verb",
       "choices": [
@@ -5851,7 +5854,7 @@
       "word": "hold",
       "phonetic": "/həʊld/",
       "definition": "To keep something in your hand.",
-      "definitionVi": "Để giữ một cái gì đó trong tay của bạn.",
+      "definitionVi": "Cầm, giữ cái gì trong tay.",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -6148,7 +6151,7 @@
       "word": "jump",
       "phonetic": "/dʒʌmp/",
       "definition": "To go up off the ground with your feet.",
-      "definitionVi": "Để đi lên khỏi mặt đất bằng đôi chân của bạn.",
+      "definitionVi": "Nhảy lên khỏi mặt đất bằng chân.",
       "category": "sports",
       "partOfSpeech": "verb",
       "choices": [
@@ -6228,16 +6231,16 @@
       "fact": "Goalkeepers kick the ball very far.",
       "level": "Starters",
       "sentences": [
-        "I like to kick in the park.",
+        "I like to kick the ball in the park.",
         "Noah can kick the ball.",
-        "Let’s kick together after school.",
-        "Can you kick with me?",
-        "Zoe loves to kick at the weekend.",
-        "We kick in our sports lesson.",
-        "Watch me kick!",
-        "Please kick carefully.",
-        "Do you kick with your friends?",
-        "Noah and Zoe kick every afternoon."
+        "Let’s kick the football after school.",
+        "Can you kick the ball with me?",
+        "Zoe loves to kick the ball at the weekend.",
+        "We kick balls in our sports lesson.",
+        "Watch me kick the ball!",
+        "Please kick the ball carefully.",
+        "Do you kick the ball with your friends?",
+        "Noah and Zoe kick the ball every afternoon."
       ],
       "image": "/assets/images/words/starters-kick.webp",
       "imageCredit": "Unknown · CC CC0 1.0 · rawpixel · https://www.rawpixel.com/image/6677858/vector-vintage-public-domain-black"
@@ -6397,7 +6400,7 @@
         "Tom knows how to swim.",
         "Do you know this word?",
         "I don’t know — can you help?",
-        "Leo knows her address.",
+        "Leo knows her name.",
         "We know many colours.",
         "I know a funny song.",
         "Does he know your name?",
@@ -6443,7 +6446,7 @@
       "word": "learn",
       "phonetic": "/lɜːn/",
       "definition": "To find out new things. To get better at something.",
-      "definitionVi": "Để tìm hiểu những điều mới mẻ. Để trở nên tốt hơn ở một cái gì đó.",
+      "definitionVi": "Học điều mới. Giỏi hơn ở việc gì đó.",
       "category": "school",
       "partOfSpeech": "verb",
       "choices": [
@@ -6492,7 +6495,7 @@
       "sentences": [
         "Touch your leg, please.",
         "Noah washes his leg.",
-        "I hurt my leg in the park.",
+        "I run with my legs in the park.",
         "Point to your leg.",
         "I can kick with my leg.",
         "We learn body words: leg.",
@@ -6738,7 +6741,7 @@
       "word": "listen",
       "phonetic": "/ˈlɪs.ən/",
       "definition": "To hear carefully and pay attention.",
-      "definitionVi": "Phải nghe kỹ và chú ý.",
+      "definitionVi": "Nghe kỹ và chú ý.",
       "category": "school",
       "partOfSpeech": "verb",
       "choices": [
@@ -6770,8 +6773,8 @@
       "id": "starters-live",
       "word": "live",
       "phonetic": "/lɪv/",
-      "definition": "to be alive or have life.",
-      "definitionVi": "Đang sống hoặc có sự sống.",
+      "definition": "to have your home in a place.",
+      "definitionVi": "Sống, ở tại một nơi.",
       "category": "home",
       "partOfSpeech": "verb",
       "choices": [
@@ -7167,7 +7170,7 @@
       "word": "man",
       "phonetic": "[mɛn]",
       "definition": "A grown-up boy; an adult male person.",
-      "definitionVi": "Một cậu bé trưởng thành; một người đàn ông trưởng thành.",
+      "definitionVi": "Người đàn ông trưởng thành.",
       "category": "people",
       "partOfSpeech": "noun",
       "choices": [
@@ -7478,7 +7481,7 @@
       "sentences": [
         "I can see a monkey at the zoo.",
         "Mia likes a monkey.",
-        "The monkey is in the garden.",
+        "The monkey is at the zoo.",
         "Can you draw a monkey, please?",
         "Emma has a book about a monkey.",
         "Look at a monkey!",
@@ -7516,7 +7519,7 @@
         "Ben has a book about a monster.",
         "Look at the monster!",
         "We read about a monster at school.",
-        "Don’t be scared of the monster!",
+        "The monster in the book is funny!",
         "Ana points to a monster in the picture.",
         "My favourite story has a monster."
       ],
@@ -7676,9 +7679,9 @@
       "sentences": [
         "Touch your mouth, please.",
         "Ana opens her mouth.",
-        "I hurt my mouth.",
+        "I smile with my mouth.",
         "Point to your mouth.",
-        "Ben has a small mouth.",
+        "Ben opens his mouth to sing.",
         "We learn body words: mouth.",
         "Don’t put toys in your mouth.",
         "My mouth feels cold.",
@@ -7938,14 +7941,14 @@
       "sentences": [
         "Touch your nose, please.",
         "Zoe touches her nose.",
-        "I hurt my nose in the park.",
+        "I smell flowers with my nose.",
         "Point to your nose.",
-        "Mia has a small nose.",
+        "Mia has a funny red nose in the play.",
         "We learn body words: nose.",
         "Don’t put your nose in the water.",
         "My nose feels cold.",
         "Can you move your nose?",
-        "My nose is small."
+        "My nose can smell the cake."
       ],
       "image": "/assets/images/words/starters-nose.webp",
       "imageCredit": "Unknown · CC CC0 1.0 · rawpixel · https://www.rawpixel.com/image/6870671/png-sticker-public-domain"
@@ -8114,7 +8117,7 @@
       "word": "onion",
       "phonetic": "/ˈʌŋjɪn/",
       "definition": "A round vegetable that makes you cry.",
-      "definitionVi": "Củ hành — ăn trong món ăn.",
+      "definitionVi": "Củ hành tây — cắt ra hay làm khóc.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -8314,7 +8317,7 @@
       "definition": "Thin sheets you write or draw on.",
       "definitionVi": "Giấy để viết hoặc vẽ.",
       "category": "school",
-      "partOfSpeech": "adjective",
+      "partOfSpeech": "noun",
       "choices": [
         "brown",
         "angry",
@@ -8708,7 +8711,7 @@
       "word": "pick up",
       "phonetic": "",
       "definition": "To lift something from the floor or ground.",
-      "definitionVi": "Để nâng một cái gì đó từ sàn hoặc mặt đất.",
+      "definitionVi": "Nhặt cái gì từ sàn hoặc mặt đất.",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -9777,12 +9780,12 @@
         "That is a scary story!",
         "Tom has a scary mask.",
         "This story is scary.",
-        "The big dog looks scary.",
-        "Leo thinks the park is scary.",
+        "The toy dinosaur looks scary.",
+        "Leo thinks the mask is scary.",
         "That was a scary game!",
         "I like this scary picture.",
         "This spider is scary!",
-        "We saw a scary film.",
+        "We read a scary story.",
         "Is this picture scary?"
       ],
       "image": "/assets/images/words/starters-scary.webp",
@@ -10090,7 +10093,7 @@
       "word": "short",
       "phonetic": "/ʃoːt/",
       "definition": "Not long.",
-      "definitionVi": "Không lâu đâu.",
+      "definitionVi": "Ngắn; không dài.",
       "category": "general",
       "partOfSpeech": "adjective",
       "choices": [
@@ -10354,7 +10357,7 @@
       "word": "skateboarding",
       "phonetic": "",
       "definition": "Riding on a skateboard for fun.",
-      "definitionVi": "Cưỡi trên ván trượt cho vui.",
+      "definitionVi": "Trượt ván để vui chơi.",
       "category": "sports",
       "partOfSpeech": "noun",
       "choices": [
@@ -10535,7 +10538,7 @@
       "sentences": [
         "I can see a snake at the zoo.",
         "Leo likes a snake.",
-        "The snake is in the garden.",
+        "The snake is at the zoo.",
         "Can you draw a snake, please?",
         "Sam has a book about a snake.",
         "Look at a snake!",
@@ -10698,15 +10701,15 @@
       "fact": "Sorry helps fix hurt feelings.",
       "level": "Starters",
       "sentences": [
-        "I am sorry today.",
-        "Zoe looks sorry.",
+        "I am sorry for the mess.",
+        "Zoe says she is sorry.",
         "I am sorry about that.",
         "Don’t be sorry — it’s OK.",
-        "Sam is sorry about the party.",
-        "This story makes me feel sorry.",
+        "Sam is sorry about the broken cup.",
+        "This story makes me say \"oh no!\"",
         "My friend is very sorry.",
-        "Why do you feel sorry?",
-        "We all feel sorry sometimes.",
+        "Why do you say sorry?",
+        "We say sorry when we are wrong.",
         "Say sorry when you are wrong."
       ]
     },
@@ -10880,7 +10883,7 @@
       "word": "stop",
       "phonetic": "/stɒp/",
       "definition": "to not go on; to finish.",
-      "definitionVi": "không tiếp tục; để kết thúc.",
+      "definitionVi": "Dừng lại; không làm nữa.",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -11011,8 +11014,8 @@
       "id": "starters-sun",
       "word": "sun",
       "phonetic": "/sʌn/",
-      "definition": "The bright light in the sky in the day.",
-      "definitionVi": "Ánh sáng rực rỡ trên bầu trời vào ban ngày.",
+      "definition": "The big bright ball of light in the sky in the day.",
+      "definitionVi": "Mặt trời — quả cầu sáng trên bầu trời ban ngày.",
       "category": "weather",
       "partOfSpeech": "noun",
       "choices": [
@@ -11078,7 +11081,7 @@
       "word": "swim",
       "phonetic": "/swɪm/",
       "definition": "to move in water with your arms and legs.",
-      "definitionVi": "di chuyển trong nước bằng tay và chân.",
+      "definitionVi": "Bơi trong nước bằng tay và chân.",
       "category": "sports",
       "partOfSpeech": "verb",
       "choices": [
@@ -11111,7 +11114,7 @@
       "word": "table",
       "phonetic": "/ˈteɪbəl/",
       "definition": "A flat top with legs. You eat or work at it.",
-      "definitionVi": "Áo phẳng có chân. Bạn ăn hoặc làm việc ở đó.",
+      "definitionVi": "Bàn — mặt phẳng có chân. Bạn ăn hoặc làm việc ở đó.",
       "category": "home",
       "partOfSpeech": "noun",
       "choices": [
@@ -11569,7 +11572,7 @@
       "word": "throw",
       "phonetic": "/θɹəʊ/",
       "definition": "To send something through the air with your hand.",
-      "definitionVi": "Để gửi một cái gì đó qua không khí bằng tay của bạn.",
+      "definitionVi": "Ném cái gì bằng tay qua không trung.",
       "category": "sports",
       "partOfSpeech": "verb",
       "choices": [
@@ -11603,7 +11606,7 @@
       "phonetic": "/tɪk/",
       "definition": "A small mark like this: ✓ (to show something is right).",
       "definitionVi": "Một dấu nhỏ như thế này: ✓ (để chứng tỏ điều gì đó đúng).",
-      "category": "animals",
+      "category": "school",
       "partOfSpeech": "noun",
       "choices": [
         "afternoon",
@@ -11679,7 +11682,7 @@
       ],
       "answer": "today",
       "hint": "What day is it today?",
-      "fact": "Today will never come again.",
+      "fact": "Today is a good day for games.",
       "level": "Starters",
       "sentences": [
         "Please do your homework today.",
@@ -11863,8 +11866,8 @@
       "id": "starters-trousers",
       "word": "trousers",
       "phonetic": "/ˈtɹaʊzəz/",
-      "definition": "Clothes you wear on your legs.",
-      "definitionVi": "Quần áo bạn mặc trên chân.",
+      "definition": "Long clothes you wear on your legs.",
+      "definitionVi": "Quần dài mặc ở hai chân.",
       "category": "clothes",
       "partOfSpeech": "noun",
       "choices": [
@@ -11930,9 +11933,9 @@
       "word": "try",
       "phonetic": "/tɹaɪ/",
       "definition": "To do something to see if you can.",
-      "definitionVi": "Để làm điều gì đó xem bạn có thể làm được không.",
+      "definitionVi": "Thử làm gì đó xem mình có làm được không.",
       "category": "general",
-      "partOfSpeech": "noun",
+      "partOfSpeech": "verb",
       "choices": [
         "try",
         "armchair",
@@ -11963,7 +11966,7 @@
       "word": "T-shirt",
       "phonetic": "",
       "definition": "A soft shirt with short sleeves.",
-      "definitionVi": "Một chiếc áo sơ mi mềm mại với tay áo ngắn.",
+      "definitionVi": "Áo thun tay ngắn.",
       "category": "clothes",
       "partOfSpeech": "noun",
       "choices": [
@@ -12043,10 +12046,10 @@
       "fact": "Everyone is beautiful in their own way.",
       "level": "Starters",
       "sentences": [
-        "What an ugly monster!",
-        "Emma draws an ugly face.",
+        "What an ugly old sock!",
+        "Emma draws an ugly old shoe.",
         "This old sock looks ugly.",
-        "The witch in the story is ugly.",
+        "The old box in the picture looks ugly.",
         "Sam thinks the picture is ugly.",
         "That was an ugly cloud!",
         "I colour this ugly fish.",
@@ -12256,7 +12259,7 @@
       "word": "water",
       "phonetic": "/ˈwoːtə/",
       "definition": "A clear drink. We need it every day.",
-      "definitionVi": "Một thức uống trong suốt. Chúng tôi cần nó mỗi ngày.",
+      "definitionVi": "Nước uống trong suốt. Chúng ta cần mỗi ngày.",
       "category": "food",
       "partOfSpeech": "noun",
       "choices": [
@@ -12454,7 +12457,7 @@
       "word": "woman",
       "phonetic": "/ˈwʊmɘn/",
       "definition": "A grown-up girl; a mum is a woman.",
-      "definitionVi": "Một cô gái trưởng thành; mẹ là một người phụ nữ.",
+      "definitionVi": "Người phụ nữ trưởng thành; mẹ là một người phụ nữ.",
       "category": "people",
       "partOfSpeech": "noun",
       "choices": [
@@ -12681,7 +12684,7 @@
       "word": "young",
       "phonetic": "/jʌŋ/",
       "definition": "Not old. A young person or animal is small or new.",
-      "definitionVi": "Không cũ. Một người trẻ hoặc một con vật nhỏ hoặc mới.",
+      "definitionVi": "Còn nhỏ tuổi; chưa già.",
       "category": "people",
       "partOfSpeech": "adjective",
       "choices": [
