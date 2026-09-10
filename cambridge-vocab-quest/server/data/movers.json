@@ -14,7 +14,10 @@
     "contentPack": "starters-content-pack",
     "vocabReviewAppliedAt": "2026-08-03T04:27:14.748Z",
     "vocabLabelsFixedAt": "2026-08-03T04:28:04.925Z",
-    "definitionViResyncedAfterReviewAt": "2026-08-03T04:29:35.778Z"
+    "definitionViResyncedAfterReviewAt": "2026-08-03T04:29:35.778Z",
+    "kidSuitabilityUpdatedAt": "2026-09-10",
+    "definitionViReviewedAt": "2026-09-10",
+    "metadataFixedAt": "2026-09-10"
   },
   "level": "Movers",
   "count": 335,
@@ -222,7 +225,7 @@
       "word": "all",
       "phonetic": "/ɔːl/",
       "definition": "every one or every part of something",
-      "definitionVi": "mỗi một hoặc mỗi phần của một cái gì đó",
+      "definitionVi": "Tất cả; mọi phần của cái gì đó.",
       "category": "general",
       "partOfSpeech": "adjective",
       "choices": [
@@ -288,7 +291,7 @@
       "word": "always",
       "phonetic": "/ˈɔː(l).weɪz/",
       "definition": "every time; at all times",
-      "definitionVi": "mọi lúc; mọi lúc",
+      "definitionVi": "Luôn luôn; mọi lúc.",
       "category": "time",
       "partOfSpeech": "adverb",
       "choices": [
@@ -354,7 +357,7 @@
       "definition": "the part of your body behind your chest",
       "definitionVi": "phần cơ thể phía sau ngực của bạn",
       "category": "body",
-      "partOfSpeech": "adjective",
+      "partOfSpeech": "noun",
       "choices": [
         "awake",
         "back",
@@ -367,8 +370,8 @@
       "level": "Movers",
       "sentences": [
         "My back hurts today.",
-        "Please wash your back.",
-        "Don’t touch my back.",
+        "Please stretch your back.",
+        "Don’t jump on my back.",
         "I carry my bag on my back.",
         "Lie on your back, please.",
         "The cat sits on my back!",
@@ -428,7 +431,7 @@
         "badly"
       ],
       "answer": "badly",
-      "hint": "If you feel badly, tell a teacher or parent.",
+      "hint": "If you feel bad, tell a teacher or parent.",
       "fact": "Practising again can fix something done badly.",
       "level": "Movers",
       "sentences": [
@@ -566,12 +569,12 @@
       "sentences": [
         "I can see a bat at the zoo.",
         "Noah likes a bat.",
-        "The bat is in the garden.",
+        "The bat is at the zoo.",
         "Can you draw a bat, please?",
         "Ana has a book about a bat.",
         "Look at a bat!",
         "We learn about a bat at school.",
-        "Don’t scare a bat.",
+        "Be quiet near a bat.",
         "Mia points to a bat in the picture.",
         "My favourite animal is a bat."
       ],
@@ -680,7 +683,7 @@
       "word": "better",
       "phonetic": "[ˈbeɾə]",
       "definition": "nicer or improved compared with before or with another",
-      "definitionVi": "đẹp hơn hoặc được cải thiện so với trước hoặc với cái khác",
+      "definitionVi": "Tốt hơn; khá hơn trước hoặc hơn cái khác.",
       "category": "general",
       "partOfSpeech": "adjective",
       "choices": [
@@ -847,7 +850,7 @@
       "definition": "the lowest part of something, not the top",
       "definitionVi": "phần dưới cùng, đáy",
       "category": "general",
-      "partOfSpeech": "adjective",
+      "partOfSpeech": "noun",
       "choices": [
         "bottom",
         "asleep",
@@ -1340,7 +1343,7 @@
       "word": "careful",
       "phonetic": "/ˈkɛːfəl/",
       "definition": "thinking about danger so you do not get hurt or make mistakes",
-      "definitionVi": "nghĩ đến nguy hiểm để không bị tổn thương hoặc mắc sai lầm",
+      "definitionVi": "Cẩn thận, chú ý để không bị đau hoặc làm sai.",
       "category": "general",
       "partOfSpeech": "adjective",
       "choices": [
@@ -1437,7 +1440,7 @@
       "word": "CD",
       "phonetic": "",
       "definition": "a shiny disc that holds music or computer information",
-      "definitionVi": "một chiếc đĩa sáng bóng chứa thông tin về âm nhạc hoặc máy tính",
+      "definitionVi": "Đĩa sáng bóng chứa nhạc hoặc dữ liệu máy tính.",
       "category": "technology",
       "partOfSpeech": "noun",
       "choices": [
@@ -1617,7 +1620,7 @@
       "level": "Movers",
       "sentences": [
         "I draw a circle at school.",
-        "Noah has a circle on her paper.",
+        "Noah has a circle on his paper.",
         "Please colour the circle.",
         "We need a circle for the picture.",
         "Zoe draws with a circle stencil.",
@@ -1698,7 +1701,7 @@
     },
     {
       "id": "movers-center",
-      "word": "centre",
+      "word": "center",
       "phonetic": "",
       "definition": "the middle of something, not the side or edge",
       "definitionVi": "ở giữa cái gì đó, không phải bên cạnh hay cạnh",
@@ -1707,10 +1710,10 @@
       "choices": [
         "address",
         "age",
-        "centre",
+        "center",
         "aunt"
       ],
-      "answer": "centre",
+      "answer": "center",
       "hint": "Stand in the center of the circle in PE class.",
       "fact": "The center of a pizza is often the first bite people take.",
       "level": "Movers",
@@ -1800,7 +1803,7 @@
       "word": "cloud",
       "phonetic": "/klaʊd/",
       "definition": "a white or grey shape in the sky that can bring rain",
-      "definitionVi": "một hình dạng màu trắng hoặc xám trên bầu trời có thể mang lại mưa",
+      "definitionVi": "Đám mây trắng hoặc xám trên bầu trời, có thể mang mưa.",
       "category": "weather",
       "partOfSpeech": "noun",
       "choices": [
@@ -2046,7 +2049,7 @@
       "level": "Movers",
       "sentences": [
         "I read the comic book at school.",
-        "Sam has the comic book in her bag.",
+        "Sam has the comic book in his bag.",
         "Please open your comic book.",
         "We need the comic book for the lesson.",
         "Ana reads the comic book on the sofa.",
@@ -2096,8 +2099,8 @@
       "id": "movers-cough",
       "word": "cough",
       "phonetic": "/kɑf/",
-      "definition": "the noise you make from your throat when you are ill",
-      "definitionVi": "tiếng ồn bạn tạo ra từ cổ họng khi bạn ốm",
+      "definition": "when you suddenly push air out of your throat because you are ill",
+      "definitionVi": "ho — đẩy hơi ra khỏi họng khi bị ốm",
       "category": "health",
       "partOfSpeech": "noun",
       "choices": [
@@ -2130,7 +2133,7 @@
       "word": "count",
       "phonetic": "",
       "definition": "to say numbers in order or find how many there are",
-      "definitionVi": "để nói các số theo thứ tự hoặc tìm xem có bao nhiêu",
+      "definitionVi": "Đếm số theo thứ tự hoặc xem có bao nhiêu.",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -2745,7 +2748,7 @@
         "Noah has a book about a dolphin.",
         "Look at the dolphin!",
         "We learn about dolphins at school.",
-        "Don’t scare a dolphin.",
+        "Be kind to a dolphin.",
         "Emma points to a dolphin in the picture.",
         "My favourite animal is a dolphin."
       ],
@@ -3260,7 +3263,7 @@
         "afraid"
       ],
       "answer": "fat",
-      "hint": "Bears store fat to keep warm in winter.",
+      "hint": "The happy cat looks fat and soft.",
       "fact": "Some healthy foods like nuts contain good fat.",
       "level": "Movers",
       "sentences": [
@@ -3272,7 +3275,7 @@
         "This cushion is fat and soft.",
         "My friend has a fat pet rabbit.",
         "Why is that balloon so fat?",
-        "We all laughed at the fat clown nose.",
+        "Look at the fat clown nose!",
         "Look at the fat orange!"
       ],
       "image": "/assets/images/words/movers-fat.webp",
@@ -3679,7 +3682,7 @@
       "word": "get dressed",
       "phonetic": "",
       "definition": "to put on your clothes",
-      "definitionVi": "mặc quần áo của bạn",
+      "definitionVi": "Mặc quần áo vào.",
       "category": "home",
       "partOfSpeech": "verb",
       "choices": [
@@ -3988,7 +3991,7 @@
         "Ana has a kind grandparent.",
         "I love my grandparent.",
         "Where is your grandparent?",
-        "Sam plays with her grandparent.",
+        "Sam plays with his grandparent.",
         "My grandparent helps me.",
         "Can you see my grandparent?",
         "We live with our grandparent.",
@@ -4715,7 +4718,7 @@
         "Does your head hurt?",
         "That fall can hurt!",
         "Did you hurt yourself at home?",
-        "Tell the teacher if you hurt."
+        "Tell the teacher if you get hurt."
       ],
       "image": "/assets/images/words/movers-hurt.webp",
       "imageCredit": "Unknown · CC CC0 1.0 · rawpixel · https://www.rawpixel.com/image/6805587/vector-vintage-public-domain-icon"
@@ -5076,7 +5079,7 @@
         "Noah has a book about a kangaroo.",
         "Look at a kangaroo!",
         "We learn about kangaroos at school.",
-        "Don’t scare a kangaroo.",
+        "Be kind to a kangaroo.",
         "Zoe points to a kangaroo in the picture.",
         "My favourite animal is the kangaroo."
       ],
@@ -5142,7 +5145,7 @@
         "Zoe has a book about a kitten.",
         "Look at a kitten!",
         "We learn about kittens at school.",
-        "Don’t scare a kitten.",
+        "Be gentle with a kitten.",
         "Ben points to a kitten in the picture.",
         "My favourite animal is the kitten."
       ],
@@ -5252,10 +5255,10 @@
       "id": "movers-laugh",
       "word": "laugh",
       "phonetic": "/laːf/",
-      "definition": "The sound you make when something is funny.",
-      "definitionVi": "Âm thanh bạn tạo ra khi có điều gì đó buồn cười.",
+      "definition": "to make a happy sound when something is funny",
+      "definitionVi": "Cười khi thấy vui hoặc buồn cười.",
       "category": "feelings",
-      "partOfSpeech": "noun",
+      "partOfSpeech": "verb",
       "choices": [
         "laugh",
         "aunt",
@@ -5406,7 +5409,7 @@
         "Ben has a book about a lion.",
         "Look at a lion!",
         "We learn about lions at school.",
-        "Don’t scare a lion.",
+        "Watch the lion carefully.",
         "Emma points to a lion in the picture.",
         "My favourite animal is the lion."
       ],
@@ -5714,8 +5717,8 @@
       "id": "movers-mean",
       "word": "mean",
       "phonetic": "/miːn/",
-      "definition": "to show what a word or thing says or is.",
-      "definitionVi": "để hiển thị những gì một từ hoặc điều nói hoặc là.",
+      "definition": "to have a meaning; what a word or sign tells us",
+      "definitionVi": "Có nghĩa là; một từ hoặc biển báo nói điều gì.",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -5829,7 +5832,7 @@
       "level": "Movers",
       "sentences": [
         "I made a mistake at school.",
-        "Noah found a mistake in her homework.",
+        "Noah found a mistake in his homework.",
         "Please correct your mistake.",
         "We all make mistakes in lessons.",
         "Leo writes and then sees a mistake.",
@@ -5879,8 +5882,8 @@
       "id": "movers-moon",
       "word": "moon",
       "phonetic": "/muːn/",
-      "definition": "The round light we see in the sky at night.",
-      "definitionVi": "Ánh sáng tròn chúng ta nhìn thấy trên bầu trời vào ban đêm.",
+      "definition": "The big round ball of light in the sky at night.",
+      "definitionVi": "Mặt trăng — quả cầu sáng trên bầu trời ban đêm.",
       "category": "nature",
       "partOfSpeech": "noun",
       "choices": [
@@ -6161,7 +6164,7 @@
         "My friend is very naughty.",
         "Why are you being naughty?",
         "We must not be naughty.",
-        "Don’t smile and be naughty!"
+        "Don’t be naughty at school!"
       ],
       "image": "/assets/images/words/movers-naughty.webp",
       "imageCredit": "Unknown · CC CC0 1.0 · rawpixel · https://www.rawpixel.com/image/7374212/psd-christmas-vintage-public-domain"
@@ -6219,15 +6222,15 @@
       "level": "Movers",
       "sentences": [
         "Touch your neck, please.",
-        "Emma washes her neck.",
-        "I hurt my neck in the park.",
+        "Emma wears a scarf on her neck.",
+        "I wear a scarf on my neck.",
         "Point to your neck.",
         "Sam has a long scarf on his neck.",
         "We learn body words: neck.",
-        "Don’t hurt your neck.",
+        "Keep your neck warm.",
         "My neck feels cold.",
         "Can you move your neck?",
-        "Wash your neck before lunch."
+        "Put a scarf on your neck."
       ],
       "image": "/assets/images/words/movers-neck.webp",
       "imageCredit": "Unknown · CC CC0 1.0 · rawpixel · https://www.rawpixel.com/image/7372073/png-sticker-public-domain-illustrations"
@@ -6431,7 +6434,7 @@
       "word": "o’clock",
       "phonetic": "",
       "definition": "We say this with a number to tell the hour.",
-      "definitionVi": "Chúng tôi nói điều này với một con số để nói giờ.",
+      "definitionVi": "Người ta nói cùng với số để chỉ giờ.",
       "category": "time",
       "partOfSpeech": "adverb",
       "choices": [
@@ -6710,7 +6713,7 @@
         "Noah has a book about pandas.",
         "Look at the panda!",
         "We learn about pandas at school.",
-        "Don’t scare the panda.",
+        "Be quiet near the panda.",
         "Zoe points to a panda in the picture.",
         "My favourite animal is a panda."
       ],
@@ -6776,7 +6779,7 @@
         "Noah has a book about a parrot.",
         "Look at a parrot!",
         "We learn about a parrot at school.",
-        "Don’t scare a parrot.",
+        "Be kind to a parrot.",
         "Emma points to a parrot in the picture.",
         "My favourite animal is a parrot."
       ],
@@ -6875,7 +6878,7 @@
         "Sam has a book about penguins.",
         "Look at the penguin!",
         "We learn about penguins at school.",
-        "Don’t scare the penguin.",
+        "Be gentle with the penguin.",
         "Emma points to a penguin in the picture.",
         "My favourite animal is a penguin."
       ],
@@ -6986,7 +6989,7 @@
       "word": "plant",
       "phonetic": "/plænt/",
       "definition": "A living thing that grows in soil.",
-      "definitionVi": "Cây cối mọc trong đất.",
+      "definitionVi": "Cây mọc trong đất.",
       "category": "nature",
       "partOfSpeech": "noun",
       "choices": [
@@ -7006,7 +7009,7 @@
         "We draw a plant at school.",
         "Lily finds a plant in the park.",
         "Can you see a plant in the park?",
-        "Don’t hurt a plant.",
+        "Please water the plant.",
         "The plant is beautiful.",
         "There is a plant near the house.",
         "My favourite thing in nature is a plant."
@@ -7304,7 +7307,7 @@
         "Mia has a book about a puppy.",
         "Look at the puppy!",
         "We learn about puppies at school.",
-        "Don’t scare the puppy.",
+        "Be gentle with the puppy.",
         "Ana points to a puppy in the picture.",
         "My favourite animal is a puppy."
       ],
@@ -7316,7 +7319,7 @@
       "word": "put on",
       "phonetic": "",
       "definition": "To place clothes on your body.",
-      "definitionVi": "Để đặt quần áo trên cơ thể của bạn.",
+      "definitionVi": "Mặc quần áo vào người.",
       "category": "clothes",
       "partOfSpeech": "verb",
       "choices": [
@@ -7502,7 +7505,7 @@
         "Sam has a book about a rabbit.",
         "Look at a rabbit!",
         "We learn about a rabbit at school.",
-        "Don’t scare a rabbit.",
+        "Be gentle with a rabbit.",
         "Leo points to a rabbit in the picture.",
         "My favourite animal is a rabbit."
       ],
@@ -7579,8 +7582,8 @@
       "id": "movers-river",
       "word": "river",
       "phonetic": "/ˈɹɪvə/",
-      "definition": "A long water path that moves across land.",
-      "definitionVi": "Một con đường nước dài xuyên qua đất liền.",
+      "definition": "A long stream of water that moves across land.",
+      "definitionVi": "Con sông — dòng nước dài chảy trên đất.",
       "category": "nature",
       "partOfSpeech": "noun",
       "choices": [
@@ -8009,7 +8012,7 @@
       "word": "score",
       "phonetic": "/skɔː/",
       "definition": "To get a point in a game.",
-      "definitionVi": "Để có được một điểm trong một trò chơi.",
+      "definitionVi": "Ghi điểm trong trò chơi.",
       "category": "sports",
       "partOfSpeech": "verb",
       "choices": [
@@ -8107,8 +8110,8 @@
       "id": "movers-send",
       "word": "send",
       "phonetic": "/sɛnd/",
-      "definition": "To make a message or thing go to another person.",
-      "definitionVi": "Để thực hiện một tin nhắn hoặc điều đi đến người khác.",
+      "definition": "to make a message or thing go to another person",
+      "definitionVi": "Gửi tin nhắn hoặc đồ cho người khác.",
       "category": "technology",
       "partOfSpeech": "verb",
       "choices": [
@@ -8286,12 +8289,12 @@
       "level": "Movers",
       "sentences": [
         "Touch your shoulder, please.",
-        "Sam puts a bag on her shoulder.",
-        "I hurt my shoulder in the park.",
+        "Sam puts a bag on his shoulder.",
+        "I carry a bag on my shoulder.",
         "Point to your shoulder.",
         "My shoulder feels sore.",
         "We learn the word shoulder in class.",
-        "Don’t push his shoulder.",
+        "Pat him on the shoulder.",
         "My shoulder feels cold.",
         "Can you move your shoulder?",
         "Carry the bag on your shoulder."
@@ -8589,7 +8592,7 @@
         "Lily has a book about a snail.",
         "Look at that snail!",
         "We learn about snails at school.",
-        "Don’t scare the snail.",
+        "Be careful with the snail.",
         "Noah points to a snail in the picture.",
         "My favourite animal is a snail."
       ],
@@ -8764,7 +8767,7 @@
       "definition": "A shape with four equal straight sides.",
       "definitionVi": "Hình vuông có bốn cạnh bằng nhau.",
       "category": "school",
-      "partOfSpeech": "adjective",
+      "partOfSpeech": "noun",
       "choices": [
         "awake",
         "square",
@@ -8914,7 +8917,7 @@
         "Point to your stomach.",
         "Sam has a full stomach.",
         "We learn body words: stomach.",
-        "Don’t hit his stomach.",
+        "My stomach feels full after lunch.",
         "My stomach feels cold.",
         "Can you touch your stomach?",
         "My stomach feels better now."
@@ -8927,7 +8930,7 @@
       "word": "stomach-ache",
       "phonetic": "",
       "definition": "A pain in your stomach.",
-      "definitionVi": "Đau bụng quá.",
+      "definitionVi": "Đau bụng.",
       "category": "health",
       "partOfSpeech": "noun",
       "choices": [
@@ -9257,7 +9260,7 @@
       "word": "take",
       "phonetic": "/teɪk/",
       "definition": "To carry or move something with you.",
-      "definitionVi": "Để mang theo hoặc di chuyển một cái gì đó với bạn.",
+      "definitionVi": "Mang hoặc đem theo cái gì.",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -9763,10 +9766,10 @@
       "level": "Movers",
       "sentences": [
         "Touch your tooth, please.",
-        "Sam cleans her tooth carefully.",
-        "I hurt my tooth in the park.",
+        "Sam cleans his tooth carefully.",
+        "I bite an apple with my tooth.",
         "Point to your tooth.",
-        "Emma has a small tooth.",
+        "Emma has a white tooth.",
         "We learn body words: tooth.",
         "Don’t forget to clean your tooth.",
         "My tooth feels cold.",
@@ -9847,7 +9850,7 @@
       "word": "toothpaste",
       "phonetic": "/ˈtuːθpeɪst/",
       "definition": "Soft paste you put on a toothbrush to clean teeth.",
-      "definitionVi": "Miếng dán mềm bạn cho vào bàn chải đánh răng để làm sạch răng.",
+      "definitionVi": "Kem đánh răng bôi lên bàn chải để làm sạch răng.",
       "category": "health",
       "partOfSpeech": "noun",
       "choices": [
@@ -10012,7 +10015,7 @@
       "word": "travel",
       "phonetic": "/ˈtɹævəl/",
       "definition": "To go on a journey to another place.",
-      "definitionVi": "Để thực hiện một cuộc hành trình đến một nơi khác.",
+      "definitionVi": "Đi du lịch, đi đến nơi khác.",
       "category": "travel",
       "partOfSpeech": "verb",
       "choices": [
@@ -10143,8 +10146,8 @@
       "id": "movers-up",
       "word": "up",
       "phonetic": "/ap/",
-      "definition": "To a higher place.",
-      "definitionVi": "Đến một nơi cao hơn.",
+      "definition": "Towards a higher place.",
+      "definitionVi": "Lên chỗ cao hơn.",
       "category": "places",
       "partOfSpeech": "adverb",
       "choices": [
@@ -10276,7 +10279,7 @@
       "word": "village",
       "phonetic": "/ˈvɪlɪd͡ʒ/",
       "definition": "A small place in the country with houses.",
-      "definitionVi": "Một nơi nhỏ trong nước với những ngôi nhà.",
+      "definitionVi": "Ngôi làng nhỏ ở nông thôn, có nhà cửa.",
       "category": "places",
       "partOfSpeech": "noun",
       "choices": [
@@ -10342,7 +10345,7 @@
       "word": "wake (up)",
       "phonetic": "",
       "definition": "To stop sleeping and open your eyes.",
-      "definitionVi": "Để ngừng ngủ và mở mắt ra.",
+      "definitionVi": "Thức dậy và mở mắt ra.",
       "category": "home",
       "partOfSpeech": "verb",
       "choices": [
@@ -10375,9 +10378,9 @@
       "word": "wash",
       "phonetic": "/wɑʃ/",
       "definition": "To clean yourself or something with water.",
-      "definitionVi": "Để làm sạch bản thân hoặc một cái gì đó bằng nước.",
+      "definitionVi": "Rửa, làm sạch bằng nước.",
       "category": "home",
-      "partOfSpeech": "noun",
+      "partOfSpeech": "verb",
       "choices": [
         "address",
         "aunt",
@@ -10865,7 +10868,7 @@
       "id": "movers-worse",
       "word": "worse",
       "phonetic": "/wɜːs/",
-      "definition": "More bad than something else; not as good.",
+      "definition": "Not as good as something else; more serious or less good.",
       "definitionVi": "Tệ hơn những thứ khác; không tốt bằng.",
       "category": "general",
       "partOfSpeech": "adjective",
@@ -10898,7 +10901,7 @@
       "id": "movers-worst",
       "word": "worst",
       "phonetic": "/wɜːst/",
-      "definition": "The most bad; worse than all the others.",
+      "definition": "The least good; worse than all the others.",
       "definitionVi": "Điều tồi tệ nhất; tệ hơn tất cả những người khác.",
       "category": "general",
       "partOfSpeech": "adjective",
@@ -10932,7 +10935,7 @@
       "word": "would",
       "phonetic": "/wʊd/",
       "definition": "A word we use for polite offers and wishes.",
-      "definitionVi": "Một từ chúng ta sử dụng cho những lời đề nghị và lời chúc lịch sự.",
+      "definitionVi": "Từ dùng để mời lịch sự hoặc nói điều mình muốn.",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -10963,7 +10966,7 @@
       "word": "wrong",
       "phonetic": "/ɹɒŋ/",
       "definition": "Not correct; not right.",
-      "definitionVi": "Không đúng; không đúng.",
+      "definitionVi": "Không đúng; sai.",
       "category": "general",
       "partOfSpeech": "adjective",
       "choices": [

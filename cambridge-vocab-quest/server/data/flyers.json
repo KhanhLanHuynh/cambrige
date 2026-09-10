@@ -14,7 +14,10 @@
     "contentPack": "starters-content-pack",
     "vocabReviewAppliedAt": "2026-08-03T04:34:50.012Z",
     "vocabLabelsFixedAt": "2026-08-03T04:35:37.151Z",
-    "definitionViResyncedAfterReviewAt": "2026-08-03T04:36:27.514Z"
+    "definitionViResyncedAfterReviewAt": "2026-08-03T04:36:27.514Z",
+    "kidSuitabilityUpdatedAt": "2026-09-10",
+    "definitionViReviewedAt": "2026-09-10",
+    "metadataFixedAt": "2026-09-10"
   },
   "level": "Flyers",
   "count": 447,
@@ -1075,7 +1078,7 @@
       ],
       "answer": "bandage",
       "hint": "A nurse puts a bandage on a hurt knee or arm.",
-      "fact": "Bandages keep a wound clean while it heals.",
+      "fact": "Bandages keep a cut clean while it heals.",
       "level": "Flyers",
       "sentences": [
         "I can see a bandage in the picture.",
@@ -1524,7 +1527,7 @@
       "word": "bridge",
       "phonetic": "/bɹɪd͡ʒ/",
       "definition": "something built over a river or road so people can cross",
-      "definitionVi": "cái gì đó được xây dựng trên một con sông hoặc con đường để mọi người có thể băng qua",
+      "definitionVi": "cây cầu bắc qua sông hoặc đường để mọi người đi qua",
       "category": "places",
       "partOfSpeech": "noun",
       "choices": [
@@ -1577,7 +1580,7 @@
         "Don't use the broken chair.",
         "Tom's pencil is broken.",
         "This story book is broken — the pages are torn.",
-        "My friend's bike is very broken.",
+        "My friend's bike is badly broken.",
         "Why is the TV broken?",
         "We all have broken toys sometimes.",
         "Careful — that cup looks broken!"
@@ -1589,8 +1592,8 @@
       "id": "flyers-brush",
       "word": "brush",
       "phonetic": "/bɹʌʃ/",
-      "definition": "a tool with many small hairs, used for hair or cleaning",
-      "definitionVi": "một dụng cụ có nhiều sợi tóc nhỏ, dùng để làm tóc hoặc làm sạch",
+      "definition": "a tool with many small bristles, used for hair or cleaning",
+      "definitionVi": "dụng cụ có nhiều sợi nhỏ, dùng chải tóc hoặc làm sạch",
       "category": "home",
       "partOfSpeech": "noun",
       "choices": [
@@ -2760,8 +2763,8 @@
         "It is dark outside tonight.",
         "Ben’s room looks dark without the light.",
         "What a dark sky before the rain!",
-        "Don’t walk alone when it is dark.",
-        "Leo is afraid of the dark sometimes.",
+        "Take a torch when it is dark.",
+        "Leo uses a night light when it is dark.",
         "This cave is dark and quiet.",
         "My street is very dark at night.",
         "Why is the classroom so dark?",
@@ -3286,15 +3289,15 @@
       "level": "Flyers",
       "sentences": [
         "Touch your elbow, please.",
-        "Noah washes her elbow.",
-        "I hurt my elbow in the park.",
+        "Noah bends his elbow.",
+        "I bend my elbow to wave hello.",
         "Point to your elbow.",
-        "Zoe has a small elbow.",
+        "Zoe touches her elbow.",
         "We learn body words: elbow.",
-        "Don’t put your elbow in the water.",
+        "Don’t lean on your elbow at the table.",
         "My elbow feels cold.",
         "Can you move your elbow?",
-        "Wash your elbow before lunch."
+        "Bend your elbow like this."
       ],
       "image": "/assets/images/words/flyers-elbow.webp",
       "imageCredit": "liverpoolhls · CC BY-SA 2.0 · flickr · https://www.flickr.com/photos/107733654@N04/10851016965"
@@ -3304,7 +3307,7 @@
       "word": "else",
       "phonetic": "/ɛls/",
       "definition": "different or more; used after words like something, anyone, or where",
-      "definitionVi": "khác hoặc nhiều hơn; được sử dụng sau những từ như cái gì đó, bất cứ ai hoặc ở đâu",
+      "definitionVi": "khác hoặc thêm nữa; dùng sau something, anyone, where…",
       "category": "general",
       "partOfSpeech": "adverb",
       "choices": [
@@ -4125,7 +4128,7 @@
       "word": "fetch",
       "phonetic": "/fɛtʃ/",
       "definition": "to go and bring something back",
-      "definitionVi": "mang lại, lấy về",
+      "definitionVi": "đi lấy về, mang về",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -4238,9 +4241,9 @@
       "sentences": [
         "Touch your finger to your nose, please.",
         "Noah washes his hands and fingers.",
-        "I hurt my finger in the park.",
+        "I hold my pencil with my finger.",
         "Point with your finger at the map.",
-        "Emma has a small cut on her finger.",
+        "Emma wears a ring on her finger.",
         "We learn the word finger in PE.",
         "Don’t put your finger in the hot water.",
         "My finger feels cold in winter.",
@@ -4321,7 +4324,7 @@
       "word": "fire engine",
       "phonetic": "",
       "definition": "a large red vehicle that carries firefighters and water",
-      "definitionVi": "một chiếc xe lớn màu đỏ chở lính cứu hỏa và nước",
+      "definitionVi": "xe cứu hỏa — xe lớn chở lính cứu hỏa và nước",
       "category": "travel",
       "partOfSpeech": "noun",
       "choices": [
@@ -4761,7 +4764,7 @@
       ],
       "answer": "frightening",
       "hint": "A loud thunderstorm can be frightening for some pets.",
-      "fact": "Scary films are made to feel frightening on purpose.",
+      "fact": "Some adventure stories are written to feel frightening on purpose.",
       "level": "Flyers",
       "sentences": [
         "That storm was frightening last night.",
@@ -4783,9 +4786,9 @@
       "word": "front",
       "phonetic": "/fɹʌnt/",
       "definition": "the part that faces forward, or the first place in a line",
-      "definitionVi": "phần hướng về phía trước hoặc vị trí đầu tiên trong một dòng",
+      "definitionVi": "phía trước, hoặc vị trí đầu tiên trong hàng",
       "category": "places",
-      "partOfSpeech": "adjective",
+      "partOfSpeech": "noun",
       "choices": [
         "amazing",
         "alone",
@@ -4901,7 +4904,7 @@
         "What a furry little rabbit!",
         "Don’t wash the furry toy in hot water.",
         "Mia holds a furry puppy carefully.",
-        "This story is about a furry monster.",
+        "This story is about a furry bear.",
         "My friend has a very furry dog.",
         "Why is that coat so furry?",
         "We all stroked the furry cat.",
@@ -5046,8 +5049,8 @@
       "id": "flyers-glove",
       "word": "glove",
       "phonetic": "/ɡlʌv/",
-      "definition": "clothing that covers one hand to keep it warm",
-      "definitionVi": "quần áo che một tay để giữ ấm",
+      "definition": "a covering for one hand to keep it warm",
+      "definitionVi": "găng tay để giữ ấm một bàn tay",
       "category": "clothes",
       "partOfSpeech": "noun",
       "choices": [
@@ -5311,9 +5314,9 @@
       "word": "half",
       "phonetic": "/hɑːf/",
       "definition": "one of two equal parts of something",
-      "definitionVi": "một trong hai phần bằng nhau của một cái gì đó",
+      "definitionVi": "một nửa — một trong hai phần bằng nhau",
       "category": "school",
-      "partOfSpeech": "adjective",
+      "partOfSpeech": "noun",
       "choices": [
         "half",
         "bored",
@@ -5431,7 +5434,7 @@
         "Tom hates waiting for the bus.",
         "We hate being late every day.",
         "Can you tell me what you hate most?",
-        "Watch me — I hate spiders!",
+        "I really hate cold soup!",
         "Do you hate homework at home?",
         "My teacher asked us not to hate mistakes."
       ],
@@ -5725,8 +5728,8 @@
         "Noah thinks the weather looks horrible.",
         "What a horrible day for a picnic!",
         "Don’t be horrible to your friends.",
-        "Leo is horrible about sharing his toys.",
-        "This story has a horrible monster.",
+        "Please don’t be horrible about sharing toys.",
+        "This story has a horrible storm.",
         "My friend had a horrible dream.",
         "Why do you feel so horrible?",
         "We all feel horrible sometimes when we are sick.",
@@ -5773,7 +5776,7 @@
       "word": "hour",
       "phonetic": "/ˈaʊɚ/",
       "definition": "sixty minutes; a length of time",
-      "definitionVi": "sáu mươi phút; một khoảng thời gian dài",
+      "definitionVi": "sáu mươi phút; một khoảng thời gian",
       "category": "time",
       "partOfSpeech": "noun",
       "choices": [
@@ -5904,8 +5907,8 @@
       "id": "flyers-important",
       "word": "important",
       "phonetic": "/ɪmˈpɔːtənt/",
-      "definition": "something you must care about or remember",
-      "definitionVi": "một cái gì đó bạn phải quan tâm hoặc ghi nhớ",
+      "definition": "worth caring about or remembering",
+      "definitionVi": "quan trọng, cần quan tâm hoặc ghi nhớ",
       "category": "school",
       "partOfSpeech": "adjective",
       "choices": [
@@ -6367,7 +6370,7 @@
       "word": "journey",
       "phonetic": "/ˈd͡ʒɜːni/",
       "definition": "travelling from one place to another",
-      "definitionVi": "đi du lịch từ nơi này đến nơi khác",
+      "definitionVi": "chuyến đi từ nơi này đến nơi khác",
       "category": "travel",
       "partOfSpeech": "noun",
       "choices": [
@@ -6530,7 +6533,7 @@
       "word": "king",
       "phonetic": "/kɪŋ/",
       "definition": "a man who is the ruler of a country",
-      "definitionVi": "một người đàn ông là người cai trị một đất nước",
+      "definitionVi": "vua — người đàn ông cai trị một đất nước",
       "category": "people",
       "partOfSpeech": "noun",
       "choices": [
@@ -6563,7 +6566,7 @@
       "word": "knee",
       "phonetic": "/niː/",
       "definition": "the middle part of your leg that bends",
-      "definitionVi": "phần giữa của chân bạn uốn cong",
+      "definitionVi": "đầu gối — chỗ giữa chân có thể gập",
       "category": "body",
       "partOfSpeech": "noun",
       "choices": [
@@ -6578,15 +6581,15 @@
       "level": "Flyers",
       "sentences": [
         "Touch your knee, please.",
-        "Ben washes his knee.",
-        "I hurt my knee in the park.",
+        "Ben bends his knee.",
+        "I bend my knee when I sit down.",
         "Point to your knee.",
-        "Ana has a small cut on her knee.",
+        "Ana points to her knee.",
         "We learn body words: knee.",
         "Don’t put your knee on the wet floor.",
         "My knee feels cold.",
         "Can you move your knee?",
-        "Wash your knee before lunch."
+        "Bend your knee carefully."
       ],
       "image": "/assets/images/words/flyers-knee.webp",
       "imageCredit": "D.L. · CC BY-SA 2.0 · flickr · https://www.flickr.com/photos/35284396@N00/35171147"
@@ -7188,7 +7191,7 @@
       "word": "magazine",
       "phonetic": "/mæɡəˈziːn/",
       "definition": "a thin book with stories and pictures that comes out often",
-      "definitionVi": "một cuốn sách mỏng với những câu chuyện và hình ảnh thường xuyên xuất hiện",
+      "definitionVi": "tạp chí — sách mỏng có bài và hình, ra định kỳ",
       "category": "school",
       "partOfSpeech": "noun",
       "choices": [
@@ -7221,7 +7224,7 @@
       "word": "make sure",
       "phonetic": "",
       "definition": "to check that something is true or finished",
-      "definitionVi": "để kiểm tra xem cái gì đó là đúng hay đã hoàn thành",
+      "definitionVi": "kiểm tra cho chắc cái gì đúng hoặc đã xong",
       "category": "school",
       "partOfSpeech": "verb",
       "choices": [
@@ -9247,7 +9250,7 @@
       "word": "poor",
       "phonetic": "/poː/",
       "definition": "having little money; also used to show you feel sorry for someone",
-      "definitionVi": "có ít tiền; cũng được sử dụng để cho thấy bạn cảm thấy tiếc cho ai đó",
+      "definitionVi": "nghèo, có ít tiền; cũng dùng để tỏ sự thương cảm",
       "category": "feelings",
       "partOfSpeech": "adjective",
       "choices": [
@@ -9676,7 +9679,7 @@
       "word": "push",
       "phonetic": "[pʷʊʃ]",
       "definition": "to move something away from you with your hands",
-      "definitionVi": "để di chuyển một cái gì đó ra khỏi bạn bằng tay của bạn",
+      "definitionVi": "đẩy cái gì ra xa bằng tay",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -10430,8 +10433,8 @@
       "id": "flyers-save",
       "word": "save",
       "phonetic": "/seɪv/",
-      "definition": "To keep money, or to keep someone or something safe.",
-      "definitionVi": "Để giữ tiền, hoặc để giữ cho ai đó hoặc một cái gì đó an toàn.",
+      "definition": "to keep money, or to keep someone or something safe",
+      "definitionVi": "tiết kiệm tiền, hoặc giữ an toàn cho ai đó / cái gì đó",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -10562,10 +10565,10 @@
       "id": "flyers-search",
       "word": "search",
       "phonetic": "/sɜːt͡ʃ/",
-      "definition": "To look carefully for something; or looking for something.",
-      "definitionVi": "Nhìn kỹ một cái gì đó; hoặc đang tìm kiếm thứ gì đó.",
+      "definition": "to look carefully for something, or to find information (for example online)",
+      "definitionVi": "tìm kỹ cái gì đó, hoặc tìm thông tin (ví dụ trên mạng)",
       "category": "technology",
-      "partOfSpeech": "noun",
+      "partOfSpeech": "verb",
       "choices": [
         "autumn",
         "search",
@@ -10782,7 +10785,7 @@
         "Mia should drink more water.",
         "We should practise every day.",
         "Can you tell me what I should say?",
-        "Watch me — you should kick like this!",
+        "Watch me — you should kick the ball like this!",
         "Do you think I should stay at home?",
         "My teacher said we should read more."
       ]
@@ -10923,8 +10926,8 @@
       "id": "flyers-smell",
       "word": "smell",
       "phonetic": "/smɛl/",
-      "definition": "Something you notice with your nose; or to notice something with your nose.",
-      "definitionVi": "Điều gì đó bạn nhận thấy bằng mũi của mình; hoặc để nhận thấy điều gì đó bằng mũi của bạn.",
+      "definition": "something you notice with your nose; or to notice something with your nose",
+      "definitionVi": "mùi bạn nhận thấy bằng mũi; hoặc ngửi bằng mũi",
       "category": "body",
       "partOfSpeech": "noun",
       "choices": [
@@ -10939,10 +10942,10 @@
       "level": "Flyers",
       "sentences": [
         "Can you smell the flowers, please?",
-        "Ben can smell smoke in the kitchen.",
+        "Ben can smell pizza in the kitchen.",
         "I like the smell of fresh bread.",
         "Point to the thing with a strong smell.",
-        "Emma has a perfume with a sweet smell.",
+        "Emma has soap with a sweet smell.",
         "We learn about smell in science.",
         "Don’t smell the paint — it’s strong!",
         "My cold makes smells hard to notice.",
@@ -11806,8 +11809,8 @@
       "id": "flyers-step",
       "word": "step",
       "phonetic": "/stɛp/",
-      "definition": "A movement of your foot when you walk, or one stair.",
-      "definitionVi": "Chuyển động của bàn chân khi bạn đi bộ hoặc leo lên một bậc thang.",
+      "definition": "a movement of your foot when you walk, or one stair",
+      "definitionVi": "bước chân khi đi, hoặc một bậc thang",
       "category": "body",
       "partOfSpeech": "noun",
       "choices": [
@@ -11823,7 +11826,7 @@
       "sentences": [
         "Take one step forward, please.",
         "Leo climbs the steps to the door.",
-        "I hurt my foot on the step.",
+        "I put my foot carefully on the step.",
         "Point to the first step.",
         "Tom has a small step into the garden.",
         "We learn dance steps at school.",
@@ -11988,7 +11991,7 @@
         "Zoe looks strange in that big hat.",
         "What a strange day at school!",
         "Don’t worry about strange noises outside.",
-        "Ben is strange about trying new food.",
+        "Ben feels strange about trying new food.",
         "This story is strange but funny.",
         "My friend found a strange rock.",
         "Why do you feel strange this morning?",
@@ -12167,8 +12170,8 @@
       "id": "flyers-study",
       "word": "study",
       "phonetic": "/ˈstʌdi/",
-      "definition": "To spend time learning about a subject.",
-      "definitionVi": "Để dành thời gian tìm hiểu về một chủ đề.",
+      "definition": "to spend time learning about a subject",
+      "definitionVi": "dành thời gian học về một chủ đề",
       "category": "school",
       "partOfSpeech": "verb",
       "choices": [
@@ -12942,15 +12945,15 @@
       "level": "Flyers",
       "sentences": [
         "Touch your toe, please.",
-        "Emma washes her toe.",
-        "I hurt my toe in the park.",
+        "Emma wiggles her toe.",
+        "I touch my toe in PE class.",
         "Point to your toe.",
-        "Noah has a small toe.",
+        "Noah wiggles his big toe.",
         "We learn body words: toe.",
-        "Don’t put your toe in the water.",
+        "Point to your biggest toe.",
         "My toe feels cold.",
         "Can you move your toe?",
-        "Wash your toe before lunch."
+        "Can you count your toes?"
       ],
       "image": "/assets/images/words/flyers-toe.webp",
       "imageCredit": "jess2284 · CC BY-SA 2.0 · flickr · https://www.flickr.com/photos/49744078@N00/274773248"
@@ -13290,7 +13293,7 @@
       "word": "turn",
       "phonetic": "/tɜːn/",
       "definition": "to change the way you are facing or going",
-      "definitionVi": "để thay đổi cách bạn đang đối mặt hoặc đi",
+      "definitionVi": "đổi hướng đang nhìn hoặc đang đi",
       "category": "places",
       "partOfSpeech": "verb",
       "choices": [
@@ -13715,7 +13718,7 @@
       "word": "use",
       "phonetic": "",
       "definition": "to do a job with something, such as a tool or machine",
-      "definitionVi": "thực hiện công việc với cái gì đó, chẳng hạn như một công cụ hoặc máy móc",
+      "definitionVi": "dùng cái gì để làm việc, như dụng cụ hoặc máy",
       "category": "general",
       "partOfSpeech": "verb",
       "choices": [
@@ -14241,7 +14244,7 @@
       "word": "will",
       "phonetic": "/wɪl/",
       "definition": "a word we use to talk about the future",
-      "definitionVi": "một từ chúng ta dùng để nói về tương lai",
+      "definitionVi": "từ dùng để nói về tương lai",
       "category": "time",
       "partOfSpeech": "verb",
       "choices": [
@@ -14488,7 +14491,7 @@
         "We draw on wood at craft club.",
         "Mia finds smooth wood in the park workshop.",
         "Can you see the wood in the picture?",
-        "Don’t hurt your hand on rough wood.",
+        "Be careful with rough wood.",
         "The wood table is beautiful.",
         "There is wood near the fireplace.",
         "My favourite toy is made of wood."
@@ -14567,7 +14570,7 @@
       "word": "x-ray",
       "phonetic": "",
       "definition": "a picture doctors take to see inside your body",
-      "definitionVi": "chụp X-quang",
+      "definitionVi": "ảnh X-quang — ảnh bác sĩ chụp để xem bên trong cơ thể",
       "category": "health",
       "partOfSpeech": "noun",
       "choices": [
