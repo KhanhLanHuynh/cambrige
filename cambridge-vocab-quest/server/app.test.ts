@@ -352,6 +352,45 @@ describe('Cambridge Vocab Quest API', () => {
     await app.close()
   }, 20_000)
 
+  it('reports absolute unique words practiced per day on the parent dashboard', async () => {
+    const { app, store } = await testApp()
+    const { vocabulary } = await import('./vocabulary.js')
+    const cookie = await signInAsParent(app, store, { name: 'Parent', email: 'activity-unique@example.com' })
+    const creation = await app.inject({
+      method: 'POST',
+      url: '/api/learners',
+      headers: { cookie },
+      payload: { name: 'Explorer', level: 'Starters' },
+    })
+    const learnerId = creation.json().learner.id as string
+    const words = vocabulary.filter((item) => item.level === 'Starters').slice(0, 2)
+    expect(words).toHaveLength(2)
+    const today = new Date().toISOString().slice(0, 10)
+    const answeredAt = `${today}T12:00:00.000Z`
+
+    await store.update((database) => {
+      database.attempts.push(
+        { id: randomUUID(), learnerId, wordId: words[0]!.id, correct: true, answeredAt },
+        { id: randomUUID(), learnerId, wordId: words[0]!.id, correct: false, answeredAt },
+        { id: randomUUID(), learnerId, wordId: words[1]!.id, correct: true, answeredAt },
+      )
+    })
+
+    const dashboard = await app.inject({ method: 'GET', url: '/api/parent/dashboard', headers: { cookie } })
+    expect(dashboard.statusCode).toBe(200)
+    const body = dashboard.json() as {
+      activityDates: string[]
+      activity: Array<{ learnerId: string; values: number[] }>
+    }
+    const todayIndex = body.activityDates.indexOf(today)
+    expect(todayIndex).toBeGreaterThanOrEqual(0)
+    const series = body.activity.find((item) => item.learnerId === learnerId)
+    expect(series).toBeTruthy()
+    expect(series!.values[todayIndex]).toBe(2)
+    expect(series!.values.every((value) => value <= 2)).toBe(true)
+    await app.close()
+  }, 20_000)
+
   it('patches settings for every learner on the parent account', async () => {
     const { app, store } = await testApp()
     const cookie = await signInAsParent(app, store, { name: 'Parent', email: 'settings-multi@example.com' })
@@ -2011,4 +2050,194 @@ describe('Cambridge Vocab Quest API', () => {
 
     await app.close()
   }, 60_000)
+
+  it('keeps a separate gift catalog per learner and migrates old parent catalogs', async () => {
+    const { migrateDatabase } = await import('./store.js')
+    const parentId = randomUUID()
+    const learnerAId = randomUUID()
+    const learnerBId = randomUUID()
+    const sharedGiftId = randomUUID()
+    const legacy = migrateDatabase({
+      version: 2,
+      users: [{
+        id: parentId,
+        name: 'Parent',
+        email: 'gifts@example.com',
+        passwordHash: 'hash',
+        role: 'parent',
+        createdAt: new Date().toISOString(),
+        giftCatalog: [{ id: sharedGiftId, name: 'Sticker pack', costGems: 100 }],
+      }] as never[],
+      learners: [
+        {
+          id: learnerAId,
+          userId: parentId,
+          nickname: 'Ada',
+          avatar: 'owl',
+          level: 'Movers',
+          streak: 0,
+          gems: 200,
+          claimedQuestIds: [],
+          achievementIds: [],
+          perfectQuizCount: 0,
+          minutesPractisedToday: 0,
+          completedQuizToday: false,
+          miniGameModesCompletedToday: [],
+          settings: {
+            dailyGoal: 10,
+            dailyLimitMinutes: 45,
+            reviewMix: 25,
+            timedModesEnabled: true,
+            focusMode: false,
+            soundEnabled: true,
+            hintsEnabled: true,
+            speedMatchSeconds: 60,
+          },
+          createdAt: new Date().toISOString(),
+        },
+        {
+          id: learnerBId,
+          userId: parentId,
+          nickname: 'Bea',
+          avatar: 'fox',
+          level: 'Starters',
+          streak: 0,
+          gems: 50,
+          claimedQuestIds: [],
+          achievementIds: [],
+          perfectQuizCount: 0,
+          minutesPractisedToday: 0,
+          completedQuizToday: false,
+          miniGameModesCompletedToday: [],
+          settings: {
+            dailyGoal: 10,
+            dailyLimitMinutes: 45,
+            reviewMix: 25,
+            timedModesEnabled: true,
+            focusMode: false,
+            soundEnabled: true,
+            hintsEnabled: true,
+            speedMatchSeconds: 60,
+          },
+          createdAt: new Date().toISOString(),
+        },
+      ] as never[],
+    })
+
+    expect(legacy.users[0]).not.toHaveProperty('giftCatalog')
+    expect(legacy.learners.map((learner) => learner.giftCatalog)).toEqual([
+      [{ id: sharedGiftId, name: 'Sticker pack', costGems: 100 }],
+      [{ id: sharedGiftId, name: 'Sticker pack', costGems: 100 }],
+    ])
+
+    const { app, store } = await testApp()
+    const cookie = await signInAsParent(app, store, { email: 'gift-parent@example.com' })
+
+    const learnerA = await app.inject({
+      method: 'POST',
+      url: '/api/learners',
+      headers: { cookie },
+      payload: { name: 'Ada', avatar: '🦉', level: 'Movers', pin: '1234' },
+    })
+    expect(learnerA.statusCode).toBe(201)
+    const learnerAIdLive = learnerA.json().learner.id as string
+
+    const learnerB = await app.inject({
+      method: 'POST',
+      url: '/api/learners',
+      headers: { cookie },
+      payload: { name: 'Bea', avatar: '🦊', level: 'Starters', pin: '2345' },
+    })
+    expect(learnerB.statusCode).toBe(201)
+    const learnerBIdLive = learnerB.json().learner.id as string
+
+    const giftAId = randomUUID()
+    const giftBId = randomUUID()
+
+    const saveA = await app.inject({
+      method: 'PUT',
+      url: `/api/parent/learners/${learnerAIdLive}/gifts`,
+      headers: { cookie },
+      payload: { gifts: [{ id: giftAId, name: 'Ice cream', costGems: 100 }] },
+    })
+    expect(saveA.statusCode).toBe(200)
+    expect(saveA.json().catalog).toEqual([{ id: giftAId, name: 'Ice cream', costGems: 100 }])
+
+    const saveB = await app.inject({
+      method: 'PUT',
+      url: `/api/parent/learners/${learnerBIdLive}/gifts`,
+      headers: { cookie },
+      payload: { gifts: [{ id: giftBId, name: 'Cinema', costGems: 200 }] },
+    })
+    expect(saveB.statusCode).toBe(200)
+
+    const catalogA = await app.inject({
+      method: 'GET',
+      url: `/api/parent/learners/${learnerAIdLive}/gifts`,
+      headers: { cookie },
+    })
+    expect(catalogA.json().catalog).toEqual([{ id: giftAId, name: 'Ice cream', costGems: 100 }])
+
+    await store.update((database) => {
+      const ada = database.learners.find((item) => item.id === learnerAIdLive)!
+      ada.gems = 150
+    })
+
+    const selectA = await app.inject({
+      method: 'POST',
+      url: '/api/learners/select',
+      headers: { cookie },
+      payload: { learnerId: learnerAIdLive, pin: '1234' },
+    })
+    expect(selectA.statusCode).toBe(200)
+
+    const shopA = await app.inject({
+      method: 'GET',
+      url: '/api/learner/gifts',
+      headers: { cookie },
+    })
+    expect(shopA.statusCode).toBe(200)
+    expect(shopA.json().catalog).toEqual([{ id: giftAId, name: 'Ice cream', costGems: 100 }])
+
+    const siblingDenied = await app.inject({
+      method: 'POST',
+      url: '/api/learner/gifts/request',
+      headers: { cookie },
+      payload: { giftId: giftBId },
+    })
+    expect(siblingDenied.statusCode).toBe(404)
+
+    const request = await app.inject({
+      method: 'POST',
+      url: '/api/learner/gifts/request',
+      headers: { cookie },
+      payload: { giftId: giftAId },
+    })
+    expect(request.statusCode).toBe(201)
+    const redemptionId = request.json().redemption.id as string
+
+    const gate = await app.inject({
+      method: 'POST',
+      url: '/api/auth/parent-gate',
+      headers: { cookie },
+      payload: { password: DEFAULT_PASSWORD },
+    })
+    expect(gate.statusCode).toBe(200)
+
+    const approve = await app.inject({
+      method: 'POST',
+      url: `/api/parent/redemptions/${redemptionId}/approve`,
+      headers: { cookie },
+    })
+    expect(approve.statusCode).toBe(200)
+    expect(approve.json().redemption.status).toBe('approved')
+    expect(approve.json().learner.gems).toBe(50)
+
+    const achievements = store.read((database) =>
+      database.learners.find((item) => item.id === learnerAIdLive)?.achievementIds ?? [],
+    )
+    expect(achievements).toContain('gift_first')
+
+    await app.close()
+  }, 20_000)
 })

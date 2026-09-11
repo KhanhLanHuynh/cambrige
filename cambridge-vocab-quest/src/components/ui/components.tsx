@@ -473,7 +473,7 @@ export function AppShell({ children, path, learner, navigate, onSwitchLearner, o
               })}
             </ul>
             {!gifts?.catalog.length && (
-              <p className="no-results">Ask a grown-up to add gifts in Curriculum Settings.</p>
+              <p className="no-results">Ask a grown-up to add gifts for you.</p>
             )}
           </section>
         </div>

@@ -18,7 +18,6 @@ export interface UserRecord {
   passwordHash: string
   role: UserRole
   createdAt: string
-  giftCatalog: GiftDefinition[]
 }
 
 export function isSuperAdmin(user: Pick<UserRecord, 'role'>): boolean {
@@ -77,6 +76,8 @@ export interface LearnerRecord {
   completedQuizToday: boolean
   miniGameModesCompletedToday: MiniGameMode[]
   settings: LearnerSettings
+  /** Real-world gifts this learner can request with gems. */
+  giftCatalog: GiftDefinition[]
   createdAt: string
 }
 
@@ -174,7 +175,6 @@ function normalizeUser(raw: Partial<UserRecord> & Pick<UserRecord, 'id' | 'name'
     passwordHash: raw.passwordHash,
     role: raw.role === 'superadmin' ? 'superadmin' : 'parent',
     createdAt: raw.createdAt,
-    giftCatalog: (raw.giftCatalog ?? []).map((gift) => normalizeGift(gift as GiftDefinition)),
   }
 }
 
@@ -192,7 +192,11 @@ function normalizeRedemption(raw: Partial<RedemptionRecord> & Pick<RedemptionRec
   }
 }
 
-function normalizeLearner(raw: Partial<LearnerRecord> & Pick<LearnerRecord, 'id' | 'userId' | 'nickname' | 'avatar' | 'level' | 'createdAt'> & { stars?: number }): LearnerRecord {
+function normalizeLearner(
+  raw: Partial<LearnerRecord> & Pick<LearnerRecord, 'id' | 'userId' | 'nickname' | 'avatar' | 'level' | 'createdAt'> & { stars?: number },
+  fallbackCatalog: GiftDefinition[] = [],
+): LearnerRecord {
+  const existingCatalog = Array.isArray(raw.giftCatalog) ? raw.giftCatalog : undefined
   return {
     id: raw.id,
     userId: raw.userId,
@@ -213,16 +217,37 @@ function normalizeLearner(raw: Partial<LearnerRecord> & Pick<LearnerRecord, 'id'
       ? raw.miniGameModesCompletedToday.filter(isMiniGameMode)
       : [],
     settings: { ...defaultSettings(), ...raw.settings },
+    giftCatalog: (existingCatalog ?? fallbackCatalog).map((gift) => normalizeGift(gift as GiftDefinition)),
     createdAt: raw.createdAt,
   }
 }
 
 export function migrateDatabase(raw: Partial<Database> & { version?: number }): Database {
   const base = emptyDatabase()
+  type LegacyUser = Partial<UserRecord> & {
+    id: string
+    name: string
+    email: string
+    passwordHash: string
+    createdAt: string
+    giftCatalog?: GiftDefinition[]
+  }
+  const rawUsers = (raw.users ?? []) as LegacyUser[]
+  const parentCatalogs = new Map<string, GiftDefinition[]>()
+  for (const user of rawUsers) {
+    if (Array.isArray(user.giftCatalog) && user.giftCatalog.length > 0) {
+      parentCatalogs.set(user.id, user.giftCatalog.map((gift) => normalizeGift(gift)))
+    }
+  }
   return {
     version: 2,
-    users: (raw.users ?? []).map((user) => normalizeUser(user as UserRecord)),
-    learners: (raw.learners ?? []).map((learner) => normalizeLearner(learner as LearnerRecord)),
+    users: rawUsers.map((user) => normalizeUser(user)),
+    learners: (raw.learners ?? []).map((learner) => {
+      const entry = learner as LearnerRecord
+      const hasOwnCatalog = Array.isArray(entry.giftCatalog)
+      const fallback = hasOwnCatalog ? [] : (parentCatalogs.get(entry.userId) ?? [])
+      return normalizeLearner(entry, fallback)
+    }),
     sessions: raw.sessions ?? [],
     quizzes: (raw.quizzes ?? []).map((quiz) => ({
       ...(quiz as QuizRecord),

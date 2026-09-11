@@ -1,11 +1,17 @@
 import { randomUUID } from 'node:crypto'
 import { pathToFileURL } from 'node:url'
 import { createStore } from './sqlite-store.js'
-import { emptyDatabase, type DataStore } from './store.js'
+import { emptyDatabase, type DataStore, type GiftDefinition } from './store.js'
 import { hashSecret } from './security.js'
 
 const DEMO_EMAIL = 'demo@example.com'
 const ADMIN_EMAIL = process.env.SEED_ADMIN_EMAIL ?? 'khanhlanhuynh@gmail.com'
+
+const demoGiftCatalog = (): GiftDefinition[] => [
+  { id: randomUUID(), name: 'Sticker pack', costGems: 100 },
+  { id: randomUUID(), name: 'Ice cream treat', costGems: 250 },
+  { id: randomUUID(), name: 'Cinema outing', costGems: 500 },
+]
 
 export async function seedStore(store: DataStore, reset = false): Promise<void> {
   if (reset) await store.reset(emptyDatabase())
@@ -15,12 +21,12 @@ export async function seedStore(store: DataStore, reset = false): Promise<void> 
   if (demoExists) {
     await store.update((database) => {
       const user = database.users.find((item) => item.email === DEMO_EMAIL)
-      if (user && (!user.giftCatalog || user.giftCatalog.length === 0)) {
-        user.giftCatalog = [
-          { id: randomUUID(), name: 'Sticker pack', costGems: 100 },
-          { id: randomUUID(), name: 'Ice cream treat', costGems: 250 },
-          { id: randomUUID(), name: 'Cinema outing', costGems: 500 },
-        ]
+      if (!user) return
+      const learners = database.learners.filter((item) => item.userId === user.id)
+      for (const learner of learners) {
+        if (!learner.giftCatalog || learner.giftCatalog.length === 0) {
+          learner.giftCatalog = demoGiftCatalog()
+        }
       }
     })
   } else {
@@ -37,11 +43,6 @@ export async function seedStore(store: DataStore, reset = false): Promise<void> 
         passwordHash,
         role: 'parent',
         createdAt: now,
-        giftCatalog: [
-          { id: randomUUID(), name: 'Sticker pack', costGems: 100 },
-          { id: randomUUID(), name: 'Ice cream treat', costGems: 250 },
-          { id: randomUUID(), name: 'Cinema outing', costGems: 500 },
-        ],
       })
       database.learners.push({
         id: learnerId,
@@ -68,6 +69,7 @@ export async function seedStore(store: DataStore, reset = false): Promise<void> 
           hintsEnabled: true,
           speedMatchSeconds: 60,
         },
+        giftCatalog: demoGiftCatalog(),
         createdAt: now,
       })
     })
@@ -84,7 +86,6 @@ export async function seedStore(store: DataStore, reset = false): Promise<void> 
         passwordHash,
         role: 'superadmin',
         createdAt: now,
-        giftCatalog: [],
       })
     })
   }

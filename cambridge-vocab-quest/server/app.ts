@@ -62,6 +62,7 @@ import {
 const SESSION_COOKIE = 'cvq_session'
 const SESSION_AGE_SECONDS = 60 * 60 * 24 * 14
 const idParams = z.object({ id: z.string().uuid() })
+const learnerIdParams = z.object({ learnerId: z.string().uuid() })
 const cambridgeLevels = ['Starters', 'Movers', 'Flyers', 'Preliminary'] as const
 const vocabularySearchQuery = z.object({
   q: z.string().optional().default(''),
@@ -616,6 +617,7 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
       completedQuizToday: false,
       miniGameModesCompletedToday: [],
       settings: siblingSettings ? { ...siblingSettings } : defaultSettings(),
+      giftCatalog: [],
       createdAt: new Date().toISOString(),
     }
     await store.update((database) => {
@@ -1127,11 +1129,12 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
     const activityCounts = learners.map((learner) => ({
       learnerId: learner.id,
       name: learner.nickname,
-      counts: dates.map((date) =>
-        allAttempts.filter((attempt) => attempt.learnerId === learner.id && attempt.answeredAt.slice(0, 10) === date).length,
-      ),
+      counts: dates.map((date) => new Set(
+        allAttempts
+          .filter((attempt) => attempt.learnerId === learner.id && attempt.answeredAt.slice(0, 10) === date)
+          .map((attempt) => attempt.wordId),
+      ).size),
     }))
-    const peakDailyCount = Math.max(1, ...activityCounts.flatMap((series) => series.counts))
     const weekStart = dates[0]!
     const masteredThisWeek = new Set(
       allAttempts
@@ -1153,7 +1156,7 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
       activity: activityCounts.map((series) => ({
         learnerId: series.learnerId,
         name: series.name,
-        values: series.counts.map((count) => Math.round((count / peakDailyCount) * 100)),
+        values: series.counts,
       })),
       masteredThisWeek,
       masteryByLevel: (Object.entries(levelCounts) as Array<[CambridgeLevel, number]>).map(([label, count]) => ({
@@ -1221,47 +1224,49 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
     }
   })
 
-  app.get('/api/parent/gifts', async (request) => {
+  app.get('/api/parent/learners/:learnerId/gifts', async (request) => {
     const session = requireParent(request)
+    const { learnerId } = parse(learnerIdParams, request.params)
     return store.read((database) => {
-      const user = database.users.find((item) => item.id === session.userId)
-      if (!user) throw new HttpError(404, 'Account not found')
-      const learners = database.learners.filter((item) => item.userId === session.userId)
+      const learner = database.learners.find(
+        (item) => item.id === learnerId && item.userId === session.userId,
+      )
+      if (!learner) throw new HttpError(404, 'Learner not found')
       const pending = database.redemptions.filter(
-        (item) => item.userId === session.userId && item.status === 'pending',
+        (item) => item.learnerId === learner.id && item.status === 'pending',
       )
       return {
-        catalog: user.giftCatalog,
-        pendingRedemptions: pending.map((item) => {
-          const learner = learners.find((entry) => entry.id === item.learnerId)
-          return {
-            id: item.id,
-            learnerId: item.learnerId,
-            learnerName: learner?.nickname ?? 'Learner',
-            giftId: item.giftId,
-            giftName: item.giftName,
-            costGems: item.costGems,
-            status: item.status,
-            createdAt: item.createdAt,
-            learnerGems: learner?.gems ?? 0,
-          }
-        }),
+        catalog: learner.giftCatalog,
+        pendingRedemptions: pending.map((item) => ({
+          id: item.id,
+          learnerId: item.learnerId,
+          learnerName: learner.nickname,
+          giftId: item.giftId,
+          giftName: item.giftName,
+          costGems: item.costGems,
+          status: item.status,
+          createdAt: item.createdAt,
+          learnerGems: learner.gems,
+        })),
       }
     })
   })
 
-  app.put('/api/parent/gifts', async (request) => {
+  app.put('/api/parent/learners/:learnerId/gifts', async (request) => {
     const session = requireParent(request)
+    const { learnerId } = parse(learnerIdParams, request.params)
     const body = parse(giftCatalogSchema, request.body)
     const catalog = await store.update((database) => {
-      const user = database.users.find((item) => item.id === session.userId)
-      if (!user) throw new HttpError(404, 'Account not found')
-      user.giftCatalog = body.gifts.map((gift) => ({
+      const learner = database.learners.find(
+        (item) => item.id === learnerId && item.userId === session.userId,
+      )
+      if (!learner) throw new HttpError(404, 'Learner not found')
+      learner.giftCatalog = body.gifts.map((gift) => ({
         id: gift.id ?? randomUUID(),
         name: gift.name,
         costGems: gift.costGems,
       }))
-      return user.giftCatalog
+      return learner.giftCatalog
     })
     return { catalog }
   })
@@ -1340,16 +1345,16 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
   })
 
   app.get('/api/learner/gifts', async (request) => {
-    const { session, learner } = requireLearner(request)
+    const { learner } = requireLearner(request)
     return store.read((database) => {
-      const user = database.users.find((item) => item.id === session.userId)
-      if (!user) throw new HttpError(404, 'Account not found')
+      const current = database.learners.find((item) => item.id === learner.id)
+      if (!current) throw new HttpError(404, 'Learner not found')
       const pending = database.redemptions.find(
         (item) => item.learnerId === learner.id && item.status === 'pending',
       )
       return {
-        gems: learner.gems,
-        catalog: user.giftCatalog,
+        gems: current.gems,
+        catalog: current.giftCatalog,
         pending: pending
           ? {
               id: pending.id,
@@ -1369,12 +1374,10 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
     const { session, learner } = requireLearner(request)
     const body = parse(giftRequestSchema, request.body)
     const redemption = await store.update((database) => {
-      const user = database.users.find((item) => item.id === session.userId)
-      if (!user) throw new HttpError(404, 'Account not found')
-      const gift = user.giftCatalog.find((item) => item.id === body.giftId)
-      if (!gift) throw new HttpError(404, 'Gift not found')
       const currentLearner = database.learners.find((item) => item.id === learner.id)
       if (!currentLearner) throw new HttpError(404, 'Learner not found')
+      const gift = currentLearner.giftCatalog.find((item) => item.id === body.giftId)
+      if (!gift) throw new HttpError(404, 'Gift not found')
       const alreadyPending = database.redemptions.some(
         (item) => item.learnerId === learner.id && item.status === 'pending',
       )

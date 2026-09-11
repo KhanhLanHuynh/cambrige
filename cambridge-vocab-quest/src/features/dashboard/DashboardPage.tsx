@@ -49,9 +49,10 @@ function activityDayLabel(isoDate: string) {
     .toUpperCase()
 }
 
-function activityPoints(values: number[]) {
+function activityPoints(values: number[], peak: number) {
   const last = Math.max(1, values.length - 1)
-  return values.map((value, index) => `${index * (100 / last)},${100 - value}`).join(' ')
+  const scale = Math.max(1, peak)
+  return values.map((value, index) => `${index * (100 / last)},${100 - (value / scale) * 100}`).join(' ')
 }
 
 function newGiftDraft(): GiftDefinition {
@@ -186,18 +187,26 @@ export function SettingsModal({
   )
 }
 
-function GiftCatalogModal({ onClose }: { onClose: () => void }) {
+function GiftCatalogModal({
+  learnerId,
+  learnerName,
+  onClose,
+}: {
+  learnerId: string
+  learnerName: string
+  onClose: () => void
+}) {
   const [catalog, setCatalog] = useState<GiftDefinition[]>([])
   const [catalogLoading, setCatalogLoading] = useState(true)
   const [catalogSaved, setCatalogSaved] = useState(false)
   const [catalogError, setCatalogError] = useState('')
 
   useEffect(() => {
-    api<{ catalog: GiftDefinition[] }>('/parent/gifts')
+    api<{ catalog: GiftDefinition[] }>(`/parent/learners/${learnerId}/gifts`)
       .then((response) => setCatalog(response.catalog))
       .catch(() => setCatalog([]))
       .finally(() => setCatalogLoading(false))
-  }, [])
+  }, [learnerId])
 
   const saveCatalog = async () => {
     if (catalog.some((gift) => !gift.name.trim())) {
@@ -206,7 +215,7 @@ function GiftCatalogModal({ onClose }: { onClose: () => void }) {
     }
     const cleaned = catalog.map((gift) => ({ ...gift, name: gift.name.trim() }))
     try {
-      const response = await api<{ catalog: GiftDefinition[] }>('/parent/gifts', {
+      const response = await api<{ catalog: GiftDefinition[] }>(`/parent/learners/${learnerId}/gifts`, {
         method: 'PUT',
         body: { gifts: cleaned },
       })
@@ -222,8 +231,8 @@ function GiftCatalogModal({ onClose }: { onClose: () => void }) {
     <div className="modal-backdrop">
       <section className="modal settings-modal gift-catalog-modal" role="dialog" aria-modal="true">
         <button className="modal-close" onClick={onClose} aria-label="Close gifts"><X /></button>
-        <h2>Real-world gifts</h2>
-        <p>Define gifts learners can request with gems. Approve requests from the learner table.</p>
+        <h2>Real-world gifts · {learnerName}</h2>
+        <p>Define gifts this learner can request with gems. Approve requests from the learner table.</p>
         <div className="gift-catalog-editor">
           {catalogLoading
             ? <p>Loading gift catalog…</p>
@@ -1053,7 +1062,7 @@ export function DashboardPage({
   const [accuracySort, setAccuracySort] = useState<AccuracySortDirection>('asc')
   const [page, setPage] = useState(0)
   const [settingsOpen, setSettingsOpen] = useState(openSettings)
-  const [giftsOpen, setGiftsOpen] = useState(false)
+  const [giftsLearner, setGiftsLearner] = useState<Learner | null>(null)
   const [assignOpen, setAssignOpen] = useState(false)
   const [addOpen, setAddOpen] = useState(false)
   const [sentencesOpen, setSentencesOpen] = useState(false)
@@ -1080,6 +1089,7 @@ export function DashboardPage({
   const pageCount = Math.max(1, Math.ceil(visibleWords.length / 5))
   const pagedWords = visibleWords.slice(page * 5, page * 5 + 5)
   const activitySeries = summary?.activity ?? []
+  const activityPeak = Math.max(1, ...activitySeries.flatMap((series) => series.values))
   const householdLearners = summary?.learners ?? []
   const atLearnerLimit = Math.max(householdLearners.length, sessionLearnerCount) >= MAX_LEARNERS_PER_PARENT
   const sharedSettings = useMemo(
@@ -1132,6 +1142,7 @@ export function DashboardPage({
     setDeleteError('')
     setRedeeming(null)
     setRedeemError('')
+    setGiftsLearner(null)
   }
 
   const openEdit = (entry: Learner) => {
@@ -1142,6 +1153,7 @@ export function DashboardPage({
     setDeleteError('')
     setRedeeming(null)
     setRedeemError('')
+    setGiftsLearner(null)
   }
 
   const openRedeem = (item: GiftRedemption) => {
@@ -1152,6 +1164,7 @@ export function DashboardPage({
     setPendingDelete(null)
     setConfirmName('')
     setDeleteError('')
+    setGiftsLearner(null)
   }
 
   const resolveRedeem = async (action: 'approve' | 'reject') => {
@@ -1263,9 +1276,6 @@ export function DashboardPage({
           <div className="dashboard-hero-actions">
             <Button variant="secondary" onClick={() => void downloadFromApi('/parent/weekly-report.csv', 'weekly-report.csv')}><Download /> Weekly Report</Button>
             <Button variant="secondary" onClick={() => setSettingsOpen(true)}>Curriculum Settings</Button>
-            <Button variant="secondary" onClick={() => setGiftsOpen(true)}>
-              <Gift /> Real-world gifts
-            </Button>
           </div>
         </div>
         <div className="hero-visual">📚<span>📈</span></div>
@@ -1340,6 +1350,20 @@ export function DashboardPage({
                               }}
                             >
                               Delete
+                            </button>
+                            <button
+                              type="button"
+                              className="text-link"
+                              onClick={() => {
+                                setGiftsLearner(learner)
+                                setEditing(null)
+                                setAddOpen(false)
+                                setPendingDelete(null)
+                                setRedeeming(null)
+                                setRedeemError('')
+                              }}
+                            >
+                              <Gift aria-hidden="true" size={14} /> Gifts
                             </button>
                             <button
                               type="button"
@@ -1449,7 +1473,7 @@ export function DashboardPage({
       <div className="charts">
         <section className="card activity-chart">
           <div className="section-heading">
-            <div><h2>Learning Activity</h2><p>Daily vocabulary engagement over the last 7 days</p></div>
+            <div><h2>Learning Activity</h2><p>Unique words practiced over the last 7 days</p></div>
             <span className="activity-legend">
               {activitySeries.length
                 ? activitySeries.map((series, index) => (
@@ -1463,19 +1487,19 @@ export function DashboardPage({
           </div>
           <div className="activity-plot-wrap">
             <div className="activity-y-axis" aria-hidden="true">
-              <span>100</span>
-              <span>50</span>
+              <span>{activityPeak}</span>
+              <span>{Math.floor(activityPeak / 2)}</span>
               <span>0</span>
             </div>
             <div className="activity-plot">
-              <svg viewBox="0 0 100 100" preserveAspectRatio="none" role="img" aria-label="Learning activity by learner over the last 7 days, relative scale from 0 to 100">
+              <svg viewBox="0 0 100 100" preserveAspectRatio="none" role="img" aria-label="Unique words practiced by learner over the last 7 days">
                 <line x1="0" y1="0" x2="100" y2="0" className="activity-gridline" vectorEffect="non-scaling-stroke" />
                 <line x1="0" y1="50" x2="100" y2="50" className="activity-gridline" vectorEffect="non-scaling-stroke" />
                 <line x1="0" y1="100" x2="100" y2="100" className="activity-gridline" vectorEffect="non-scaling-stroke" />
                 {activitySeries.map((series, index) => (
                   <polyline
                     key={series.learnerId}
-                    points={activityPoints(series.values.length ? series.values : [0, 0, 0, 0, 0, 0, 0])}
+                    points={activityPoints(series.values.length ? series.values : [0, 0, 0, 0, 0, 0, 0], activityPeak)}
                     fill="none"
                     stroke={ACTIVITY_COLORS[index % ACTIVITY_COLORS.length]}
                     strokeWidth="2"
@@ -1629,8 +1653,12 @@ export function DashboardPage({
           onClose={() => { setSettingsOpen(false); if (openSettings) navigate('/dashboard') }}
         />
       )}
-      {giftsOpen && (
-        <GiftCatalogModal onClose={() => setGiftsOpen(false)} />
+      {giftsLearner && (
+        <GiftCatalogModal
+          learnerId={giftsLearner.id}
+          learnerName={giftsLearner.name}
+          onClose={() => setGiftsLearner(null)}
+        />
       )}
       {addOpen && (
         <AddLearnerModal

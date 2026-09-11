@@ -3,7 +3,7 @@ import { pathToFileURL } from 'node:url'
 import { parentUpdateSchema, registerSchema } from '../shared/schemas.js'
 import { hashSecret } from './security.js'
 import { createStore } from './sqlite-store.js'
-import { isSuperAdmin, type DataStore, type GiftDefinition, type UserRole } from './store.js'
+import { isSuperAdmin, type DataStore, type UserRole } from './store.js'
 
 export class AdminError extends Error {
   constructor(message: string, readonly statusCode = 400) {
@@ -46,7 +46,6 @@ export async function createParent(
     passwordHash: await hashSecret(body.password),
     role: 'parent' as const,
     createdAt: new Date().toISOString(),
-    giftCatalog: [] as GiftDefinition[],
   }
   await store.update((database) => database.users.push(user))
   return asParent(user)
