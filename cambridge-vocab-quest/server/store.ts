@@ -234,9 +234,8 @@ const LEGACY_WORD_ID_MAP: Record<string, string | null> = {
 }
 
 function remapWordId(wordId: string): string | null {
-  return Object.prototype.hasOwnProperty.call(LEGACY_WORD_ID_MAP, wordId)
-    ? LEGACY_WORD_ID_MAP[wordId]
-    : wordId
+  if (!Object.prototype.hasOwnProperty.call(LEGACY_WORD_ID_MAP, wordId)) return wordId
+  return LEGACY_WORD_ID_MAP[wordId] ?? null
 }
 
 function remapWordIdList(ids: string[] | undefined): string[] {
