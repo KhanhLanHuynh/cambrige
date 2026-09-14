@@ -2374,25 +2374,6 @@
       "We learn the word “find” in class."
     ]
   },
-  "starters-pl": {
-    "category": "general",
-    "definition": "A polite word when you ask for something.",
-    "definitionVi": "Xin vui lòng — nói lịch sự khi nhờ.",
-    "hint": "Say please when you want help.",
-    "fact": "Please and thank you are magic words.",
-    "sentences": [
-      "I can see a please in the picture.",
-      "Sam has a please at home.",
-      "Look! There is a please.",
-      "We learned about a please at school today.",
-      "Leo pointed to a please and smiled.",
-      "Can you draw a please, please?",
-      "Please show me a please.",
-      "My favourite thing is a please.",
-      "Tom found a please in the book.",
-      "We talked about a please in class."
-    ]
-  },
   "starters-fishing": {
     "category": "sports",
     "definition": "catching fish with a rod, line and hook near water",
@@ -4462,25 +4443,6 @@
       "My favourite thing is music.",
       "Ana found music in the book.",
       "We talked about music in class."
-    ]
-  },
-  "starters-adj": {
-    "category": "general",
-    "definition": "a small word that joins two things, like cats and dogs",
-    "definitionVi": "và — nối hai thứ với nhau",
-    "hint": "Say 'bread and butter' — 'and' links the two foods.",
-    "fact": "You use 'and' many times when you tell a story.",
-    "sentences": [
-      "I can see an and in the picture.",
-      "Lily has an and at home.",
-      "Look! There is an and.",
-      "We learned about an and at school today.",
-      "Ben pointed to an and and smiled.",
-      "Can you draw an and, please?",
-      "Please show me an and.",
-      "My favourite thing is an and.",
-      "Emma found an and in the book.",
-      "We talked about an and in class."
     ]
   },
   "starters-new": {
@@ -7369,6 +7331,25 @@
       "Meet me at the zoo.",
       "The zoo is fun.",
       "We learn about the zoo at school."
+    ]
+  },
+  "starters-please": {
+    "category": "general",
+    "definition": "A polite word when you ask for something.",
+    "definitionVi": "Xin vui lòng — nói lịch sự khi nhờ.",
+    "hint": "Say please when you want help.",
+    "fact": "Please and thank you are magic words.",
+    "sentences": [
+      "I can see a please in the picture.",
+      "Sam has a please at home.",
+      "Look! There is a please.",
+      "We learned about a please at school today.",
+      "Leo pointed to a please and smiled.",
+      "Can you draw a please, please?",
+      "Please show me a please.",
+      "My favourite thing is a please.",
+      "Tom found a please in the book.",
+      "We talked about a please in class."
     ]
   }
 }

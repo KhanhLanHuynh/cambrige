@@ -10,8 +10,6 @@ import { cleanDisplay, categoryFor } from '../yle-content-templates.mjs'
 
 /** Headword overrides for OCR-corrupted Flyers wordlist entries. */
 export const HEAD_OVERRIDES = {
-  'ibility)': 'could',
-  'bike)': 'racing',
   'chemist(’s)': "chemist's shop",
   'p.m. pajamas': 'pajamas',
 }
@@ -561,7 +559,7 @@ export const GLOSS_BY_ID = {
     "hint": "Children wear costumes for parties or plays.",
     "fact": "People wear fun costumes for Halloween or a fancy dress party."
   },
-  "flyers-ibility": {
+  "flyers-could": {
     "category": "general",
     "definition": "was able to do something in the past",
     "definitionVi": "đã có thể (làm gì đó trong quá khứ)",
@@ -2150,7 +2148,7 @@ export const GLOSS_BY_ID = {
     "hint": "Runners line up at the start of a race.",
     "fact": "In a race, the winner crosses the finish line first."
   },
-  "flyers-bike": {
+  "flyers-racing": {
     "category": "sports",
     "definition": "connected with fast competitions, like a racing car",
     "definitionVi": "thuộc về đua xe, tốc độ",

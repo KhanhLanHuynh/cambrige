@@ -18,10 +18,11 @@
     "b1SuitabilityUpdatedAt": "2026-09-10",
     "definitionViReviewedAt": "2026-09-10",
     "headwordsRepairedAt": "2026-09-10",
-    "metadataFixedAt": "2026-09-10"
+    "metadataFixedAt": "2026-09-10",
+    "frankensteinIdsFixedAt": "2026-09-14"
   },
   "level": "Preliminary",
-  "count": 2213,
+  "count": 2212,
   "words": [
     {
       "id": "preliminary-ability",
@@ -1089,7 +1090,7 @@
       "imageCredit": "Unknown · CC CC0 1.0 · rawpixel · https://www.rawpixel.com/image/6288963/psd-sticker-vintage-public-domain"
     },
     {
-      "id": "preliminary-charges",
+      "id": "preliminary-admit",
       "word": "admit",
       "phonetic": "/ˈt͡ʃɑːd͡ʒɪz/",
       "definition": "to agree that something is true, often unwillingly; to allow someone to enter",
@@ -1103,8 +1104,8 @@
         "base on"
       ],
       "answer": "admit",
-      "hint": "Notice how people use “charges” in real situations.",
-      "fact": "Learners use “charges” in stories, messages, and everyday English.",
+      "hint": "If you break a rule, you should admit it.",
+      "fact": "Admit can also mean to let someone into a place, like a museum.",
       "level": "Preliminary",
       "sentences": [
         "He had to admit that the whole plan had failed.",
@@ -1118,7 +1119,7 @@
         "They admitted her to the course after a short interview.",
         "I admit feeling nervous before important exams every time."
       ],
-      "image": "/assets/images/words/preliminary-charges.webp",
+      "image": "/assets/images/words/preliminary-admit.webp",
       "imageCredit": "alisdare1 · CC BY-SA 2.0 · flickr · https://www.flickr.com/photos/59952459@N08/6620193705"
     },
     {
@@ -58890,37 +58891,6 @@
         "He stopped the bike and checked the tyre.",
         "The elevator stopped on the third floor.",
         "Don’t stop here — it’s a busy street."
-      ]
-    },
-    {
-      "id": "preliminary-it-s-stopped-raining",
-      "word": "stop",
-      "phonetic": "",
-      "definition": "to finish happening; to no longer continue",
-      "definitionVi": "Kết thúc xảy ra; không còn tiếp tục nữa",
-      "category": "general",
-      "partOfSpeech": "verb",
-      "choices": [
-        "realise",
-        "shave",
-        "doubt",
-        "stop"
-      ],
-      "answer": "stop",
-      "hint": "Notice how people use “It’s stopped raining.” in real situations.",
-      "fact": "Learners use “It’s stopped raining.” in stories, messages, and everyday English.",
-      "level": "Preliminary",
-      "sentences": [
-        "It’s stopped raining, so we can go out.",
-        "Has the music stopped yet?",
-        "The noise finally stopped after midnight.",
-        "When the rain stops, we’ll walk to the café.",
-        "My phone stopped working during the call.",
-        "The pain stopped after I rested.",
-        "Did the alarm stop on its own?",
-        "The wind stopped just before sunset.",
-        "Please wait until the printer stops.",
-        "The conversation stopped when the manager entered."
       ]
     },
     {

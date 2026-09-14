@@ -531,13 +531,6 @@
     "hint": "Children wear costumes for parties or plays.",
     "fact": "People wear fun costumes for Halloween or a fancy dress party."
   },
-  "flyers-ibility": {
-    "category": "general",
-    "definition": "was able to do something in the past",
-    "definitionVi": "đã có thể (làm gì đó trong quá khứ)",
-    "hint": "Say 'I could swim when I was five' to talk about past ability.",
-    "fact": "'Could' is the past form of the word 'can'."
-  },
   "flyers-creature": {
     "category": "animals",
     "definition": "a living being, especially an animal",
@@ -1048,5 +1041,12 @@
     "definitionVi": "tương lai",
     "hint": "Talk about what you want to do when you grow up.",
     "fact": "'Future' is the opposite of 'past'."
+  },
+  "flyers-could": {
+    "category": "general",
+    "definition": "was able to do something in the past",
+    "definitionVi": "đã có thể (làm gì đó trong quá khứ)",
+    "hint": "Say 'I could swim when I was five' to talk about past ability.",
+    "fact": "'Could' is the past form of the word 'can'."
   }
 }

@@ -222,6 +222,33 @@ function normalizeLearner(
   }
 }
 
+/** Remap / drop legacy vocab IDs from frankenstein parse artifacts. */
+const LEGACY_WORD_ID_MAP: Record<string, string | null> = {
+  'starters-pl': 'starters-please',
+  'starters-adj': null,
+  'movers-ability': 'starters-count',
+  'flyers-ibility': 'flyers-could',
+  'flyers-bike': 'flyers-racing',
+  'preliminary-charges': 'preliminary-admit',
+  'preliminary-it-s-stopped-raining': 'preliminary-stop',
+}
+
+function remapWordId(wordId: string): string | null {
+  return Object.prototype.hasOwnProperty.call(LEGACY_WORD_ID_MAP, wordId)
+    ? LEGACY_WORD_ID_MAP[wordId]
+    : wordId
+}
+
+function remapWordIdList(ids: string[] | undefined): string[] {
+  if (!ids?.length) return ids ?? []
+  const next: string[] = []
+  for (const id of ids) {
+    const mapped = remapWordId(id)
+    if (mapped && !next.includes(mapped)) next.push(mapped)
+  }
+  return next
+}
+
 export function migrateDatabase(raw: Partial<Database> & { version?: number }): Database {
   const base = emptyDatabase()
   type LegacyUser = Partial<UserRecord> & {
@@ -249,11 +276,20 @@ export function migrateDatabase(raw: Partial<Database> & { version?: number }): 
       return normalizeLearner(entry, fallback)
     }),
     sessions: raw.sessions ?? [],
-    quizzes: (raw.quizzes ?? []).map((quiz) => ({
-      ...(quiz as QuizRecord),
-      mode: (quiz as QuizRecord).mode ?? 'explorer',
-    })),
-    attempts: raw.attempts ?? [],
+    quizzes: (raw.quizzes ?? []).map((quiz) => {
+      const entry = quiz as QuizRecord
+      return {
+        ...entry,
+        mode: entry.mode ?? 'explorer',
+        wordIds: remapWordIdList(entry.wordIds),
+        answeredWordIds: remapWordIdList(entry.answeredWordIds),
+      }
+    }),
+    attempts: (raw.attempts ?? []).flatMap((attempt) => {
+      const mapped = remapWordId(attempt.wordId)
+      if (!mapped) return []
+      return [{ ...attempt, wordId: mapped }]
+    }),
     assignments: raw.assignments ?? [],
     passwordResets: raw.passwordResets ?? base.passwordResets,
     redemptions: (raw.redemptions ?? []).map((item) => normalizeRedemption(item as RedemptionRecord)),

@@ -398,13 +398,6 @@
     "hint": "Runners line up at the start of a race.",
     "fact": "In a race, the winner crosses the finish line first."
   },
-  "flyers-bike": {
-    "category": "sports",
-    "definition": "connected with fast competitions, like a racing car",
-    "definitionVi": "thuộc về đua xe, tốc độ",
-    "hint": "A racing car is built to go extremely fast.",
-    "fact": "Racing bikes are made very light so riders can go faster."
-  },
   "flyers-railway": {
     "category": "travel",
     "definition": "the metal tracks that trains travel along",
@@ -1405,5 +1398,12 @@
     "definitionVi": "số không",
     "hint": "A rocket launch counts down to zero before it blasts off.",
     "fact": "Zero was invented as a number a very long time ago."
+  },
+  "flyers-racing": {
+    "category": "sports",
+    "definition": "connected with fast competitions, like a racing car",
+    "definitionVi": "thuộc về đua xe, tốc độ",
+    "hint": "A racing car is built to go extremely fast.",
+    "fact": "Racing bikes are made very light so riders can go faster."
   }
 }

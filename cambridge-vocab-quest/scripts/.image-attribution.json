@@ -1341,17 +1341,6 @@
     "provider": "rawpixel",
     "fetchedAt": "2026-07-28T03:13:23.747Z"
   },
-  "starters-pl": {
-    "word": "pl)",
-    "level": "Starters",
-    "image": "/assets/images/words/starters-pl.webp",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/48/Oort_cloud_Sedna_orbit-pl.svg",
-    "creator": "Adi, oryg. http://commons.wikimedia.org/wiki/File:Oort_cloud_Sedna_orbit.svg?uselang=pl",
-    "license": "CC BY-SA 4.0",
-    "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=5753499",
-    "provider": "wikimedia",
-    "fetchedAt": "2026-07-28T03:13:26.133Z"
-  },
   "starters-fishing": {
     "word": "fishing",
     "level": "Starters",
@@ -2517,17 +2506,6 @@
     "sourceUrl": "https://www.rawpixel.com/image/6516291/image-vintage-public-domain-person",
     "provider": "rawpixel",
     "fetchedAt": "2026-07-28T03:20:02.241Z"
-  },
-  "starters-adj": {
-    "word": "adj",
-    "level": "Starters",
-    "image": "/assets/images/words/starters-adj.webp",
-    "imageUrl": "https://live.staticflickr.com/7266/7551132280_4807fb50d2_b.jpg",
-    "creator": "Foxcroft Academy",
-    "license": "CC BY 2.0",
-    "sourceUrl": "https://www.flickr.com/photos/82414210@N03/7551132280",
-    "provider": "flickr",
-    "fetchedAt": "2026-07-28T03:20:10.010Z"
   },
   "starters-new": {
     "word": "new",
@@ -4750,17 +4728,6 @@
     "sourceUrl": "https://www.rawpixel.com/image/10096226/image-face-hand-person",
     "provider": "rawpixel",
     "fetchedAt": "2026-07-28T03:31:05.617Z"
-  },
-  "movers-ability": {
-    "word": "ability)",
-    "level": "Movers",
-    "image": "/assets/images/words/movers-ability.webp",
-    "imageUrl": "https://live.staticflickr.com/690/22130141674_4842a47017_b.jpg",
-    "creator": "Neda Andel ~SLooK4U Blog",
-    "license": "CC BY-SA 2.0",
-    "sourceUrl": "https://www.flickr.com/photos/31730451@N03/22130141674",
-    "provider": "flickr",
-    "fetchedAt": "2026-07-26T04:40:12.051Z"
   },
   "movers-country": {
     "word": "country",
@@ -8315,17 +8282,6 @@
     "provider": "rawpixel",
     "fetchedAt": "2026-07-28T03:53:08.435Z"
   },
-  "flyers-ibility": {
-    "word": "ibility)",
-    "level": "Flyers",
-    "image": "/assets/images/words/flyers-ibility.webp",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Zlatan_Ibile.jpg",
-    "creator": "WALINTEEN PRO",
-    "license": "CC BY 3.0",
-    "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=85857932",
-    "provider": "wikimedia",
-    "fetchedAt": "2026-07-26T04:52:40.160Z"
-  },
   "flyers-creature": {
     "word": "creature",
     "level": "Flyers",
@@ -10702,17 +10658,6 @@
     "provider": "rawpixel",
     "fetchedAt": "2026-07-28T04:38:21.990Z"
   },
-  "flyers-bike": {
-    "word": "bike)",
-    "level": "Flyers",
-    "image": "/assets/images/words/flyers-bike.webp",
-    "imageUrl": "https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA0L2pvYjY4My0wMDgwLmpwZw.jpg",
-    "creator": "Unknown",
-    "license": "CC CC0 1.0",
-    "sourceUrl": "https://www.rawpixel.com/image/6442394/psd-christmas-sticker-public-domain",
-    "provider": "rawpixel",
-    "fetchedAt": "2026-07-28T04:38:22.675Z"
-  },
   "flyers-railway": {
     "word": "railway",
     "level": "Flyers",
@@ -12505,17 +12450,6 @@
     "sourceUrl": "https://www.rawpixel.com/image/6288963/psd-sticker-vintage-public-domain",
     "provider": "rawpixel",
     "fetchedAt": "2026-07-28T04:51:36.934Z"
-  },
-  "preliminary-charges": {
-    "word": "charges",
-    "level": "Preliminary",
-    "image": "/assets/images/words/preliminary-charges.webp",
-    "imageUrl": "https://live.staticflickr.com/7165/6620193705_f0bc4f86ec_b.jpg",
-    "creator": "alisdare1",
-    "license": "CC BY-SA 2.0",
-    "sourceUrl": "https://www.flickr.com/photos/59952459@N08/6620193705",
-    "provider": "flickr",
-    "fetchedAt": "2026-07-26T05:07:17.539Z"
   },
   "preliminary-adult": {
     "word": "adult",
@@ -29776,17 +29710,6 @@
     "provider": "flickr",
     "fetchedAt": "2026-07-26T06:12:11.514Z"
   },
-  "preliminary-it-s-stopped-raining": {
-    "word": "It’s stopped raining.",
-    "level": "Preliminary",
-    "image": "/assets/images/words/preliminary-it-s-stopped-raining.webp",
-    "imageUrl": "https://live.staticflickr.com/65535/52362629245_51040afba7_b.jpg",
-    "creator": "Casey Hugelfink",
-    "license": "CC BY-SA 2.0",
-    "sourceUrl": "https://www.flickr.com/photos/93212986@N03/52362629245",
-    "provider": "flickr",
-    "fetchedAt": "2026-07-26T06:12:13.811Z"
-  },
   "preliminary-to-go-straight-on": {
     "word": "to go straight on",
     "level": "Preliminary",
@@ -32998,5 +32921,49 @@
     "sourceUrl": "https://www.rawpixel.com/image/9117105/the-slumbers-ragotin-interrupted",
     "provider": "rawpixel",
     "fetchedAt": "2026-07-28T06:19:12.909Z"
+  },
+  "starters-please": {
+    "word": "pl)",
+    "level": "Starters",
+    "image": "/assets/images/words/starters-please.webp",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/48/Oort_cloud_Sedna_orbit-pl.svg",
+    "creator": "Adi, oryg. http://commons.wikimedia.org/wiki/File:Oort_cloud_Sedna_orbit.svg?uselang=pl",
+    "license": "CC BY-SA 4.0",
+    "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=5753499",
+    "provider": "wikimedia",
+    "fetchedAt": "2026-07-28T03:13:26.133Z"
+  },
+  "flyers-could": {
+    "word": "ibility)",
+    "level": "Flyers",
+    "image": "/assets/images/words/flyers-could.webp",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Zlatan_Ibile.jpg",
+    "creator": "WALINTEEN PRO",
+    "license": "CC BY 3.0",
+    "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=85857932",
+    "provider": "wikimedia",
+    "fetchedAt": "2026-07-26T04:52:40.160Z"
+  },
+  "flyers-racing": {
+    "word": "bike)",
+    "level": "Flyers",
+    "image": "/assets/images/words/flyers-racing.webp",
+    "imageUrl": "https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA0L2pvYjY4My0wMDgwLmpwZw.jpg",
+    "creator": "Unknown",
+    "license": "CC CC0 1.0",
+    "sourceUrl": "https://www.rawpixel.com/image/6442394/psd-christmas-sticker-public-domain",
+    "provider": "rawpixel",
+    "fetchedAt": "2026-07-28T04:38:22.675Z"
+  },
+  "preliminary-admit": {
+    "word": "charges",
+    "level": "Preliminary",
+    "image": "/assets/images/words/preliminary-admit.webp",
+    "imageUrl": "https://live.staticflickr.com/7165/6620193705_f0bc4f86ec_b.jpg",
+    "creator": "alisdare1",
+    "license": "CC BY-SA 2.0",
+    "sourceUrl": "https://www.flickr.com/photos/59952459@N08/6620193705",
+    "provider": "flickr",
+    "fetchedAt": "2026-07-26T05:07:17.539Z"
   }
 }

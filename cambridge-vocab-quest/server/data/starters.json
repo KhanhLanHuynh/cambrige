@@ -17,10 +17,11 @@
     "definitionViResyncedAfterReviewAt": "2026-08-03T04:18:37.752Z",
     "kidSuitabilityUpdatedAt": "2026-09-10",
     "definitionViReviewedAt": "2026-09-10",
-    "metadataFixedAt": "2026-09-10"
+    "metadataFixedAt": "2026-09-10",
+    "frankensteinIdsFixedAt": "2026-09-14"
   },
   "level": "Starters",
-  "count": 388,
+  "count": 387,
   "words": [
     {
       "id": "starters-armchair",
@@ -4142,7 +4143,7 @@
       "imageCredit": "Miiruuku · CC CC0 1.0 · rawpixel · https://www.rawpixel.com/image/10775622/pirate-finds-treasure-illustration-vector"
     },
     {
-      "id": "starters-pl",
+      "id": "starters-please",
       "word": "please",
       "phonetic": "",
       "definition": "a polite word you say when you ask for something",
@@ -4171,7 +4172,7 @@
         "Please listen to the teacher.",
         "Can you help, please?"
       ],
-      "image": "/assets/images/words/starters-pl.webp",
+      "image": "/assets/images/words/starters-please.webp",
       "imageCredit": "Adi, oryg. http://commons.wikimedia.org/wiki/File:Oort_cloud_Sedna_orbit.svg?uselang=pl · CC BY-SA 4.0 · wikimedia · https://commons.wikimedia.org/w/index.php?curid=5753499"
     },
     {
@@ -7756,39 +7757,6 @@
       ],
       "image": "/assets/images/words/starters-music.webp",
       "imageCredit": "Unknown · CC CC0 1.0 · rawpixel · https://www.rawpixel.com/image/6516291/image-vintage-public-domain-person"
-    },
-    {
-      "id": "starters-adj",
-      "word": "and",
-      "phonetic": "",
-      "definition": "A small word that joins two things, like cats and dogs.",
-      "definitionVi": "Một từ nhỏ kết hợp hai thứ, như mèo và chó.",
-      "category": "general",
-      "partOfSpeech": "noun",
-      "choices": [
-        "afternoon",
-        "and",
-        "armchair",
-        "alien"
-      ],
-      "answer": "and",
-      "hint": "Say 'bread and butter' — 'and' links the two foods.",
-      "fact": "You use 'and' many times when you tell a story.",
-      "level": "Starters",
-      "sentences": [
-        "I like cats and dogs.",
-        "Lily has a pen and a book.",
-        "Look! Mum and Dad are here.",
-        "We learn ‘and’ at school today.",
-        "Ben points to red and blue.",
-        "Can you say ‘fish and chips’?",
-        "Please show me black and white.",
-        "My favourite numbers are one and two.",
-        "Emma finds ‘and’ in the book.",
-        "We talk about ‘and’ in class."
-      ],
-      "image": "/assets/images/words/starters-adj.webp",
-      "imageCredit": "Foxcroft Academy · CC BY 2.0 · flickr · https://www.flickr.com/photos/82414210@N03/7551132280"
     },
     {
       "id": "starters-new",

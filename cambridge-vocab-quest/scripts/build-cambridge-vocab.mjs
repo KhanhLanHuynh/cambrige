@@ -101,6 +101,11 @@ function isSkippableLemma(lemma) {
   if (/^[A-Z][a-z]+$/.test(lemma)) return true // proper names like Alex
   if (/^\d/.test(lemma)) return true
   if (lemma === '(No words at this level)') return true
+  // Fragments from parenthetical notes, e.g. "could (as in past of can for ability) v"
+  // can be matched as "ability)" / "ibility)" / "bike)" by the lemma regex.
+  if (/[()]/.test(lemma)) return true
+  // POS abbreviations accidentally captured as lemmas
+  if (/^(n|v|adj|adv|conj|det|prep|pron|excl|dis|int|poss|title|pl)$/i.test(lemma)) return true
   // Pure function/grammar tokens often too weak for MCQ vocab quests
   const blocked = new Set(['a', 'an', 'the', 'and', 'or', 'but', 'to', 'of', 'in', 'on', 'at', 'is', 'be', 'am', 'are', 'was', 'were', 'do', 'does', 'did', 'i', 'you', 'he', 'she', 'it', 'we', 'they', 'my', 'your', 'his', 'her', 'its', 'our', 'their'])
   return blocked.has(lemma.toLowerCase())
@@ -116,13 +121,15 @@ function extractYleSection(text, startHeading, endHeading) {
 
 function parseYleEntries(sectionText) {
   const posPattern = String.raw`(?:n|v|adj|adv|conj|det|prep|pron|excl|dis|int|poss|title)`
+  // Strip parenthetical notes before matching so fragments like "ability) v" are not lemmas.
+  const flattened = sectionText.replace(/\([^)]*\)/g, ' ')
   // Match lemma + primary POS (ignore trailing "of place/time" notes and +alt POS)
   const re = new RegExp(
-    String.raw`([A-Za-z][A-Za-z0-9'’./() -]*?)\s+(${posPattern})(?:\s*\+\s*${posPattern})*(?:\s+of\s+(?:place|time))?`,
+    String.raw`([A-Za-z][A-Za-z0-9'’./ -]*?)\s+(${posPattern})(?:\s*\+\s*${posPattern})*(?:\s+of\s+(?:place|time))?`,
     'g',
   )
   const found = []
-  for (const match of sectionText.matchAll(re)) {
+  for (const match of flattened.matchAll(re)) {
     const rawLemma = cleanLemma(match[1])
     const pos = POS_MAP[match[2]]
     if (!pos || !CONTENT_POS.has(pos)) continue

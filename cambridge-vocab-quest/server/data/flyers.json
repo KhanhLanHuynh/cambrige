@@ -17,7 +17,8 @@
     "definitionViResyncedAfterReviewAt": "2026-08-03T04:36:27.514Z",
     "kidSuitabilityUpdatedAt": "2026-09-10",
     "definitionViReviewedAt": "2026-09-10",
-    "metadataFixedAt": "2026-09-10"
+    "metadataFixedAt": "2026-09-10",
+    "frankensteinIdsFixedAt": "2026-09-14"
   },
   "level": "Flyers",
   "count": 447,
@@ -2513,7 +2514,7 @@
       "imageCredit": "Unknown · CC CC0 1.0 · rawpixel · https://www.rawpixel.com/image/6820347/image-public-domain-illustrations-white"
     },
     {
-      "id": "flyers-ibility",
+      "id": "flyers-could",
       "word": "could",
       "phonetic": "",
       "definition": "was able to do something in the past",
@@ -9970,7 +9971,7 @@
       "imageCredit": "Unknown · CC CC0 1.0 · rawpixel · https://www.rawpixel.com/image/6755491/png-sticker-public-domain"
     },
     {
-      "id": "flyers-bike",
+      "id": "flyers-racing",
       "word": "racing",
       "phonetic": "",
       "definition": "Connected with going very fast in a competition.",
@@ -9999,7 +10000,7 @@
         "We all cheer at racing events sometimes.",
         "Look — that racing bike is red!"
       ],
-      "image": "/assets/images/words/flyers-bike.webp",
+      "image": "/assets/images/words/flyers-racing.webp",
       "imageCredit": "Unknown · CC CC0 1.0 · rawpixel · https://www.rawpixel.com/image/6442394/psd-christmas-sticker-public-domain"
     },
     {

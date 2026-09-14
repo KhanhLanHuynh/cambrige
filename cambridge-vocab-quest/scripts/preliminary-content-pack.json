@@ -626,25 +626,6 @@
       "We talked about an admission in class."
     ]
   },
-  "preliminary-charges": {
-    "category": "general",
-    "definition": "to charges",
-    "definitionVi": "làm hành động “charges”",
-    "hint": "Notice how people use “charges” in real situations.",
-    "fact": "Learners use “charges” in stories, messages, and everyday English.",
-    "sentences": [
-      "I can charges at school.",
-      "Sam likes to charges.",
-      "Please charges carefully.",
-      "Let’s charges together.",
-      "Lily can charges very well.",
-      "We charges every day.",
-      "Can you charges for me, please?",
-      "Watch me charges!",
-      "Do you charges at home?",
-      "My teacher asked us to charges."
-    ]
-  },
   "preliminary-adult": {
     "category": "general",
     "definition": "an adult",
@@ -34370,25 +34351,6 @@
       "My teacher asked us to car stopped.."
     ]
   },
-  "preliminary-it-s-stopped-raining": {
-    "category": "general",
-    "definition": "to It’s stopped raining.",
-    "definitionVi": "làm hành động “It’s stopped raining.”",
-    "hint": "Notice how people use “It’s stopped raining.” in real situations.",
-    "fact": "Learners use “It’s stopped raining.” in stories, messages, and everyday English.",
-    "sentences": [
-      "I can It’s stopped raining. at school.",
-      "Ana likes to It’s stopped raining..",
-      "Please It’s stopped raining. carefully.",
-      "Let’s It’s stopped raining. together.",
-      "Ben can It’s stopped raining. very well.",
-      "We It’s stopped raining. every day.",
-      "Can you It’s stopped raining. for me, please?",
-      "Watch me It’s stopped raining.!",
-      "Do you It’s stopped raining. at home?",
-      "My teacher asked us to It’s stopped raining.."
-    ]
-  },
   "preliminary-rain-stopped-me-from-going-out": {
     "category": "general",
     "definition": "to rain stopped me from going out.",
@@ -41968,6 +41930,25 @@
       "Say “programmer publisher qualification queen quit receptionist reporter retire retirement sailor salary sales assistant salesman saleswoman scientist secretary security guard shop assistant shopper singer soldier staff student taxi driver teacher tennis player tour guide trade travel agent unemployed uniform volunteer” with me.",
       "I can spell “programmer publisher qualification queen quit receptionist reporter retire retirement sailor salary sales assistant salesman saleswoman scientist secretary security guard shop assistant shopper singer soldier staff student taxi driver teacher tennis player tour guide trade travel agent unemployed uniform volunteer”.",
       "Do you know the word “programmer publisher qualification queen quit receptionist reporter retire retirement sailor salary sales assistant salesman saleswoman scientist secretary security guard shop assistant shopper singer soldier staff student taxi driver teacher tennis player tour guide trade travel agent unemployed uniform volunteer”?"
+    ]
+  },
+  "preliminary-admit": {
+    "category": "general",
+    "definition": "to charges",
+    "definitionVi": "làm hành động “charges”",
+    "hint": "If you break a rule, you should admit it.",
+    "fact": "Admit can also mean to let someone into a place, like a museum.",
+    "sentences": [
+      "I can charges at school.",
+      "Sam likes to charges.",
+      "Please charges carefully.",
+      "Let’s charges together.",
+      "Lily can charges very well.",
+      "We charges every day.",
+      "Can you charges for me, please?",
+      "Watch me charges!",
+      "Do you charges at home?",
+      "My teacher asked us to charges."
     ]
   }
 }

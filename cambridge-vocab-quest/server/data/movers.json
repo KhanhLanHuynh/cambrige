@@ -17,10 +17,11 @@
     "definitionViResyncedAfterReviewAt": "2026-08-03T04:29:35.778Z",
     "kidSuitabilityUpdatedAt": "2026-09-10",
     "definitionViReviewedAt": "2026-09-10",
-    "metadataFixedAt": "2026-09-10"
+    "metadataFixedAt": "2026-09-10",
+    "frankensteinIdsFixedAt": "2026-09-14"
   },
   "level": "Movers",
-  "count": 335,
+  "count": 334,
   "words": [
     {
       "id": "movers-asleep",
@@ -2127,39 +2128,6 @@
       ],
       "image": "/assets/images/words/movers-cough.webp",
       "imageCredit": "Unknown · CC CC0 1.0 · rawpixel · https://www.rawpixel.com/image/10096226/image-face-hand-person"
-    },
-    {
-      "id": "movers-ability",
-      "word": "count",
-      "phonetic": "",
-      "definition": "to say numbers in order or find how many there are",
-      "definitionVi": "Đếm số theo thứ tự hoặc xem có bao nhiêu.",
-      "category": "general",
-      "partOfSpeech": "verb",
-      "choices": [
-        "bring",
-        "build",
-        "be called",
-        "count"
-      ],
-      "answer": "count",
-      "hint": "A good swimmer has the ability to swim far.",
-      "fact": "Practice helps your abilities grow stronger every day.",
-      "level": "Movers",
-      "sentences": [
-        "I can count to twenty at school.",
-        "Emma likes to count the stars.",
-        "Please count carefully.",
-        "Let’s count together.",
-        "Sam can count very well.",
-        "We count our books every day.",
-        "Can you count these apples, please?",
-        "Watch me count!",
-        "Do you count the steps at home?",
-        "My teacher asked us to count to ten."
-      ],
-      "image": "/assets/images/words/movers-ability.webp",
-      "imageCredit": "Neda Andel ~SLooK4U Blog · CC BY-SA 2.0 · flickr · https://www.flickr.com/photos/31730451@N03/22130141674"
     },
     {
       "id": "movers-country",

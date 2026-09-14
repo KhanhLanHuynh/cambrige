@@ -1,11 +1,4 @@
 {
-  "movers-ability": {
-    "category": "general",
-    "definition": "to be able to do something well, like running fast",
-    "definitionVi": "khả năng làm việc gì đó tốt",
-    "hint": "A good swimmer has the ability to swim far.",
-    "fact": "Practice helps your abilities grow stronger every day."
-  },
   "movers-address": {
     "category": "places",
     "definition": "the numbers and street name where someone lives",

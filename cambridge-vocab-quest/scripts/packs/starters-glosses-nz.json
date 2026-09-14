@@ -230,13 +230,6 @@
     "hint": "Some pigs and flamingos look pink.",
     "fact": "Pink is made by mixing red and white."
   },
-  "starters-pl": {
-    "category": "general",
-    "definition": "A polite word when you ask for something.",
-    "definitionVi": "Xin vui lòng — nói lịch sự khi nhờ.",
-    "hint": "Say please when you want help.",
-    "fact": "Please and thank you are magic words."
-  },
   "starters-plane": {
     "category": "travel",
     "definition": "A flying vehicle with wings.",
@@ -1083,5 +1076,12 @@
     "definitionVi": "Sở thú — xem động vật hoang dã.",
     "hint": "You see lions and monkeys at the zoo.",
     "fact": "Zoos help protect endangered animals."
+  },
+  "starters-please": {
+    "category": "general",
+    "definition": "A polite word when you ask for something.",
+    "definitionVi": "Xin vui lòng — nói lịch sự khi nhờ.",
+    "hint": "Say please when you want help.",
+    "fact": "Please and thank you are magic words."
   }
 }

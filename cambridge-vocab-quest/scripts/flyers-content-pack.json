@@ -1443,25 +1443,6 @@
       "I like my blue costume."
     ]
   },
-  "flyers-ibility": {
-    "category": "general",
-    "definition": "was able to do something in the past",
-    "definitionVi": "đã có thể (làm gì đó trong quá khứ)",
-    "hint": "Say 'I could swim when I was five' to talk about past ability.",
-    "fact": "'Could' is the past form of the word 'can'.",
-    "sentences": [
-      "I can ibility at school.",
-      "Tom likes to ibility.",
-      "Please ibility carefully.",
-      "Let’s ibility together.",
-      "Ana can ibility very well.",
-      "We ibility every day.",
-      "Can you ibility for me, please?",
-      "Watch me ibility!",
-      "Do you ibility at home?",
-      "My teacher asked us to ibility."
-    ]
-  },
   "flyers-creature": {
     "category": "animals",
     "definition": "a living being, especially an animal",
@@ -5756,25 +5737,6 @@
       "Where is my race?"
     ]
   },
-  "flyers-bike": {
-    "category": "sports",
-    "definition": "connected with fast competitions, like a racing car",
-    "definitionVi": "thuộc về đua xe, tốc độ",
-    "hint": "A racing car is built to go extremely fast.",
-    "fact": "Racing bikes are made very light so riders can go faster.",
-    "sentences": [
-      "I feel bike today.",
-      "Sam looks bike.",
-      "What a bike day!",
-      "Don’t be bike.",
-      "Zoe is bike about the party.",
-      "This story is bike.",
-      "My friend is very bike.",
-      "Why do you feel bike?",
-      "We all feel bike sometimes.",
-      "Smile — you look bike!"
-    ]
-  },
   "flyers-railway": {
     "category": "travel",
     "definition": "the metal tracks that trains travel along",
@@ -8490,6 +8452,44 @@
       "My teacher shows a zero.",
       "I like this zero.",
       "Put a zero on the desk."
+    ]
+  },
+  "flyers-could": {
+    "category": "general",
+    "definition": "was able to do something in the past",
+    "definitionVi": "đã có thể (làm gì đó trong quá khứ)",
+    "hint": "Say 'I could swim when I was five' to talk about past ability.",
+    "fact": "'Could' is the past form of the word 'can'.",
+    "sentences": [
+      "I can ibility at school.",
+      "Tom likes to ibility.",
+      "Please ibility carefully.",
+      "Let’s ibility together.",
+      "Ana can ibility very well.",
+      "We ibility every day.",
+      "Can you ibility for me, please?",
+      "Watch me ibility!",
+      "Do you ibility at home?",
+      "My teacher asked us to ibility."
+    ]
+  },
+  "flyers-racing": {
+    "category": "sports",
+    "definition": "connected with fast competitions, like a racing car",
+    "definitionVi": "thuộc về đua xe, tốc độ",
+    "hint": "A racing car is built to go extremely fast.",
+    "fact": "Racing bikes are made very light so riders can go faster.",
+    "sentences": [
+      "I feel bike today.",
+      "Sam looks bike.",
+      "What a bike day!",
+      "Don’t be bike.",
+      "Zoe is bike about the party.",
+      "This story is bike.",
+      "My friend is very bike.",
+      "Why do you feel bike?",
+      "We all feel bike sometimes.",
+      "Smile — you look bike!"
     ]
   }
 }
