@@ -12,6 +12,21 @@ type CreatedSession = QuizSession & {
   mode?: string
 }
 
+type MapStop = 'nature-valley' | 'crystal-caves' | 'space-station' | 'dragon-ridge'
+
+const STOP_LABELS: Record<MapStop, string> = {
+  'nature-valley': 'Nature Valley',
+  'space-station': 'Space Station',
+  'crystal-caves': 'Crystal Caves',
+  'dragon-ridge': 'Dragon Ridge',
+}
+
+function parseMapStop(stop: string | null): MapStop | undefined {
+  return stop === 'nature-valley' || stop === 'crystal-caves' || stop === 'space-station' || stop === 'dragon-ridge'
+    ? stop
+    : undefined
+}
+
 export function QuizPage({ learner, navigate }: { learner: Learner; navigate: (path: string) => void }) {
   const { index, xp, streak, recordAnswer, next, reset } = useQuestStore()
   const [session, setSession] = useState<CreatedSession | null>(null)
@@ -22,17 +37,16 @@ export function QuizPage({ learner, navigate }: { learner: Learner; navigate: (p
   const [answerResult, setAnswerResult] = useState<QuizAnswerResult | null>(null)
   const [exampleSentence, setExampleSentence] = useState('')
   const word = session?.questions[index]
+  const mapStop = parseMapStop(new URLSearchParams(window.location.search).get('stop'))
+  const quizLabel = (mapStop && STOP_LABELS[mapStop]) || learner.level
 
   useEffect(() => {
     let active = true
     reset()
     const params = new URLSearchParams(window.location.search)
-    const stop = params.get('stop')
     const focus = params.get('focus')
     const review = params.get('review') === '1'
-    const mapStop = stop === 'nature-valley' || stop === 'crystal-caves' || stop === 'space-station' || stop === 'dragon-ridge'
-      ? stop
-      : undefined
+    const sessionMapStop = parseMapStop(params.get('stop'))
     api<CreatedSession>('/quiz/sessions', {
       method: 'POST',
       body: focus
@@ -42,7 +56,7 @@ export function QuizPage({ learner, navigate }: { learner: Learner; navigate: (p
           : {
               count: 10,
               level: learner.level,
-              mapStop,
+              mapStop: sessionMapStop,
             },
     })
       .then((created) => { if (active) setSession(created) })
@@ -105,8 +119,8 @@ export function QuizPage({ learner, navigate }: { learner: Learner; navigate: (p
         <button className="back-button" onClick={() => navigate('/home')}><ArrowLeft /></button>
         <div>
           <p className="eyebrow">WORD EXPLORER</p>
-          <h1>Quiz · {learner.level}</h1>
-          <p>{learner.level} • {index + 1}/{session.questions.length} Words</p>
+          <h1>Quiz · {quizLabel}</h1>
+          <p>{quizLabel} • {index + 1}/{session.questions.length} Words</p>
         </div>
         <div className="quest-progress">
           <span>🚀 QUEST PROGRESS <b>{progress}%</b></span>
