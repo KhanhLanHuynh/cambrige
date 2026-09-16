@@ -12,6 +12,12 @@ function escapeRegExp(value: string) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 }
 
+function wordShapeTip(word: string) {
+  const target = word.replace(/\)+$/g, '').trim()
+  if (!target) return null
+  return { start: target[0].toUpperCase(), length: target.length }
+}
+
 function blankSentence(question: QuizQuestion) {
   const target = question.word.replace(/\)+$/g, '').trim()
   const pool = question.sentences
@@ -57,6 +63,7 @@ export function FillBlankPage({ learner, navigate }: { learner: Learner; navigat
   const questions = session?.questions ?? []
   const question = questions[index]
   const cloze = useMemo(() => (question ? blankSentence(question) : ''), [question])
+  const shape = useMemo(() => (question ? wordShapeTip(question.word) : null), [question])
   const total = questions.length
 
   const submit = async (event?: FormEvent) => {
@@ -154,6 +161,11 @@ export function FillBlankPage({ learner, navigate }: { learner: Learner; navigat
               <aside className="fill-blank-hint">
                 <p><strong>Meaning:</strong> {question.definition}</p>
                 {question.definitionVi && <p className="fill-blank-hint-vi">{question.definitionVi}</p>}
+                {shape && (
+                  <p className="fill-blank-hint-shape">
+                    <strong>Word tip:</strong> Starts with {shape.start} · {shape.length} letters
+                  </p>
+                )}
               </aside>
               <label className="fill-blank-label" htmlFor="fill-blank-answer">Missing word</label>
               <input

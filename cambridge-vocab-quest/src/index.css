@@ -380,6 +380,7 @@ svg { flex: 0 0 auto; }
 .fill-blank-hint{border:1px solid #7040a1;background:#2a0658;border-radius:12px;padding:.9rem 1rem;display:grid;gap:.45rem}
 .fill-blank-hint p{font-size: calc(.78rem + var(--text-bump));line-height:1.5;margin:0;color:#e8dff8}
 .fill-blank-hint-vi{color:#b9a6d8;font-size: calc(.72rem + var(--text-bump)) !important}
+.fill-blank-hint-shape{color:#cbb8e8;font-size: calc(.75rem + var(--text-bump)) !important}
 .fill-blank-feedback{display:grid;gap:.85rem;justify-items:start}
 .fill-blank-revealed{color:var(--muted);font-size: calc(.78rem + var(--text-bump));line-height:1.5}
 .swap-words{padding:1.4rem;max-width:720px}
