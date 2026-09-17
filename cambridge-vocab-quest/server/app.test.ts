@@ -412,6 +412,7 @@ describe('Cambridge Vocab Quest API', () => {
     const body = dashboard.json() as {
       activityDates: string[]
       activity: Array<{ learnerId: string; values: number[] }>
+      masteryByLevel: Array<{ label: string; value: number; count: number }>
     }
     const todayIndex = body.activityDates.indexOf(today)
     expect(todayIndex).toBeGreaterThanOrEqual(0)
@@ -419,6 +420,9 @@ describe('Cambridge Vocab Quest API', () => {
     expect(series).toBeTruthy()
     expect(series!.values[todayIndex]).toBe(2)
     expect(series!.values.every((value) => value <= 2)).toBe(true)
+    expect(body.masteryByLevel).toEqual(expect.arrayContaining([
+      expect.objectContaining({ label: 'Starters', count: 2, value: 100 }),
+    ]))
     await app.close()
   }, 20_000)
 

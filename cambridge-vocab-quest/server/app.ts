@@ -1096,12 +1096,18 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
         .map((attempt) => attempt.wordId),
     ).size
 
-    const levelCounts: Record<CambridgeLevel, number> = {
-      Starters: 0, Movers: 0, Flyers: 0, Preliminary: 0,
+    const levelWordIds: Record<CambridgeLevel, Set<string>> = {
+      Starters: new Set(), Movers: new Set(), Flyers: new Set(), Preliminary: new Set(),
     }
     for (const attempt of allAttempts) {
       const level = vocabulary.find((word) => word.id === attempt.wordId)?.level
-      if (level) levelCounts[level] += 1
+      if (level) levelWordIds[level].add(attempt.wordId)
+    }
+    const levelCounts: Record<CambridgeLevel, number> = {
+      Starters: levelWordIds.Starters.size,
+      Movers: levelWordIds.Movers.size,
+      Flyers: levelWordIds.Flyers.size,
+      Preliminary: levelWordIds.Preliminary.size,
     }
     const levelPeak = Math.max(1, ...Object.values(levelCounts))
 
