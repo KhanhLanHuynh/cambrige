@@ -35,8 +35,14 @@ type HubData = {
   settings: LearnerSettings
   map: {
     unlocks: Record<MapStop, boolean>
-    correctCount: number
-    thresholds: Record<MapStop, number>
+    progress: {
+      level: CambridgeLevel
+      nextLevel: CambridgeLevel | null
+      learnedCount: number
+      requiredCount: number
+      totalCount: number
+      ratio: number
+    }
   }
   journey: JourneyItem[]
   assignment: { id: string; level: string; categories: string[] } | null
@@ -68,11 +74,15 @@ export function HomePage({ learner, navigate }: { learner: Learner; navigate: (p
   const journey = hub?.journey ?? []
   const visibleJourney = journey.slice(journeyOffset, journeyOffset + 4)
   const focusStop = LEVEL_TO_STOP[currentLearner.level] ?? 'nature-valley'
+  const mapProgress = hub?.map.progress
+  const lockHint = mapProgress
+    ? `learn ${Math.round(mapProgress.ratio * 100)}% of ${mapProgress.level} words (${mapProgress.learnedCount}/${mapProgress.requiredCount})`
+    : 'learn 80% of the current level words'
 
   const startStop = (stop: MapStop) => {
     if (limitReached) return setMessage('Daily learning limit reached. Come back tomorrow!')
     if (!hub?.map.unlocks[stop]) {
-      return setMessage(`Locked — need ${hub?.map.thresholds[stop] ?? 0} correct answers (you have ${hub?.map.correctCount ?? 0}).`)
+      return setMessage(`Locked — ${lockHint}.`)
     }
     navigate(`/explore?stop=${stop}`)
   }
@@ -132,21 +142,21 @@ export function HomePage({ learner, navigate }: { learner: Learner; navigate: (p
               <button
                 className={`map-stop stop-two ${hub?.map.unlocks['space-station'] ? '' : 'locked'}`}
                 onClick={() => startStop('space-station')}
-                title={hub?.map.unlocks['space-station'] ? 'Space Station' : `Need ${hub?.map.thresholds['space-station'] ?? 200} correct`}
+                title={hub?.map.unlocks['space-station'] ? 'Space Station' : `Need to ${lockHint}`}
               >
                 <i>{hub?.map.unlocks['space-station'] ? '👆' : '🔒'}</i><span>SPACE STATION</span>
               </button>
               <button
                 className={`map-stop stop-three ${hub?.map.unlocks['crystal-caves'] ? '' : 'locked'}`}
                 onClick={() => startStop('crystal-caves')}
-                title={hub?.map.unlocks['crystal-caves'] ? 'Crystal Caves' : `Need ${hub?.map.thresholds['crystal-caves'] ?? 350} correct`}
+                title={hub?.map.unlocks['crystal-caves'] ? 'Crystal Caves' : `Need to ${lockHint}`}
               >
                 <i>{hub?.map.unlocks['crystal-caves'] ? '💎' : '🔒'}</i><span>CRYSTAL CAVES</span>
               </button>
               <button
                 className={`map-stop stop-four ${hub?.map.unlocks['dragon-ridge'] ? '' : 'locked'}`}
                 onClick={() => startStop('dragon-ridge')}
-                title={hub?.map.unlocks['dragon-ridge'] ? 'Dragon Ridge' : `Need ${hub?.map.thresholds['dragon-ridge'] ?? 550} correct`}
+                title={hub?.map.unlocks['dragon-ridge'] ? 'Dragon Ridge' : `Need to ${lockHint}`}
               >
                 <i>{hub?.map.unlocks['dragon-ridge'] ? '🐉' : '🔒'}</i><span>DRAGON RIDGE</span>
               </button>

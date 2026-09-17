@@ -4,9 +4,12 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { afterEach, describe, expect, it } from 'vitest'
 import type { FastifyInstance } from 'fastify'
+import type { CambridgeLevel } from '../shared/types.js'
 import { createParent, promoteParent } from './admin-parent.js'
 import { buildApp } from './app.js'
+import { requiredCountForLevel } from './level-progress.js'
 import { JsonStore, type DataStore } from './store.js'
+import { VOCABULARY_LEVELS, vocabulary as levelVocabulary } from './vocabulary.js'
 
 const directories: string[] = []
 const DEFAULT_PASSWORD = 'A-secure-password1'
@@ -79,6 +82,34 @@ async function finishSession(
     expect(answered.statusCode).toBe(200)
   }
   return quiz
+}
+
+async function seedUniqueCorrectWords(
+  store: DataStore,
+  learnerId: string,
+  level: CambridgeLevel,
+  count = requiredCountForLevel(level),
+) {
+  const words = levelVocabulary.filter((word) => word.level === level).slice(0, count)
+  expect(words).toHaveLength(count)
+  await store.update((database) => {
+    for (const word of words) {
+      database.attempts.push({
+        id: randomUUID(),
+        learnerId,
+        wordId: word.id,
+        correct: true,
+        answeredAt: '2020-01-01T12:00:00.000Z',
+      })
+    }
+  })
+}
+
+async function seedCoverageToUnlock(store: DataStore, learnerId: string, targetLevel: CambridgeLevel) {
+  const targetIndex = VOCABULARY_LEVELS.indexOf(targetLevel)
+  for (const level of VOCABULARY_LEVELS.slice(0, targetIndex)) {
+    await seedUniqueCorrectWords(store, learnerId, level)
+  }
 }
 
 afterEach(async () => {
@@ -549,7 +580,6 @@ describe('Cambridge Vocab Quest API', () => {
   }, 20_000)
 
   it('adapts focus quest to Movers after Space Station unlocks', async () => {
-    const { randomUUID } = await import('node:crypto')
     const { vocabulary } = await import('./vocabulary.js')
     const directory = await mkdtemp(join(tmpdir(), 'cvq-'))
     directories.push(directory)
@@ -571,19 +601,7 @@ describe('Cambridge Vocab Quest API', () => {
       payload: { learnerId },
     })
 
-    const startersWord = vocabulary.find((item) => item.level === 'Starters')
-    expect(startersWord).toBeTruthy()
-    await store.update((database) => {
-      for (let index = 0; index < 200; index += 1) {
-        database.attempts.push({
-          id: randomUUID(),
-          learnerId,
-          wordId: startersWord!.id,
-          correct: true,
-          answeredAt: '2020-01-01T12:00:00.000Z',
-        })
-      }
-    })
+    await seedCoverageToUnlock(store, learnerId, 'Movers')
 
     const hub = await app.inject({ method: 'GET', url: '/api/learner/hub', headers: { cookie } })
     expect(hub.statusCode).toBe(200)
@@ -886,14 +904,10 @@ describe('Cambridge Vocab Quest API', () => {
   }, 20_000)
 
   it.each([
-    { correctCount: 350, level: 'Flyers', mapStop: 'crystal-caves' },
-    { correctCount: 550, level: 'Preliminary', mapStop: 'dragon-ridge' },
-  ] as const)('adapts all daily quests to $level after map unlock', async ({ correctCount, level, mapStop }) => {
-    const { vocabulary } = await import('./vocabulary.js')
-    const directory = await mkdtemp(join(tmpdir(), 'cvq-'))
-    directories.push(directory)
-    const store = new JsonStore(join(directory, 'database.json'))
-    const app = await buildApp({ store })
+    { level: 'Flyers', mapStop: 'crystal-caves' },
+    { level: 'Preliminary', mapStop: 'dragon-ridge' },
+  ] as const)('adapts all daily quests to $level after map unlock', async ({ level, mapStop }) => {
+    const { app, store } = await testApp()
 
     const cookie = await signInAsParent(app, store, { name: 'Parent', email: `quest-${level.toLowerCase()}@example.com` })
     const creation = await app.inject({
@@ -910,19 +924,7 @@ describe('Cambridge Vocab Quest API', () => {
       payload: { learnerId },
     })
 
-    const word = vocabulary.find((item) => item.level === 'Starters')
-    expect(word).toBeTruthy()
-    await store.update((database) => {
-      for (let index = 0; index < correctCount; index += 1) {
-        database.attempts.push({
-          id: randomUUID(),
-          learnerId,
-          wordId: word!.id,
-          correct: true,
-          answeredAt: '2020-01-01T12:00:00.000Z',
-        })
-      }
-    })
+    await seedCoverageToUnlock(store, learnerId, level)
 
     const hub = await app.inject({ method: 'GET', url: '/api/learner/hub', headers: { cookie } })
     expect(hub.statusCode).toBe(200)
@@ -961,12 +963,12 @@ describe('Cambridge Vocab Quest API', () => {
     const hub = await app.inject({ method: 'GET', url: '/api/learner/hub', headers: { cookie } })
     expect(hub.statusCode).toBe(200)
     const map = hub.json().map
-    expect(map.correctCount).toBe(0)
-    expect(map.thresholds).toMatchObject({
-      'nature-valley': 0,
-      'space-station': 200,
-      'crystal-caves': 350,
-      'dragon-ridge': 550,
+    expect(map.progress).toMatchObject({
+      level: 'Starters',
+      nextLevel: 'Movers',
+      learnedCount: 0,
+      requiredCount: requiredCountForLevel('Starters'),
+      ratio: 0.8,
     })
     expect(map.unlocks).toMatchObject({
       'nature-valley': true,
@@ -1013,7 +1015,11 @@ describe('Cambridge Vocab Quest API', () => {
 
     const hub = await app.inject({ method: 'GET', url: '/api/learner/hub', headers: { cookie } })
     expect(hub.statusCode).toBe(200)
-    expect(hub.json().map.correctCount).toBe(0)
+    expect(hub.json().map.progress).toMatchObject({
+      level: 'Flyers',
+      nextLevel: 'Preliminary',
+      learnedCount: 0,
+    })
     expect(hub.json().map.unlocks).toMatchObject({
       'nature-valley': true,
       'space-station': true,
@@ -1057,22 +1063,16 @@ describe('Cambridge Vocab Quest API', () => {
       payload: { learnerId },
     })
 
-    await store.update((database) => {
-      const now = new Date().toISOString()
-      for (let index = 0; index < 200; index += 1) {
-        database.attempts.push({
-          id: randomUUID(),
-          learnerId,
-          wordId: `seed-word-${index}`,
-          correct: true,
-          answeredAt: now,
-        })
-      }
-    })
+    await seedCoverageToUnlock(store, learnerId, 'Movers')
 
     const hub = await app.inject({ method: 'GET', url: '/api/learner/hub', headers: { cookie } })
     expect(hub.statusCode).toBe(200)
-    expect(hub.json().map.correctCount).toBe(200)
+    expect(hub.json().map.progress).toMatchObject({
+      level: 'Movers',
+      nextLevel: 'Flyers',
+      learnedCount: 0,
+      requiredCount: requiredCountForLevel('Movers'),
+    })
     expect(hub.json().learner.level).toBe('Movers')
     expect(hub.json().map.unlocks).toMatchObject({
       'nature-valley': true,
