@@ -1,5 +1,5 @@
 import {
-  BookOpen, Check, ChevronDown, Gem, Gift, Home, LayoutDashboard, LogOut, Menu, Target, Trophy, UserRound, X,
+  BookOpen, Check, ChevronDown, Gem, Gift, Home, LayoutDashboard, Library, LogOut, Menu, Target, Trophy, UserRound, X,
 } from 'lucide-react'
 import { useEffect, useRef, useState, type ButtonHTMLAttributes, type ReactNode } from 'react'
 import { api, ApiError } from '../../lib'
@@ -243,6 +243,7 @@ export function AppShell({ children, path, learner, navigate, onSwitchLearner, o
   const links = [
     { path: '/home', label: 'Home Hub', icon: Home },
     { path: '/explore', label: 'Word Explorer', icon: BookOpen },
+    { path: '/dictionary', label: 'Dictionary', icon: Library },
   ]
 
   const go = (next: string) => {

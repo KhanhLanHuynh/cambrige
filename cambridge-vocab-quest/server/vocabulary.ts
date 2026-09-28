@@ -100,6 +100,27 @@ export function listCategories(level?: CambridgeLevel): string[] {
   return [...new Set(pool.map((word) => word.category))].sort((a, b) => a.localeCompare(b))
 }
 
+export type VocabularyListItem = {
+  id: string
+  word: string
+  partOfSpeech: string
+  level: CambridgeLevel
+  definition: string
+}
+
+export function listVocabulary(level?: CambridgeLevel): VocabularyListItem[] {
+  const pool = level ? vocabulary.filter((word) => word.level === level) : vocabulary
+  return [...pool]
+    .sort((left, right) => left.word.localeCompare(right.word))
+    .map((word) => ({
+      id: word.id,
+      word: word.word,
+      partOfSpeech: word.partOfSpeech,
+      level: word.level,
+      definition: word.definition,
+    }))
+}
+
 function toSearchResult(word: VocabularyWord): VocabularySearchResult {
   return {
     id: word.id,

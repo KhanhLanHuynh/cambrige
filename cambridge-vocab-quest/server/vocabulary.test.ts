@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { getWordById, restoreVocabularyFiles, searchVocabulary, selectVocabulary, snapshotVocabularyFiles, vocabulary } from './vocabulary.js'
+import { getWordById, listVocabulary, restoreVocabularyFiles, searchVocabulary, selectVocabulary, snapshotVocabularyFiles, vocabulary } from './vocabulary.js'
 
 describe('vocabulary quiz shape', () => {
   it('uses the word as the answer with word choices, not the definition', () => {
@@ -67,6 +67,29 @@ describe('selectVocabulary', () => {
 
     expect(words).toHaveLength(4)
     expect(words.some((word) => word.id === 'movers-asleep')).toBe(true)
+  })
+})
+
+describe('listVocabulary', () => {
+  it('returns all words sorted alphabetically when no level is set', () => {
+    const words = listVocabulary()
+    expect(words.length).toBe(vocabulary.length)
+    expect(words[0]).toMatchObject({
+      id: expect.any(String),
+      word: expect.any(String),
+      partOfSpeech: expect.any(String),
+      level: expect.any(String),
+      definition: expect.any(String),
+    })
+    for (let index = 1; index < words.length; index += 1) {
+      expect(words[index - 1]!.word.localeCompare(words[index]!.word)).toBeLessThanOrEqual(0)
+    }
+  })
+
+  it('filters by level when provided', () => {
+    const words = listVocabulary('Starters')
+    expect(words.length).toBeGreaterThan(0)
+    expect(words.every((word) => word.level === 'Starters')).toBe(true)
   })
 })
 

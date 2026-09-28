@@ -1233,6 +1233,40 @@ describe('Cambridge Vocab Quest API', () => {
     })
     expect(results[0]).not.toHaveProperty('sentences')
 
+    const listAll = await app.inject({
+      method: 'GET',
+      url: '/api/parent/vocabulary',
+      headers: { cookie },
+    })
+    expect(listAll.statusCode).toBe(200)
+    const { words: allWords } = listAll.json() as {
+      words: Array<{ id: string; word: string; level: string; partOfSpeech: string; definition: string }>
+    }
+    expect(allWords.length).toBeGreaterThan(100)
+    expect(allWords[0]).toMatchObject({
+      id: expect.any(String),
+      word: expect.any(String),
+      level: expect.any(String),
+      partOfSpeech: expect.any(String),
+      definition: expect.any(String),
+    })
+    expect(allWords[0]).not.toHaveProperty('sentences')
+    for (let index = 1; index < Math.min(allWords.length, 50); index += 1) {
+      expect(allWords[index - 1]!.word.localeCompare(allWords[index]!.word)).toBeLessThanOrEqual(0)
+    }
+
+    const listStarters = await app.inject({
+      method: 'GET',
+      url: '/api/parent/vocabulary?level=Starters',
+      headers: { cookie },
+    })
+    expect(listStarters.statusCode).toBe(200)
+    const { words: starterWords } = listStarters.json() as {
+      words: Array<{ level: string }>
+    }
+    expect(starterWords.length).toBeGreaterThan(0)
+    expect(starterWords.every((word) => word.level === 'Starters')).toBe(true)
+
     const wordId = 'starters-armchair'
     const original = await app.inject({
       method: 'GET',

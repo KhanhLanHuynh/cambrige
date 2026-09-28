@@ -62,6 +62,7 @@ import {
 import {
   getWordById,
   listCategories,
+  listVocabulary,
   searchVocabulary,
   selectVocabulary,
   updateWordContent,
@@ -678,6 +679,12 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
       sentenceCount: word.sentences.length,
     }))
     return { results }
+  })
+
+  app.get('/api/parent/vocabulary', async (request) => {
+    requireParent(request)
+    const query = parse(vocabularyCategoriesQuery, request.query ?? {})
+    return { words: listVocabulary(query.level) }
   })
 
   app.get('/api/parent/vocabulary/:id', async (request) => {

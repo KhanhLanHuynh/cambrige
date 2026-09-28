@@ -8,6 +8,7 @@ import { FillBlankPage } from './features/games/FillBlankPage'
 import { SwapWordsPage } from './features/games/SwapWordsPage'
 import { HomePage } from './features/learning/HomePage'
 import { QuizPage } from './features/learning/QuizPage'
+import { DictionaryPage } from './features/learning/DictionaryPage'
 import { ProfilesPage } from './features/learner-profiles/ProfilesPage'
 import { flushQueue } from './db'
 import { useRouter } from './hooks'
@@ -86,6 +87,7 @@ function App() {
 
   let page
   if (path === '/explore') page = <QuizPage learner={learner} navigate={navigate} />
+  else if (path === '/dictionary') page = <DictionaryPage navigate={navigate} />
   else if (path === '/games/fill-blank') page = <FillBlankPage learner={learner} navigate={navigate} />
   else if (path === '/games/speed-match') page = <SpeedMatchPage learner={learner} navigate={navigate} />
   else if (path === '/games/swap-words') page = <SwapWordsPage learner={learner} navigate={navigate} />
