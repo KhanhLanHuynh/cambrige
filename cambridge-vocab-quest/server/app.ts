@@ -67,6 +67,7 @@ import {
   selectVocabulary,
   updateWordContent,
   vocabulary,
+  withRandomQuizChoices,
 } from './vocabulary.js'
 
 const SESSION_COOKIE = 'cvq_session'
@@ -972,7 +973,9 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
         soundEnabled: learner.settings.soundEnabled,
         speedMatchSeconds: learner.settings.speedMatchSeconds,
       },
-      questions: selected.map(({ answer: _answer, fact: _fact, ...question }) => question),
+      questions: selected
+        .map(withRandomQuizChoices)
+        .map(({ answer: _answer, fact: _fact, ...question }) => question),
     })
   })
 

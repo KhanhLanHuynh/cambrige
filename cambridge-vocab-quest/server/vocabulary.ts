@@ -179,6 +179,54 @@ function shuffled<T>(items: readonly T[]): T[] {
   return result
 }
 
+const FALLBACK_DISTRACTORS = [
+  'colour',
+  'number',
+  'weather',
+  'music',
+  'sleep',
+  'friend',
+  'garden',
+  'river',
+]
+
+function randomWordDistractors(item: VocabularyWord, pool: readonly VocabularyWord[]): string[] {
+  const answer = item.word
+  const picks: string[] = []
+
+  const tryAdd = (label: string | undefined) => {
+    if (!label || label === answer || picks.includes(label)) return false
+    picks.push(label)
+    return true
+  }
+
+  for (const word of shuffled(pool.filter((peer) => peer.partOfSpeech === item.partOfSpeech && peer.id !== item.id))) {
+    if (tryAdd(word.word) && picks.length === 3) return picks
+  }
+  for (const word of shuffled(pool.filter((peer) => peer.id !== item.id))) {
+    if (tryAdd(word.word) && picks.length === 3) return picks
+  }
+  for (const fallback of FALLBACK_DISTRACTORS) {
+    if (tryAdd(fallback) && picks.length === 3) return picks
+  }
+  let index = 1
+  while (picks.length < 3) {
+    tryAdd(`option-${index}`)
+    index += 1
+  }
+  return picks
+}
+
+/** Fresh random MCQ choices for a quiz session (does not mutate the vocab cache). */
+export function withRandomQuizChoices(word: VocabularyWord): VocabularyWord {
+  const pool = vocabulary.filter((item) => item.level === word.level)
+  const distractors = randomWordDistractors(word, pool.length > 1 ? pool : vocabulary)
+  return {
+    ...word,
+    choices: shuffled([word.word, ...distractors]),
+  }
+}
+
 export interface WordAttemptSummary {
   wordId: string
   health: WordHealth

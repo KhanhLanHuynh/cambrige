@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { getWordById, listVocabulary, restoreVocabularyFiles, searchVocabulary, selectVocabulary, snapshotVocabularyFiles, vocabulary } from './vocabulary.js'
+import { getWordById, listVocabulary, restoreVocabularyFiles, searchVocabulary, selectVocabulary, snapshotVocabularyFiles, vocabulary, withRandomQuizChoices } from './vocabulary.js'
 
 describe('vocabulary quiz shape', () => {
   it('uses the word as the answer with word choices, not the definition', () => {
@@ -11,6 +11,30 @@ describe('vocabulary quiz shape', () => {
       expect(new Set(word.choices).size).toBe(4)
       expect(word.choices).not.toContain(word.definition)
     }
+  })
+})
+
+describe('withRandomQuizChoices', () => {
+  it('returns valid unique choices that include the answer', () => {
+    const word = vocabulary.find((item) => item.level === 'Starters')
+    expect(word).toBeDefined()
+    const originalChoices = [...word!.choices]
+    const randomized = withRandomQuizChoices(word!)
+    expect(randomized).not.toBe(word)
+    expect(randomized.choices).toHaveLength(4)
+    expect(randomized.choices).toContain(word!.word)
+    expect(new Set(randomized.choices).size).toBe(4)
+    expect(randomized.choices).not.toContain(word!.definition)
+    expect(word!.choices).toEqual(originalChoices)
+  })
+
+  it('varies distractors or order across runs for the same word', () => {
+    const word = vocabulary.find((item) => item.level === 'Starters' && item.partOfSpeech === 'noun')
+    expect(word).toBeDefined()
+    const signatures = new Set(
+      Array.from({ length: 20 }, () => withRandomQuizChoices(word!).choices.join('|')),
+    )
+    expect(signatures.size).toBeGreaterThan(1)
   })
 })
 
