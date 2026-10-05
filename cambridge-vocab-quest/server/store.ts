@@ -100,6 +100,17 @@ export interface QuizRecord {
   expiresAt: string
 }
 
+export interface LastLetterGameRecord {
+  id: string
+  userId: string
+  learnerId: string
+  currentWord: string
+  usedWords: string[]
+  gemsAwarded: number
+  createdAt: string
+  expiresAt: string
+}
+
 export interface AttemptRecord {
   id: string
   learnerId: string
@@ -130,6 +141,7 @@ export interface Database {
   learners: LearnerRecord[]
   sessions: SessionRecord[]
   quizzes: QuizRecord[]
+  lastLetterGames: LastLetterGameRecord[]
   attempts: AttemptRecord[]
   assignments: AssignmentRecord[]
   passwordResets: PasswordResetRecord[]
@@ -153,6 +165,7 @@ export const emptyDatabase = (): Database => ({
   learners: [],
   sessions: [],
   quizzes: [],
+  lastLetterGames: [],
   attempts: [],
   assignments: [],
   passwordResets: [],
@@ -284,6 +297,7 @@ export function migrateDatabase(raw: Partial<Database> & { version?: number }): 
         answeredWordIds: remapWordIdList(entry.answeredWordIds),
       }
     }),
+    lastLetterGames: raw.lastLetterGames ?? [],
     attempts: (raw.attempts ?? []).flatMap((attempt) => {
       const mapped = remapWordId(attempt.wordId)
       if (!mapped) return []
@@ -383,6 +397,11 @@ export function ensureDailyPractice(learner: LearnerRecord, now = new Date()): v
     learner.miniGameModesCompletedToday = []
     learner.claimedQuestIds = []
   }
+}
+
+export function pruneExpiredLastLetterGames(database: Database, now = new Date()): void {
+  const nowMs = now.getTime()
+  database.lastLetterGames = database.lastLetterGames.filter((game) => Date.parse(game.expiresAt) > nowMs)
 }
 
 /** Drop expired quiz sessions, keeping completed speed-match rows for achievement counts. */

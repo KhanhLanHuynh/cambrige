@@ -8,17 +8,18 @@ import type { CambridgeLevel } from '../shared/types.js'
 import { createParent, promoteParent } from './admin-parent.js'
 import { buildApp } from './app.js'
 import { requiredCountForLevel } from './level-progress.js'
+import type { EnglishLookup } from './english-word.js'
 import { JsonStore, type DataStore } from './store.js'
 import { VOCABULARY_LEVELS, vocabulary as levelVocabulary } from './vocabulary.js'
 
 const directories: string[] = []
 const DEFAULT_PASSWORD = 'A-secure-password1'
 
-async function testApp() {
+async function testApp(options: { lookupEnglishWord?: EnglishLookup } = {}) {
   const directory = await mkdtemp(join(tmpdir(), 'cvq-'))
   directories.push(directory)
   const store = new JsonStore(join(directory, 'database.json'))
-  const app = await buildApp({ store })
+  const app = await buildApp({ store, lookupEnglishWord: options.lookupEnglishWord })
   return { app, store }
 }
 
@@ -2278,4 +2279,265 @@ describe('Cambridge Vocab Quest API', () => {
 
     await app.close()
   }, 20_000)
+
+  it('awards 5 gems for an off-list English word and advances the chain', async () => {
+    const { vocabulary } = await import('./vocabulary.js')
+    const { app, store } = await testApp({
+      lookupEnglishWord: async () => 'english',
+    })
+    const cookie = await signInAsParent(app, store, { name: 'Parent', email: 'last-letter-ok@example.com' })
+    const creation = await app.inject({
+      method: 'POST',
+      url: '/api/learners',
+      headers: { cookie },
+      payload: { name: 'Explorer', level: 'Starters' },
+    })
+    const learnerId = creation.json().learner.id as string
+    await app.inject({
+      method: 'POST',
+      url: '/api/learners/select',
+      headers: { cookie },
+      payload: { learnerId },
+    })
+
+    const started = await app.inject({
+      method: 'POST',
+      url: '/api/games/last-letter',
+      headers: { cookie },
+    })
+    expect(started.statusCode).toBe(201)
+    const game = started.json() as { id: string; word: string; letter: string; gemsAwarded: number }
+    expect(game.gemsAwarded).toBe(0)
+    expect(game.letter).toBe(game.word.slice(-1))
+    expect(vocabulary.some((item) => item.word.toLowerCase() === game.word)).toBe(true)
+
+    const next = `${game.letter}qzz${game.word[0]}`
+    expect(vocabulary.some((item) => item.word.toLowerCase() === next)).toBe(false)
+    const answered = await app.inject({
+      method: 'POST',
+      url: `/api/games/last-letter/${game.id}/answers`,
+      headers: { cookie },
+      payload: { answer: next.toUpperCase() },
+    })
+    expect(answered.statusCode).toBe(200)
+    expect(answered.json()).toMatchObject({
+      correct: true,
+      reason: 'ok',
+      word: next,
+      letter: game.word[0],
+      gemsAwarded: 5,
+      totalGems: 5,
+    })
+
+    const chained = await app.inject({
+      method: 'POST',
+      url: `/api/games/last-letter/${game.id}/answers`,
+      headers: { cookie },
+      payload: { answer: `${game.word[0]}qzzlink` },
+    })
+    expect(chained.statusCode).toBe(200)
+    expect(chained.json()).toMatchObject({
+      correct: true,
+      reason: 'ok',
+      word: `${game.word[0]}qzzlink`,
+      gemsAwarded: 5,
+      totalGems: 10,
+    })
+
+    const learner = store.read((database) => database.learners.find((item) => item.id === learnerId))
+    expect(learner?.gems).toBe(10)
+    expect(learner?.minutesPractisedToday).toBe(2)
+    expect(store.read((database) => database.attempts.filter((item) => item.learnerId === learnerId))).toEqual([])
+    await app.close()
+  })
+
+  it('rejects a wrong letter, a repeat, and a non-word without gems', async () => {
+    const { app, store } = await testApp({
+      lookupEnglishWord: async (word) => (word.includes('notaword') ? 'unknown' : 'english'),
+    })
+    const cookie = await signInAsParent(app, store, { name: 'Parent', email: 'last-letter-miss@example.com' })
+    const creation = await app.inject({
+      method: 'POST',
+      url: '/api/learners',
+      headers: { cookie },
+      payload: { name: 'Explorer', level: 'Starters' },
+    })
+    const learnerId = creation.json().learner.id as string
+    await app.inject({
+      method: 'POST',
+      url: '/api/learners/select',
+      headers: { cookie },
+      payload: { learnerId },
+    })
+    const started = await app.inject({
+      method: 'POST',
+      url: '/api/games/last-letter',
+      headers: { cookie },
+    })
+    const game = started.json() as { id: string; word: string; letter: string }
+    const wrong = game.letter === 'a' ? 'banana' : 'apple'
+
+    const missed = await app.inject({
+      method: 'POST',
+      url: `/api/games/last-letter/${game.id}/answers`,
+      headers: { cookie },
+      payload: { answer: wrong },
+    })
+    expect(missed.statusCode).toBe(200)
+    expect(missed.json()).toMatchObject({
+      correct: false,
+      reason: 'wrong-letter',
+      word: game.word,
+      gemsAwarded: 0,
+      totalGems: 0,
+    })
+
+    const coined = `${game.letter}notaword`
+    const unknown = await app.inject({
+      method: 'POST',
+      url: `/api/games/last-letter/${game.id}/answers`,
+      headers: { cookie },
+      payload: { answer: coined },
+    })
+    expect(unknown.json()).toMatchObject({
+      correct: false,
+      reason: 'not-english',
+      word: game.word,
+      gemsAwarded: 0,
+      totalGems: 0,
+    })
+
+    const fresh = `${game.letter}qzz${game.letter}`
+    const accepted = await app.inject({
+      method: 'POST',
+      url: `/api/games/last-letter/${game.id}/answers`,
+      headers: { cookie },
+      payload: { answer: fresh },
+    })
+    expect(accepted.json().reason).toBe('ok')
+
+    const repeated = await app.inject({
+      method: 'POST',
+      url: `/api/games/last-letter/${game.id}/answers`,
+      headers: { cookie },
+      payload: { answer: fresh },
+    })
+    expect(repeated.statusCode).toBe(200)
+    expect(repeated.json()).toMatchObject({
+      correct: false,
+      reason: 'repeat',
+      gemsAwarded: 0,
+      totalGems: 5,
+    })
+
+    const learner = store.read((database) => database.learners.find((item) => item.id === learnerId))
+    expect(learner?.gems).toBe(5)
+    await app.close()
+  })
+
+  it('does not award gems when the dictionary cannot be checked', async () => {
+    const { app, store } = await testApp({
+      lookupEnglishWord: async () => 'unavailable',
+    })
+    const cookie = await signInAsParent(app, store, { name: 'Parent', email: 'last-letter-down@example.com' })
+    const creation = await app.inject({
+      method: 'POST',
+      url: '/api/learners',
+      headers: { cookie },
+      payload: { name: 'Explorer', level: 'Starters' },
+    })
+    const learnerId = creation.json().learner.id as string
+    await app.inject({
+      method: 'POST',
+      url: '/api/learners/select',
+      headers: { cookie },
+      payload: { learnerId },
+    })
+    const started = await app.inject({
+      method: 'POST',
+      url: '/api/games/last-letter',
+      headers: { cookie },
+    })
+    const game = started.json() as { id: string; word: string; letter: string }
+    const answered = await app.inject({
+      method: 'POST',
+      url: `/api/games/last-letter/${game.id}/answers`,
+      headers: { cookie },
+      payload: { answer: `${game.letter}qzz` },
+    })
+    expect(answered.statusCode).toBe(200)
+    expect(answered.json()).toMatchObject({
+      correct: false,
+      reason: 'unavailable',
+      word: game.word,
+      gemsAwarded: 0,
+      totalGems: 0,
+    })
+    const learner = store.read((database) => database.learners.find((item) => item.id === learnerId))
+    expect(learner?.gems).toBe(0)
+    expect(learner?.minutesPractisedToday).toBe(0)
+    await app.close()
+  })
+
+  it('blocks Grab the Last Letter in focus mode and at the daily limit', async () => {
+    const { app, store } = await testApp({
+      lookupEnglishWord: async () => 'english',
+    })
+    const cookie = await signInAsParent(app, store, { name: 'Parent', email: 'last-letter-gate@example.com' })
+    const creation = await app.inject({
+      method: 'POST',
+      url: '/api/learners',
+      headers: { cookie },
+      payload: { name: 'Explorer', level: 'Starters' },
+    })
+    const learnerId = creation.json().learner.id as string
+    await app.inject({
+      method: 'POST',
+      url: '/api/learners/select',
+      headers: { cookie },
+      payload: { learnerId },
+    })
+    await app.inject({
+      method: 'POST',
+      url: '/api/auth/parent-gate',
+      headers: { cookie },
+      payload: { password: DEFAULT_PASSWORD },
+    })
+    const focus = await app.inject({
+      method: 'PATCH',
+      url: '/api/settings',
+      headers: { cookie },
+      payload: { focusMode: true },
+    })
+    expect(focus.statusCode).toBe(200)
+
+    const blocked = await app.inject({
+      method: 'POST',
+      url: '/api/games/last-letter',
+      headers: { cookie },
+    })
+    expect(blocked.statusCode).toBe(403)
+    expect(blocked.json().error).toBe('Finish today’s quiz before playing mini-games')
+
+    await app.inject({
+      method: 'PATCH',
+      url: '/api/settings',
+      headers: { cookie },
+      payload: { focusMode: false },
+    })
+    await store.update((database) => {
+      const learner = database.learners.find((item) => item.id === learnerId)
+      if (!learner) return
+      learner.minutesPractisedDate = new Date().toISOString().slice(0, 10)
+      learner.minutesPractisedToday = learner.settings.dailyLimitMinutes
+    })
+    const limited = await app.inject({
+      method: 'POST',
+      url: '/api/games/last-letter',
+      headers: { cookie },
+    })
+    expect(limited.statusCode).toBe(429)
+    expect(limited.json().error).toBe('Daily learning limit reached. Come back tomorrow!')
+    await app.close()
+  })
 })

@@ -397,6 +397,15 @@ svg { flex: 0 0 auto; }
 .swap-words-row.sentence .swap-words-chip{background:#45108a}
 .swap-words-placeholder{color:#9b86c0;font-size: calc(.78rem + var(--text-bump));align-self:center}
 .swap-words-revealed{font-size: calc(1.15rem + var(--text-bump));line-height:1.55;margin:0}
+.last-letter{padding:1.4rem;max-width:720px}
+.last-letter-word{font-size: calc(2.4rem + var(--text-bump));font-weight:800;letter-spacing:.04em;margin:.4rem 0 1.2rem;line-height:1.2}
+.last-letter-mark{color:#102000;background:var(--lime);border-radius:.2em;padding:0 .12em}
+.last-letter-ok{margin:0;color:var(--lime);font-size: calc(.85rem + var(--text-bump))}
+.last-letter-miss{margin:0;color:#f0b4c8;font-size: calc(.85rem + var(--text-bump))}
+.last-letter-chain{max-width:720px;margin-top:1rem;padding:1rem 1.2rem;border:1px solid #7040a1;border-radius:18px;background:#2a0658}
+.last-letter-chain ol{margin:.55rem 0 0;padding-left:1.4rem;display:grid;gap:.4rem}
+.last-letter-chain li{font-weight:800;font-size: calc(1.05rem + var(--text-bump))}
+.last-letter-chain li.is-current{color:var(--lime)}
 .achievement-list{display:grid;gap:.7rem;margin-top:1rem;text-align:left}
 .achievement-list article{display:flex;gap:.7rem;align-items:center;border:1px solid #ddd3e8;border-radius:12px;padding:.7rem}
 .achievement-list article.locked{opacity:.55}

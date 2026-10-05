@@ -87,6 +87,10 @@ export const quizAnswerSchema = z.object({
   answer: z.string().trim().min(1).max(120),
 })
 
+export const lastLetterAnswerSchema = z.object({
+  answer: z.string().trim().min(1).max(40),
+})
+
 export const settingsSchema = z.object({
   learnerId: z.string().uuid().optional(),
   dailyGoal: z.number().int().min(1).max(50).optional(),

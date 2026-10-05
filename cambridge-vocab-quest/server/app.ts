@@ -20,6 +20,7 @@ import {
   parentUpdateSchema,
   questClaimSchema,
   registerSchema,
+  lastLetterAnswerSchema,
   quizAnswerSchema,
   quizCreateSchema,
   settingsQuerySchema,
@@ -30,6 +31,7 @@ import {
 } from '../shared/schemas.js'
 import type { CambridgeLevel, SafeLearner, VocabularyWord } from '../shared/types.js'
 import { ACHIEVEMENTS, evaluateAchievements } from './achievements.js'
+import { lookupEnglishWord, type EnglishLookup } from './english-word.js'
 import { AdminError, createParent, deleteParent, listParents, updateParent } from './admin-parent.js'
 import { applyBackup, backupFilename, BackupError, buildBackup } from './backup.js'
 import { createSessionToken, digestToken, hashSecret, isAllowedCorsOrigin, verifySecret } from './security.js'
@@ -41,6 +43,7 @@ import {
   MINI_GAME_MODES,
   isSuperAdmin,
   JsonStore,
+  pruneExpiredLastLetterGames,
   pruneExpiredQuizzes,
   todayKey,
   type AttemptRecord,
@@ -266,10 +269,50 @@ function syncAchievements(store: DataStore, learnerId: string): string[] {
   })
 }
 
+const SINGLE_ALPHA_WORD = /^[a-zA-Z]{2,30}$/
+
+function pickStarterWord(level: CambridgeLevel): string {
+  const pool = vocabulary.filter((word) => word.level === level && SINGLE_ALPHA_WORD.test(word.word))
+  if (!pool.length) throw new HttpError(404, 'No vocabulary matches this game')
+  const choice = pool[Math.floor(Math.random() * pool.length)]!
+  return choice.word.toLowerCase()
+}
+
+function normalizeChainWord(value: string): string | null {
+  const word = value.trim().toLowerCase()
+  if (!/^[a-z]{2,30}$/.test(word)) return null
+  return word
+}
+
+function assertChainAccess(learner: LearnerRecord): void {
+  ensureDailyPractice(learner)
+  if (learner.minutesPractisedToday >= learner.settings.dailyLimitMinutes) {
+    throw new HttpError(429, 'Daily learning limit reached. Come back tomorrow!')
+  }
+  if (!learner.settings.timedModesEnabled) {
+    throw new HttpError(403, 'Timed modes are disabled')
+  }
+  if (learner.settings.focusMode && !learner.completedQuizToday) {
+    throw new HttpError(403, 'Finish today’s quiz before playing mini-games')
+  }
+}
+
+function noteChainPractice(learner: LearnerRecord): void {
+  ensureDailyPractice(learner)
+  learner.minutesPractisedToday += 1
+  const today = todayKey()
+  const yesterday = new Date(Date.now() - 86_400_000).toISOString().slice(0, 10)
+  if (learner.lastActiveDate !== today) {
+    learner.streak = learner.lastActiveDate === yesterday ? learner.streak + 1 : 1
+    learner.lastActiveDate = today
+  }
+}
+
 export interface BuildAppOptions {
   store?: DataStore
   logger?: boolean
   serverFactory?: FastifyServerOptions['serverFactory']
+  lookupEnglishWord?: EnglishLookup
 }
 
 function resolveStaticDir(): string {
@@ -287,6 +330,7 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
     serverFactory: options.serverFactory,
   })
   const store = options.store ?? new JsonStore()
+  const checkEnglishWord = options.lookupEnglishWord ?? lookupEnglishWord
   await store.init()
   const serveStatic = shouldServeStatic()
   const staticDir = resolveStaticDir()
@@ -1075,6 +1119,89 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
         fact: word.fact,
         gemsAwarded,
         complete: currentQuiz.answeredWordIds.length === currentQuiz.wordIds.length,
+      }
+    })
+    return result
+  })
+
+  app.post('/api/games/last-letter', async (request, reply) => {
+    const { session, learner } = requireLearner(request)
+    assertChainAccess(learner)
+    const word = pickStarterWord(learner.level)
+    const game = {
+      id: randomUUID(),
+      userId: session.userId,
+      learnerId: learner.id,
+      currentWord: word,
+      usedWords: [word],
+      gemsAwarded: 0,
+      createdAt: new Date().toISOString(),
+      expiresAt: new Date(Date.now() + 60 * 60 * 1000).toISOString(),
+    }
+    await store.update((database) => {
+      pruneExpiredLastLetterGames(database)
+      database.lastLetterGames.push(game)
+    })
+    return reply.code(201).send({
+      id: game.id,
+      word: game.currentWord,
+      letter: game.currentWord.slice(-1),
+      gemsAwarded: 0,
+    })
+  })
+
+  app.post('/api/games/last-letter/:id/answers', async (request) => {
+    const { session, learner } = requireLearner(request)
+    const { id } = parse(idParams, request.params)
+    const body = parse(lastLetterAnswerSchema, request.body ?? {})
+    const game = store.read((database) => database.lastLetterGames.find((item) =>
+      item.id === id && item.userId === session.userId && item.learnerId === learner.id,
+    ))
+    if (!game || Date.parse(game.expiresAt) <= Date.now()) {
+      throw new HttpError(404, 'Game not found or expired')
+    }
+    ensureDailyPractice(learner)
+    if (learner.minutesPractisedToday >= learner.settings.dailyLimitMinutes) {
+      throw new HttpError(429, 'Daily learning limit reached. Come back tomorrow!')
+    }
+
+    const answer = normalizeChainWord(body.answer)
+    if (!answer) throw new HttpError(400, 'Use 2 to 30 letters')
+
+    const required = game.currentWord.slice(-1)
+    let outcome: 'ok' | 'wrong-letter' | 'repeat' | 'not-english' | 'unavailable'
+    if (answer[0] !== required) outcome = 'wrong-letter'
+    else if (game.usedWords.includes(answer)) outcome = 'repeat'
+    else {
+      const lookup = await checkEnglishWord(answer)
+      outcome = lookup === 'english' ? 'ok' : lookup === 'unknown' ? 'not-english' : 'unavailable'
+    }
+
+    const result = await store.update((database) => {
+      const currentGame = database.lastLetterGames.find((item) => item.id === game.id)
+      const currentLearner = database.learners.find((item) => item.id === learner.id)
+      if (!currentGame || !currentLearner || Date.parse(currentGame.expiresAt) <= Date.now()) {
+        throw new HttpError(404, 'Game not found or expired')
+      }
+      const latestLetter = currentGame.currentWord.slice(-1)
+      if (answer[0] !== latestLetter) outcome = 'wrong-letter'
+      else if (outcome === 'ok' && currentGame.usedWords.includes(answer)) outcome = 'repeat'
+      let gemsAwarded = 0
+      if (outcome !== 'unavailable') noteChainPractice(currentLearner)
+      if (outcome === 'ok') {
+        currentGame.currentWord = answer
+        currentGame.usedWords.push(answer)
+        currentGame.gemsAwarded += 5
+        currentLearner.gems += 5
+        gemsAwarded = 5
+      }
+      return {
+        correct: outcome === 'ok',
+        reason: outcome,
+        word: currentGame.currentWord,
+        letter: currentGame.currentWord.slice(-1),
+        gemsAwarded,
+        totalGems: currentLearner.gems,
       }
     })
     return result
