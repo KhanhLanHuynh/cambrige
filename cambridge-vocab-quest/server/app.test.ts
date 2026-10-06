@@ -2346,7 +2346,7 @@ describe('Cambridge Vocab Quest API', () => {
 
     const learner = store.read((database) => database.learners.find((item) => item.id === learnerId))
     expect(learner?.gems).toBe(10)
-    expect(learner?.minutesPractisedToday).toBe(2)
+    expect(learner?.minutesPractisedToday).toBe(0)
     expect(store.read((database) => database.attempts.filter((item) => item.learnerId === learnerId))).toEqual([])
     await app.close()
   })

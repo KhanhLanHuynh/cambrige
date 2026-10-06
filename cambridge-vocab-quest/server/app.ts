@@ -299,7 +299,6 @@ function assertChainAccess(learner: LearnerRecord): void {
 
 function noteChainPractice(learner: LearnerRecord): void {
   ensureDailyPractice(learner)
-  learner.minutesPractisedToday += 1
   const today = todayKey()
   const yesterday = new Date(Date.now() - 86_400_000).toISOString().slice(0, 10)
   if (learner.lastActiveDate !== today) {
