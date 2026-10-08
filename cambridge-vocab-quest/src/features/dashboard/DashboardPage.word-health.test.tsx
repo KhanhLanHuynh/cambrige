@@ -11,7 +11,15 @@ const wordHealth = [
   { id: '4', word: 'balloon', partOfSpeech: 'noun', category: 'objects', health: 'Warming', accuracy: 50, quizzes: 2, lastActivity: null, lastActivityLabel: '—' },
   { id: '5', word: 'cloud', partOfSpeech: 'noun', category: 'weather', health: 'Healthy', accuracy: 80, quizzes: 5, lastActivity: null, lastActivityLabel: '—' },
   { id: '6', word: 'dragon', partOfSpeech: 'noun', category: 'animals', health: 'Healthy', accuracy: 100, quizzes: 6, lastActivity: null, lastActivityLabel: '—' },
+  { id: '7', word: 'echo', partOfSpeech: 'noun', category: 'sounds', health: 'New', accuracy: 20, quizzes: 1, lastActivity: null, lastActivityLabel: '—' },
+  { id: '8', word: 'fig', partOfSpeech: 'noun', category: 'food', health: 'New', accuracy: 30, quizzes: 1, lastActivity: null, lastActivityLabel: '—' },
+  { id: '9', word: 'kite', partOfSpeech: 'noun', category: 'objects', health: 'New', accuracy: 40, quizzes: 1, lastActivity: null, lastActivityLabel: '—' },
+  { id: '10', word: 'lemon', partOfSpeech: 'noun', category: 'food', health: 'Warming', accuracy: 60, quizzes: 2, lastActivity: null, lastActivityLabel: '—' },
+  { id: '11', word: 'nest', partOfSpeech: 'noun', category: 'animals', health: 'Warming', accuracy: 70, quizzes: 2, lastActivity: null, lastActivityLabel: '—' },
 ]
+
+const lowestFirstPage = ['mango', 'zebra', 'echo', 'fig', 'kite', 'balloon', 'lemon', 'nest', 'cloud', 'apple']
+const highestFirstPage = ['dragon', 'apple', 'cloud', 'nest', 'lemon', 'balloon', 'kite', 'fig', 'echo', 'mango']
 
 function jsonResponse(body: unknown, status = 200) {
   return new Response(JSON.stringify(body), {
@@ -75,7 +83,7 @@ describe('DashboardPage Word Health Matrix accuracy sort', () => {
     render(<DashboardPage navigate={vi.fn()} />)
 
     await waitFor(() => {
-      expect(matrixWords()).toEqual(['mango', 'zebra', 'balloon', 'cloud', 'apple'])
+      expect(matrixWords()).toEqual(lowestFirstPage)
     })
 
     const accuracyHeader = within(matrixSection()).getByRole('columnheader', { name: /accuracy/i })
@@ -83,7 +91,7 @@ describe('DashboardPage Word Health Matrix accuracy sort', () => {
 
     await user.click(within(matrixSection()).getByRole('button', { name: 'Sort accuracy from highest to lowest' }))
 
-    expect(matrixWords()).toEqual(['dragon', 'apple', 'cloud', 'balloon', 'mango'])
+    expect(matrixWords()).toEqual(highestFirstPage)
     expect(accuracyHeader).toHaveAttribute('aria-sort', 'descending')
     expect(within(matrixSection()).getByText('Page 1 of 2')).toBeInTheDocument()
 
@@ -91,7 +99,7 @@ describe('DashboardPage Word Health Matrix accuracy sort', () => {
     expect(matrixWords()).toEqual(['zebra'])
 
     await user.click(within(matrixSection()).getByRole('button', { name: 'Sort accuracy from lowest to highest' }))
-    expect(matrixWords()).toEqual(['mango', 'zebra', 'balloon', 'cloud', 'apple'])
+    expect(matrixWords()).toEqual(lowestFirstPage)
     expect(accuracyHeader).toHaveAttribute('aria-sort', 'ascending')
     expect(within(matrixSection()).getByText('Page 1 of 2')).toBeInTheDocument()
   })

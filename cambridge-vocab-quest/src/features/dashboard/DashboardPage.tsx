@@ -37,6 +37,7 @@ interface DashboardSummary {
 }
 
 const ACTIVITY_COLORS = ['#00dcff', '#8b50e6', '#86ff3a', '#ff477e', '#ffb020', '#5eead4']
+const WORD_HEALTH_PAGE_SIZE = 10
 
 function rollingActivityDates(now = Date.now()) {
   return Array.from({ length: 7 }, (_, offset) =>
@@ -797,8 +798,8 @@ export function DashboardPage({
       .toSorted((a, b) => compareWordHealthByAccuracy(a, b, accuracySort)),
     [healthRows, query, health, accuracySort],
   )
-  const pageCount = Math.max(1, Math.ceil(visibleWords.length / 5))
-  const pagedWords = visibleWords.slice(page * 5, page * 5 + 5)
+  const pageCount = Math.max(1, Math.ceil(visibleWords.length / WORD_HEALTH_PAGE_SIZE))
+  const pagedWords = visibleWords.slice(page * WORD_HEALTH_PAGE_SIZE, page * WORD_HEALTH_PAGE_SIZE + WORD_HEALTH_PAGE_SIZE)
   const activitySeries = summary?.activity ?? []
   const activityPeak = Math.max(1, ...activitySeries.flatMap((series) => series.values))
   const householdLearners = summary?.learners ?? []
